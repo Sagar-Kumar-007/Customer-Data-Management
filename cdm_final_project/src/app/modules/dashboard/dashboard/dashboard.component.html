@@ -1,0 +1,8 @@
+<ng-template [ngIf]="isCustomerDashboard==true">
+    <!-- Customer Section goes here -->
+    <app-customer-navigation-pane></app-customer-navigation-pane>
+    <app-customer-dashboard></app-customer-dashboard>
+</ng-template>
+<ng-template [ngIf]="isCustomerDashboard==false">
+    <!-- Accounts Section goes here -->
+</ng-template>
