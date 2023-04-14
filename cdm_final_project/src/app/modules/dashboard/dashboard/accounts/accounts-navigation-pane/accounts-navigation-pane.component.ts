@@ -8,7 +8,9 @@ import { AddAccountFormComponent } from '../add-account-form/add-account-form.co
   styleUrls: ['./accounts-navigation-pane.component.css']
 })
 export class AccountsNavigationPaneComponent {
-  constructor(private matDialog:MatDialog){}
+  constructor(private dialog:MatDialog){
+    this.addAccount();
+  }
   animateIcon(icon:HTMLElement,classToBeAdded:string){
     icon.classList.add(classToBeAdded);
     icon.style.color="#2a2185";
@@ -17,7 +19,15 @@ export class AccountsNavigationPaneComponent {
     icon.classList.remove(classToBeRemoved);
     icon.style.color="white";
   }
+  
+
   addAccount(){
-    this.matDialog.open(AddAccountFormComponent);
+    
+    this.dialog.open(AddAccountFormComponent,{
+      
+      maxHeight: 'calc(100vh - 120px)',
+      backdropClass: "backgroundblur",
+     
+    });
   }
 }
