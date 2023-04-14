@@ -25,6 +25,7 @@
     list-style: none;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    cursor: pointer;
   }
   
   .navigation ul li:hover,

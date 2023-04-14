@@ -10,7 +10,7 @@ import {AccountsModule} from './dashboard/accounts/accounts.module';
   imports: [
     CommonModule,
     CustomerModule,
-    AccountsModule
+    AccountsModule,
   ],
   exports: [DashboardComponent]
 })

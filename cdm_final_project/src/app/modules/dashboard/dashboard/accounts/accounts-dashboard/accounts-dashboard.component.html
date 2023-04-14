@@ -12,7 +12,7 @@
         </div>
 
         <div class="user">
-            <img src="assets/imgs/customer01.jpg" alt="">
+            <img src="https://www.pngplay.com/wp-content/uploads/7/Customer-Logo-Transparent-File.png" alt="">
         </div>
     </div>
 
@@ -75,150 +75,24 @@
                 <thead>
                     <tr>
                         <td>Name</td>
-                        <td>Price</td>
-                        <td>Payment</td>
-                        <td>Status</td>
+                        <td>Year of Establishment</td>
+                        <td>Update</td>
+                        <td>Delete</td>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
+                    <ng-template [ngIf]="accountsList!=undefined">
+                        <tr *ngFor="let account of accountsList['accounts']">
+                            <td>{{account['name']}}</td>
+                            <td>{{account['year']}}</td>
+                            <td><span><i class="fa-solid fa-pencil" style="color: #ffc400;"></i></span></td>
+                            <td><span><i class="fa-solid fa-trash" style="color: #a80000;"></i></span></td>
+                        </tr>
+                    </ng-template>
 
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Addidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Addidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
+                    
                 </tbody>
-            </table>
-        </div>
-
-        <!-- ================= New Customers ================ -->
-        <div class="recentCustomers">
-            <div class="cardHeader">
-                <h2>Recent Customers</h2>
-            </div>
-
-            <table>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>Amit <br> <span>India</span></h4>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>Amit <br> <span>India</span></h4>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>Amit <br> <span>India</span></h4>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                    </td>
-                    <td>
-                        <h4>Amit <br> <span>India</span></h4>
-                    </td>
-                </tr>
             </table>
         </div>
     </div>
