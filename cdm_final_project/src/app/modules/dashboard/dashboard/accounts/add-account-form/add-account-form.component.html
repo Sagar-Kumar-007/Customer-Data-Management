@@ -1,0 +1,110 @@
+<!--Customer Form Registartion-->
+<div class="add-customer-form">
+    <h1 mat-dialog-title class="titlehead">Add Customer Form</h1>
+    <div mat-dialog-content style="max-height: 100vh;">
+    
+        <form [formGroup]="customerAddForm" >
+    
+            <mat-form-field class="example-full-width">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" formControlName="cname" name="cname" >
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="cname && cname.invalid">
+                   Name <strong>Required</strong>
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email" name="email" >
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error *ngIf="email && email.invalid && email.touched">
+                    Please Enter valid email
+                </mat-error>
+            </mat-form-field>
+           
+           
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Type of Company</mat-label>
+                <mat-select formControlName="typeOfCompany">
+                    <mat-option value="Construction">Construction</mat-option>
+                    <mat-option value="IT">IT</mat-option>
+                    <mat-option value="Electronics">Electronics</mat-option>
+                    <mat-option value="Textiles">Textiles</mat-option>
+                    <mat-option value="Machinery">Machinery</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Logo</mat-label>
+                <input type="text" matInput formControlName="logo" >
+                <mat-icon matSuffix>link</mat-icon>
+            </mat-form-field>
+    
+            <table class="example-full-width" cellspacing="0">
+                <tr class="table-row">
+    
+                    <td>
+                        <mat-form-field appearance="fill">
+                            <mat-label>GSTIN</mat-label>
+                            <input type="text" matInput formControlName="gstin" name="gstin">
+                            <mat-error>GSTIN <strong>Required</strong></mat-error>
+                         
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field >
+                            <mat-label>Phone</mat-label>
+                            <span matPrefix>+91 &nbsp;</span>
+                            <input type="tel" matInput placeholder="555-555-1234" name="phoneNo" formControlName="phoneNo" >
+                            <mat-icon matSuffix>call</mat-icon>
+                            <mat-error><strong>Required</strong></mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Website</mat-label>
+                <input type="text" matInput formControlName="website" name="website" >
+                <mat-icon matSuffix>language</mat-icon>
+    
+            </mat-form-field>
+            <table class="example-full-width" cellspacing="0">
+                <tr class="table-row">
+    
+                    <td>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Headquarter</mat-label>
+                            <input type="text" matInput formControlName="headquarter" name="headquarter" >
+                            <mat-icon matSuffix>location_on</mat-icon>
+                            <mat-error><strong>Required</strong></mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+    
+                        <mat-form-field appearance="fill">
+                            <mat-label>Country Code</mat-label>
+                            <input type="text" matInput formControlName="countryCode" name="countryCode" >
+                            <mat-icon matSuffix>tag</mat-icon>
+                            <mat-error><strong>Required</strong></mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" name="description" ></textarea>
+                <mat-icon matSuffix>mode_edit</mat-icon>
+                <mat-error><strong>Required</strong></mat-error>
+            </mat-form-field>
+        </form>
+        <div mat-dialog-action [align]="'end'" class="button-class">
+            <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
+            <button style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addCustomer()"> Submit</button>
+        </div>
+    </div>
+    </div>
+    
+    
