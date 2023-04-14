@@ -133,10 +133,9 @@
   /* ================== Order Details List ============== */
   .details {
     position: relative;
-    width: 100%;
     padding: 20px;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: auto;
     grid-gap: 30px;
     /* margin-top: 10px; */
   }
@@ -149,6 +148,7 @@
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
+    width: 100%;
   }
   
   .details .cardHeader {
@@ -176,6 +176,11 @@
   }
   .details table thead td {
     font-weight: 600;
+    text-align: center !important;
+  }
+  .details table tbody td {
+    align-items: center;
+    text-align: center !important;
   }
   .details .recentOrders table tr {
     color: var(--black1);
@@ -320,7 +325,7 @@
     .main.active .toggle {
       color: #fff;
       position: fixed;
-      left: initial;
+      left: 80vw;
     }
     .main.active .toggle i{
       color: #fff !important;

@@ -21,15 +21,16 @@
                 <span class="title">Dashboard</span>
             </a>
         </li>
-
-        <li (mouseover)="animateIcon(icon2,'fa-bounce')" (mouseout)="removeAnimation(icon2,'fa-bounce')">
-            <a href="#">
+        
+        <li (mouseover)="animateIcon(icon2,'fa-bounce')" (mouseout)="removeAnimation(icon2,'fa-bounce')" (click)="addAccount()">
+            <a>
                 <span class="icon">
                     <i class="fa-solid fa-user-plus" #icon2 style="color: #ffffff;"></i>
                 </span>
-                <span class="title">Customers</span>
+                <span class="title">Add Account</span>
             </a>
         </li>
+        
 
         <li (mouseover)="animateIcon(icon3,'fa-beat-fade')" (mouseout)="removeAnimation(icon3,'fa-beat-fade')">
             <a href="#">
