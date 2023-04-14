@@ -8,6 +8,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddAccountFormComponent } from './add-account-form/add-account-form.component'
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { MaterialModule } from 'src/app/modules/material/material.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatDialogModule,
     FormsModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports:[
     AccountsDashboardComponent,
