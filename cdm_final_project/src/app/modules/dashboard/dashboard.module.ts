@@ -12,7 +12,7 @@ import { HistoryComponent } from './dashboard/history/history.component';
   imports: [
     CommonModule,
     CustomerModule,
-    AccountsModule
+    AccountsModule,
   ],
   exports: [DashboardComponent]
 })
