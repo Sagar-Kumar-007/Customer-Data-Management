@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { CustomerService } from 'src/app/services/customer.service';
 
 
 @Component({
@@ -12,32 +13,33 @@ export class CreateCustomerComponent {
 
   //Form Logic
 
-  //constructor(private customer:CustomerService ){}
+  constructor(private customer:CustomerService ){}
   
     addProductMessage:string|undefined;
-    addCustomer(){
-      // this.customer.addCustomer(this.customerAddForm.value).subscribe((result)=>{
-      //   console.log(result);
-      //   if(result){
-      //     this.addProductMessage="Product is successfully added";
-      //     setTimeout(()=>{this.addProductMessage = undefined},3000);
-      //     this.customerAddForm.reset();
-      //   }
-      // });
-    }
-
+    
     customerAddForm = new FormGroup({
       cname:new FormControl('',[Validators.required]),
       logo:new FormControl('',[]),
-      typeOfCompany:new FormControl('',[Validators.required]),
+      sector:new FormControl('',[Validators.required]),
       description:new FormControl('',[Validators.required]),
       email:new FormControl('',[Validators.required, Validators.email]),
-      gstin:new FormControl('',[Validators.required,Validators.minLength(15)]),
       headquarter:new FormControl('',[Validators.required]),
       phoneNo:new FormControl('',[Validators.required,Validators.minLength(10)]),
       website:new FormControl('',[]),
       countryCode:new FormControl('',[Validators.required])
     });
+
+    addCustomer(){
+      this.customer.addCustomer(this.customerAddForm.value).subscribe((result)=>{
+        console.log(result);
+        if(result){
+          this.addProductMessage="Product is successfully added";
+          setTimeout(()=>{this.addProductMessage = undefined},3000);
+          this.customerAddForm.reset();
+        }
+      });
+    }
+
    
     get email(){
       return this.customerAddForm.get('email');

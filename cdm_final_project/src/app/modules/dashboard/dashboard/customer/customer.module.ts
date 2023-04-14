@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import { CustomerService } from 'src/app/services/customer.service';
 
 
 
@@ -32,6 +33,7 @@ import {MatIconModule} from '@angular/material/icon';
     CustomerDashboardComponent,
     CustomerNavigationPaneComponent,
     CreateCustomerComponent
-  ]
+  ],
+  providers: [CustomerService]
 })
 export class CustomerModule { }
