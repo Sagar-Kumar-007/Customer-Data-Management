@@ -22,7 +22,6 @@ export class AccountsDashboardComponent implements OnInit {
   }
 
   onToggleClick(){
-    console.log("Yes");
     let navigation = document.querySelector(".navigation") as HTMLDivElement;
     let main = document.querySelector(".main") as HTMLDivElement;
     let toggle=document.querySelector(".fa-bars") as HTMLIFrameElement;
