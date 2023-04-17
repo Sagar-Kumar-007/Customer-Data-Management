@@ -1,7 +1,7 @@
 {
   "customer": [
     {
-      "name": "Sagar Kumar",
+      "cname": "Sagar Kumar",
       "description": "abc",
       "address": "1/10 abc def",
       "sector": "Private",
@@ -11,69 +11,69 @@
       "id": 1,
       "accounts": [
         {
-          "name": "Account 1",
+          "aname": "Account 1",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 2",
+          "aname": "Account 2",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 3",
+          "aname": "Account 3",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 4",
+          "aname": "Account 4",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 5",
+          "aname": "Account 5",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 6",
+          "aname": "Account 6",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 7",
+          "aname": "Account 7",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 8",
+          "aname": "Account 8",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-          "name": "Account 9",
+          "aname": "Account 9",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         },
         {
-            "name": "Account 10",
-            "location": "1/10 abc def",
-            "servicesOffered": "",
-            "year": 2019
-          }
+          "aname": "Account 10",
+          "location": "1/10 abc def",
+          "email": "abc",
+          "estYear": 2019
+        }
       ]
     },
     {
-      "name": "Sagar Kumar",
+      "cname": "Sagar Kumar",
       "description": "abc",
       "address": "1/10 abc def",
       "sector": "Private",
@@ -83,12 +83,35 @@
       "id": 2,
       "accounts": [
         {
-          "name": "Account 1",
+          "aname": "Account 1",
           "location": "1/10 abc def",
-          "servicesOffered": "",
-          "year": 2019
+          "email": "abc",
+          "estYear": 2019
         }
       ]
+    }
+  ],
+  "accounts": [
+    {
+      "aname": "account 0",
+      "email": "abc@asc.com",
+      "location": "1/10 abc",
+      "estYear": "2020",
+      "id": 1
+    },
+    {
+      "aname": "account 1",
+      "email": "abc@asc.com",
+      "location": "1/10 abc",
+      "estYear": "2020",
+      "id": 3
+    },
+    {
+      "aname": "account 2",
+      "email": "abc@asc.com",
+      "location": "1/10 abc",
+      "estYear": "2020",
+      "id": 4
     }
   ]
 }

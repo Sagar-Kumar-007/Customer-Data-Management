@@ -21,7 +21,6 @@
 
 body {
   min-height: 100vh;
-  /* overflow-x: hidden; */
 }
 
 .container {
@@ -99,6 +98,3 @@ mat-dialog-content {
   backdrop-filter: blur(5px);
 }
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
