@@ -38,7 +38,6 @@ export class CustomerNavigationPaneComponent {
   
 
   addCustomer(){
-    console.log("add customer");
     this.dialog.open(CreateCustomerComponent,{
       
       maxHeight: 'calc(100vh - 120px)',

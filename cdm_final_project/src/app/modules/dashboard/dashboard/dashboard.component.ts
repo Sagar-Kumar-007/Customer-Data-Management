@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  view:string="account";
+  view:string="customer";
 }
 
 

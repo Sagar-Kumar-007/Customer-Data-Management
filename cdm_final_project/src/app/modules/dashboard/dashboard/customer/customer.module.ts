@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import { CustomerService } from 'src/app/services/customer.service';
+import {NgConfirmModule} from 'ng-confirm-box';
 
 
 
@@ -27,7 +28,8 @@ import { CustomerService } from 'src/app/services/customer.service';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    NgConfirmModule
   ],
   exports:[
     CustomerDashboardComponent,
