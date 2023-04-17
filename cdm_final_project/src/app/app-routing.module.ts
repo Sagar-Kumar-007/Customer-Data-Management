@@ -7,7 +7,7 @@ import { CustomerDashboardComponent } from './modules/dashboard/dashboard/custom
 const routes: Routes = [
   { path: 'account', component: AccountsDashboardComponent },
   {path:'register', component:CreateCustomerComponent},
-  {path:'customerlist', component: CustomerDashboardComponent },
+  {path:'customer', component: CustomerDashboardComponent },
 ];
 
 @NgModule({

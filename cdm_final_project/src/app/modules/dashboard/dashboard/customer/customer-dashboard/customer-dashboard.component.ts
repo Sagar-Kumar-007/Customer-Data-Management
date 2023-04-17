@@ -21,7 +21,9 @@ export class CustomerDashboardComponent implements OnInit {
     this.customer?.getAllCustomers().subscribe((result:ICustomer[] | undefined)=>{
       this.customersList=result;
     })
+
   }
+
   
   //Toggle
    onToggleClick(){
@@ -48,6 +50,8 @@ export class CustomerDashboardComponent implements OnInit {
       backdropClass: "backgroundblur",
      
     });
+
+
   }
 
 
@@ -58,8 +62,9 @@ export class CustomerDashboardComponent implements OnInit {
       if(id)this.customer.deleteCustomer(id).subscribe(res=>{
         console.log("res: "+ res);
         if(res)this.toastService.success({detail:'SUCCESS', summary: 'Deleted Successfully', duration: 3000});
-        //this.getAllCustomers();
+        
       })
+      window.location.reload();
     
   }
 }

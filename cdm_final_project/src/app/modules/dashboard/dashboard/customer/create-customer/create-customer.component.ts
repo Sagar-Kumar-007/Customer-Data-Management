@@ -82,6 +82,7 @@ export class CreateCustomerComponent {
       this.customerAddForm.reset();
       
     })
+    window.location.reload();
   }
 
   
