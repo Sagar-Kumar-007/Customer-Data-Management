@@ -7,9 +7,9 @@
     
             <mat-form-field class="example-full-width">
                 <mat-label>Account's Name</mat-label>
-                <input matInput type="text" formControlName="cname" name="cname" >
+                <input matInput type="text" formControlName="aname" name="aname" >
                 <mat-icon matSuffix>computer</mat-icon>
-                <mat-error *ngIf="cname && cname.invalid">
+                <mat-error *ngIf="aname && aname.invalid">
                    Name <strong>Required</strong>
                 </mat-error>
             </mat-form-field>
@@ -22,36 +22,8 @@
                     Please Enter valid email
                 </mat-error>
             </mat-form-field>
+    
             
-    
-            <mat-form-field appearance="fill">
-                <mat-label>Logo</mat-label>
-                <input type="text" matInput formControlName="logo" >
-                <mat-icon matSuffix>link</mat-icon>
-            </mat-form-field>
-    
-            <table class="example-full-width" cellspacing="0">
-                <tr class="table-row">
-    
-                    <td>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Sector</mat-label>
-                            <input type="text" matInput formControlName="sector" name="sector">
-                            <mat-error>Sector <strong>Required</strong></mat-error>
-                         
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field >
-                            <mat-label>Account's Phone Number</mat-label>
-                            <span matPrefix>+91 &nbsp;</span>
-                            <input type="tel" matInput placeholder="555-555-1234" name="phoneNo" formControlName="phoneNo" >
-                            <mat-icon matSuffix>call</mat-icon>
-                            <mat-error><strong>Required</strong></mat-error>
-                        </mat-form-field>
-                    </td>
-                </tr>
-            </table>
             <table class="example-full-width" cellspacing="0">
                 <tr class="table-row">
     
@@ -66,24 +38,18 @@
                     <td>
     
                         <mat-form-field appearance="fill">
-                            <mat-label>Country Code</mat-label>
-                            <input type="text" matInput formControlName="countryCode" name="countryCode" >
+                            <mat-label>Year of Establishment</mat-label>
+                            <input type="text" matInput formControlName="estYear" name="estYear" >
                             <mat-icon matSuffix>tag</mat-icon>
                             <mat-error><strong>Required</strong></mat-error>
                         </mat-form-field>
                     </td>
                 </tr>
             </table>
-            <mat-form-field appearance="fill">
-                <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description" name="description" ></textarea>
-                <mat-icon matSuffix>mode_edit</mat-icon>
-                <mat-error><strong>Required</strong></mat-error>
-            </mat-form-field>
         </form>
         <div mat-dialog-action [align]="'end'" class="button-class">
             <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
-            <button style="background-color: #00599C;" [disabled]="accountAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addAccount()"> Submit</button>
+            <button style="background-color: #00599C;" [disabled]="accountAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="accountFormSubmit()"> Submit</button>
         </div>
     </div>
     </div>

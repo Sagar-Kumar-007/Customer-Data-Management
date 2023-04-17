@@ -37,6 +37,9 @@
     margin-bottom: 40px;
     pointer-events: none;
   }
+  .navigation ul li:nth-child(2) {
+    pointer-events: none;
+  }
   
   .navigation ul li a {
     position: relative;
@@ -73,7 +76,39 @@
     white-space: nowrap;
     font-size: large;
   }
-  
+  /* --------- customer tab in navigation pane ---------- */
+  .customer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .customer{
+    height: 60vh;
+    width: 90%;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(255, 246, 229);
+    margin-bottom: 5px;
+  }
+  .customer-img{
+    height: 50%;
+  }
+  .customer-img img{
+    height: 95%;
+    width: auto;
+    border-radius: 100%;
+  }
+  .customer-details{
+    padding: 15px;
+    width: 80%;
+    border-radius: 5px;
+    background-color: bisque;
+    text-align: center;
+  }
   /* --------- curve outside ---------- */
   .navigation ul li:hover a::before,
   .navigation ul li.hovered a::before {

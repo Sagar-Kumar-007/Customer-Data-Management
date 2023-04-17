@@ -1,16 +1,117 @@
 {
   "customer": [
     {
-      "cname": "Tata",
-      "logo": "",
-      "sector": "Construction",
-      "description": "jagagdsg",
-      "email": "tata@gmail.com",
-      "headquarter": "India",
-      "phoneNo": "9334486447",
-      "website": "https://st.adda247.com/https://wpassets.adda247.com/wp-content/uploads/multisite/sites/5/2022/12/31141157/Tata-Motors-to-complete-acquisition-of-Ford-Indias-manufacturing-Plant-in-January-.png",
-      "countryCode": "+91",
-      "id": 5
+      "name": "Sagar Kumar",
+      "description": "abc",
+      "address": "1/10 abc def",
+      "sector": "Private",
+      "email": "sagar_sk007@yahoo.com",
+      "size": "Large",
+      "password": "2222",
+      "id": 1,
+      "accounts": [
+        {
+          "name": "Account 1",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 2",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 3",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 4",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 5",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 6",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 7",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 8",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+          "name": "Account 9",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        },
+        {
+            "name": "Account 10",
+            "location": "1/10 abc def",
+            "servicesOffered": "",
+            "year": 2019
+          }
+      ]
+    },
+    {
+      "name": "Sagar Kumar",
+      "description": "abc",
+      "address": "1/10 abc def",
+      "sector": "Private",
+      "email": "sagar_sk007@yahoo.com",
+      "size": "Large",
+      "password": "2222",
+      "id": 2,
+      "accounts": [
+        {
+          "name": "Account 1",
+          "location": "1/10 abc def",
+          "servicesOffered": "",
+          "year": 2019
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "aname": "account 0",
+      "email": "abc@asc.com",
+      "location": "1/10 abc",
+      "estYear": "2020",
+      "id": 1
+    },
+    {
+      "aname": "account 1",
+      "email": "abc@asc.com",
+      "location": "1/10 abc",
+      "estYear": "2020",
+      "id": 3
+    },
+    {
+      "aname": "account 2",
+      "email": "abc@asc.com",
+      "location": "1/10 abc",
+      "estYear": "2020",
+      "id": 4
     }
   ]
 }

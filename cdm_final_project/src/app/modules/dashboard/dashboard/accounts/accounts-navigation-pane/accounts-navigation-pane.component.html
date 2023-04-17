@@ -13,13 +13,19 @@
             </div>
             
         </li>
-        <li (mouseover)="animateIcon(icon1,'fa-beat')" (mouseout)="removeAnimation(icon1,'fa-beat')">
-            <a href="#">
-                <span class="icon">
-                    <i class="fa-solid fa-house" #icon1 style="color: #ffffff;"></i>
-                </span>
-                <span class="title">Dashboard</span>
-            </a>
+        <li>
+            <div class="customer">
+                <div class="customer-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHsP_TOOw6qLHi0t0eylpR5TTrnVDVpYPaHA&usqp=CAU" alt="">
+                </div>
+                <div class="customer-details">
+                    <span>Customer 1</span><br>
+                    <span>abcdef@abc.com</span><br>
+                    <span>+91 9876543210</span><br>
+                    <span>www.company1.com</span><br>
+                    <span>Large Cap</span>
+                </div>
+            </div>
         </li>
         
         <li (mouseover)="animateIcon(icon2,'fa-bounce')" (mouseout)="removeAnimation(icon2,'fa-bounce')" (click)="addAccount()">
@@ -28,16 +34,6 @@
                     <i class="fa-solid fa-user-plus" #icon2 style="color: #ffffff;"></i>
                 </span>
                 <span class="title">Add Account</span>
-            </a>
-        </li>
-        
-
-        <li (mouseover)="animateIcon(icon3,'fa-beat-fade')" (mouseout)="removeAnimation(icon3,'fa-beat-fade')">
-            <a href="#">
-                <span class="icon">
-                    <i class="fa-solid fa-clock" #icon3></i>
-                </span>
-                <span class="title">History</span>
             </a>
         </li>
 
