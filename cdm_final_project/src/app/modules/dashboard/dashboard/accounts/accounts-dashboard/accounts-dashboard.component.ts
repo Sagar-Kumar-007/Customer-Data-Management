@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ICustomer } from 'src/app/datatypes/customer';
 import { AccountsService } from 'src/app/services/accounts.service';
 
 @Component({
@@ -10,13 +11,13 @@ export class AccountsDashboardComponent implements OnInit {
 
   customerId:number=1;
   accountsService:AccountsService|null=null;
-  accountsList:any;
+  accountsList:ICustomer|undefined;
   constructor(accountsService:AccountsService){
     this.accountsService=accountsService;
   }
 
   ngOnInit(){
-    this.accountsService?.accountsList(this.customerId.toString()).subscribe((result)=>{
+    this.accountsService?.accountsList(this.customerId.toString()).subscribe((result:ICustomer | undefined)=>{
       this.accountsList=result;
     })
   }

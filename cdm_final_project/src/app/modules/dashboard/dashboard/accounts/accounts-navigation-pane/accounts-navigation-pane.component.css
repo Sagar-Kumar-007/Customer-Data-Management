@@ -127,3 +127,14 @@
     }
   }
   
+
+  /******** Form Pop Up **********/
+
+.backgroundblur{
+  width: 45%;
+}
+@media (max-width: 500px) {
+  .backgroundblur{
+    width: 100%;
+  }
+}

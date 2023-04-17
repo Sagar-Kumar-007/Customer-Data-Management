@@ -9,52 +9,51 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 export class AddAccountFormComponent {
 
   addProductMessage:string|undefined;
-    addCustomer(){
-      // this.customer.addCustomer(this.customerAddForm.value).subscribe((result)=>{
+    addAccount(){
+      console.log(this.accountAddForm.value);
+      // this.account.addaccount(this.accountAddForm.value).subscribe((result)=>{
       //   console.log(result);
       //   if(result){
       //     this.addProductMessage="Product is successfully added";
       //     setTimeout(()=>{this.addProductMessage = undefined},3000);
-      //     this.customerAddForm.reset();
+      //     this.accountAddForm.reset();
       //   }
       // });
     }
 
-    customerAddForm = new FormGroup({
+    accountAddForm = new FormGroup({
       cname:new FormControl('',[Validators.required]),
-      logo:new FormControl('',[]),
-      typeOfCompany:new FormControl('',[Validators.required]),
-      description:new FormControl('',[Validators.required]),
       email:new FormControl('',[Validators.required, Validators.email]),
-      gstin:new FormControl('',[Validators.required,Validators.minLength(15)]),
-      headquarter:new FormControl('',[Validators.required]),
+      logo:new FormControl('',[]),
+      sector:new FormControl('',[Validators.required]),
       phoneNo:new FormControl('',[Validators.required,Validators.minLength(10)]),
-      website:new FormControl('',[]),
-      countryCode:new FormControl('',[Validators.required])
+      location:new FormControl('',[Validators.required]),
+      countryCode:new FormControl('',[Validators.required]),
+      description:new FormControl('',[Validators.required]),
     });
    
-    get email(){
-      return this.customerAddForm.get('email');
-    }
+    
     get cname(){
-      return this.customerAddForm.get('cname');
+      return this.accountAddForm.get('cname');
+    }
+    get email(){
+      return this.accountAddForm.get('email');
+    }
+    get sector(){
+      return this.accountAddForm.get('sector');
     }
 
-    get gstin(){
-      return this.customerAddForm.get('gstin');
-    }
-
-    get headquarter(){
-      return this.customerAddForm.get('headquarter');
+    get location(){
+      return this.accountAddForm.get('location');
     }
     get countryCode(){
-      return this.customerAddForm.get('countryCode');
+      return this.accountAddForm.get('countryCode');
     }
     get description(){
-      return this.customerAddForm.get('description');
+      return this.accountAddForm.get('description');
     }
     get phoneNo(){
-      return this.customerAddForm.get('phoneNo');
+      return this.accountAddForm.get('phoneNo');
     }
 
 

@@ -1,14 +1,14 @@
-<!--Customer Form Registartion-->
-<div class="add-customer-form">
-    <h1 mat-dialog-title class="titlehead">Add Customer Form</h1>
+<!--Account Form Registartion-->
+<div class="add-account-form">
+    <h1 mat-dialog-title class="titlehead">Add account Form</h1>
     <div mat-dialog-content style="max-height: 100vh;">
     
-        <form [formGroup]="customerAddForm" >
+        <form [formGroup]="accountAddForm" >
     
             <mat-form-field class="example-full-width">
-                <mat-label>Name</mat-label>
+                <mat-label>Account's Name</mat-label>
                 <input matInput type="text" formControlName="cname" name="cname" >
-                <mat-icon matSuffix>person</mat-icon>
+                <mat-icon matSuffix>computer</mat-icon>
                 <mat-error *ngIf="cname && cname.invalid">
                    Name <strong>Required</strong>
                 </mat-error>
@@ -22,19 +22,7 @@
                     Please Enter valid email
                 </mat-error>
             </mat-form-field>
-           
-           
-    
-            <mat-form-field appearance="fill">
-                <mat-label>Type of Company</mat-label>
-                <mat-select formControlName="typeOfCompany">
-                    <mat-option value="Construction">Construction</mat-option>
-                    <mat-option value="IT">IT</mat-option>
-                    <mat-option value="Electronics">Electronics</mat-option>
-                    <mat-option value="Textiles">Textiles</mat-option>
-                    <mat-option value="Machinery">Machinery</mat-option>
-                </mat-select>
-            </mat-form-field>
+            
     
             <mat-form-field appearance="fill">
                 <mat-label>Logo</mat-label>
@@ -47,15 +35,15 @@
     
                     <td>
                         <mat-form-field appearance="fill">
-                            <mat-label>GSTIN</mat-label>
-                            <input type="text" matInput formControlName="gstin" name="gstin">
-                            <mat-error>GSTIN <strong>Required</strong></mat-error>
+                            <mat-label>Sector</mat-label>
+                            <input type="text" matInput formControlName="sector" name="sector">
+                            <mat-error>Sector <strong>Required</strong></mat-error>
                          
                         </mat-form-field>
                     </td>
                     <td>
                         <mat-form-field >
-                            <mat-label>Phone</mat-label>
+                            <mat-label>Account's Phone Number</mat-label>
                             <span matPrefix>+91 &nbsp;</span>
                             <input type="tel" matInput placeholder="555-555-1234" name="phoneNo" formControlName="phoneNo" >
                             <mat-icon matSuffix>call</mat-icon>
@@ -64,20 +52,13 @@
                     </td>
                 </tr>
             </table>
-    
-            <mat-form-field appearance="fill">
-                <mat-label>Website</mat-label>
-                <input type="text" matInput formControlName="website" name="website" >
-                <mat-icon matSuffix>language</mat-icon>
-    
-            </mat-form-field>
             <table class="example-full-width" cellspacing="0">
                 <tr class="table-row">
     
                     <td>
                         <mat-form-field appearance="fill">
-                            <mat-label>Headquarter</mat-label>
-                            <input type="text" matInput formControlName="headquarter" name="headquarter" >
+                            <mat-label>Account's Location</mat-label>
+                            <input type="text" matInput formControlName="location" name="location" >
                             <mat-icon matSuffix>location_on</mat-icon>
                             <mat-error><strong>Required</strong></mat-error>
                         </mat-form-field>
@@ -102,9 +83,7 @@
         </form>
         <div mat-dialog-action [align]="'end'" class="button-class">
             <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
-            <button style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addCustomer()"> Submit</button>
+            <button style="background-color: #00599C;" [disabled]="accountAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addAccount()"> Submit</button>
         </div>
     </div>
     </div>
-    
-    
