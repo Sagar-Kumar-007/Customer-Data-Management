@@ -12,6 +12,7 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
 import { AccountsComponent } from './accounts/accounts.component';
 
 
+
 @NgModule({
   declarations: [
     AccountsDashboardComponent,

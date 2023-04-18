@@ -1,5 +1,5 @@
 <!--Customer Form Registartion-->
-<div class="add-customer-form">
+
 <h1 mat-dialog-title class="titlehead">Add Customer Form</h1>
 <div mat-dialog-content style="max-height: 100vh;">
 
@@ -26,13 +26,15 @@
         
 
         <mat-form-field appearance="fill">
-            <mat-label>Type of Company</mat-label>
-            <mat-select formControlName="typeOfCompany">
+            <mat-label>Sector</mat-label>
+            <mat-select formControlName="sector">
                 <mat-option value="Construction">Construction</mat-option>
                 <mat-option value="IT">IT</mat-option>
                 <mat-option value="Electronics">Electronics</mat-option>
                 <mat-option value="Textiles">Textiles</mat-option>
                 <mat-option value="Machinery">Machinery</mat-option>
+                <mat-option value="Automobile">Automobile</mat-option>
+                <mat-option value="Power">Power</mat-option>
             </mat-select>
         </mat-form-field>
 
@@ -45,14 +47,6 @@
         <table class="example-full-width" cellspacing="0">
             <tr class="table-row">
 
-                <td>
-                    <mat-form-field appearance="fill">
-                        <mat-label>GSTIN</mat-label>
-                        <input type="text" matInput formControlName="gstin" name="gstin">
-                        <mat-error>GSTIN <strong>Required</strong></mat-error>
-                     
-                    </mat-form-field>
-                </td>
                 <td>
                     <mat-form-field >
                         <mat-label>Phone</mat-label>
@@ -103,7 +97,8 @@
     </form>
     <div mat-dialog-action [align]="'end'" class="button-class">
         <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
-        <button style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addCustomer()"> Submit</button>
+        <button *ngIf="!isUpdateActive" style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addCustomer()"> Submit</button>
+        <button *ngIf="isUpdateActive" style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="updateCustomer()"> Update</button>
     </div>
 </div>
-</div>
+
