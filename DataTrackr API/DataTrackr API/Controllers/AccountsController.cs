@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataTrackr_Web_API.Models;
+using DataTrackr_API.DTO.Account;
+using AutoMapper;
 
 namespace DataTrackr_API.Controllers
 {
@@ -14,10 +16,11 @@ namespace DataTrackr_API.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly ApiDbContext _context;
-
-        public AccountsController(ApiDbContext context)
+        private readonly IMapper _mapper;
+        public AccountsController(ApiDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Accounts
@@ -75,8 +78,9 @@ namespace DataTrackr_API.Controllers
         // POST: api/Accounts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Account>> PostAccount(Account account)
+        public async Task<ActionResult<Account>> PostAccount(CreateAccountDto createAccountDto)
         {
+            var account = _mapper.Map<Account>(createAccountDto);
             _context.Accounts.Add(account);
             try
             {

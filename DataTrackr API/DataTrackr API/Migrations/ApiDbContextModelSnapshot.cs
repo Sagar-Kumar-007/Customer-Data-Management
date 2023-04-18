@@ -26,21 +26,21 @@ namespace DataTrackr_API.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Account_email")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("EstYear")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PmId")
                         .HasColumnType("int");
 
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Location");
 
-                    b.HasIndex("email");
+                    b.HasIndex("Account_email");
 
                     b.ToTable("Accounts");
                 });
@@ -83,7 +83,7 @@ namespace DataTrackr_API.Migrations
                 {
                     b.HasOne("DataTrackr_Web_API.Models.Customer", "Customer")
                         .WithMany("Accounts")
-                        .HasForeignKey("email");
+                        .HasForeignKey("Account_email");
 
                     b.Navigation("Customer");
                 });

@@ -5,7 +5,7 @@
 namespace DataTrackr_API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class migration3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,22 +37,22 @@ namespace DataTrackr_API.Migrations
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EstYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PmId = table.Column<int>(type: "int", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Account_email = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Location);
                     table.ForeignKey(
-                        name: "FK_Accounts_Customers_email",
-                        column: x => x.email,
+                        name: "FK_Accounts_Customers_Account_email",
+                        column: x => x.Account_email,
                         principalTable: "Customers",
                         principalColumn: "email");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_email",
+                name: "IX_Accounts_Account_email",
                 table: "Accounts",
-                column: "email");
+                column: "Account_email");
         }
 
         /// <inheritdoc />
