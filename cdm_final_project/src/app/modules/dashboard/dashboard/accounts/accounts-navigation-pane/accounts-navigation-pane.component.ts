@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { AddAccountFormComponent } from '../add-account-form/add-account-form.component';
 
@@ -8,6 +8,8 @@ import { AddAccountFormComponent } from '../add-account-form/add-account-form.co
   styleUrls: ['./accounts-navigation-pane.component.css']
 })
 export class AccountsNavigationPaneComponent {
+  toggleActive:boolean=true;
+  @Input() toggleVar:boolean | undefined;
   constructor(private dialog:MatDialog){}
   animateIcon(icon:HTMLElement,classToBeAdded:string){
     icon.classList.add(classToBeAdded);

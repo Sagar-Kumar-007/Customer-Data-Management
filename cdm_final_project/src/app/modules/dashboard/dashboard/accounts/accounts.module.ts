@@ -9,13 +9,16 @@ import { AddAccountFormComponent } from './add-account-form/add-account-form.com
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { MaterialModule } from 'src/app/modules/material/material.module';
+import { AccountsComponent } from './accounts/accounts.component';
+
 
 
 @NgModule({
   declarations: [
     AccountsDashboardComponent,
     AccountsNavigationPaneComponent,
-    AddAccountFormComponent
+    AddAccountFormComponent,
+    AccountsComponent
   ],
   imports: [
     CommonModule,

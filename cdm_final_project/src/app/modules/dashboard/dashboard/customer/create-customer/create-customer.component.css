@@ -52,8 +52,8 @@ td {
   
   /* Hide scrollbar for IE, Edge and Firefox */
   .mat-mdc-dialog-container .mdc-dialog__surface {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
   }
 
 @media only screen and (max-width: 1102px) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IAccount } from 'src/app/datatypes/account';
 import { AccountsService } from 'src/app/services/accounts.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -13,12 +13,40 @@ export class AccountsDashboardComponent implements OnInit {
 
   customerId:number=1;
   accountsList:IAccount[]|undefined;
+  @Output() newEventEmitter=new EventEmitter<boolean>();
   constructor(private _accountsService:AccountsService,private dialog:MatDialog){  }
 
   ngOnInit(){
+    let main = document.querySelector(".main") as HTMLDivElement;
+    this.checkViewportSize(main.classList.contains("active"));
     this._accountsService.accountsList(this.customerId.toString()).subscribe((result:IAccount[])=>{
       this.accountsList=result;
     })
+  }
+
+  showCustomerCard(flag:boolean){
+    this.newEventEmitter.emit(flag);
+  }
+
+  checkViewportSize(flag:boolean) {
+    let width = window.innerWidth;
+  
+    if (width >=991) {
+      if(flag){
+        this.showCustomerCard(true);
+      }
+      else{
+        this.showCustomerCard(false);
+      }
+    }
+    else {
+      if(flag){
+        this.showCustomerCard(false);
+      }
+      else{
+        this.showCustomerCard(true);
+      }
+    }
   }
 
   onToggleClick(){
@@ -27,6 +55,7 @@ export class AccountsDashboardComponent implements OnInit {
     let toggle=document.querySelector(".fa-bars") as HTMLIFrameElement;
     navigation.classList.toggle("active");
     main.classList.toggle("active");
+    this.checkViewportSize(main.classList.contains("active"));
     toggle.classList.add("fa-flip");
     setTimeout(()=>{
       toggle.classList.remove("fa-flip");

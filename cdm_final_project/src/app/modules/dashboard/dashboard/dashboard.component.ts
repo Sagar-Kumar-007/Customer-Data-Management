@@ -7,7 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  view:string="account";
+  view:string="";
+  item:boolean | undefined;
+  passedValue(item:boolean){
+    this.item=item;
+  }
 }
 
 
