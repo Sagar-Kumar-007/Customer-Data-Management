@@ -19,112 +19,44 @@
   <div class="customers">
     <div class="article-contener">
       <ul class="groups">
-        <li>
-          <div class="card">
-            <div class="image-session">
-              <span
-                class="image"
-                style="
-                  background-image: url('https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png');
-                "
-              ></span>
-            </div>
-            <div class="meta-sission">
-              <div class="body">
-                <h2 class="title">Amazon</h2>
-                <p class="desc">
-                  Amazon.com, Inc. is an American multinational technology
-                  company focusing on e-commerce, cloud computing, online
-                  advertising, digital streaming, and artificial intelligence.
-                </p>
+        <ng-template [ngIf]="customersList!=undefined">
+          <li *ngFor="let customer of customersList">
+            <div class="card">
+              <div class="image-session">
+                <span
+                routerLink="/account"
+                  class="image"
+                  style="
+                    background-image: url({{customer.logo}});
+                  "
+                ></span>
               </div>
-              <div class="footer">
-                <div class="views">
-                  <span><b>Sector:</b> IT</span>
+              <div class="meta-sission">
+                <div class="body">
+                  <h2 class="title">{{customer.cname}}</h2>
+                  <p class="desc">
+                    {{customer['description']}}
+                  </p>
                 </div>
-                <!-- <a href="#" class="button">Read more →</a> -->
-                <div class="icons">
-                    <i class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;"></i>
-                    <i class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
-                    <i class="fa-solid fa-pencil" style="color: #ead053;"></i>
-                    <i class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="card">
-            <div class="image-session">
-              <span
-                class="image"
-                style="
-                  background-image: url('https://www.basistechnologies.com/wp-content/uploads/2019/06/tata-customer-logo_988x742.png');
-                "
-              ></span>
-            </div>
-            <div class="meta-sission">
-              <div class="body">
-                <h2 class="title">Tata Motors</h2>
-                <p class="desc">
-                  Tata Motors Limited is an Indian multinational automotive
-                  manufacturing company, headquartered in Mumbai, India, which
-                  is part of the Tata Group. The company produces passenger
-                  cars, trucks, vans, coaches, buses.
-                </p>
-              </div>
-              <div class="footer">
-                <div class="views">
-                  <span><b>Sector:</b> Automobile</span>
-                </div>
-                <!-- <a href="#" class="button">Read more →</a> -->
-                <div class="icons">
-                    <i class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;"></i>
-                    <i class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
-                    <i class="fa-solid fa-pencil" style="color: #ead053;"></i>
-                    <i class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;"></i>
+                <div class="footer">
+                  <div class="views">
+                    <span><b>Sector:</b> {{customer['sector']}}</span>
+                  </div>
+                  <!-- <a href="#" class="button">Read more →</a> -->
+                  <div class="icons">
+                      <i routerLink="account" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;"></i>
+                      <i class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
+                      <i (click)="updateCustomer(customer['id'])" class="fa-solid fa-pencil" style="color: #ead053;"></i>
+                      <i (click)="deleteCustomer(customer['id'])" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;"></i>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <div class="card">
-            <div class="image-session">
-              <span
-                class="image"
-                style="
-                  background-image: url('https://logowik.com/content/uploads/images/hyundai1362.jpg');
-                "
-              ></span>
-            </div>
-            <div class="meta-sission">
-              <div class="body">
-                <h2 class="title">Hyundai</h2>
-                <p class="desc">
-                  Hyundai Motor Company, often abbreviated to Hyundai Motors and
-                  commonly known as Hyundai, is a South Korean multinational
-                  automotive manufacturer headquartered in Seoul, South Korea,
-                  and founded in 1967.
-                </p>
-              </div>
-              <div class="footer">
-                <div class="views">
-                  <span><b>Sector:</b> Automobile</span>
-                </div>
-                <!-- <a href="#" class="button">Read more →</a> -->
-                <div class="icons">
-                    <i class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;"></i>
-                    <i class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
-                    <i class="fa-solid fa-pencil" style="color: #ead053;"></i>
-                    <i class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>
 </div>
+
 

@@ -11,4 +11,5 @@ export interface ICustomer{
     description?:string | null;
     website?:string | null;
     accounts?:IAccount[] | null;
+    id?: string | null;
 }
