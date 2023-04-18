@@ -34,7 +34,7 @@ import { CustomerComponent } from './customer/customer.component';
     MatDialogModule,
     MatIconModule,
     NgConfirmModule,
-    NgToastModule
+    NgToastModule,
     CustomerRoutingModule
   ],
   exports:[
