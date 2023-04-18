@@ -11,6 +11,51 @@
       "website": "https://www.tatamotors.com/",
       "countryCode": "+91",
       "id": 1
+    },
+    {
+      "cname": "Tata Motorsa",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz0QW2rnAdzWkO0CsGEbbfRk6hzycjNC4sf-HJVjj_VA&usqp=CAU&ec=48665701",
+      "sector": "Electronics",
+      "description": "Tata Motors Limited is an Indian multinational automotive manufacturing company, headquartered in Mumbai, India, which is part of the Tata Group. The company produces passenger cars, trucks, vans, coaches, buses. ",
+      "email": "tata@ta.com",
+      "headquarter": "India",
+      "phoneNo": "9334486448",
+      "website": "https://www.tatamotors.com/",
+      "countryCode": "+91",
+      "id": 2
+    },
+    {
+      "cname": "Tata Motorsa",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz0QW2rnAdzWkO0CsGEbbfRk6hzycjNC4sf-HJVjj_VA&usqp=CAU&ec=48665701",
+      "sector": "Electronics",
+      "description": "Tata Motors Limited is an Indian multinational automotive manufacturing company, headquartered in Mumbai, India, which is part of the Tata Group. The company produces passenger cars, trucks, vans, coaches, buses. ",
+      "email": "tata@ta.com",
+      "headquarter": "India",
+      "phoneNo": "9334486448",
+      "website": "https://www.tatamotors.com/",
+      "countryCode": "+91",
+      "id": 3
+    },
+    {
+      "cname": "Tata Motorsa",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz0QW2rnAdzWkO0CsGEbbfRk6hzycjNC4sf-HJVjj_VA&usqp=CAU&ec=48665701",
+      "sector": "Electronics",
+      "description": "Tata Motors Limited is an Indian multinational automotive manufacturing company, headquartered in Mumbai, India, which is part of the Tata Group. The company produces passenger cars, trucks, vans, coaches, buses. ",
+      "email": "tata@ta.com",
+      "headquarter": "India",
+      "phoneNo": "9334486448",
+      "website": "https://www.tatamotors.com/",
+      "countryCode": "+91",
+      "id": 4
+    }
+  ],
+  "accounts": [
+    {
+      "aname": "sagar",
+      "email": "sagar_sk007@yahoo.com",
+      "location": "1/10 abc",
+      "estYear": "2021",
+      "id": 1
     }
   ]
 }
