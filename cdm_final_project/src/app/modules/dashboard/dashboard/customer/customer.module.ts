@@ -8,6 +8,9 @@ import {FormsModule} from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import { CustomerRoutingModule } from './customer-routing.module';
+import { CustomerComponent } from './customer/customer.component';
+
 
 
 
@@ -18,7 +21,8 @@ import {MatIconModule} from '@angular/material/icon';
   declarations: [
     CustomerNavigationPaneComponent,
     CustomerDashboardComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    CustomerComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    CustomerRoutingModule
   ],
   exports:[
     CustomerDashboardComponent,
