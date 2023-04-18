@@ -3,6 +3,7 @@ import { IAccount } from 'src/app/datatypes/account';
 import { AccountsService } from 'src/app/services/accounts.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddAccountFormComponent } from '../add-account-form/add-account-form.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-accounts-dashboard',
@@ -11,12 +12,16 @@ import { AddAccountFormComponent } from '../add-account-form/add-account-form.co
 })
 export class AccountsDashboardComponent implements OnInit {
 
-  customerId:number=1;
+  customerId:string='1';
   accountsList:IAccount[]|undefined;
   @Output() newEventEmitter=new EventEmitter<boolean>();
-  constructor(private _accountsService:AccountsService,private dialog:MatDialog){  }
+  constructor(private _accountsService:AccountsService,private dialog:MatDialog,private _route:ActivatedRoute){  }
 
   ngOnInit(){
+    this._route.paramMap.subscribe(params => {
+      let id = params.get('id');
+      if(id)this.customerId=(id);
+    });
     let main = document.querySelector(".main") as HTMLDivElement;
     this.checkViewportSize(main.classList.contains("active"));
     this._accountsService.accountsList(this.customerId.toString()).subscribe((result:IAccount[])=>{
