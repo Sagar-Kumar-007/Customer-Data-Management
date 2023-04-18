@@ -6,8 +6,8 @@
 
 <ng-template [ngIf]="view=='account'">
     <!-- Account Section goes here -->
-        <app-accounts-navigation-pane></app-accounts-navigation-pane>
-        <app-accounts-dashboard></app-accounts-dashboard>
+        <app-accounts-navigation-pane [toggleVar]="item"></app-accounts-navigation-pane>
+        <app-accounts-dashboard (newEventEmitter)="passedValue($event)"></app-accounts-dashboard>
 </ng-template>
 
 <!-- <ng-template [ngIf]="view=='history'"> -->

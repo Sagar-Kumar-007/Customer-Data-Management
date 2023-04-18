@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   view:string="account";
+  item:boolean | undefined;
+  passedValue(item:boolean){
+    this.item=item;
+  }
 }
 
 
