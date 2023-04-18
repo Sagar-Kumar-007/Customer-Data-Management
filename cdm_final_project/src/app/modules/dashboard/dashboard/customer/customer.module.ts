@@ -10,6 +10,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmModule} from 'ng-confirm-box';
+import { NgToastModule } from 'ng-angular-popup';
+
+
 
 
 
@@ -20,7 +23,8 @@ import {NgConfirmModule} from 'ng-confirm-box';
   declarations: [
     CustomerNavigationPaneComponent,
     CustomerDashboardComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+ 
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,8 @@ import {NgConfirmModule} from 'ng-confirm-box';
     ReactiveFormsModule,
     MatDialogModule,
     MatIconModule,
-    NgConfirmModule
+    NgConfirmModule,
+    NgToastModule
   ],
   exports:[
     CustomerDashboardComponent,

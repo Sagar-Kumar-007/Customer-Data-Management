@@ -6,11 +6,12 @@
 
 <ng-template [ngIf]="view=='account'">
     <!-- Account Section goes here -->
-        <app-accounts-navigation-pane></app-accounts-navigation-pane>
-        <app-accounts-dashboard></app-accounts-dashboard>
+    <app-accounts-navigation-pane></app-accounts-navigation-pane>
+    <app-accounts-dashboard></app-accounts-dashboard>
 </ng-template>
 
-<!-- <ng-template [ngIf]="view=='history'"> -->
-    <!-- History Section goes here -->
-    <!-- <app-history></app-history> -->
-<!-- </ng-template> -->
+<ng-template [ngIf]="view=='history'">
+    <app-customer-navigation-pane></app-customer-navigation-pane>
+    <app-history></app-history>
+</ng-template>
+

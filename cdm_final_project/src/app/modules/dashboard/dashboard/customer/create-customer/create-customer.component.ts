@@ -66,7 +66,7 @@ export class CreateCustomerComponent {
       if (res) {
         this.toastService.success({
           detail: 'Success',
-          summary: 'Enquiry Added',
+          summary: 'Customer Added',
           duration: 3000,
         });
         this.customerAddForm.reset();
@@ -77,12 +77,15 @@ export class CreateCustomerComponent {
   // Update a Customer
 
   updateCustomer(){
-    if(this.data.customerId)this.customer.updateCustomer(this.customerAddForm.value, this.data.customerId).subscribe(res=>{
-      //this.toastService.success({detail:"Success", summary:"Enquiry updated", duration:3000});
+    if(this.data.customerId)this.customer.updateCustomer(this.customerAddForm.value, this.data.customerId).subscribe(async res=>{
+      this.toastService.success({detail:"Success", summary:"Customer updated", duration:3000});
       this.customerAddForm.reset();
-      
+      await new Promise(f=>{
+        setTimeout(f, 1000)
+      });
+      window.location.reload();
     })
-    window.location.reload();
+    
   }
 
   
