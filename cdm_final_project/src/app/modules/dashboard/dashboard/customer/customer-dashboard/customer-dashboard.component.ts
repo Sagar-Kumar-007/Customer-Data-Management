@@ -57,14 +57,21 @@ export class CustomerDashboardComponent implements OnInit {
 
   // Delete a Customer
 
-  deleteCustomer(id?:string | null){
+  deleteCustomer(id?:string | null, cname?:string |null){
       
+    this.confirm.showConfirm(`Are you sure want to delete ${cname}?`, async ()=>{
       if(id)this.customer.deleteCustomer(id).subscribe(res=>{
-        console.log("res: "+ res);
+        
         if(res)this.toastService.success({detail:'SUCCESS', summary: 'Deleted Successfully', duration: 3000});
         
       })
+      await new Promise(f=>{
+        setTimeout(f, 1000)
+      });
       window.location.reload();
+    }, ()=>{
+
+    })
     
   }
 }

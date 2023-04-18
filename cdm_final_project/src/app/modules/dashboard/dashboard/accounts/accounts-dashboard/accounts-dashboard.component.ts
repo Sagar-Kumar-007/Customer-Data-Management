@@ -3,6 +3,7 @@ import { IAccount } from 'src/app/datatypes/account';
 import { AccountsService } from 'src/app/services/accounts.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddAccountFormComponent } from '../add-account-form/add-account-form.component';
+import {NgConfirmService} from 'ng-confirm-box'
 
 @Component({
   selector: 'app-accounts-dashboard',
@@ -14,7 +15,7 @@ export class AccountsDashboardComponent implements OnInit {
   customerId:number=1;
   accountsList:IAccount[]|undefined;
   @Output() newEventEmitter=new EventEmitter<boolean>();
-  constructor(private _accountsService:AccountsService,private dialog:MatDialog){  }
+  constructor(private confirm:NgConfirmService, private _accountsService:AccountsService,private dialog:MatDialog){  }
 
   ngOnInit(){
     let main = document.querySelector(".main") as HTMLDivElement;
@@ -74,11 +75,19 @@ export class AccountsDashboardComponent implements OnInit {
     });
   }
 
-  deleteAccount(account:IAccount){
-    this._accountsService.deleteAccount(account,account.id?.toString()).subscribe(result=>{
-      if(result){
-        console.log("Account Deleted");
-      }
+  deleteAccount(account:IAccount, aname?:string |null){
+    this.confirm.showConfirm(`Are you sure want to delete ${aname}?`, async ()=>{
+      this._accountsService.deleteAccount(account,account.id?.toString()).subscribe(result=>{
+        if(result){
+          console.log("Account Deleted");
+        }
+      })
+      await new Promise(f=>{
+        setTimeout(f, 1000)
+      });
+      window.location.reload();
+    }, ()=>{
+
     })
   }
 }

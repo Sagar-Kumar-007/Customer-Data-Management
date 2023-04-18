@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgToastModule } from 'ng-angular-popup';
+import {NgConfirmModule} from 'ng-confirm-box';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgToastModule } from 'ng-angular-popup';
     MaterialModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgToastModule
+    NgToastModule,
+    NgConfirmModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { AccountsService } from 'src/app/services/accounts.service';
 import {MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IAccount } from 'src/app/datatypes/account';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-add-account-form',
@@ -10,7 +11,7 @@ import { IAccount } from 'src/app/datatypes/account';
   styleUrls: ['./add-account-form.component.css']
 })
 export class AddAccountFormComponent {
-  constructor(private _accountsService:AccountsService,private matDialogRef:MatDialogRef<AddAccountFormComponent>,@Inject(MAT_DIALOG_DATA) private data:{
+  constructor(private toastService: NgToastService, private _accountsService:AccountsService,private matDialogRef:MatDialogRef<AddAccountFormComponent>,@Inject(MAT_DIALOG_DATA) private data:{
     status: string;
     account: IAccount | null;
     email: string | null | undefined;
@@ -27,7 +28,7 @@ export class AddAccountFormComponent {
       console.log(this.accountAddForm.value);
       this._accountsService.addAccount(this.customerId.toString(),this.accountAddForm.value).subscribe((result)=>{
         if(result){
-          console.log("Account Added");
+          this.toastService.success({detail:"Success", summary:"Customer updated", duration:3000});
         }
       });
     }
@@ -37,7 +38,7 @@ export class AddAccountFormComponent {
       this._accountsService.updateAccount(this.accountAddForm.value,this.data.account?.id?.toString()).subscribe(result=>{
         if(result){
           console.log(result);
-          console.log("Account Updated");
+          this.toastService.success({detail:"Success", summary:"Customer updated", duration:3000});
         }
       });
     }

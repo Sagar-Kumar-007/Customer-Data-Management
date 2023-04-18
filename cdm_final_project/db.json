@@ -12,5 +12,14 @@
       "countryCode": "+91",
       "id": 1
     }
+  ],
+  "accounts": [
+    {
+      "aname": "abc",
+      "email": "abc@gmail.com",
+      "location": "Bangalore",
+      "estYear": "1972",
+      "id": 1
+    }
   ]
 }
