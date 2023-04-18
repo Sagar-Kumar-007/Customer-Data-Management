@@ -11,8 +11,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { NgToastModule } from 'ng-angular-popup';
-
-
+import { CustomerRoutingModule } from './customer-routing.module';
+import { CustomerComponent } from './customer/customer.component';
 
 
 
@@ -24,7 +24,7 @@ import { NgToastModule } from 'ng-angular-popup';
     CustomerNavigationPaneComponent,
     CustomerDashboardComponent,
     CreateCustomerComponent,
- 
+    CustomerComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +35,7 @@ import { NgToastModule } from 'ng-angular-popup';
     MatIconModule,
     NgConfirmModule,
     NgToastModule
+    CustomerRoutingModule
   ],
   exports:[
     CustomerDashboardComponent,
