@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {}
+    "C:\\Users\\hchoudha\\Desktop\\Final Project\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {
+    "C:\\Users\\hchoudha\\Desktop\\Final Project\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
+        "projectUniqueName": "C:\\Users\\hchoudha\\Desktop\\Final Project\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
         "projectName": "DataTrackr API",
-        "projectPath": "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
+        "projectPath": "C:\\Users\\hchoudha\\Desktop\\Final Project\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
         "packagesPath": "C:\\Users\\hchoudha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\obj\\",
+        "outputPath": "C:\\Users\\hchoudha\\Desktop\\Final Project\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hchoudha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.5, )"

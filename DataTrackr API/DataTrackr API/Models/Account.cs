@@ -14,9 +14,10 @@ namespace DataTrackr_Web_API.Models
 
         public int PmId { get; set; }
 
-        [ForeignKey(nameof(Customer))]
-        public string email { get; set; }
+        [ForeignKey(nameof(Account_email))]
+        public string Account_email { get; set; }
 
+        [ForeignKey(nameof(Account_email))]
         public virtual Customer Customer { get; set; }
     }
 }

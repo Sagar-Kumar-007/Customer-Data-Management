@@ -1,3 +1,4 @@
+using DataTrackr_API.Configurations;
 using DataTrackr_Web_API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,8 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod()
         .AllowAnyOrigin());
 });
+
+builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 var app = builder.Build();
 

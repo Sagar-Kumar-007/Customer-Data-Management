@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using DataTrackr_API.DTO.Account;
+using DataTrackr_Web_API.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataTrackr_Web_API.Models
+namespace DataTrackr_API.DTO.Customer
 {
-    public class Customer
+    public class GetCustomerDetails
     {
-        [Key]
         public string email { get; set; }
-
-        [Column(TypeName = "nvarchar(250)")]
         public string cname { get; set; }
-
         public string logo { get; set; }
         public string sector { get; set; }
         public string phoneNo { get; set; }
@@ -19,6 +17,8 @@ namespace DataTrackr_Web_API.Models
         public string CountryCode { get; set; }
         public string Description { get; set; }
         public string Website { get; set; }
-        public virtual IList<Account> Accounts { get; set; }
+        public virtual IList<GetAccountDto> Accounts { get; set; }
     }
+
+  
 }
