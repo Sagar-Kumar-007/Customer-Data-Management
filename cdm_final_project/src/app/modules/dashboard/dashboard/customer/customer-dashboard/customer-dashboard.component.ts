@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmService} from 'ng-confirm-box'
 import { NgToastService } from 'ng-angular-popup';
@@ -18,10 +18,13 @@ export class CustomerDashboardComponent implements OnInit {
   
   constructor(private dialog: MatDialog, private customer: CustomerService, private router: Router, private confirm:NgConfirmService, private toastService: NgToastService,){}
   ngOnInit(): void {
+    this.showCustomerList();
+  }
+
+  showCustomerList(){
     this.customer?.getAllCustomers().subscribe((result:ICustomer[] | undefined)=>{
       this.customersList=result;
     })
-
   }
 
   
@@ -39,18 +42,20 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   //Edit a customer..
-  updateCustomer(id?:string |null){
-    this.dialog.open(CreateCustomerComponent,{
+  updateCustomer(email?:string |null){
+    let dialogRef=this.dialog.open(CreateCustomerComponent,{
       
       data: {
         status: 'updateCustomer',
-        customerId: id,
+        customerId: email,
       },
       maxHeight: 'calc(100vh - 120px)',
       backdropClass: "backgroundblur",
      
     });
-
+    dialogRef.afterClosed().subscribe((result)=>{
+      this.showCustomerList();
+    })
 
   }
 
@@ -62,9 +67,9 @@ export class CustomerDashboardComponent implements OnInit {
       if(id)this.customer.deleteCustomer(id).subscribe(res=>{
         console.log("res: "+ res);
         if(res)this.toastService.success({detail:'SUCCESS', summary: 'Deleted Successfully', duration: 3000});
-        
+        this.showCustomerList();
       })
-      window.location.reload();
+      
     
   }
 }

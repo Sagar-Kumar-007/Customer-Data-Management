@@ -5,7 +5,7 @@
 namespace DataTrackr_API.Migrations
 {
     /// <inheritdoc />
-    public partial class migration3 : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,7 @@ namespace DataTrackr_API.Migrations
                 columns: table => new
                 {
                     Location = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    aname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EstYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PmId = table.Column<int>(type: "int", nullable: false),
                     Account_email = table.Column<string>(type: "nvarchar(450)", nullable: true)

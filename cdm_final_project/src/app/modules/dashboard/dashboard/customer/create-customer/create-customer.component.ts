@@ -25,6 +25,7 @@ export class CreateCustomerComponent {
 
   constructor(
     private customer: CustomerService,
+    private router:Router,
     private toastService: NgToastService, 
     private confirm:NgConfirmService,
     private matDialogRef: MatDialogRef<CreateCustomerComponent>,
@@ -83,11 +84,8 @@ export class CreateCustomerComponent {
       await new Promise(f=>{
         setTimeout(f, 1000)
       });
-      window.location.reload();
     })
-    
   }
-
   
 
 
@@ -124,7 +122,7 @@ export class CreateCustomerComponent {
       sector: customer.sector,
       description: customer.description,
       email: customer.email,
-      headquarter: customer.headquarter,
+      headquarter: customer.headquarters,
       phoneNo: customer.phoneNo,
       website: customer.website,
       countryCode: customer.countryCode

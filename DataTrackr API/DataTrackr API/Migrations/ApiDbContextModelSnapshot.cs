@@ -35,7 +35,7 @@ namespace DataTrackr_API.Migrations
                     b.Property<int>("PmId")
                         .HasColumnType("int");
 
-                    b.Property<string>("name")
+                    b.Property<string>("aname")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Location");

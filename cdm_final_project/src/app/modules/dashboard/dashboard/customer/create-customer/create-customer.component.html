@@ -97,8 +97,8 @@
     </form>
     <div mat-dialog-action [align]="'end'" class="button-class">
         <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
-        <button *ngIf="!isUpdateActive" style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addCustomer()"> Submit</button>
-        <button *ngIf="isUpdateActive" style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="updateCustomer()"> Update</button>
+        <button mat-dialog-close *ngIf="!isUpdateActive" style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="addCustomer()"> Submit</button>
+        <button mat-dialog-close *ngIf="isUpdateActive" style="background-color: #00599C;" [disabled]="customerAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="updateCustomer()"> Update</button>
     </div>
 </div>
 
