@@ -11,7 +11,7 @@ namespace DataTrackr_Web_API.Models
 
         public string Location { get; set; }
 
-        public string name { get; set; }
+        public string aname { get; set; }
 
         public string EstYear { get; set; }
 

@@ -77,8 +77,9 @@ export class CreateCustomerComponent {
 
   // Update a Customer
 
-  updateCustomer(){
-    if(this.data.customerId)this.customer.updateCustomer(this.customerAddForm.value, this.data.customerId).subscribe(async res=>{
+  updateCustomer(){    
+    if(this.data.customerId)this.customer.updateCustomer(this.customerAddForm.value, this.data.customerId).subscribe(async (res)=>{
+      // console.log(res);
       this.toastService.success({detail:"Success", summary:"Customer updated", duration:3000});
       this.customerAddForm.reset();
       await new Promise(f=>{

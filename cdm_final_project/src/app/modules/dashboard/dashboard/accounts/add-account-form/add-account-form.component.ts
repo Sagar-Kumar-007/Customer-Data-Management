@@ -24,9 +24,9 @@ export class AddAccountFormComponent {
   }
 
     addAccount(){
-      // console.log(this.accountAddForm.value);
-      console.log("Add ACcount Form: "+this.accountAddForm.value.account_email);
-      this.accountAddForm.value.account_email=this.data.email;
+      // console.log("Add ACcount Form: "+this.accountAddForm.value.acc_email);
+      this.accountAddForm.value.customer_email=this.data.email;
+      console.log(this.accountAddForm.value);
       this._accountsService.addAccount(this.accountAddForm.value).subscribe((result)=>{
         if(result){
           console.log("Account Added");
@@ -36,7 +36,7 @@ export class AddAccountFormComponent {
 
     updateAccount(){
       // console.log(this.accountAddForm.value);
-      this._accountsService.updateAccount(this.accountAddForm.value,this.data.account?.location).subscribe(result=>{
+      this._accountsService.updateAccount(this.accountAddForm.value,this.accountAddForm.value.acc_email).subscribe(result=>{
         if(result){
           // console.log(result);
           console.log("Account Updated");
@@ -54,24 +54,29 @@ export class AddAccountFormComponent {
     }
 
     accountAddForm = new FormGroup({
+      acc_email:new FormControl('',[Validators.required,Validators.email]),
       aname:new FormControl('',[Validators.required]),
-      account_email:new FormControl(''),
       location:new FormControl('',[Validators.required]),
       estYear:new FormControl('',[Validators.required]),
+      description:new FormControl('',[Validators.required]),
+      customer_email:new FormControl(this.data.email)
     });
    
     
     get aname(){
       return this.accountAddForm.get('aname');
     }
-    // get email(){
-    //   return this.accountAddForm.get('email');
-    // }
+    get email(){
+      return this.accountAddForm.get('acc_email');
+    }
     get location(){
       return this.accountAddForm.get('location');
     }
     get estYear(){
       return this.accountAddForm.get('estYear');
+    }
+    get description(){
+      return this.accountAddForm.get('description');
     }
 
     ngOnDestroy(){
