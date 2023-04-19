@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataTrackr_API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230419104435_InitialMigration1")]
-    partial class InitialMigration1
+    [Migration("20230419131717_inital")]
+    partial class inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,10 +41,10 @@ namespace DataTrackr_API.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("description")
+                    b.Property<string>("aname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Acc_email");

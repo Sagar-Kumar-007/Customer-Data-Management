@@ -38,10 +38,10 @@ namespace DataTrackr_API.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("description")
+                    b.Property<string>("aname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Acc_email");

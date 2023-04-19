@@ -90,10 +90,10 @@ export class AccountsDashboardComponent implements OnInit {
   }
 
   deleteAccount(account:IAccount){
-    this._accountsService.deleteAccount(account,account.location?.toString()).subscribe(result=>{
-      if(result){
-        console.log("Account Deleted");
-      }
+    this._accountsService.deleteAccount(account,account.acc_email).subscribe(result=>{
+      // if(result){
+      //   console.log("Account Deleted");
+      // }
       this.showAccountsList();
     })
   }

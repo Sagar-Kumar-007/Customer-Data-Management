@@ -14,14 +14,14 @@
                 </mat-error>
             </mat-form-field>
     
-            <!-- <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="email" name="email" >
+                <input type="email" matInput formControlName="acc_email" name="acc_email" >
                 <mat-icon matSuffix>email</mat-icon>
                 <mat-error *ngIf="email && email.invalid && email.touched">
                     Please Enter valid email
                 </mat-error>
-            </mat-form-field> -->
+            </mat-form-field>
     
             
             <table class="example-full-width" cellspacing="0">
@@ -46,6 +46,16 @@
                     </td>
                 </tr>
             </table>
+
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" formControlName="description" name="description" >
+                <mat-icon matSuffix>computer</mat-icon>
+                <mat-error *ngIf="aname && aname.invalid">
+                   Name <strong>Required</strong>
+                </mat-error>
+            </mat-form-field>
         </form>
         <div mat-dialog-action [align]="'end'" class="button-class">
             <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
