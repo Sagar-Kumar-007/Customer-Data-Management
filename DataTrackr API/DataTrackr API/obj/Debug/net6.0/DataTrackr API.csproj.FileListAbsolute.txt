@@ -580,3 +580,14 @@ C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\
 C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.pdb
 C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.genruntimeconfig.cache
 C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\ref\DataTrackr API.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Azure.Security.KeyVault.Certificates.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.Identity.Web.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.Identity.Web.Certificate.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.Identity.Web.Certificateless.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.Identity.Web.TokenCache.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.Identity.Web.UI.Views.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.Identity.Web.UI.dll
+C:\Users\hchoudha\Desktop\Final Project\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.IdentityModel.Validators.dll
