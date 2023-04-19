@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { AccountsService } from 'src/app/services/accounts.service';
 import {MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IAccount } from 'src/app/datatypes/account';
+import {ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-account-form',
@@ -13,10 +14,9 @@ export class AddAccountFormComponent {
   constructor(private _accountsService:AccountsService,private matDialogRef:MatDialogRef<AddAccountFormComponent>,@Inject(MAT_DIALOG_DATA) private data:{
     status: string;
     account: IAccount | null;
-    email: string | null | undefined;
-}){}
+    email:string;
+},private route:ActivatedRoute){}
   addProductMessage:string|undefined;
-  customerId:number=1;
   ngOnInit(){
     if(this.data.status==='updateAccount'){
       if(this.data.account)this.accountAddForm.patchValue(this.data.account);
@@ -24,8 +24,10 @@ export class AddAccountFormComponent {
   }
 
     addAccount(){
-      console.log(this.accountAddForm.value);
-      this._accountsService.addAccount(this.customerId.toString(),this.accountAddForm.value).subscribe((result)=>{
+      // console.log(this.accountAddForm.value);
+      console.log("Add ACcount Form: "+this.accountAddForm.value.account_email);
+      this.accountAddForm.value.account_email=this.data.email;
+      this._accountsService.addAccount(this.accountAddForm.value).subscribe((result)=>{
         if(result){
           console.log("Account Added");
         }
@@ -33,10 +35,10 @@ export class AddAccountFormComponent {
     }
 
     updateAccount(){
-      console.log(this.accountAddForm.value);
-      this._accountsService.updateAccount(this.accountAddForm.value,this.data.account?.id?.toString()).subscribe(result=>{
+      // console.log(this.accountAddForm.value);
+      this._accountsService.updateAccount(this.accountAddForm.value,this.data.account?.location).subscribe(result=>{
         if(result){
-          console.log(result);
+          // console.log(result);
           console.log("Account Updated");
         }
       });
@@ -53,7 +55,7 @@ export class AddAccountFormComponent {
 
     accountAddForm = new FormGroup({
       aname:new FormControl('',[Validators.required]),
-      email:new FormControl('',[Validators.required, Validators.email]),
+      account_email:new FormControl(''),
       location:new FormControl('',[Validators.required]),
       estYear:new FormControl('',[Validators.required]),
     });
@@ -62,9 +64,9 @@ export class AddAccountFormComponent {
     get aname(){
       return this.accountAddForm.get('aname');
     }
-    get email(){
-      return this.accountAddForm.get('email');
-    }
+    // get email(){
+    //   return this.accountAddForm.get('email');
+    // }
     get location(){
       return this.accountAddForm.get('location');
     }

@@ -6,7 +6,7 @@ import { ICustomer } from '../datatypes/customer';
 export class CustomerService {
 
   constructor(private _http: HttpClient) { }
-  private baseUrl: string="http://localhost:3000/customer";
+  private baseUrl:string='https://localhost:7196/api/Customers'
 
    /********************  Get all Customers********************/
 
