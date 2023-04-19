@@ -9,11 +9,14 @@ using DataTrackr_Web_API.Models;
 using DataTrackr_API.DTO.Country;
 using AutoMapper;
 using DataTrackr_API.DTO.Customer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web.Resource;
 
 namespace DataTrackr_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class CustomersController : ControllerBase
     {
         private readonly IMapper _mapper;
