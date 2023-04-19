@@ -1,17 +1,1 @@
-<ng-template [ngIf]="view=='customer'">
-    
-    <app-customer-navigation-pane></app-customer-navigation-pane>
-    <app-customer-dashboard></app-customer-dashboard>
-</ng-template> 
-
-<ng-template [ngIf]="view=='account'">
-    <!-- Account Section goes here -->
-        <app-accounts-navigation-pane [toggleVar]="item"></app-accounts-navigation-pane>
-        <app-accounts-dashboard (newEventEmitter)="passedValue($event)"></app-accounts-dashboard>
-</ng-template>
-
-<ng-template [ngIf]="view=='history'">
-    <app-customer-navigation-pane></app-customer-navigation-pane>
-    <app-history></app-history>
-</ng-template>
-
+<router-outlet routerLink="customer"></router-outlet>
