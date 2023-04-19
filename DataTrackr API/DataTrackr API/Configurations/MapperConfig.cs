@@ -17,7 +17,7 @@ namespace DataTrackr_API.Configurations
 
             CreateMap<Account, GetAccountDto>().ReverseMap();
             CreateMap<Account, CreateAccountDto>().ReverseMap();
-          
+            CreateMap<Account, UpdateAccountDetailDto>().ReverseMap();
         }
     }
 }

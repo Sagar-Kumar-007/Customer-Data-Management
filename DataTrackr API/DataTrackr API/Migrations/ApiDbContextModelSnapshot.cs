@@ -23,24 +23,30 @@ namespace DataTrackr_API.Migrations
 
             modelBuilder.Entity("DataTrackr_Web_API.Models.Account", b =>
                 {
-                    b.Property<string>("Location")
+                    b.Property<string>("Acc_email")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Account_email")
+                    b.Property<double>("Acc_revenue")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Customer_email")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("EstYear")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PmId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("aname")
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Location");
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("Account_email");
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Acc_email");
+
+                    b.HasIndex("Customer_email");
 
                     b.ToTable("Accounts");
                 });
@@ -83,7 +89,7 @@ namespace DataTrackr_API.Migrations
                 {
                     b.HasOne("DataTrackr_Web_API.Models.Customer", "Customer")
                         .WithMany("Accounts")
-                        .HasForeignKey("Account_email");
+                        .HasForeignKey("Customer_email");
 
                     b.Navigation("Customer");
                 });
