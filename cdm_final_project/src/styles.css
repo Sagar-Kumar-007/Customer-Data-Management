@@ -98,3 +98,7 @@ mat-dialog-content {
   backdrop-filter: blur(5px);
 }
 
+
+/* mat-mdc-dialog-title mdc-dialog__title titlehead{
+  position: fixed;
+} */

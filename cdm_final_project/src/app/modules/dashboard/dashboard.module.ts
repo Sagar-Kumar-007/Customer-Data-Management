@@ -5,16 +5,23 @@ import {CustomerModule} from './dashboard/customer/customer.module';
 import {AccountsModule} from './dashboard/accounts/accounts.module';
 import { HistoryComponent } from './dashboard/history/history.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { MaterialModule } from '../material/material.module';
+
+
+
 @NgModule({
   declarations: [
     DashboardComponent,
-    HistoryComponent
+    HistoryComponent,
+    
   ],
   imports: [
     CommonModule,
     CustomerModule,
     AccountsModule,
     DashboardRoutingModule,
+    MaterialModule,
+    
   ],
   exports: [DashboardComponent]
 })

@@ -8,6 +8,8 @@ import {DashboardModule} from './modules/dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgToastModule } from 'ng-angular-popup';
 import {NgConfirmModule} from 'ng-confirm-box';
+import { FormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,12 @@ import {NgConfirmModule} from 'ng-confirm-box';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgToastModule,
-    NgConfirmModule
+    NgConfirmModule,
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
+      libraries: ['places']
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

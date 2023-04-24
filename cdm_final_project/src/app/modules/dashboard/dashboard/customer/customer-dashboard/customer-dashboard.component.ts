@@ -6,6 +6,7 @@ import {Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog'
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
 import { ICustomer } from 'src/app/datatypes/customer';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -73,5 +74,16 @@ export class CustomerDashboardComponent implements OnInit {
 
     })
     
+  }
+
+  mapCall(cname?:string |null){
+    this.dialog.open(MapComponent,{
+      data: {
+        customerName: cname,
+      },
+      maxHeight: 'calc(100vh - 120px)',
+      backdropClass: "backgroundblur",
+     
+    });
   }
 }

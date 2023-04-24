@@ -45,7 +45,7 @@
                   <!-- <a href="#" class="button">Read more →</a> -->
                   <div class="icons">
                       <i routerLink="account" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;"></i>
-                      <i class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
+                      <i (click)="mapCall(customer.cname)" class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
                       <i (click)="updateCustomer(customer.id)" class="fa-solid fa-pencil" style="color: #ead053;"></i>
                       <i (click)="deleteCustomer(customer.id, customer.cname)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;"></i>
                   </div>

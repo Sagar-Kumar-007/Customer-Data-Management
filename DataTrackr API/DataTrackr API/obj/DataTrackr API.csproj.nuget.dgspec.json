@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {}
+    "C:\\Final Project\\CDM\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {
+    "C:\\Final Project\\CDM\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
+        "projectUniqueName": "C:\\Final Project\\CDM\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
         "projectName": "DataTrackr API",
-        "projectPath": "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
-        "packagesPath": "C:\\Users\\hchoudha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hchoudha\\Desktop\\Final Project\\DataTrackr API\\DataTrackr API\\obj\\",
+        "projectPath": "C:\\Final Project\\CDM\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
+        "packagesPath": "C:\\Users\\ku\\.nuget\\packages\\",
+        "outputPath": "C:\\Final Project\\CDM\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hchoudha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ku\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
