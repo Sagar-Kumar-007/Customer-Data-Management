@@ -5,7 +5,7 @@
 namespace DataTrackr_API.Migrations
 {
     /// <inheritdoc />
-    public partial class inital : Migration
+    public partial class Initial1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

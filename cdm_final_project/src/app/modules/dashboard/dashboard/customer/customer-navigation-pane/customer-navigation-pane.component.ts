@@ -44,7 +44,7 @@ export class CustomerNavigationPaneComponent {
       backdropClass: 'backgroundblur',
     });
     dialogRef.afterClosed().subscribe((result)=>{
-      window.location.reload();
+     
     })
   }
   updateView() {

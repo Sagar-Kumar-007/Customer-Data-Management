@@ -14,7 +14,7 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" *ngIf="!isUpdateActive">
             <mat-label>Email</mat-label>
             <input type="email" matInput formControlName="email" name="email" >
             <mat-icon matSuffix>email</mat-icon>
@@ -22,6 +22,15 @@
                 Please Enter valid email
             </mat-error>
         </mat-form-field>
+
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput  formControlName="email" name="email">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="email && email.invalid && email.touched">
+                Please Enter valid email
+            </mat-error>
+        </mat-form-field> -->
         
         
 

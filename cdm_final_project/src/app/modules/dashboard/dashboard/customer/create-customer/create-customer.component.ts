@@ -22,6 +22,8 @@ export class CreateCustomerComponent {
   //Form Logic
   public userIdToUpdate!:string;
   public isUpdateActive:boolean=false;
+  error=false;
+  errorMessage='';
 
   constructor(
     private customer: CustomerService,
@@ -62,7 +64,8 @@ export class CreateCustomerComponent {
   // Add Customer.........
 
   addCustomer() {
-    this.customer.addCustomer(this.customerAddForm.value).subscribe((res) => {
+    this.customer.addCustomer(this.customerAddForm.value).subscribe(
+      (res) => {
       console.log(res);
       if (res) {
         this.toastService.success({
@@ -70,9 +73,23 @@ export class CreateCustomerComponent {
           summary: 'Customer Added',
           duration: 3000,
         });
+        console.log("C");
+        setTimeout(()=>
+        {
+          window.location.reload();
+        },3000);
+         
         this.customerAddForm.reset();
       }
-    });
+    },
+    (error) => {
+      // console.warn("b");
+      this.error = true;
+      console.warn(error.message);
+      this.errorMessage = "Customer already Exists";
+      this.toastService.error({detail: this.errorMessage, summary: 'Error', duration: 3000});
+    }
+    );
   }
 
   // Update a Customer

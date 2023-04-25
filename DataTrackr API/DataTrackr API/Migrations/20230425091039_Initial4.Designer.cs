@@ -4,6 +4,7 @@ using DataTrackr_Web_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataTrackr_API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230425091039_Initial4")]
+    partial class Initial4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,9 +73,6 @@ namespace DataTrackr_API.Migrations
                     b.Property<string>("EstYear")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LocationAddress")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double?>("LocationLatitude")
                         .HasColumnType("float");
 
@@ -89,7 +89,7 @@ namespace DataTrackr_API.Migrations
 
                     b.HasIndex("Customer_email");
 
-                    b.HasIndex("LocationLatitude", "LocationLongitude", "LocationAddress");
+                    b.HasIndex("LocationLatitude", "LocationLongitude");
 
                     b.ToTable("Accounts");
                 });
@@ -103,9 +103,9 @@ namespace DataTrackr_API.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Latitude", "Longitude", "Address");
+                    b.HasKey("Latitude", "Longitude");
 
                     b.ToTable("Coordinates");
                 });
@@ -152,7 +152,7 @@ namespace DataTrackr_API.Migrations
 
                     b.HasOne("DataTrackr_Web_API.Models.Coordinates", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationLatitude", "LocationLongitude", "LocationAddress");
+                        .HasForeignKey("LocationLatitude", "LocationLongitude");
 
                     b.Navigation("Customer");
 

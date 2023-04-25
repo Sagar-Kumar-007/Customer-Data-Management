@@ -1195,3 +1195,4 @@ C:\Users\sagkumar\Downloads\Customer-Data-Management\DataTrackr API\DataTrackr A
 C:\Users\sagkumar\Downloads\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.pdb
 C:\Users\sagkumar\Downloads\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.genruntimeconfig.cache
 C:\Users\sagkumar\Downloads\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\ref\DataTrackr API.dll
+C:\Users\hchoudha\Desktop\Project_Internship\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Binder.dll

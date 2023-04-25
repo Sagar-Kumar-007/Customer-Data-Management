@@ -15,17 +15,22 @@ import { ICustomer } from 'src/app/datatypes/customer';
 export class CustomerDashboardComponent implements OnInit {
 
   customersList:ICustomer[]|undefined;
+ 
   
   constructor(private dialog: MatDialog, private customer: CustomerService, private router: Router, private confirm:NgConfirmService, private toastService: NgToastService,){}
   ngOnInit(): void {
     this.showCustomerList();
   }
 
-  showCustomerList(){
-    this.customer?.getAllCustomers().subscribe((result:ICustomer[] | undefined)=>{
-      this.customersList=result;
-    })
+  showCustomerList() {
+    this.customer?.getAllCustomers().subscribe(
+      (result:ICustomer[] | undefined) => {
+        this.customersList = result;
+      },
+      
+    );
   }
+  
 
   
   //Toggle
