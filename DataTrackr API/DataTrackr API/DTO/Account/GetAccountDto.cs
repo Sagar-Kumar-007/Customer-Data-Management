@@ -1,13 +1,15 @@
-﻿namespace DataTrackr_API.DTO.Account
+﻿using DataTrackr_Web_API.Models;
+
+namespace DataTrackr_API.DTO.Account
 {
     public class GetAccountDto
     {
         public string Acc_email { get; set; }
         public decimal Acc_revenue { get; set; }
 
-        public string Location { get; set; }
+        public Coordinates Location { get; set; }
 
-        public string name { get; set; }
+        public string aname { get; set; }
 
         public string EstYear { get; set; }
 

@@ -1,1 +1,43 @@
-<button class="btn btn-primary"></button>
+
+      <div class="wrapper">
+         <div class="title-text">
+            <div class="title login">
+               Login
+            </div>
+         </div>
+         <div class="form-container">
+   
+            <div class="form-inner">
+
+               <form class="login" [formGroup]="loginForm">
+                  <div class="field">
+                     <input formControlName="username" type="text" placeholder="Username" required>
+                  </div>
+                  <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
+                    *Username is required 
+                  </small>
+                  <div class="field">
+                     <input formControlName="password" type="password" placeholder="Password" required>
+                  </div>
+                  <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
+                    *Password is required 
+                  </small>
+
+                  <div class="pass-link">
+                     <a href="#">Forgot password?</a>
+                  </div>
+
+                  <div>
+   
+                    <button (click)="OnLogin()" class="field">LOGIN</button>
+                  </div>
+
+                  <div class="signup-link">
+                     Don't Have Account? <a routerLink="/signup">Create A New</a>
+                  </div> 
+
+               </form>
+               
+            </div>
+         </div>
+      </div>

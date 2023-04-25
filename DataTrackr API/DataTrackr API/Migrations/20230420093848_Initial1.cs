@@ -5,7 +5,7 @@
 namespace DataTrackr_API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration1 : Migration
+    public partial class Initial1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,7 +36,7 @@ namespace DataTrackr_API.Migrations
                     Acc_email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Acc_revenue = table.Column<double>(type: "float", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    aname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EstYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Customer_email = table.Column<string>(type: "nvarchar(450)", nullable: true)

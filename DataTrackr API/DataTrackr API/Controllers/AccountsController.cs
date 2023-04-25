@@ -9,11 +9,15 @@ using DataTrackr_Web_API.Models;
 using AutoMapper;
 using DataTrackr_API.DTO.Account;
 using DataTrackr_API.DTO.Customer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web.Resource;
 
 namespace DataTrackr_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
+    //[RequiredScope("account.read")]
     public class AccountsController : ControllerBase
     {
         private readonly ApiDbContext _context;

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hchoudha\\Desktop\\Project_Internship\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {}
+    "C:\\Users\\hchoudha\\Desktop\\latest_datatrackr\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hchoudha\\Desktop\\Project_Internship\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {
+    "C:\\Users\\hchoudha\\Desktop\\latest_datatrackr\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hchoudha\\Desktop\\Project_Internship\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
+        "projectUniqueName": "C:\\Users\\hchoudha\\Desktop\\latest_datatrackr\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
         "projectName": "DataTrackr API",
-        "projectPath": "C:\\Users\\hchoudha\\Desktop\\Project_Internship\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
+        "projectPath": "C:\\Users\\hchoudha\\Desktop\\latest_datatrackr\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
         "packagesPath": "C:\\Users\\hchoudha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hchoudha\\Desktop\\Project_Internship\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\obj\\",
+        "outputPath": "C:\\Users\\hchoudha\\Desktop\\latest_datatrackr\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hchoudha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -65,6 +65,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[7.0.4, )"
             },
             "Microsoft.Identity.Web": {
               "target": "Package",

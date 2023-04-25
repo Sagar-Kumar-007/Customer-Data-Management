@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+NF7HANZX4L1gVf5EnV23E9PyyWmL7Pr/sT9Ejh6m0GBegSHmPNNwxJoMyBBJWoYrjmFGA5QyzvPzPDhL6WHxg==",
+  "dgSpecHash": "ifCJ60T9zdQB0t358ctjb1jcJS91iZeTgGxWEdnSOVvu8arHuTVsIPo4hrvsy9FAemBuSva0/v3116gYZLxVDQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hchoudha\\Desktop\\Project_Internship\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
+  "projectFilePath": "C:\\Users\\hchoudha\\Desktop\\latest_datatrackr\\Customer-Data-Management\\DataTrackr API\\DataTrackr API\\DataTrackr API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hchoudha\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\hchoudha\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -54,6 +54,7 @@
     "C:\\Users\\hchoudha\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\hchoudha\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "C:\\Users\\hchoudha\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\hchoudha\\.nuget\\packages\\microsoft.extensions.configuration.binder\\7.0.4\\microsoft.extensions.configuration.binder.7.0.4.nupkg.sha512",
     "C:\\Users\\hchoudha\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\hchoudha\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\hchoudha\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
