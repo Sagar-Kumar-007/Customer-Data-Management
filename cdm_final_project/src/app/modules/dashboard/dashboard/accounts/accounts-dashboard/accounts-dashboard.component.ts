@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { AddAccountFormComponent } from '../add-account-form/add-account-form.component';
 import { ActivatedRoute } from '@angular/router';
 import { ICustomer } from 'src/app/datatypes/customer';
+import {NgConfirmService} from 'ng-confirm-box'
 
 @Component({
   selector: 'app-accounts-dashboard',
@@ -18,8 +19,9 @@ export class AccountsDashboardComponent implements OnInit {
   totalRevenue:number | string=0;
   totalAccounts:number=0;
   @Output() newEventEmitter=new EventEmitter<boolean>();
-  // intervalId: any;
-  constructor(private _accountsService:AccountsService,private dialog:MatDialog,private _route:ActivatedRoute){  }
+
+
+  constructor(private confirm:NgConfirmService, private _accountsService:AccountsService,private dialog:MatDialog,private _route:ActivatedRoute){  }
   showAccountsList(){
     this.totalRevenue=0;
     this.totalAccounts=0;
@@ -45,9 +47,29 @@ export class AccountsDashboardComponent implements OnInit {
     });
     console.log("Account Customer Email: "+this.customerId);
     let main = document.querySelector(".main") as HTMLDivElement;
+    this.checkViewportSize(main.classList.contains("active"));
     this.showAccountsList();
   }
-
+  checkViewportSize(flag:boolean) {
+    let width = window.innerWidth;
+  
+    if (width >=991) {
+      if(flag){
+        this.showCustomerCard(true);
+      }
+      else{
+        this.showCustomerCard(false);
+      }
+    }
+    else {
+      if(flag){
+        this.showCustomerCard(false);
+      }
+      else{
+        this.showCustomerCard(true);
+      }
+    }
+  }
   onToggleClick(){
     let navigation = document.querySelector(".navigation") as HTMLDivElement;
     let main = document.querySelector(".main") as HTMLDivElement;
@@ -75,9 +97,19 @@ export class AccountsDashboardComponent implements OnInit {
     })
   }
 
-  deleteAccount(account:IAccount){
-    this._accountsService.deleteAccount(account,account.acc_email).subscribe(result=>{
-      this.showAccountsList();
+  deleteAccount(account:IAccount, aname?:string |null){
+    this.confirm.showConfirm(`Are you sure want to delete ${aname}?`, async ()=>{
+      this._accountsService.deleteAccount(account,account.acc_email?.toString()).subscribe(result=>{
+        if(result){
+          console.log("Account Deleted");
+        }
+      })
+      await new Promise(f=>{
+        setTimeout(f, 1000)
+      });
+      window.location.reload();
+    }, ()=>{
+
     })
   }
 

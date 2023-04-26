@@ -11,6 +11,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -19,6 +22,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   declarations: [],
   imports: [
     CommonModule,
+   
   ],
 
   exports: [
@@ -32,7 +36,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatRadioModule,
     MatSelectModule,
     MatToolbarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
+   
+
   ]
   
 

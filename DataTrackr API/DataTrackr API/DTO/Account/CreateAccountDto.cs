@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using DataTrackr_Web_API.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataTrackr_API.DTO.Account
 {
@@ -8,7 +9,7 @@ namespace DataTrackr_API.DTO.Account
         public string Acc_email { get; set; }
         public decimal Acc_revenue { get; set; }
 
-        public string Location { get; set; }
+        public Coordinates Location { get; set; }
 
         public string aname { get; set; }
 

@@ -37,7 +37,7 @@
       "id": 3
     },
     {
-      "cname": "Tata Motorsa",
+      "cname": "Tata Motors",
       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz0QW2rnAdzWkO0CsGEbbfRk6hzycjNC4sf-HJVjj_VA&usqp=CAU&ec=48665701",
       "sector": "Electronics",
       "description": "Tata Motors Limited is an Indian multinational automotive manufacturing company, headquartered in Mumbai, India, which is part of the Tata Group. The company produces passenger cars, trucks, vans, coaches, buses. ",
@@ -49,6 +49,7 @@
       "id": 4
     }
   ],
+
   "accounts": [
     {
       "aname": "sagar",
@@ -56,6 +57,16 @@
       "location": "1/10 abc",
       "estYear": "2021",
       "id": 1
+    },
+
+    {
+      "aname": "abc",
+      "email": "abc@gmail.com",
+      "location": "Bangalore",
+      "estYear": "1972",
+      "id": 1
     }
+    
   ]
+  
 }

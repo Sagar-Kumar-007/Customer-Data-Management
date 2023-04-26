@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  view:string="";
+  view:string="history";
   item:boolean | undefined;
   passedValue(item:boolean){
     this.item=item;

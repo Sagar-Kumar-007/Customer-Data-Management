@@ -12,7 +12,10 @@ import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { NgToastModule } from 'ng-angular-popup';
 import { CustomerComponent } from './customer/customer.component';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './map/map.component';
+
 
 
 
@@ -23,7 +26,8 @@ import { Router, RouterModule } from '@angular/router';
     CustomerNavigationPaneComponent,
     CustomerDashboardComponent,
     CreateCustomerComponent,
-    CustomerComponent
+    CustomerComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +38,12 @@ import { Router, RouterModule } from '@angular/router';
     MatIconModule,
     NgConfirmModule,
     NgToastModule,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
+      libraries: ['places']
+    })
   ],
   exports:[
     CustomerDashboardComponent,

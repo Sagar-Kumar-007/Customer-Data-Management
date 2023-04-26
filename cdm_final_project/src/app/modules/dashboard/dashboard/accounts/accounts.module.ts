@@ -10,6 +10,8 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { AccountsComponent } from './accounts/accounts.component';
+import { GoogleMapComponent } from './google-map/google-map.component';
+import { AgmCoreModule } from '@agm/core';
 import { RouterModule } from '@angular/router';
 
 
@@ -19,7 +21,8 @@ import { RouterModule } from '@angular/router';
     AccountsDashboardComponent,
     AccountsNavigationPaneComponent,
     AddAccountFormComponent,
-    AccountsComponent
+    AccountsComponent,
+    GoogleMapComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,10 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     ReactiveFormsModule,
     MaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
+      libraries: ['places']
+    }),,
     RouterModule
   ],
   exports:[
