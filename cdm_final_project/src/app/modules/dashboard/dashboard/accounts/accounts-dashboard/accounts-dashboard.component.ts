@@ -47,29 +47,9 @@ export class AccountsDashboardComponent implements OnInit {
     });
     console.log("Account Customer Email: "+this.customerId);
     let main = document.querySelector(".main") as HTMLDivElement;
-    this.checkViewportSize(main.classList.contains("active"));
     this.showAccountsList();
   }
-  checkViewportSize(flag:boolean) {
-    let width = window.innerWidth;
   
-    if (width >=991) {
-      if(flag){
-        this.showCustomerCard(true);
-      }
-      else{
-        this.showCustomerCard(false);
-      }
-    }
-    else {
-      if(flag){
-        this.showCustomerCard(false);
-      }
-      else{
-        this.showCustomerCard(true);
-      }
-    }
-  }
   onToggleClick(){
     let navigation = document.querySelector(".navigation") as HTMLDivElement;
     let main = document.querySelector(".main") as HTMLDivElement;
