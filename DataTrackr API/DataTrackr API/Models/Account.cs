@@ -1,15 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace DataTrackr_Web_API.Models
 {
+    public class Coordinates
+    {
+        public double latitude { get; set; }
+        public double longitude { get; set; }
+        [Key]
+        public string address { get; set; }
+    }
     public class Account
     {
         [Key]
         public string Acc_email { get; set; }
         public double Acc_revenue { get; set; }
 
-        public string Location { get; set; }
+        public Coordinates Location { get; set; }
 
         public string aname { get; set; }
 

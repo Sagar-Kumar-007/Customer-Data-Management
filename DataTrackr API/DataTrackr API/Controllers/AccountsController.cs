@@ -9,6 +9,7 @@ using DataTrackr_Web_API.Models;
 using AutoMapper;
 using DataTrackr_API.DTO.Account;
 using DataTrackr_API.DTO.Customer;
+using Microsoft.CodeAnalysis;
 
 namespace DataTrackr_API.Controllers
 {
@@ -29,8 +30,9 @@ namespace DataTrackr_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
         {
-            var accounts = await _context.Accounts.ToListAsync();
+            var accounts = await _context.Accounts.Include(q=>q.Location).ToListAsync();
             var records = _mapper.Map<List<GetAccountDto>>(accounts);
+       
             return Ok(records);
         }
 
@@ -38,7 +40,7 @@ namespace DataTrackr_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(string id)
         {
-            var account = await _context.Accounts.Include(q => q.Acc_email).FirstOrDefaultAsync(q => q.Acc_email == id);
+            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q=> q.Acc_email==id);
           
 
             if (account == null)

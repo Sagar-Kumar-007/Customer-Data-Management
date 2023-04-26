@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { AddAccountFormComponent } from '../add-account-form/add-account-form.component';
 import { ActivatedRoute } from '@angular/router';
 import { ICustomer } from 'src/app/datatypes/customer';
+import {NgConfirmService} from 'ng-confirm-box'
 
 @Component({
   selector: 'app-accounts-dashboard',
@@ -16,7 +17,9 @@ export class AccountsDashboardComponent implements OnInit {
   customerId:string='1';
   accountsList:IAccount[]|undefined;
   @Output() newEventEmitter=new EventEmitter<boolean>();
-  constructor(private _accountsService:AccountsService,private dialog:MatDialog,private _route:ActivatedRoute){  }
+
+
+  constructor(private confirm:NgConfirmService, private _accountsService:AccountsService,private dialog:MatDialog,private _route:ActivatedRoute){  }
   showAccountsList(){
     this._accountsService.accountsList(this.customerId).subscribe((result:ICustomer)=>{
         if(result.accounts){
@@ -33,7 +36,9 @@ export class AccountsDashboardComponent implements OnInit {
     console.log("Account Customer Email: "+this.customerId);
     let main = document.querySelector(".main") as HTMLDivElement;
     this.checkViewportSize(main.classList.contains("active"));
-    this.showAccountsList();
+    this._accountsService.accountsList(this.customerId).subscribe((result:ICustomer)=>{
+      if(result.accounts)this.accountsList=result.accounts;
+    })
   }
 
   showCustomerCard(flag:boolean){
@@ -89,12 +94,19 @@ export class AccountsDashboardComponent implements OnInit {
     })
   }
 
-  deleteAccount(account:IAccount){
-    this._accountsService.deleteAccount(account,account.acc_email).subscribe(result=>{
-      // if(result){
-      //   console.log("Account Deleted");
-      // }
-      this.showAccountsList();
+  deleteAccount(account:IAccount, aname?:string |null){
+    this.confirm.showConfirm(`Are you sure want to delete ${aname}?`, async ()=>{
+      this._accountsService.deleteAccount(account,account.acc_email?.toString()).subscribe(result=>{
+        if(result){
+          console.log("Account Deleted");
+        }
+      })
+      await new Promise(f=>{
+        setTimeout(f, 1000)
+      });
+      window.location.reload();
+    }, ()=>{
+
     })
   }
 }

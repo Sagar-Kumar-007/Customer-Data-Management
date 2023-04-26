@@ -28,6 +28,7 @@ body {
   width: 100%;
 }
 
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -95,6 +96,7 @@ mat-dialog-content {
 }
 
 .backgroundblur {
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px);
 }
+
 

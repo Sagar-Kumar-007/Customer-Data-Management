@@ -10,6 +10,8 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { AccountsComponent } from './accounts/accounts.component';
+import { GoogleMapComponent } from './google-map/google-map.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -18,7 +20,8 @@ import { AccountsComponent } from './accounts/accounts.component';
     AccountsDashboardComponent,
     AccountsNavigationPaneComponent,
     AddAccountFormComponent,
-    AccountsComponent
+    AccountsComponent,
+    GoogleMapComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +30,11 @@ import { AccountsComponent } from './accounts/accounts.component';
     FormsModule,
     MatIconModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
+      libraries: ['places']
+    }),
   ],
   exports:[
     AccountsDashboardComponent,
