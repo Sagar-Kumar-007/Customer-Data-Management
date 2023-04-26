@@ -25,6 +25,7 @@ export class CreateCustomerComponent {
 
   constructor(
     private customer: CustomerService,
+    private router:Router,
     private toastService: NgToastService, 
     private confirm:NgConfirmService,
     private matDialogRef: MatDialogRef<CreateCustomerComponent>,
@@ -49,7 +50,7 @@ export class CreateCustomerComponent {
     sector: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    headquarter: new FormControl('', [Validators.required]),
+    headquaters: new FormControl('', [Validators.required]),
     phoneNo: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
@@ -76,18 +77,16 @@ export class CreateCustomerComponent {
 
   // Update a Customer
 
-  updateCustomer(){
-    if(this.data.customerId)this.customer.updateCustomer(this.customerAddForm.value, this.data.customerId).subscribe(async res=>{
+  updateCustomer(){    
+    if(this.data.customerId)this.customer.updateCustomer(this.customerAddForm.value, this.data.customerId).subscribe(async (res)=>{
+      // console.log(res);
       this.toastService.success({detail:"Success", summary:"Customer updated", duration:3000});
       this.customerAddForm.reset();
       await new Promise(f=>{
         setTimeout(f, 1000)
       });
-      window.location.reload();
     })
-    
   }
-
   
 
 
@@ -124,7 +123,7 @@ export class CreateCustomerComponent {
       sector: customer.sector,
       description: customer.description,
       email: customer.email,
-      headquarter: customer.headquarter,
+      headquaters: customer.headquaters,
       phoneNo: customer.phoneNo,
       website: customer.website,
       countryCode: customer.countryCode

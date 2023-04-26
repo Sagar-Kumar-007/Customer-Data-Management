@@ -6,52 +6,70 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataTrackr_Web_API.Models;
+using DataTrackr_API.DTO.Country;
+using AutoMapper;
+using DataTrackr_API.DTO.Customer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web.Resource;
 
 namespace DataTrackr_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class CustomersController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly ApiDbContext _context;
 
-        public CustomersController(ApiDbContext context)
+        public CustomersController(ApiDbContext context, IMapper mapper)
         {
             _context = context;
+            this._mapper = mapper;
         }
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<GetCustomerDto>>> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            var customers=await _context.Customers.ToListAsync();
+            var records = _mapper.Map<List<GetCustomerDto>>(customers);
+            return Ok(records);
         }
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(string id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.Include(q=>q.Accounts).ThenInclude(q=>q.Location).FirstOrDefaultAsync(q=>q.email==id);
 
             if (customer == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            var customerDetailsDto = _mapper.Map<GetCustomerDetails>(customer);
+
+            return Ok(customerDetailsDto);
         }
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, Customer customer)
+        public async Task<IActionResult> PutCustomer(string id, UpdateCustomerDto updateCustomerDto)
         {
-            if (id != customer.email)
+            if (id != updateCustomerDto.email)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            //_context.Entry(customer).State = EntityState.Modified;
+            var customer = await _context.Customers.FindAsync(id);
+            if(customer==null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(updateCustomerDto, customer);
 
             try
             {
@@ -75,8 +93,9 @@ namespace DataTrackr_API.Controllers
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<Customer>> PostCustomer(CreateCustomerDto createcustomer)
         {
+            var customer = _mapper.Map<Customer>(createcustomer);
             _context.Customers.Add(customer);
             try
             {

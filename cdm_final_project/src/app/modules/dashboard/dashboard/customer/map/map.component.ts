@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-map',
@@ -12,29 +13,35 @@ export class MapComponent {
     @Inject(MAT_DIALOG_DATA)
     private data: {
       customerName: string | null;
-    }
+      customerId: string 
+    },
+    private _customerService: CustomerService
   ) {}
+  markers: { lat: number; lng: number; label: string }[]=[{lat : 22.4064172,
+    lng : 69.0750171,
+    label : "name"}];
+  ngOnInit() {
+    this._customerService.getCustomer(this.data.customerId).subscribe((result) => {
+      if(result){
+        let accounts = result.accounts;
+      this.markers.pop();
+      if (accounts)
+        accounts.forEach((account) => {
+          let obj: { lat: number; lng: number; label: string } = {
+            lat: account.location?.latitude? account.location?.latitude:22.4064172,
+            lng:  account.location?.longitude? account.location?.longitude: 69.0750171,
+            label:  account.aname? account.aname:'Surat'
+          };
 
-  customerName=this.data.customerName;
+          this.markers?.push(obj);
+        });
+        console.log(this.markers);
+      }
+    });
+  }
+
+  customerName = this.data.customerName;
   lat = 22.4064172;
   long = 69.0750171;
-  zoom = 7;
-
-  markers = [
-    {
-      lat: 21.1594627,
-      lng: 72.6822083,
-      label: 'Surat',
-    },
-    {
-      lat: 23.0204978,
-      lng: 72.4396548,
-      label: 'Ahmedabad',
-    },
-    {
-      lat: 22.2736308,
-      lng: 70.7512555,
-      label: 'Rajkot',
-    },
-  ];
+  zoom = 1;
 }

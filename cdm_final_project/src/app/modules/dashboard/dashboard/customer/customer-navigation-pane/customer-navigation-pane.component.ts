@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
+import { Router } from '@angular/router';
+import { ICustomer } from 'src/app/datatypes/customer';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-customer-navigation-pane',
@@ -9,6 +12,7 @@ import { CreateCustomerComponent } from '../create-customer/create-customer.comp
 })
 export class CustomerNavigationPaneComponent {
   viewStatus: boolean = false;
+  customersList:ICustomer[]|undefined;
   constructor(private dialog: MatDialog) {}
 
   //Toggle
@@ -34,15 +38,15 @@ export class CustomerNavigationPaneComponent {
     icon.style.color = 'white';
   }
 
-
-
   addCustomer() {
-    this.dialog.open(CreateCustomerComponent, {
+    let dialogRef=this.dialog.open(CreateCustomerComponent, {
       maxHeight: 'calc(100vh - 120px)',
       backdropClass: 'backgroundblur',
     });
+    dialogRef.afterClosed().subscribe((result)=>{
+      window.location.reload();
+    })
   }
-
   updateView() {
     console.log(true);
     this.viewStatus = true;

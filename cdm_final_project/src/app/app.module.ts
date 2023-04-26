@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgToastModule } from 'ng-angular-popup';
+import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FourOfourComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmService} from 'ng-confirm-box'
 import { NgToastService } from 'ng-angular-popup';
@@ -16,13 +16,19 @@ import { MapComponent } from '../map/map.component';
 export class CustomerDashboardComponent implements OnInit {
 
   customersList:ICustomer[]|undefined;
+  markers: { lat: number; lng: number; label: string }[]=[{lat : 22.4064172,
+    lng : 69.0750171,
+    label : "name"}];
   
-  constructor(private dialog: MatDialog, private customer: CustomerService, private router: Router, private confirm:NgConfirmService, private toastService: NgToastService,){}
+  constructor(private dialog: MatDialog, private _customerService: CustomerService, private router: Router, private confirm:NgConfirmService, private toastService: NgToastService,){}
   ngOnInit(): void {
-    this.customer?.getAllCustomers().subscribe((result:ICustomer[] | undefined)=>{
+    this.showCustomerList();
+  }
+
+  showCustomerList(){
+    this._customerService?.getAllCustomers().subscribe((result:ICustomer[] | undefined)=>{
       this.customersList=result;
     })
-
   }
 
   
@@ -40,18 +46,20 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   //Edit a customer..
-  updateCustomer(id?:string |null){
-    this.dialog.open(CreateCustomerComponent,{
+  updateCustomer(email?:string |null){
+    let dialogRef=this.dialog.open(CreateCustomerComponent,{
       
       data: {
         status: 'updateCustomer',
-        customerId: id,
+        customerId: email,
       },
       maxHeight: 'calc(100vh - 120px)',
       backdropClass: "backgroundblur",
      
     });
-
+    dialogRef.afterClosed().subscribe((result)=>{
+      this.showCustomerList();
+    })
 
   }
 
@@ -61,10 +69,10 @@ export class CustomerDashboardComponent implements OnInit {
   deleteCustomer(id?:string | null, cname?:string |null){
       
     this.confirm.showConfirm(`Are you sure want to delete ${cname}?`, async ()=>{
-      if(id)this.customer.deleteCustomer(id).subscribe(res=>{
+      if(id)this._customerService.deleteCustomer(id).subscribe(res=>{
         
         if(res)this.toastService.success({detail:'SUCCESS', summary: 'Deleted Successfully', duration: 3000});
-        
+        this.showCustomerList();
       })
       await new Promise(f=>{
         setTimeout(f, 1000)
@@ -76,14 +84,40 @@ export class CustomerDashboardComponent implements OnInit {
     
   }
 
-  mapCall(cname?:string |null){
-    this.dialog.open(MapComponent,{
-      data: {
-        customerName: cname,
-      },
-      maxHeight: 'calc(100vh - 120px)',
-      backdropClass: "backgroundblur",
-     
-    });
+  mapCall(cname?:string |null, id?:string | null){
+    if(id)this._customerService.getCustomer(id).subscribe(result=>{
+      if(result){
+        let accounts = result.accounts;
+      this.markers.pop();
+      if (accounts)
+        accounts.forEach((account) => {
+          let obj: { lat: number; lng: number; label: string } = {
+            lat: account.location?.latitude? account.location?.latitude:22.4064172,
+            lng:  account.location?.longitude? account.location?.longitude: 69.0750171,
+            label:  account.aname? account.aname:'AName'
+          };
+
+          this.markers?.push(obj);
+        });
+        console.log(this.markers);
+
+        if(this.markers.length>0){
+          this.dialog.open(MapComponent,{
+            data: {
+              customerName: cname,
+              customerId: id
+            },
+            maxHeight: 'calc(100vh - 120px)',
+            backdropClass: "backgroundblur",
+            
+           
+          });
+        }
+        else{
+          this.toastService.info({detail:'INFO', summary: 'No Accounts exist!', duration: 3000});
+        }
+      }
+    })
+    
   }
 }

@@ -40,14 +40,14 @@
                 </div>
                 <div class="footer">
                   <div class="views">
-                    <span><b>Sector:</b> {{customer['sector']}}</span>
+                    <span><b>Sector:</b> {{customer.sector}}</span>
                   </div>
                   <!-- <a href="#" class="button">Read more →</a> -->
                   <div class="icons">
-                      <i routerLink="account" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;"></i>
-                      <i (click)="mapCall(customer.cname)" class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
-                      <i (click)="updateCustomer(customer.id)" class="fa-solid fa-pencil" style="color: #ead053;"></i>
-                      <i (click)="deleteCustomer(customer.id, customer.cname)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;"></i>
+                      <i routerLink="getcustomer/{{customer.email}}" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;"></i>
+                      <i (click)="mapCall(customer.cname, customer.email)" class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;"></i>
+                      <i (click)="updateCustomer(customer.email)" class="fa-solid fa-pencil" style="color: #ead053;"></i>
+                      <i (click)="deleteCustomer(customer.email)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;"></i>
                   </div>
                 </div>
               </div>

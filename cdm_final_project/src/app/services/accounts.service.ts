@@ -5,17 +5,22 @@ import { IAccount } from '../datatypes/account';
 
 @Injectable()
 export class AccountsService {
+  private baseUrl:string='https://localhost:7196/api/'
   constructor(private _http:HttpClient){}
-  accountsList(customerId:string){
-    return this._http.get<IAccount[]>('http://localhost:3000/accounts/');
+  accountsList(customerEmail:string){
+    return this._http.get<ICustomer>(this.baseUrl+'Customers/'+customerEmail);
   }
-  addAccount(customerId:string,account:IAccount){
-    return this._http.post<IAccount>('http://localhost:3000/accounts/',account);
+  addAccount(account:IAccount){
+    // console.log("account to be added:");
+    // console.log(account);
+    return this._http.post<IAccount>(this.baseUrl+'Accounts',account);
   }
   updateAccount(account:IAccount | undefined,id:string | undefined | null){
-    return this._http.put<IAccount>('http://localhost:3000/accounts/'+id,account);
+    // console.log("urL: "+this.baseUrl+'Accounts/'+id);
+    // console.log("account: "+account);
+    return this._http.put<IAccount>(this.baseUrl+'Accounts/'+id,account);
   }
   deleteAccount(account:IAccount | undefined,id:string | undefined | null){
-    return this._http.delete<IAccount>('http://localhost:3000/accounts/'+id);
+    return this._http.delete<IAccount>(this.baseUrl+'Accounts/'+id);
   }
 }

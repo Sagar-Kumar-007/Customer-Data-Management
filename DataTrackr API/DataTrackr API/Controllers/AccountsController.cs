@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataTrackr_Web_API.Models;
+using AutoMapper;
+using DataTrackr_API.DTO.Account;
+using DataTrackr_API.DTO.Customer;
+using Microsoft.CodeAnalysis;
 
 namespace DataTrackr_API.Controllers
 {
@@ -14,44 +18,56 @@ namespace DataTrackr_API.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly ApiDbContext _context;
+        private readonly IMapper _mapper;
 
-        public AccountsController(ApiDbContext context)
+        public AccountsController(ApiDbContext context, IMapper mapper)
         {
             _context = context;
+            this._mapper = mapper;
         }
 
         // GET: api/Accounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
+        public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
         {
-            return await _context.Accounts.ToListAsync();
+            var accounts = await _context.Accounts.Include(q=>q.Location).ToListAsync();
+            var records = _mapper.Map<List<GetAccountDto>>(accounts);
+       
+            return Ok(records);
         }
 
         // GET: api/Accounts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(string id)
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q=> q.Acc_email==id);
+          
 
             if (account == null)
             {
                 return NotFound();
             }
-
-            return account;
+            var accountDetailsDto = _mapper.Map<GetAccountDto>(account);
+            return Ok(accountDetailsDto);
         }
 
         // PUT: api/Accounts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount(string id, Account account)
+        public async Task<IActionResult> PutAccount(string id, UpdateAccountDetailDto updateAccountDto)
         {
-            if (id != account.Location)
+            if (id != updateAccountDto.Acc_email)
             {
                 return BadRequest();
             }
 
-            _context.Entry(account).State = EntityState.Modified;
+            //_context.Entry(account).State = EntityState.Modified;
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(updateAccountDto, account);
 
             try
             {
@@ -75,8 +91,9 @@ namespace DataTrackr_API.Controllers
         // POST: api/Accounts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Account>> PostAccount(Account account)
+        public async Task<ActionResult<Account>> PostAccount(CreateAccountDto createAccountDto)
         {
+            var account = _mapper.Map<Account>(createAccountDto);
             _context.Accounts.Add(account);
             try
             {
@@ -84,7 +101,7 @@ namespace DataTrackr_API.Controllers
             }
             catch (DbUpdateException)
             {
-                if (AccountExists(account.Location))
+                if (AccountExists(account.Acc_email))
                 {
                     return Conflict();
                 }
@@ -94,7 +111,7 @@ namespace DataTrackr_API.Controllers
                 }
             }
 
-            return CreatedAtAction("GetAccount", new { id = account.Location }, account);
+            return CreatedAtAction("GetAccount", new { id = account.Acc_email }, account);
         }
 
         // DELETE: api/Accounts/5
@@ -115,7 +132,7 @@ namespace DataTrackr_API.Controllers
 
         private bool AccountExists(string id)
         {
-            return _context.Accounts.Any(e => e.Location == id);
+            return _context.Accounts.Any(e => e.Acc_email == id);
         }
     }
 }

@@ -11,9 +11,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { NgToastModule } from 'ng-angular-popup';
-import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerComponent } from './customer/customer.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router, RouterModule } from '@angular/router';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 
@@ -39,7 +38,7 @@ import { MapComponent } from './map/map.component';
     MatIconModule,
     NgConfirmModule,
     NgToastModule,
-    CustomerRoutingModule,
+    RouterModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',

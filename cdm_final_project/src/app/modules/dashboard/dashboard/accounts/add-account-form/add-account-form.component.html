@@ -16,7 +16,7 @@
     
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="email" name="email" >
+                <input type="email" matInput formControlName="acc_email" name="acc_email" >
                 <mat-icon matSuffix>email</mat-icon>
                 <mat-error *ngIf="email && email.invalid && email.touched">
                     Please Enter valid email
@@ -30,7 +30,7 @@
                     <td>
                         <mat-form-field appearance="fill">
                             <mat-label>Account's Location</mat-label>
-                            <input type="text" matInput formControlName="location" name="location" >
+                            <input (click)="openGoogleMap()" type="text" matInput formControlName="location" name="location" >
                             <mat-icon matSuffix>location_on</mat-icon>
                             <mat-error><strong>Required</strong></mat-error>
                         </mat-form-field>
@@ -46,10 +46,20 @@
                     </td>
                 </tr>
             </table>
+
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" formControlName="description" name="description" >
+                <mat-icon matSuffix>computer</mat-icon>
+                <mat-error *ngIf="aname && aname.invalid">
+                   Name <strong>Required</strong>
+                </mat-error>
+            </mat-form-field>
         </form>
         <div mat-dialog-action [align]="'end'" class="button-class">
             <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
-            <button style="background-color: #00599C;" [disabled]="accountAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="accountFormSubmit()"> Submit</button>
+            <button mat-dialog-close style="background-color: #00599C;" [disabled]="accountAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="accountFormSubmit()"> Submit</button>
         </div>
     </div>
     </div>

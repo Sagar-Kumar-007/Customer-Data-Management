@@ -19,7 +19,6 @@ namespace DataTrackr_Web_API.Models
         public string CountryCode { get; set; }
         public string Description { get; set; }
         public string Website { get; set; }
-
         public virtual IList<Account> Accounts { get; set; }
     }
 }
