@@ -16,15 +16,27 @@ export class AccountsDashboardComponent implements OnInit {
 
   customerId:string='1';
   accountsList:IAccount[]|undefined;
+  totalRevenue:number | string=0;
+  totalAccounts:number=0;
   @Output() newEventEmitter=new EventEmitter<boolean>();
 
 
   constructor(private confirm:NgConfirmService, private _accountsService:AccountsService,private dialog:MatDialog,private _route:ActivatedRoute){  }
   showAccountsList(){
+    this.totalRevenue=0;
+    this.totalAccounts=0;
     this._accountsService.accountsList(this.customerId).subscribe((result:ICustomer)=>{
         if(result.accounts){
             this.accountsList=result.accounts;
-            console.log(this.accountsList);
+            this.totalAccounts=this.accountsList.length;
+            // console.log(this.accountsList);
+            this.accountsList.forEach(element => {
+              if(element.acc_revenue && (typeof this.totalRevenue=='number'))this.totalRevenue+=element.acc_revenue;
+              else{
+                this.totalRevenue="Err";
+                return;
+              }
+            });
           }
         })
   }
@@ -35,44 +47,15 @@ export class AccountsDashboardComponent implements OnInit {
     });
     console.log("Account Customer Email: "+this.customerId);
     let main = document.querySelector(".main") as HTMLDivElement;
-    this.checkViewportSize(main.classList.contains("active"));
-    this._accountsService.accountsList(this.customerId).subscribe((result:ICustomer)=>{
-      if(result.accounts)this.accountsList=result.accounts;
-    })
+    this.showAccountsList();
   }
-
-  showCustomerCard(flag:boolean){
-    this.newEventEmitter.emit(flag);
-  }
-
-  checkViewportSize(flag:boolean) {
-    let width = window.innerWidth;
   
-    if (width >=991) {
-      if(flag){
-        this.showCustomerCard(true);
-      }
-      else{
-        this.showCustomerCard(false);
-      }
-    }
-    else {
-      if(flag){
-        this.showCustomerCard(false);
-      }
-      else{
-        this.showCustomerCard(true);
-      }
-    }
-  }
-
   onToggleClick(){
     let navigation = document.querySelector(".navigation") as HTMLDivElement;
     let main = document.querySelector(".main") as HTMLDivElement;
     let toggle=document.querySelector(".fa-bars") as HTMLIFrameElement;
     navigation.classList.toggle("active");
     main.classList.toggle("active");
-    this.checkViewportSize(main.classList.contains("active"));
     toggle.classList.add("fa-flip");
     setTimeout(()=>{
       toggle.classList.remove("fa-flip");
@@ -109,4 +92,6 @@ export class AccountsDashboardComponent implements OnInit {
 
     })
   }
+
+
 }

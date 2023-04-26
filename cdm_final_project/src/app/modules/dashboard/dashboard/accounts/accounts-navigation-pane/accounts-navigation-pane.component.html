@@ -2,7 +2,7 @@
     <ul>
         <li>
             <div class="brand">
-                <a href="#">
+                <a>
                     <div><span class="icon">
                         <i class="fa-solid fa-database" style="color: #ffffff;"></i>
                     </span></div>
@@ -14,9 +14,9 @@
             
         </li>
         <li>
-            <div class="customer" *ngIf="!toggleVar">
+            <div class="customer" *ngIf="!validateViewportSize()">
                 <div class="customer-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHsP_TOOw6qLHi0t0eylpR5TTrnVDVpYPaHA&usqp=CAU" alt="">
+                    <img src={{customer?.logo}} alt="">
                 </div>
                 <div class="customer-details">
                     <span>{{customer?.cname}}</span><br>
@@ -27,11 +27,20 @@
                 </div>
             </div>
         </li>
-        
-        <li (mouseover)="animateIcon(icon2,'fa-bounce')" (mouseout)="removeAnimation(icon2,'fa-bounce')" (click)="addAccount()">
+
+        <li (mouseover)="animateIcon(icon2,'fa-bounce')" (mouseout)="removeAnimation(icon2,'fa-bounce')" routerLink="/customer">
             <a>
                 <span class="icon">
-                    <i class="fa-solid fa-user-plus" #icon2 style="color: #ffffff;"></i>
+                    <i class="fa-solid fa-home" #icon2 style="color: #ffffff;"></i>
+                </span>
+                <span class="title">Home</span>
+            </a>
+        </li>
+
+        <li (mouseover)="animateIcon(icon3,'fa-bounce')" (mouseout)="removeAnimation(icon3,'fa-bounce')" (click)="addAccount()">
+            <a>
+                <span class="icon">
+                    <i class="fa-solid fa-user-plus" #icon3 style="color: #ffffff;"></i>
                 </span>
                 <span class="title">Add Account</span>
             </a>

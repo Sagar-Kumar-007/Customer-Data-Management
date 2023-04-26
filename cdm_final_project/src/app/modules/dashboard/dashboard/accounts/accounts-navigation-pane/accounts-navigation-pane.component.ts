@@ -1,7 +1,7 @@
 import { Component,Input } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { AddAccountFormComponent } from '../add-account-form/add-account-form.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICustomer } from 'src/app/datatypes/customer';
 import { AccountsService } from 'src/app/services/accounts.service';
 
@@ -24,9 +24,7 @@ export class AccountsNavigationPaneComponent {
       }
     })
   }
-  toggleActive:boolean=true;
-  @Input() toggleVar:boolean | undefined;
-  constructor(private dialog:MatDialog,private _route:ActivatedRoute,private _accountsService:AccountsService){}
+  constructor(private dialog:MatDialog,private _route:ActivatedRoute,private _accountsService:AccountsService,private _router:Router){}
   animateIcon(icon:HTMLElement,classToBeAdded:string){
     icon.classList.add(classToBeAdded);
     icon.style.color="#2a2185";
@@ -49,4 +47,34 @@ export class AccountsNavigationPaneComponent {
       window.location.reload();
     })
   }
+
+  showCustomerCard(flag:boolean){
+    return flag;
+  }
+
+  validateViewportSize() {
+    let width = window.innerWidth;
+    let main = document.querySelector(".main") as HTMLDivElement;
+    let flag=main.classList.contains("active");
+    let res:boolean=false;
+    if (width >=991) {
+      if(flag){
+        res=this.showCustomerCard(true);
+      }
+      else{
+        res=this.showCustomerCard(false);
+      }
+    }
+    else {
+      if(flag){
+        res=this.showCustomerCard(false);
+      }
+      else{
+        res=this.showCustomerCard(true);
+      }
+    }
+    return res;
+  }
+
+
 }
