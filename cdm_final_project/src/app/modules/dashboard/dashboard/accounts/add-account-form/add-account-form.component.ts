@@ -27,6 +27,7 @@ export class AddAccountFormComponent {
       // console.log("Add ACcount Form: "+this.accountAddForm.value.acc_email);
       this.accountAddForm.value.customer_email=this.data.email;
       console.log(this.accountAddForm.value);
+      this.accountAddForm.value.acc_revenue=Math.floor((Math.random()*101));
       this._accountsService.addAccount(this.accountAddForm.value).subscribe((result)=>{
         if(result){
           console.log("Account Added");
@@ -59,6 +60,7 @@ export class AddAccountFormComponent {
       location:new FormControl('',[Validators.required]),
       estYear:new FormControl('',[Validators.required]),
       description:new FormControl('',[Validators.required]),
+      acc_revenue:new FormControl(0),
       customer_email:new FormControl(this.data.email)
     });
    

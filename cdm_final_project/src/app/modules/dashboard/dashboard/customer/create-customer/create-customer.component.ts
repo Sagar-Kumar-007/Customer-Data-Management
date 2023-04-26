@@ -50,7 +50,7 @@ export class CreateCustomerComponent {
     sector: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    headquarter: new FormControl('', [Validators.required]),
+    headquaters: new FormControl('', [Validators.required]),
     phoneNo: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
@@ -103,8 +103,8 @@ export class CreateCustomerComponent {
     return this.customerAddForm.get('gstin');
   }
 
-  get headquarter() {
-    return this.customerAddForm.get('headquarter');
+  get headquaters() {
+    return this.customerAddForm.get('headquaters');
   }
   get countryCode() {
     return this.customerAddForm.get('countryCode');
@@ -123,7 +123,7 @@ export class CreateCustomerComponent {
       sector: customer.sector,
       description: customer.description,
       email: customer.email,
-      headquarter: customer.headquarters,
+      headquaters: customer.headquaters,
       phoneNo: customer.phoneNo,
       website: customer.website,
       countryCode: customer.countryCode

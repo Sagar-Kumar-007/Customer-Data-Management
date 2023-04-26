@@ -3,7 +3,7 @@
     public class UpdateAccountDetailDto
     {
         public string Acc_email { get; set; }
-        public decimal Acc_revenue { get; set; }
+        //public decimal Acc_revenue { get; set; }
 
         public string Location { get; set; }
 
