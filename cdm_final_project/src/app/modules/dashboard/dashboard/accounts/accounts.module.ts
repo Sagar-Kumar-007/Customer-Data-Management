@@ -35,7 +35,7 @@ import { RouterModule } from '@angular/router';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
       libraries: ['places']
-    }),,
+    }),
     RouterModule
   ],
   exports:[
