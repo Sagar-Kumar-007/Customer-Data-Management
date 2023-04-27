@@ -1,6 +1,5 @@
 ﻿using DataTrackr_Web_API.Models;
 
-using DataTrackr_Web_API.Models;
 
 namespace DataTrackr_API.DTO.Account
 {
