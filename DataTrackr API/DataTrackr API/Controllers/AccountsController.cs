@@ -34,7 +34,7 @@ namespace DataTrackr_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
         {
-            var account = await _context.Accounts.Include(q => q.Location).ToListAsync();
+            var account = await _context.Accounts.Include(q=>q.Location).ToListAsync();
             var records = _mapper.Map<List<GetAccountDto>>(account);
             return Ok(records);
         }

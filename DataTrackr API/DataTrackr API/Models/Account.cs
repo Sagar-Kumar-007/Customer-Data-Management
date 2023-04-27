@@ -19,7 +19,7 @@ namespace DataTrackr_Web_API.Models
         public string Acc_email { get; set; }
         public double Acc_revenue { get; set; }
 
-        public string Location { get; set; }
+        public virtual Coordinates Location { get; set; }
 
         public string aname { get; set; }
 
