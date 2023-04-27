@@ -29,7 +29,7 @@ export class AccountsNavigationPaneComponent {
   constructor(private dialog:MatDialog,private _route:ActivatedRoute,private _accountsService:AccountsService){}
   animateIcon(icon:HTMLElement,classToBeAdded:string){
     icon.classList.add(classToBeAdded);
-    icon.style.color="#2a2185";
+    icon.style.color="#003b69";
   }
   removeAnimation(icon:HTMLElement,classToBeRemoved:string){
     icon.classList.remove(classToBeRemoved);

@@ -1,14 +1,15 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateCustomerComponent } from '../create-customer/create-customer.component';
+
 
 @Component({
-  selector: 'app-customer-navigation-pane',
-  templateUrl: './customer-navigation-pane.component.html',
-  styleUrls: ['./customer-navigation-pane.component.css'],
+  selector: 'app-logs-navigation-pane',
+  templateUrl: './logs-navigation-pane.component.html',
+  styleUrls: ['./logs-navigation-pane.component.css']
 })
-export class CustomerNavigationPaneComponent {
-  constructor(private dialog: MatDialog) {}
+export class LogsNavigationPaneComponent {
+
+  
 
   //Toggle
   onToggleClick() {
@@ -33,14 +34,5 @@ export class CustomerNavigationPaneComponent {
     icon.style.color = 'white';
   }
 
-  addCustomer() {
-    let dialogRef=this.dialog.open(CreateCustomerComponent, {
-      maxHeight: 'calc(100vh - 60px)',
-      width: '70%',
-      backdropClass: 'backgroundblur',
-    });
-    dialogRef.afterClosed().subscribe((result)=>{
-      window.location.reload();
-    })
-  }
+  
 }

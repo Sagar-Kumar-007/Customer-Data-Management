@@ -107,7 +107,8 @@ export class CustomerDashboardComponent implements OnInit {
               customerName: cname,
               customerId: id
             },
-            maxHeight: 'calc(100vh - 120px)',
+            height: 'calc(100vh-60px)',
+            width:'60%',
             backdropClass: "backgroundblur",
             
            

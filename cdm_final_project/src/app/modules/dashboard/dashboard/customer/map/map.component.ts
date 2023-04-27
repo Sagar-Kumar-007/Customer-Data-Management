@@ -43,5 +43,5 @@ export class MapComponent {
   customerName = this.data.customerName;
   lat = 22.4064172;
   long = 69.0750171;
-  zoom = 1;
+  zoom = 4;
 }

@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddAccountFormComponent {
   coordinates: ICoordinate;
+  address!: string;
   constructor(
     private dialog: MatDialog,
     private toastService: NgToastService,
@@ -56,12 +57,14 @@ export class AddAccountFormComponent {
       maxHeight: 'calc(100vh - 120px)',
       width:'100%',
       backdropClass: 'backgroundblur',
+      
     });
 
     dialogRef.afterClosed().subscribe(
       (result:ICoordinate) => {
           this.coordinates = result;
           console.log(this.coordinates.latitude);
+          if(this.coordinates.address)this.address=this.coordinates.address;
           if (this.coordinates) {
             this.accountAddForm.controls.location.patchValue(
               this.coordinates

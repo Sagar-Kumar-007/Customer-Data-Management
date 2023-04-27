@@ -22,9 +22,8 @@
         <ng-template [ngIf]="customersList!=undefined">
           <li *ngFor="let customer of customersList">
             <div class="card">
-              <div class="image-session">
+              <div class="image-session" routerLink="getcustomer/{{customer.email}}">
                 <span
-                routerLink="/account"
                   class="image"
                   style="
                     background-image: url({{customer.logo}});
@@ -37,6 +36,8 @@
                   <p class="desc">
                     {{customer['description']}}
                   </p>
+                  <span routerLink="getcustomer/{{customer.email}}" class="read-more">Read More..</span>
+                 
                 </div>
                 <div class="footer">
                   <div class="views">
@@ -53,6 +54,7 @@
               </div>
             </div>
           </li>
+          
         </ng-template>
       </ul>
     </div>
