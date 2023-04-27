@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataTrackr_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/User")]
     [ApiController]
     public class UserController : ControllerBase
     {

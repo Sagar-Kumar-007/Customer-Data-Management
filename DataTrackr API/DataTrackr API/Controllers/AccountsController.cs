@@ -33,8 +33,8 @@ namespace DataTrackr_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
         {
-            var accounts = await _context.Accounts.ToListAsync();
-            var records = _mapper.Map<List<GetAccountDto>>(accounts);
+            var account = await _context.Accounts.Include(q => q.Location).ToListAsync();
+            var records = _mapper.Map<List<GetAccountDto>>(account);
             return Ok(records);
         }
 
@@ -42,7 +42,7 @@ namespace DataTrackr_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(string id)
         {
-            var account = await _context.Accounts.Include(q => q.Acc_email).FirstOrDefaultAsync(q => q.Acc_email == id);
+            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q => q.Acc_email == id);
           
 
             if (account == null)
@@ -58,18 +58,21 @@ namespace DataTrackr_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount(string id, UpdateAccountDetailDto updateAccountDto)
         {
+            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q => q.Acc_email == id);
             if (id != updateAccountDto.Acc_email)
             {
                 return BadRequest();
             }
 
             //_context.Entry(account).State = EntityState.Modified;
-            var account = await _context.Accounts.FindAsync(id);
+            //var account = await _context.Accounts.FindAsync(id);
             if (account == null)
             {
                 return NotFound();
             }
             _mapper.Map(updateAccountDto, account);
+            //Console.WriteLine(account.Location.Id + " " + updateAccountDto.Location.Id);
+            //updateAccountDto.Location.Id = account.Location.Id;
 
             try
             {

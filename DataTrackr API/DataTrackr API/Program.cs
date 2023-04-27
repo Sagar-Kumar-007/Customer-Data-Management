@@ -36,7 +36,6 @@ builder.Services.AddSwaggerGen();
 
 
 
-
 var connectionString = builder.Configuration.GetConnectionString("DevelopConnection");
 
 builder.Services.AddDbContext<ApiDbContext>(options =>
