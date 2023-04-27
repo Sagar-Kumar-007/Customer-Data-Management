@@ -1,7 +1,10 @@
+import { ICoordinate } from "./Coordinates";
+
 export interface IAccount{
-    aname?:string | null;
-    account_email?:string | null;
-    location?:string | null;
+    acc_email?:string | null;
+    acc_revenue?:number | null;
+    location?:ICoordinate | null;
+    aname?:string |null;
     estYear?:string | null;
     PmId?:number | null;
 }

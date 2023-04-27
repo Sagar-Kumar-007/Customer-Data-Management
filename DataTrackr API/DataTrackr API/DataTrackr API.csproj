@@ -5,6 +5,7 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <RootNamespace>DataTrackr_API</RootNamespace>
+    <UserSecretsId>c407f063-f00d-4cd6-b694-76b9f2c5c319</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

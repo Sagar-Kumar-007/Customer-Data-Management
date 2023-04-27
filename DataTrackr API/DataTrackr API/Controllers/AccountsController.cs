@@ -9,6 +9,7 @@ using DataTrackr_Web_API.Models;
 using AutoMapper;
 using DataTrackr_API.DTO.Account;
 using DataTrackr_API.DTO.Customer;
+using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web.Resource;
 
@@ -42,7 +43,7 @@ namespace DataTrackr_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(string id)
         {
-            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q => q.Acc_email == id);
+            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q=> q.Acc_email==id);
           
 
             if (account == null)

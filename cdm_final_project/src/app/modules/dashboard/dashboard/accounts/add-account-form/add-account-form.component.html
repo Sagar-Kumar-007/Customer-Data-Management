@@ -30,7 +30,7 @@
                     <td>
                         <mat-form-field appearance="fill">
                             <mat-label>Account's Location</mat-label>
-                            <input type="text" matInput formControlName="location" name="location" >
+                            <input (click)="openGoogleMap()" type="text" matInput formControlName="location" name="location" >
                             <mat-icon matSuffix>location_on</mat-icon>
                             <mat-error><strong>Required</strong></mat-error>
                         </mat-form-field>

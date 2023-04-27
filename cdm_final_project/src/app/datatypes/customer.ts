@@ -6,7 +6,7 @@ export interface ICustomer{
     logo?:string | null;
     sector?:string | null;
     phoneNo?:string | null;
-    headquarters?:string | null;
+    headquaters?:string | null;
     countryCode?:string | null;
     description?:string | null;
     website?:string | null;

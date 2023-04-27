@@ -20,8 +20,8 @@
     <div class="cardBox">
         <div class="card">
             <div>
-                <div class="numbers">1,504</div>
-                <div class="cardName">Daily Views</div>
+                <div class="numbers">{{totalAccounts}}</div>
+                <div class="cardName">Accounts</div>
             </div>
 
             <div class="iconBx">
@@ -31,8 +31,8 @@
 
         <div class="card">
             <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
+                <div class="numbers">{{totalRevenue}} Cr</div>
+                <div class="cardName">Total Revenue</div>
             </div>
 
             <div class="iconBx">
@@ -76,6 +76,7 @@
                     <tr>
                         <td>Name</td>
                         <td>Establishment</td>
+                        <td>Location</td>
                         <td>Update</td>
                         <td>Delete</td>
                     </tr>
@@ -86,9 +87,10 @@
                         <tr *ngFor="let account of accountsList">
                             <td>{{account['aname']}}</td>
                             <td>{{account['estYear']}}</td>
+                            <td>{{account.location}}</td>
                             <!-- Change id to email in updateAccount and deleteAccount -->
                             <td class="update-icon"><span (click)="updateAccount(account)"><i class="fa-solid fa-pencil" style="color: #ffc400;"></i></span></td>
-                            <td class="delete-icon"><span (click)="deleteAccount(account)" ><i class="fa-solid fa-trash" style="color: #a80000;"></i></span></td>
+                            <td class="delete-icon"><span (click)="deleteAccount(account, account.aname)" ><i class="fa-solid fa-trash" style="color: #a80000;"></i></span></td>
                         </tr>
                     </ng-template>
 

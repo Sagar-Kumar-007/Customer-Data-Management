@@ -83,7 +83,7 @@
     align-items: center;
   }
   .customer{
-    height: 60vh;
+    height: 50vh;
     width: 90%;
     padding: 15px;
     border-radius: 5px;
@@ -98,8 +98,9 @@
     height: 50%;
   }
   .customer-img img{
-    height: 95%;
-    width: auto;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
     border-radius: 100%;
   }
   .customer-details{

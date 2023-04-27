@@ -28,6 +28,8 @@ export class CustomerService {
   /********************  Update a Customer********************/
   updateCustomer(customer: ICustomer, customerId: string)
   {
+    console.log(customer);
+    
     return this._http.put<ICustomer>(`${this.baseUrl}/${customerId}`, customer);
   }
 

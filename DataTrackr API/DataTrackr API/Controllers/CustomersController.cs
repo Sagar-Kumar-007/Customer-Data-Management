@@ -43,7 +43,7 @@ namespace DataTrackr_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(string id)
         {
-            var customer = await _context.Customers.Include(q=>q.Accounts).FirstOrDefaultAsync(q=>q.email==id);
+            var customer = await _context.Customers.Include(q=>q.Accounts).ThenInclude(q=>q.Location).FirstOrDefaultAsync(q=>q.email==id);
 
             if (customer == null)
             {
