@@ -103,8 +103,8 @@ export class CreateCustomerComponent {
     return this.customerAddForm.get('gstin');
   }
 
-  get headquarter() {
-    return this.customerAddForm.get('headquarter');
+  get headquaters() {
+    return this.customerAddForm.get('headquaters');
   }
   get countryCode() {
     return this.customerAddForm.get('countryCode');

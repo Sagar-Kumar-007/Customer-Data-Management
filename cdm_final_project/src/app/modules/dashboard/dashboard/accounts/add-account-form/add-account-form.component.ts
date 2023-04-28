@@ -82,6 +82,7 @@ export class AddAccountFormComponent {
     this.accountAddForm.value.location=this.coordinates;
     this.accountAddForm.value.customer_email = this.data.email;
     console.log(this.accountAddForm.value);
+    this.accountAddForm.value.acc_revenue=Math.floor((Math.random()*101));
     this._accountsService
       .addAccount(this.accountAddForm.value)
       .subscribe((result) => {
@@ -129,6 +130,7 @@ export class AddAccountFormComponent {
     estYear: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     customer_email: new FormControl(this.data.email),
+    acc_revenue:new FormControl(0),
   });
 
   get aname() {
