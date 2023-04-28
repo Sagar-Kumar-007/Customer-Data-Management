@@ -12,6 +12,7 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
 import { AccountsComponent } from './accounts/accounts.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -35,6 +36,7 @@ import { AgmCoreModule } from '@agm/core';
       apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
       libraries: ['places']
     }),
+    RouterModule
   ],
   exports:[
     AccountsDashboardComponent,

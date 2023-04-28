@@ -5,7 +5,7 @@ namespace DataTrackr_API.DTO.Account
     public class UpdateAccountDetailDto
     {
         public string Acc_email { get; set; }
-        public decimal Acc_revenue { get; set; }
+        //public decimal Acc_revenue { get; set; }
 
         public Coordinates Location { get; set; }
 
