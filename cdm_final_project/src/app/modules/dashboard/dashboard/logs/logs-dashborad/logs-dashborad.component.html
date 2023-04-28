@@ -18,25 +18,19 @@
           <thead>
             <tr>
               <th>User ID</th>
-              <th>Account Name</th>
-              <th>Location</th>
-              <th>Email</th>
-              <th>Year of Establishment</th>
-              <th></th>
+              <th>TimeStamp</th>
+              <th>Action</th>
+              <th>Comment</th>
             </tr>
             <br />
           </thead>
 
           <tbody class="logslist">
-            <tr class="body-row">
-              <td data-title="UserId">xyz</td>
-              <td data-title="accountName">xyz</td>
-              <td data-title="branch">xyz</td>
-              <td data-title="email">xyz</td>
-              <td data-title="yearOfEst">xyz</td>
-              <td>
-                <button class="update_btn">Update</button>
-              </td>
+            <tr class="body-row" *ngFor="let loglist of logsList">
+              <td data-title="UserId">{{loglist.userId}}</td>
+              <td data-title="TimeStamp">{{loglist.timeStamp}}</td>
+              <td data-title="Action">{{loglist.action}}</td>
+              <td data-title="Comment">{{loglist.comment}}</td>
             </tr>
           </tbody>
           <div class="paginationclass">
