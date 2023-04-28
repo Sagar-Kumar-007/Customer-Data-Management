@@ -83,9 +83,10 @@
 
 /* ===================== Customers ===================== */
 .customers {
-  margin-top: 50px;
-  margin-bottom: 60px
- 
+  margin: 3%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding-top: 2%;
+  
 }
 
 .flexone {
@@ -101,15 +102,18 @@
 .groups li {
   position: relative;
   list-style: none;
-  background: #fff;
+  /* background: #fff; */
   border-radius: 5px;
   box-shadow: 0 3px 4px 0 #0001;
   overflow: hidden;
   margin-bottom: 30px;
   transition: all 0.3s;
+  background: #dfe2e3;
+  cursor: pointer;
+  
 }
 .groups li:hover {
-  transform: scale(1.04);
+  transform: scale(1.01);
   box-shadow: 0 4px 14px 0 #0005;
 }
 .groups .card {
@@ -119,13 +123,15 @@
 .groups .image-session {
   float: left;
   overflow: hidden;
-  margin: 10px 40px 10px 10px;
-  
+  margin: 2% 4% 1% 3%;
+  border-radius: 16px;
+  border: 1px solid #00599C; 
   
 }
+
 .groups .image-session .image {
-  width: 240px;
-  height: 180px;
+  width: 220px;
+  height: 160px;
   display: block;
   background-size: cover;
   background-position: center;
@@ -167,20 +173,29 @@
   box-shadow: -100px 0 0 100px #0075ff;
 }
 .groups .body .title {
-  height: 60px;
+  height: 40px;
   overflow: hidden;
   font-size: 24px;
 }
 .groups .body .desc {
   height: 45px;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   font-size: 14px;
 }
+.read-more{
+  position: absolute;
+  cursor: pointer;
+  font-size: 65%;
+  margin-bottom: 40%;
+  
+}
+
 
 .groups .footer .views {
   display: block;
   font-size: 12px;
+  padding-top: 5%;
   
 }
 
@@ -219,12 +234,19 @@
 @media screen and (max-width: 560px) {
   .groups .image-session {
     float: none;
-    margin-right: 0;
+    
+    
   }
   .groups .image-session .image {
     width: 100%;
   }
+  .title{
+    text-align: center;
+  }
 }
+
+
+
  /* ====================== Responsive Design ========================== */
  @media (max-width: 991px) {
   .main {

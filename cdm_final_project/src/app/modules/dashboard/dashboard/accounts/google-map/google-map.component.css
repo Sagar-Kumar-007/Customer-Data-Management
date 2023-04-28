@@ -54,3 +54,6 @@ agm-map{
     color: white;
     border-radius: 5px;
 }
+button{
+    cursor: pointer;
+}
