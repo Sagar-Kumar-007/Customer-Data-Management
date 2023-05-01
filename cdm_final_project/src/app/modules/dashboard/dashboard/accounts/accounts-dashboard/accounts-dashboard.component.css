@@ -88,7 +88,7 @@
     width: 100%;
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
   }
   
@@ -98,7 +98,8 @@
     padding: 30px;
     border-radius: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   }
@@ -128,6 +129,10 @@
   .cardBox .card:hover .cardName,
   .cardBox .card:hover .iconBx {
     color: var(--white);
+  }
+  .piechart-revenue canvas{
+    height: 100px;
+    width: auto;
   }
   
   /* ================== Order Details List ============== */
@@ -295,7 +300,7 @@
       left: 300px;
     }
     .cardBox {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
     }
   }
   
