@@ -5,7 +5,7 @@
     </div>
     <div class="search">
       <label>
-          <input type="text" placeholder="Search here">
+          <input type="text" placeholder="Search here" #searchIpt (keyup)="searchVal(searchIpt)">
           <i class="fa fa-solid fa-magnifying-glass"></i>
       </label>
   </div>

@@ -93,5 +93,16 @@ export class AccountsDashboardComponent implements OnInit {
     })
   }
 
+  searchVal(data:HTMLInputElement){
+    // console.log(data.value);
+    
+    if(!data.value){
+      this.showAccountsList();
+    }
+    if(data.value)this._accountsService.searchAccounts(data.value).subscribe(result=>{
+      if(result)this.accountsList=result;
+    })
+    // if(!data.value)console.log(this.customersList);
+  }
 
 }

@@ -6,7 +6,7 @@
 
         <div class="search">
             <label>
-                <input type="text" placeholder="Search here">
+                <input type="text" placeholder="Search here" #data (keyup)="searchVal(data)">
                 <i class="fa fa-solid fa-magnifying-glass"></i>
             </label>
         </div>
