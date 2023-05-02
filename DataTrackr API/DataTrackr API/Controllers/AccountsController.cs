@@ -35,9 +35,9 @@ namespace DataTrackr_API.Controllers
        
             return Ok(records);
         }
-        // GET: api/Accounts_like?search=sagar
+        // GET: api/Accounts$like?search=sagar
         [HttpGet]
-        [Route("/Accounts_like")]
+        [Route("/api/Accounts$like")]
         public async Task<ActionResult<IEnumerable<GetAccountDto>>> SearchAccounts([FromQuery] string search)
         {
             var accounts = await _context.Accounts.Include(q => q.Location).Where(d=>d.aname.Contains(search) || d.description.Contains(search) || d.EstYear.Contains(search) || d.Location.address.Contains(search)).ToListAsync();
