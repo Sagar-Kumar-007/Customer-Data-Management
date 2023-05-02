@@ -8,6 +8,7 @@ import { Ilogs } from 'src/app/datatypes/logs';
 })
 export class LogsDashboradComponent {
   p: number = 1;
+  action:string='deleted';
   //Toggle
   onToggleClick() {
     let navigation = document.querySelector('.navigation') as HTMLDivElement;
@@ -50,8 +51,15 @@ export class LogsDashboradComponent {
     {
       userId: 'utka@123',
       timeStamp: '28/02/2023 2:10:15 PM',
-      action: 'deleted',
-      comment: 'Account3 has been deleted.',
+      action: 'created',
+      comment: 'Account3 has been created.',
+    },
+
+    {
+      userId: 'ak@123',
+      timeStamp: '28/02/2023 11:10:15 AM',
+      action: 'updated',
+      comment: 'Account3 has been updated.',
     },
   ];
 }

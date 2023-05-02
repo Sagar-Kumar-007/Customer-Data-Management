@@ -1,3 +1,4 @@
+<!-------------------Toogler------------------------->
 <div class="main">
   <div class="topbar">
     <div class="toggle" (click)="onToggleClick()">
@@ -11,37 +12,41 @@
     </div>
   </div>
 
-  <div class="logs">
-    <div class="tableaccounts">
-      <div class="tablebody">
-        <table>
-          <thead>
-            <tr>
-              <th>User ID</th>
-              <th>TimeStamp</th>
-              <th>Action</th>
-              <th>Comment</th>
-            </tr>
-            <br />
-          </thead>
+  <!------------------------------Logs HTML Code------------------------------>
 
-          <tbody class="logslist">
-            <tr class="body-row" *ngFor="let loglist of logsList">
-              <td data-title="UserId">{{loglist.userId}}</td>
-              <td data-title="TimeStamp">{{loglist.timeStamp}}</td>
-              <td data-title="Action">{{loglist.action}}</td>
-              <td data-title="Comment">{{loglist.comment}}</td>
-            </tr>
-          </tbody>
-          <div class="paginationclass">
-            <pagination-controls
-              (pageChange)="p = $event"
-            ></pagination-controls>
-          </div>
+  <div class="details">
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>History</h2>
+            <!-- <a href="#" class="btn">View All</a> -->
+        </div>
+
+        <table class="account-table">
+            <thead class="account-head">
+                <tr>
+                    <td>UserId</td>
+                    <td>TimeStamp</td>
+                    <td>Comment</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <ng-template [ngIf]="logsList!=undefined">
+                    <tr  *ngFor="let logList of logsList">
+                        <td>{{logList.userId}}</td>
+                        <td>{{logList.timeStamp}}</td>
+                        <td>{{logList.comment}}</td>
+                        <ng-template [ngIf]="logList.action==='created'"><td><span class="status-created">{{logList.action}}</span></td></ng-template>
+                        <ng-template [ngIf]="logList.action==='updated'"><td><span class="status-updated">{{logList.action}}</span></td></ng-template>
+                        <ng-template [ngIf]="logList.action==='deleted'"><td><span class="status-deleted">{{logList.action}}</span></td></ng-template>
+                    </tr>
+                </ng-template>
+
+                
+            </tbody>
         </table>
-      </div>
     </div>
-  </div>
-
+</div>
 
 </div>
