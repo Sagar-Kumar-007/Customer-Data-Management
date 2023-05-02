@@ -13,6 +13,7 @@ import { AccountsComponent } from './accounts/accounts.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { RouterModule } from '@angular/router';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -36,7 +37,8 @@ import { RouterModule } from '@angular/router';
       apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
       libraries: ['places']
     }),
-    RouterModule
+    RouterModule,
+    NgChartsModule
   ],
   exports:[
     AccountsDashboardComponent,

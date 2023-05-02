@@ -23,4 +23,7 @@ export class AccountsService {
   deleteAccount(account:IAccount | undefined,id:string | undefined | null){
     return this._http.delete<IAccount>(this.baseUrl+'Accounts/'+id);
   }
+  searchAccounts(data:string){
+    return this._http.get<IAccount[]>(`${this.baseUrl}Accounts$like?search=${data}`);
+  }
 }
