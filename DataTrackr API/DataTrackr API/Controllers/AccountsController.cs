@@ -17,8 +17,8 @@ namespace DataTrackr_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
-    //[RequiredScope("account.read")]
+    [Authorize]
+
     public class AccountsController : ControllerBase
     {
         private readonly ApiDbContext _context;

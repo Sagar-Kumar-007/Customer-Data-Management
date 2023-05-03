@@ -4,6 +4,7 @@ import { AddAccountFormComponent } from '../add-account-form/add-account-form.co
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICustomer } from 'src/app/datatypes/customer';
 import { AccountsService } from 'src/app/services/accounts.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-accounts-navigation-pane',
@@ -24,7 +25,7 @@ export class AccountsNavigationPaneComponent {
       }
     })
   }
-  constructor(private dialog:MatDialog,private _route:ActivatedRoute,private _accountsService:AccountsService,private _router:Router){}
+  constructor(private dialog:MatDialog,private _route:ActivatedRoute,private _accountsService:AccountsService,private _router:Router, private auth:AuthService){}
   animateIcon(icon:HTMLElement,classToBeAdded:string){
     icon.classList.add(classToBeAdded);
     icon.style.color="#003b69";
@@ -75,6 +76,9 @@ export class AccountsNavigationPaneComponent {
     }
     return res;
   }
+  signout(){
+    this.auth.signOut();
+   }
 
 
 }

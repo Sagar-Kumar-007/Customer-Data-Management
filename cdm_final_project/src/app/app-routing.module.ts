@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'signup', component:SignupComponent},
   {path:'account', component:AccountsComponent, canActivate:[AuthGuard]},
   {path:'customer',component:CustomerComponent},
-
+  {path:'logs',component:LogsComponent},
   {path:'customer/getcustomer/:customerEmail',component:AccountsComponent, canActivate:[AuthGuard]},
   {path:'**',component:FourOfourComponent}
 ]

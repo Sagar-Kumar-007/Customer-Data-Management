@@ -7,7 +7,6 @@ import {MatDialog} from '@angular/material/dialog'
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
 import { ICustomer } from 'src/app/datatypes/customer';
 import { MapComponent } from '../map/map.component';
-import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -22,12 +21,9 @@ export class CustomerDashboardComponent implements OnInit {
     lng : 69.0750171,
     label : "name"}];
    
-  constructor(private dialog: MatDialog, private _customerService: CustomerService, private router: Router, private confirm:NgConfirmService, private toastService: NgToastService,private api:ApiService){}
+  constructor(private dialog: MatDialog, private _customerService: CustomerService, private router: Router, private confirm:NgConfirmService, private toastService: NgToastService){}
   ngOnInit(): void {
     this.showCustomerList();
-    this.api.getUsers().subscribe(res=>{
-      this.users=res;
-    })
   }
 
   showCustomerList(){

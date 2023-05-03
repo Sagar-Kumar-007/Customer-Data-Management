@@ -14,8 +14,7 @@ using Microsoft.Identity.Web.Resource;
 
 namespace DataTrackr_API.Controllers
 {
-    //[Authorize]
-    //[RequiredScope("customer.read")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
