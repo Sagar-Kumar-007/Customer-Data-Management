@@ -4,6 +4,7 @@ import { CreateCustomerComponent } from '../create-customer/create-customer.comp
 import { Router } from '@angular/router';
 import { ICustomer } from 'src/app/datatypes/customer';
 import { CustomerService } from 'src/app/services/customer.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-customer-navigation-pane',
@@ -13,7 +14,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class CustomerNavigationPaneComponent {
   viewStatus: boolean = false;
   customersList:ICustomer[]|undefined;
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private auth:AuthService) {}
 
   //Toggle
   onToggleClick() {
@@ -50,5 +51,9 @@ export class CustomerNavigationPaneComponent {
   updateView() {
     console.log(true);
     this.viewStatus = true;
+  }
+
+  signout(){
+   this.auth.signOut();
   }
 }

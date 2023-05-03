@@ -31,7 +31,7 @@ constructor(
     if(this.loginForm.valid)
     {
       this.auth.login(this.loginForm.value).subscribe({
-        next:(res=>{
+         next:(res=>{
           alert(res.message);
           console.log(res.token);
           this.loginForm.reset();

@@ -120,6 +120,7 @@
 using DataTrackr_API.Helpers;
 using DataTrackr_API.Models;
 using DataTrackr_Web_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
@@ -213,7 +214,7 @@ namespace DataTrackr_API.Controllers
             });
         }
 
-
+        [Authorize]
         [HttpGet]
         
         public async Task<ActionResult<User>>GetAllUsers()

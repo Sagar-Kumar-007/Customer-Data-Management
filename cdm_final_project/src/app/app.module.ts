@@ -14,6 +14,8 @@ import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './modules/auth/components/login/login.component';
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
 import { AuthModule } from './modules/auth/auth.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,13 @@ import { AuthModule } from './modules/auth/auth.module';
       libraries: ['places']
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true  
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,13 +9,13 @@ import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'signup', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
   {path:'signup', component:SignupComponent},
-  {path:'account', component:AccountsComponent},
-  {path:'customer',component:CustomerComponent, canActivate:[AuthGuard]},
+  {path:'account', component:AccountsComponent, canActivate:[AuthGuard]},
+  {path:'customer',component:CustomerComponent},
 
-  {path:'customer/getcustomer/:customerEmail',component:AccountsComponent},
+  {path:'customer/getcustomer/:customerEmail',component:AccountsComponent, canActivate:[AuthGuard]},
   {path:'**',component:FourOfourComponent}
 ]
 
