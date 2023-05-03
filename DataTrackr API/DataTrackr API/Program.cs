@@ -11,6 +11,7 @@ using Microsoft.Identity.Web;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,8 +50,9 @@ builder.Services.AddAuthentication(x =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("veryverysecret....")),
-        ValidateAudience=false,
-        ValidateIssuer=false,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ClockSkew = TimeSpan.Zero
     };
 });
 
