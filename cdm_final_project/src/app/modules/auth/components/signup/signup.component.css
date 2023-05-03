@@ -13,13 +13,21 @@ html,body{
   place-items: center;
   background: -webkit-linear-gradient(left, #9896F0,#FBC8D5);
 } */
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
 ::selection{
   background: #12e8f0;
   color: #fff;
 }
 .wrapper{
   overflow: hidden;
-  max-width: 390px;
+  /* max-width: 390px; */
+  width: 400px;
   place-items: center;
   background: #fff;
   padding: 30px;

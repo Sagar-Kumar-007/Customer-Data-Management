@@ -17,6 +17,13 @@ html,body{
   background: #12e8f0;
   color: #fff;
 }
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
 .wrapper{
   overflow: hidden;
   max-width: 390px;
@@ -25,6 +32,7 @@ html,body{
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+  
 }
 .wrapper .title-text{
   display: flex;
@@ -168,7 +176,8 @@ form .btn .btn-layer{
 form .btn:hover .btn-layer{
   left: 0;
 }
-form .btn input[type="submit"]{
+form .btn input[type="submit"]
+{
   height: 100%;
   width: 100%;
   z-index: 2;

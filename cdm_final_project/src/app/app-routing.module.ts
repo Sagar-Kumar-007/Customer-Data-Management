@@ -5,13 +5,17 @@ import { CustomerComponent } from './modules/dashboard/dashboard/customer/custom
 import { AccountsComponent } from './modules/dashboard/dashboard/accounts/accounts/accounts.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
+import { AuthGuard } from './guards/auth.guard';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: 'customer', pathMatch: 'full' },
-  { path: 'customer', component: CustomerComponent },
-  {path:'customer/getcustomer/:customerEmail',component:AccountsComponent},
+  { path: '', redirectTo: 'signup', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
-  {path:'signup',component:SignupComponent},
+  {path:'signup', component:SignupComponent},
+  {path:'account', component:AccountsComponent},
+  {path:'customer',component:CustomerComponent, canActivate:[AuthGuard]},
+
+  {path:'customer/getcustomer/:customerEmail',component:AccountsComponent},
   {path:'**',component:FourOfourComponent}
 ]
 
