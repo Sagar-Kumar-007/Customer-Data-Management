@@ -38,6 +38,15 @@ namespace DataTrackr_API.Controllers
             var records = _mapper.Map<List<GetCustomerDto>>(customers);
             return Ok(records);
         }
+        // GET: api/Customers_like?search=sagar
+        [HttpGet]
+        [Route("/Customers_like")]
+        public async Task<ActionResult<IEnumerable<GetCustomerDto>>> SearchCustomers([FromQuery] string search)
+        {
+            var customers = await _context.Customers.Where(d => d.cname.Contains(search) || d.CountryCode.Contains(search) || d.Description.Contains(search) || d.sector.Contains(search)).ToListAsync();
+            var records = _mapper.Map<List<GetCustomerDto>>(customers);
+            return Ok(records);
+        }
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
