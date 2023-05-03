@@ -39,4 +39,7 @@ export class CustomerService {
   {
     return this._http.delete<ICustomer>(`${this.baseUrl}/${customerId}`);
   }
+  searchCustomers(data:string){
+    return this._http.get<ICustomer[]>(`${this.baseUrl}$like?search=${data}`);
+  }
 }

@@ -37,19 +37,17 @@
       <a>
         <span class="icon">
           <i class="fa-solid fa-user-plus" #icon2 style="color: #ffffff"></i>
-          <!-- <i class="fa-solid fa-comment viewStatus" #icon2 style="color: #ffffff;"></i> -->
         </span>
-        <span *ngIf="!viewStatus" class="title"> Add Customer</span>
-        <span *ngIf="viewStatus" class="title"> Add Comment</span>
+        <span class="title"> Add Customer</span>
       </a>
     </li>
 
     <li
       (mouseover)="animateIcon(icon3, 'fa-beat-fade')"
       (mouseout)="removeAnimation(icon3, 'fa-beat-fade')"
-      (click)="updateView()"
+      routerLink="/logs"
     >
-      <a routerLink="/history">
+      <a>
         <span class="icon">
           <i class="fa-solid fa-clock" #icon3></i>
         </span>

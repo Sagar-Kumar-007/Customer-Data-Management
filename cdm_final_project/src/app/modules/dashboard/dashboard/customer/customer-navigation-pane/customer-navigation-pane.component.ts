@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class CustomerNavigationPaneComponent {
 
   animateIcon(icon: HTMLElement, classToBeAdded: string) {
     icon.classList.add(classToBeAdded);
-    icon.style.color = '#2a2185';
+    icon.style.color = '#003b69';
   }
   removeAnimation(icon: HTMLElement, classToBeRemoved: string) {
     icon.classList.remove(classToBeRemoved);
@@ -41,7 +41,8 @@ export class CustomerNavigationPaneComponent {
 
   addCustomer() {
     let dialogRef=this.dialog.open(CreateCustomerComponent, {
-      maxHeight: 'calc(100vh - 120px)',
+      maxHeight: 'calc(100vh - 60px)',
+      width: '70%',
       backdropClass: 'backgroundblur',
     });
     dialogRef.afterClosed().subscribe((result)=>{

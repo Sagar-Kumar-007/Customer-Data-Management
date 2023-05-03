@@ -112,7 +112,8 @@ export class CustomerDashboardComponent implements OnInit {
               customerName: cname,
               customerId: id
             },
-            maxHeight: 'calc(100vh - 120px)',
+            height: 'calc(100vh-60px)',
+            width:'60%',
             backdropClass: "backgroundblur",
             
            
@@ -124,5 +125,19 @@ export class CustomerDashboardComponent implements OnInit {
       }
     })
     
+  }
+
+
+  // Search bar implementation
+  searchVal(data:HTMLInputElement){
+    // console.log(data.value);
+    
+    if(!data.value){
+      this.showCustomerList();
+    }
+    if(data.value)this._customerService.searchCustomers(data.value).subscribe(result=>{
+      if(result)this.customersList=result;
+    })
+    // if(!data.value)console.log(this.customersList);
   }
 }

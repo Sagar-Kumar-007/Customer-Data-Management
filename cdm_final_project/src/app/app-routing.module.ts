@@ -7,6 +7,7 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
 import { SignupComponent } from './modules/auth/components/signup/signup.component';
 import { AuthGuard } from './guards/auth.guard';
 
+import { LogsComponent } from './modules/dashboard/dashboard/logs/logs/logs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

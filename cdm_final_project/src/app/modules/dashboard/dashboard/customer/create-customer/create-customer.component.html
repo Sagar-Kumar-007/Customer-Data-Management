@@ -13,7 +13,15 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" *ngIf="isUpdateActive">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" name="email" readonly/>
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="email && email.invalid && email.touched">
+          Please Enter valid email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" *ngIf="!isUpdateActive">
         <mat-label>Email</mat-label>
         <input type="email" matInput formControlName="email" name="email" />
         <mat-icon matSuffix>email</mat-icon>
@@ -113,7 +121,7 @@
       </button>
       <button
         *ngIf="!isUpdateActive"
-        style="background-color: #00599c"
+        style="background-color: #00599c; color: white;"
         [disabled]="customerAddForm.invalid"
         mat-raised-button
         color="primary"
@@ -125,7 +133,7 @@
       </button>
       <button
         *ngIf="isUpdateActive"
-        style="background-color: #00599c"
+        style="background-color: #00599c; color:white"
         [disabled]="customerAddForm.invalid"
         mat-raised-button
         color="primary"
