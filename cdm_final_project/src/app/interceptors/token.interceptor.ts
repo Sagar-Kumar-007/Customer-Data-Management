@@ -24,17 +24,18 @@ export class TokenInterceptor implements HttpInterceptor {
         setHeaders:{Authorization: `Bearer ${myToken}`}
       })
     }
-    return next.handle(request).pipe(
-      catchError((err:any)=>{
-        if(err instanceof HttpErrorResponse){
-          if(err.status===401){
-            this.toast.warning({detail:"Warning",summary:"Token is expired, Login again"});
-            this.router.navigate(['login']);
-          }
-        }
-        return throwError(()=>new Error("Some other error occured"));
-      })
-    );
+    return next.handle(request);
+    // .pipe(
+    //   catchError((err:any)=>{
+    //     if(err instanceof HttpErrorResponse){
+    //       if(err.status===401){
+    //         this.toast.warning({detail:"Warning",summary:"Token is expired, Login again"});
+    //         this.router.navigate(['login']);
+    //       }
+    //     }
+    //      return throwError(()=>new Error("Some other error occured"));
+    //   })
+    // );
   }
 }
 
