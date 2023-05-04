@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+
+
+addSignup() {
+  let container = document.querySelector(".container") as HTMLDivElement;
+  container.classList.add("sign-up-mode");
+};
+
+removeSignup(){
+  let container = document.querySelector(".container") as HTMLDivElement;
+  container.classList.remove("sign-up-mode");
+};
+
 }

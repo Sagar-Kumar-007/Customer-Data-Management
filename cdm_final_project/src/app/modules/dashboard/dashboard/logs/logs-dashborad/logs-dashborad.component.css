@@ -31,6 +31,37 @@
     font-size: 2.5rem;
     cursor: pointer;
   }
+
+  .search {
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+  }
+  
+  .search label {
+    position: relative;
+    width: 100%;
+  }
+  
+  .search label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 45px;
+    font-size: 18px;
+    outline: none;
+    border: 2px solid var(--black2);
+    color: var(--black2);
+  }
+  
+  .search label i {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 1.2rem;
+    color: var(--black2);
+  }
   
   .user {
     position: relative;
@@ -52,125 +83,177 @@
 
   /********************* Table *******************************/
 
-  .logs {
-    padding-top: 40px;
-    padding-bottom: 7%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bolder;
-  }
 
-
-
-@media only screen and (max-width: 970px) {
- 
-  table{
-    padding-top: 10%;
-    padding-bottom: 7%;
-  }
-  table,
-  head,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-
-  }
-  thead tr {
-    display: none;
-  }
-  tr {
-
-    width: 100vw;
-    height: 100%;
-  }
-  td {
-    border-bottom: 1px solid #eee;
+  .details {
     position: relative;
-    padding-left: 50%;
-    white-space: normal;
-    text-align: left;
-    min-height: 30px;
-    overflow: auto;
-    word-break: normal;
-  }
-  td:before {
-    margin: 20px;
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 40%;
-    padding-right: 10px;
-    text-align: left;
-    font-weight: bold;
-    top: 0px;
-    content: attr(data-title);
-  }
-
-}
-
-thead th {
-  position: sticky;
-  top: 0;
-  background-color: #00599C;
-  color: white;
-  font-size: 15px;
-  height: 50px;
-
-}
-.table_section {
-  /* height: 100vh; */
-  overflow:auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  min-width: 1000px;
-
-}
-
-td {
-
-  padding: 10px 2px;
-  word-break: normal;
-  text-align: auto;
-}
-.tablebody tr:hover td {
-  color: black;
-  cursor: pointer;
-  background-color: #d2eafb;
- 
-}
-.logslist td{
-  text-align: center;
-}
-button{
-  outline: none;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 10px;
-  margin: 5px;
-}
-.delete_btn{
-  background-color: red;
-  color: white;
-}
-.update_btn{
-  background-color: #00599C;
-  color: white;
-}
-
-@media only screen and (max-width: 480px)
-{
-  .accounts{
-    font-size: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 30px;
+    margin-top: 2%;
   }
   
-}
-
+  .details .recentOrders {
+    position: relative;
+    /* display: grid; */
+    min-height: 500px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    width: 100%;
+  }
+  
+  .details .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+  .cardHeader h2 {
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 2%;
+  }
+  .cardHeader .btn {
+    position: relative;
+    padding: 5px 10px;
+    background: var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+    margin-bottom: 2%;
+  }
+  
+  .details table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin-top: 10px; */
+  }
+  
+  .account-head {
+    background: var(--blue);
+  }
+  
+  .account-head tr td {
+    color: white;
+  }
+  .details table thead td {
+    font-weight: 600;
+    text-align: center !important;
+  }
+  .details table tbody td {
+    align-items: center;
+    text-align: center !important;
+  }
+  
+  .details .recentOrders table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .update-icon,
+  .delete-icon {
+    cursor: pointer;
+  }
+  .details .recentOrders table tr:last-child {
+    border-bottom: none;
+  }
+  .details .recentOrders table tbody tr:hover {
+    background: var(--gray);
+    /* color: var(--white); */
+    transform: scale(1);
+    box-shadow: 0 4px 14px 0 #0005;
+    border: 1px solid var(--black2);
+  }
+  .details .recentOrders table tr td {
+    padding: 10px;
+  }
+  .details .recentOrders table tr td:last-child {
+    text-align: end;
+  }
+  .details .recentOrders table tr td:nth-child(2) {
+    text-align: end;
+  }
+  .details .recentOrders table tr td:nth-child(3) {
+    text-align: center;
+  }
+  .status-created {
+    padding: 2px 4px;
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .status-updated {
+    padding: 2px 4px;
+    background: #e9b10a;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .status-deleted {
+    padding: 2px 4px;
+    background: #f00;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .status.inProgress {
+    padding: 2px 4px;
+    background: #1795ce;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .recentCustomers {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+  }
+  .recentCustomers .imgBx {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+  }
+  .recentCustomers .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .recentCustomers table tr td {
+    padding: 12px 10px;
+  }
+  .recentCustomers table tr td h4 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2rem;
+  }
+  .recentCustomers table tr td h4 span {
+    font-size: 14px;
+    color: var(--black2);
+  }
+  .recentCustomers table tr:hover {
+    background: var(--blue);
+    color: var(--white);
+  }
+  .recentCustomers table tr:hover td h4 span {
+    color: var(--white);
+  }
+  
 
 
 

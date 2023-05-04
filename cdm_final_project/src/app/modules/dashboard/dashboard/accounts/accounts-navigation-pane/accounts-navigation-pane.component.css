@@ -91,7 +91,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: rgb(255, 246, 229);
+    background-color: var(--gray);
     margin-bottom: 5px;
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.2);
@@ -114,7 +114,7 @@
     padding: 15px;
     width: 80%;
     border-radius: 5px;
-    background-color: bisque;
+    background-color: #C8CCCE;
     text-align: center;
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.2);

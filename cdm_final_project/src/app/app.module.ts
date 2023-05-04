@@ -11,6 +11,8 @@ import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import { DatePipe } from '@angular/common';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { AgmCoreModule } from '@agm/core';
     FourOfourComponent
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
@@ -32,7 +35,7 @@ import { AgmCoreModule } from '@agm/core';
       libraries: ['places']
     })
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
