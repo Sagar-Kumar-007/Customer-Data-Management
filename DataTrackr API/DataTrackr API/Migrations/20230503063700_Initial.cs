@@ -5,7 +5,7 @@
 namespace DataTrackr_API.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,6 +40,22 @@ namespace DataTrackr_API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.email);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Logs",
+                columns: table => new
+                {
+                    logId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    userId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    timeStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    operation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    message = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logs", x => x.logId);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,6 +103,9 @@ namespace DataTrackr_API.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "Logs");
 
             migrationBuilder.DropTable(
                 name: "Coordinates");

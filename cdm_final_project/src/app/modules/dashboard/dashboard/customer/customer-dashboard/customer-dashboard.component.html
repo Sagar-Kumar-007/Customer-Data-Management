@@ -48,7 +48,7 @@
                       <i routerLink="getcustomer/{{customer.email}}" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;" title="account-dashboard"></i>
                       <i (click)="mapCall(customer.cname, customer.email)" class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;" title="map"></i>
                       <i (click)="updateCustomer(customer.email)" class="fa-solid fa-pencil" style="color: #ead053;" title="update-customer"></i>
-                      <i (click)="deleteCustomer(customer.email)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;" title="delete-customer"></i>
+                      <i (click)="deleteCustomer(customer.email, customer.cname)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;" title="delete-customer"></i>
                   </div>
                 </div>
               </div>

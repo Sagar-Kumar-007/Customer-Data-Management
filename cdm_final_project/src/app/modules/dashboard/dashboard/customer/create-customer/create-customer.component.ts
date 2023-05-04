@@ -8,10 +8,12 @@ import {
 import { ICustomer } from 'src/app/datatypes/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NgToastService } from 'ng-angular-popup';
-import {NgConfirmService} from 'ng-confirm-box'
+import { NgConfirmService } from 'ng-confirm-box';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import { LogsService } from 'src/app/services/logs.service';
+import { Ilogs } from 'src/app/datatypes/logs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-customer',
@@ -20,28 +22,31 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class CreateCustomerComponent {
   //Form Logic
-  public userIdToUpdate!:string;
-  public isUpdateActive:boolean=false;
+  public userIdToUpdate!: string;
+  public isUpdateActive: boolean = false;
+  logInfo: Ilogs = {};
 
   constructor(
+    public datepipe: DatePipe,
+    private _logService: LogsService,
     private customer: CustomerService,
-    private router:Router,
-    private toastService: NgToastService, 
-    private confirm:NgConfirmService,
+    private router: Router,
+    private toastService: NgToastService,
+    private confirm: NgConfirmService,
     private matDialogRef: MatDialogRef<CreateCustomerComponent>,
-    @Inject(MAT_DIALOG_DATA) private data:{
-      status: string,
-      customerId: string | null,
-
+    @Inject(MAT_DIALOG_DATA)
+    private data: {
+      status: string;
+      customerId: string | null;
     }
   ) {}
 
   ngOnInit(): void {
-
-    if(this.data.customerId)this.customer.getCustomer(this.data.customerId).subscribe((res) => {
-      this.isUpdateActive = true;
-      this.fillFormToUpdate(res);
-    });
+    if (this.data.customerId)
+      this.customer.getCustomer(this.data.customerId).subscribe((res) => {
+        this.isUpdateActive = true;
+        this.fillFormToUpdate(res);
+      });
   }
 
   customerAddForm = new FormGroup({
@@ -71,24 +76,54 @@ export class CreateCustomerComponent {
           duration: 3000,
         });
         this.customerAddForm.reset();
+
+        this.logInfo.userId = 'abc@gmail.com';
+        this.logInfo.operation = 'created';
+        this.logInfo.message = `${res?.cname} has been created.`;
+        this.logInfo.timeStamp = `${this.datepipe.transform(
+          new Date(),
+          'MM/dd/yyyy h:mm:ss'
+        )}`;
+
+        this._logService.postLogs(this.logInfo).subscribe(result=>{
+          console.log(result);
+        });
       }
     });
   }
 
   // Update a Customer
 
-  updateCustomer(){    
-    if(this.data.customerId)this.customer.updateCustomer(this.customerAddForm.value, this.data.customerId).subscribe(async (res)=>{
-      // console.log(res);
-      this.toastService.success({detail:"Success", summary:"Customer updated", duration:3000});
-      this.customerAddForm.reset();
-      await new Promise(f=>{
-        setTimeout(f, 1000)
-      });
-    })
-  }
-  
+  updateCustomer() {
+    if (this.data.customerId)
+      this.customer
+        .updateCustomer(this.customerAddForm.value, this.data.customerId)
+        .subscribe(async (res) => {
+          
+          this.toastService.success({
+            detail: 'Success',
+            summary: 'Customer updated',
+            duration: 3000,
+          });
+          this.customerAddForm.reset();
 
+          this.logInfo.userId = 'abc@gmail.com';
+          this.logInfo.operation = 'updated';
+          this.logInfo.message = `${res?.cname} has been updated.`;
+          this.logInfo.timeStamp = `${this.datepipe.transform(
+            new Date(),
+            'MM/dd/yyyy h:mm:ss'
+          )}`;
+
+          this._logService.postLogs(this.logInfo).subscribe(result=>{
+            console.log(result);
+            
+          });
+          await new Promise((f) => {
+            setTimeout(f, 1000);
+          });
+        });
+  }
 
   // Validations......
 
@@ -126,11 +161,11 @@ export class CreateCustomerComponent {
       headquaters: customer.headquaters,
       phoneNo: customer.phoneNo,
       website: customer.website,
-      countryCode: customer.countryCode
+      countryCode: customer.countryCode,
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.matDialogRef.close();
   }
 }

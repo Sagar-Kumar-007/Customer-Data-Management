@@ -4,6 +4,12 @@
     <div class="toggle" (click)="onToggleClick()">
       <i class="fa-solid fa-bars" style="color: #000000"></i>
     </div>
+    <div class="search">
+      <label>
+          <input type="text" placeholder="Search here" #searchIpt (keyup)="searchVal(searchIpt)">
+          <i class="fa fa-solid fa-magnifying-glass"></i>
+      </label>
+  </div>
     <div class="user">
       <img
         src="https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
@@ -36,10 +42,10 @@
                     <tr  *ngFor="let logList of logsList">
                         <td>{{logList.userId}}</td>
                         <td>{{logList.timeStamp}}</td>
-                        <td>{{logList.comment}}</td>
-                        <ng-template [ngIf]="logList.action==='created'"><td><span class="status-created">{{logList.action}}</span></td></ng-template>
-                        <ng-template [ngIf]="logList.action==='updated'"><td><span class="status-updated">{{logList.action}}</span></td></ng-template>
-                        <ng-template [ngIf]="logList.action==='deleted'"><td><span class="status-deleted">{{logList.action}}</span></td></ng-template>
+                        <td>{{logList.message}}</td>
+                        <ng-template [ngIf]="logList.operation==='created'"><td><span class="status-created">{{logList.operation}}</span></td></ng-template>
+                        <ng-template [ngIf]="logList.operation==='updated'"><td><span class="status-updated">{{logList.operation}}</span></td></ng-template>
+                        <ng-template [ngIf]="logList.operation==='deleted'"><td><span class="status-deleted">{{logList.operation}}</span></td></ng-template>
                     </tr>
                 </ng-template>
 

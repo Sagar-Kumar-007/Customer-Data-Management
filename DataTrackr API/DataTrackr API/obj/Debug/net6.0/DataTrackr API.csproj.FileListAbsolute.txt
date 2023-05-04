@@ -300,3 +300,5 @@ C:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\
 C:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.pdb
 C:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.genruntimeconfig.cache
 C:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\ref\DataTrackr API.dll
+C:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.RazorAssemblyInfo.cache
+C:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.RazorAssemblyInfo.cs

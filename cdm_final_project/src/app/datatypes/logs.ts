@@ -1,6 +1,6 @@
 export interface Ilogs{
     userId?:string | null;
     timeStamp?:string | null;
-    action?:string |null;
-    comment?:string | null;
+    operation?:string |null;
+    message?:string | null;
 }

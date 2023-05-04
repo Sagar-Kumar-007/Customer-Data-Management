@@ -22,6 +22,31 @@ namespace DataTrackr_API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DataTrackr_API.Models.Logs", b =>
+                {
+                    b.Property<int>("logId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("logId"));
+
+                    b.Property<string>("message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("operation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("timeStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("logId");
+
+                    b.ToTable("Logs");
+                });
+
             modelBuilder.Entity("DataTrackr_Web_API.Models.Account", b =>
                 {
                     b.Property<string>("Acc_email")

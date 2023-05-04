@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Ilogs } from 'src/app/datatypes/logs';
+import { LogsService } from 'src/app/services/logs.service';
+
 
 @Component({
   selector: 'app-logs-dashborad',
@@ -7,8 +9,21 @@ import { Ilogs } from 'src/app/datatypes/logs';
   styleUrls: ['./logs-dashborad.component.css'],
 })
 export class LogsDashboradComponent {
-  p: number = 1;
-  action:string='deleted';
+
+  logsList: Ilogs[] | undefined;
+  constructor(private _logsService: LogsService){}
+
+  ngOnInit(): void {
+    this.showLogsList();
+  }
+
+  showLogsList() {
+    this._logsService
+      ?.getAllLogs()
+      .subscribe((result: Ilogs[] | undefined) => {
+        this.logsList = result;
+      });
+  }
   //Toggle
   onToggleClick() {
     let navigation = document.querySelector('.navigation') as HTMLDivElement;
@@ -22,44 +37,18 @@ export class LogsDashboradComponent {
     }, 500);
   }
 
-  // Table
-  logsList: Ilogs[] = [
-    {
-      userId: 'utkarsh@123',
-      timeStamp: '28/02/2023 2:41:15 PM',
-      action: 'deleted',
-      comment: 'Account has been deleted.',
-    },
-    {
-      userId: 'arsh@123',
-      timeStamp: '28/02/2023 2:30:15 PM',
-      action: 'created',
-      comment: 'Account has been Created.',
-    },
-    {
-      userId: 'utkarsh@123',
-      timeStamp: '28/02/2023 2:41:15 PM',
-      action: 'deleted',
-      comment: 'Account1 has been deleted.',
-    },
-    {
-      userId: 'utkarsh@123',
-      timeStamp: '28/02/2023 2:20:15 PM',
-      action: 'deleted',
-      comment: 'Account has been deleted.',
-    },
-    {
-      userId: 'utka@123',
-      timeStamp: '28/02/2023 2:10:15 PM',
-      action: 'created',
-      comment: 'Account3 has been created.',
-    },
+  // Search bar implementation
+  searchVal(data: HTMLInputElement) {
+    // console.log(data.value);
 
-    {
-      userId: 'ak@123',
-      timeStamp: '28/02/2023 11:10:15 AM',
-      action: 'updated',
-      comment: 'Account3 has been updated.',
-    },
-  ];
+    if (!data.value) {
+      this.showLogsList();
+    }
+    if (data.value)
+      this._logsService.searchLogs(data.value).subscribe((result) => {
+        if (result) this.logsList = result;
+      });
+    // if(!data.value)console.log(this.customersList);
+  }
+  
 }
