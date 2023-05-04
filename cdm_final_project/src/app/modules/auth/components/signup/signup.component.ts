@@ -34,11 +34,13 @@ export class SignupComponent implements OnInit{
         console.log(this.signUpForm.value);
         this.auth.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
+            console.log("a: "+res.message);
             alert(res.message);
             this.signUpForm.reset();
             this.router.navigate(['login']);
           }),
           error:(err=>{
+            console.log("a: "+err.message);
             alert(err?.error.message)
           })
         })
