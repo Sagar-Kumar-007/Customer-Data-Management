@@ -14,6 +14,7 @@ import { GoogleMapComponent } from './google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { RouterModule } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';
+import { NgToastModule } from 'ng-angular-popup';
 
 
 
@@ -28,6 +29,7 @@ import { NgChartsModule } from 'ng2-charts';
   imports: [
     CommonModule,
     HttpClientModule,
+    NgToastModule,
     MatDialogModule,
     FormsModule,
     MatIconModule,

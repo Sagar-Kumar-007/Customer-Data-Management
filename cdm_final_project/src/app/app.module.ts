@@ -16,6 +16,7 @@ import { SignupComponent } from './modules/auth/components/signup/signup.compone
 import { AuthModule } from './modules/auth/auth.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     FourOfourComponent,
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     AuthModule,
     AppRoutingModule,
@@ -43,8 +45,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
       provide:HTTP_INTERCEPTORS,
       useClass:TokenInterceptor,
       multi:true  
-    }
-  ],
+    },
+  DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,5 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     SignupComponent
   ]
+  ,
+  exports: [LoginComponent]
 })
 export class AuthModule { }

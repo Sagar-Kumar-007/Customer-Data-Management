@@ -8,6 +8,11 @@ import { ICustomer } from 'src/app/datatypes/customer';
 import { NgConfirmService } from 'ng-confirm-box';
 import { ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { NgToastService } from 'ng-angular-popup';
+import { LogsService } from 'src/app/services/logs.service';
+import { Ilogs } from 'src/app/datatypes/logs';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-accounts-dashboard',
   templateUrl: './accounts-dashboard.component.html',
@@ -18,6 +23,7 @@ export class AccountsDashboardComponent implements OnInit {
   accountsList: IAccount[] | undefined;
   totalRevenue: number | string = 0;
   totalAccounts: number = 0;
+  logInfo: Ilogs = {};
   @Output() newEventEmitter = new EventEmitter<boolean>();
   // Pie
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
@@ -32,10 +38,13 @@ export class AccountsDashboardComponent implements OnInit {
   pieChartPlugins = [];
 
   constructor(
+    public datepipe: DatePipe,
+    private _logService : LogsService,
     private confirm: NgConfirmService,
     private _accountsService: AccountsService,
     private dialog: MatDialog,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _ngtoastService: NgToastService
   ) {}
   showAccountsList() {
     this.totalRevenue = 0;
@@ -81,6 +90,8 @@ export class AccountsDashboardComponent implements OnInit {
           if(typeof this.totalRevenue=="number" && this.totalRevenue-sumOfTopFourAccounts>0)this.pieChartLabels.push("Others");
           if(typeof this.totalRevenue=="number" && this.totalRevenue-sumOfTopFourAccounts>0)this.pieChartDatasets[0].data.push(this.totalRevenue-sumOfTopFourAccounts);
           this.chart.update();
+
+
         }
         
       });
@@ -129,14 +140,26 @@ export class AccountsDashboardComponent implements OnInit {
         this._accountsService
           .deleteAccount(account, account.acc_email?.toString())
           .subscribe((result) => {
-            if (result) {
-              console.log('Account Deleted');
-            }
+            this._ngtoastService.success({detail:'SUCCESS', summary: 'Deleted Successfully', duration: 3000});
+
+            this.logInfo.userId = 'abc@gmail.com';
+            this.logInfo.operation = 'deleted';
+            this.logInfo.message = `${account.aname} has been deleted.`;
+            this.logInfo.timeStamp = `${this.datepipe.transform(
+              new Date(),
+              'MM/dd/yyyy h:mm:ss'
+            )}`;
+
+            this._logService.postLogs(this.logInfo).subscribe(result=>{
+              console.log(result);
+              
+            });
           });
+
         await new Promise((f) => {
           setTimeout(f, 1000);
         });
-        window.location.reload();
+        // window.location.reload();
       },
       () => {}
     );
