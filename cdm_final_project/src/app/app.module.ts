@@ -11,22 +11,22 @@ import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
-import { LoginComponent } from './modules/auth/components/login/login.component';
-import { SignupComponent } from './modules/auth/components/signup/signup.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { DatePipe } from '@angular/common';
+import { LoginComponent } from './modules/auth/components/login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FourOfourComponent,
+    
   ],
   imports: [
     AuthModule,
     BrowserModule,
-    AuthModule,
     AppRoutingModule,
     DashboardModule,
     MaterialModule,
