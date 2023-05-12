@@ -10,7 +10,7 @@
                 <input matInput type="text" formControlName="aname" name="aname" >
                 <mat-icon matSuffix>computer</mat-icon>
                 <mat-error *ngIf="aname && aname.invalid">
-                   Name <strong>Required</strong>
+                    Account's Name Required
                 </mat-error>
             </mat-form-field>
     
@@ -28,12 +28,10 @@
                 <tr class="table-row">
     
                     <td>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Account's Location</mat-label>
-                            <input (click)="openGoogleMap()" type="text" matInput formControlName="location" name="location" >
-                            <mat-icon matSuffix>location_on</mat-icon>
-                            <mat-error><strong>Required</strong></mat-error>
-                        </mat-form-field>
+                        <button class="location-btn" (click)="openGoogleMap()" mat-stroked-button style="border: 1px solid black;" (click)="changeState()"> 
+                            <mat-icon matSuffix>location_on</mat-icon> Location
+                        </button>
+                        
                     </td>
                     <td>
     
@@ -41,7 +39,7 @@
                             <mat-label>Year of Establishment</mat-label>
                             <input type="text" matInput formControlName="estYear" name="estYear" >
                             <mat-icon matSuffix>tag</mat-icon>
-                            <mat-error><strong>Required</strong></mat-error>
+                            <mat-error>Year Required</mat-error>
                         </mat-form-field>
                     </td>
                 </tr>
@@ -53,13 +51,13 @@
                 <input matInput type="text" formControlName="description" name="description" >
                 <mat-icon matSuffix>computer</mat-icon>
                 <mat-error *ngIf="aname && aname.invalid">
-                   Name <strong>Required</strong>
+                   Description Required
                 </mat-error>
             </mat-form-field>
         </form>
         <div mat-dialog-action [align]="'end'" class="button-class">
             <button mat-raised-button color="warn" mat-dialog-close class="closebtn">Close</button>
-            <button mat-dialog-close style="background-color: #00599C; color: white;" [disabled]="accountAddForm.invalid" mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="accountFormSubmit()"> Submit</button>
+            <button mat-dialog-close style="background-color: #00599C; color: white;" [disabled]="isButtonDisabled()"  mat-raised-button color="primary" type="submit" class="submitbtn"  (click)="accountFormSubmit()"> Submit</button>
         </div>
     </div>
     </div>

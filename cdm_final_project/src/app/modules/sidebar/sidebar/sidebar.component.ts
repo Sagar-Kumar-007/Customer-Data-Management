@@ -24,14 +24,15 @@ export class SidebarComponent {
     });
   }
   detectDashboard(): boolean {
+    // console.log("dash: "+this.dashboard);
     if(this.currentUrl && this.currentUrl.includes('customerDashboard')){
       if(this.dashboard!=='customer'){
-        console.log(this.currentUrl);
+        // console.log(this.currentUrl);
         this.dashboard='customer';
       }
       return true;
     }
-    else{
+    else if(this.currentUrl && this.currentUrl.includes('accountDashboard')){
       
       if(this.dashboard!=='account'){
         this.route.queryParams.subscribe(params=>{
@@ -49,6 +50,7 @@ export class SidebarComponent {
       this.dashboard='account';
       return false;
     }
+    return true;
   }
 
 
@@ -77,6 +79,7 @@ export class SidebarComponent {
 
   addCustomer() {
     let dialogRef=this.dialog.open(CreateCustomerComponent, {
+      disableClose:true,
       maxHeight: 'calc(100vh - 60px)',
       width: '70%',
       backdropClass: 'backgroundblur',
@@ -114,12 +117,14 @@ export class SidebarComponent {
   }
   addAccount(){
     let dialogRef=this.dialog.open(AddAccountFormComponent,{
+      disableClose:true,
       maxHeight: 'calc(100vh - 120px)',
       backdropClass: "backgroundblur",
       data:{
         status:'addAccount',
         account:null,
-        email:this.customerId
+        email:this.customerId,
+        customerName: this.customer?.cname
       }
     });
     dialogRef.afterClosed().subscribe(result=>{

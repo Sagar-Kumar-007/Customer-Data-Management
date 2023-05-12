@@ -7,6 +7,8 @@ import { RouterModule} from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { LogsModule } from './dashboard/logs/logs.module';
 import { SidebarModule } from "../sidebar/sidebar.module";
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -22,6 +24,8 @@ import { SidebarModule } from "../sidebar/sidebar.module";
         RouterModule,
         MaterialModule,
         LogsModule,
+    MatPaginatorModule,
+    NgxPaginationModule,
         SidebarModule
     ]
 })

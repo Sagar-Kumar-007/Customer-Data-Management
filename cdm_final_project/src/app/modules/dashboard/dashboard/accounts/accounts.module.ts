@@ -14,6 +14,8 @@ import { AgmCoreModule } from '@agm/core';
 import { RouterModule } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';
 import { NgToastModule } from 'ng-angular-popup';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -25,6 +27,8 @@ import { NgToastModule } from 'ng-angular-popup';
     GoogleMapComponent
   ],
   imports: [
+    MatPaginatorModule,
+    NgxPaginationModule,
     CommonModule,
     HttpClientModule,
     NgToastModule,

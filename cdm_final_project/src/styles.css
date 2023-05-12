@@ -103,3 +103,29 @@ mat-dialog-content {
 .change{
   height: 100px !important;
 }
+
+/************ng confirm ********************/
+
+.modal1{
+  background-color: var(--gray)!important;
+  margin-top: 10%;
+}
+
+.mat-button{
+  margin: 5px;
+ 
+}
+
+@media  (max-width: 1000px)  {
+  .modal1{
+    margin-top: 20%;
+  }
+}
+
+/* ======================== Pagination =========================*/
+.paginationclass{
+  margin-left: 4%;
+}
+.ngx-pagination .current{
+  background-color: #00599C!important;
+}
