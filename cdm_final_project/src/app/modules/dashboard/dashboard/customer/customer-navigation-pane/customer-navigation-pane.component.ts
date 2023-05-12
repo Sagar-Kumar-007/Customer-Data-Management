@@ -35,6 +35,7 @@ export class CustomerNavigationPaneComponent {
 
   addCustomer() {
     let dialogRef=this.dialog.open(CreateCustomerComponent, {
+      disableClose:true,
       maxHeight: 'calc(100vh - 60px)',
       width: '70%',
       backdropClass: 'backgroundblur',

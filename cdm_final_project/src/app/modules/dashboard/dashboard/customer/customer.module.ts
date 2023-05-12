@@ -15,6 +15,8 @@ import { CustomerComponent } from './customer/customer.component';
 import { Router, RouterModule } from '@angular/router';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -30,6 +32,8 @@ import { MapComponent } from './map/map.component';
     MapComponent
   ],
   imports: [
+    MatPaginatorModule,
+    NgxPaginationModule,
     CommonModule,
     MaterialModule,
     FormsModule,

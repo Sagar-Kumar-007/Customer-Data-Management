@@ -13,6 +13,8 @@ import { AccountsService } from 'src/app/services/accounts.service';
 export class AccountsNavigationPaneComponent {
   customerId?:string | null;
   customer?:ICustomer;
+  
+  
   ngOnInit(){
     this._route.paramMap.subscribe(params => {
       let id = params.get('customerEmail');
@@ -21,6 +23,7 @@ export class AccountsNavigationPaneComponent {
     this.customerId && this._accountsService.accountsList(this.customerId).subscribe((result:ICustomer)=>{
       if(result.accounts){
         this.customer=result;
+        
       }
     })
   }
@@ -35,12 +38,14 @@ export class AccountsNavigationPaneComponent {
   }
   addAccount(){
     let dialogRef=this.dialog.open(AddAccountFormComponent,{
+      disableClose:true,
       maxHeight: 'calc(100vh - 120px)',
       backdropClass: "backgroundblur",
       data:{
         status:'addAccount',
         account:null,
-        email:this.customerId
+        email:this.customerId,
+        customerName: this.customer?.cname
       }
     });
     dialogRef.afterClosed().subscribe(result=>{

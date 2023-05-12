@@ -22,6 +22,8 @@ export class AddAccountFormComponent {
   coordinates: ICoordinate;
   address!: string;
   logInfo: Ilogs = {};
+  active:boolean=false;
+
   constructor(
     public datepipe: DatePipe,
     private _logService: LogsService,
@@ -34,6 +36,7 @@ export class AddAccountFormComponent {
       status: string;
       account: IAccount | null;
       email: string;
+      customerName: string;
     },
     private route: ActivatedRoute
   ) {
@@ -43,13 +46,24 @@ export class AddAccountFormComponent {
     }
   }
 
-  addProductMessage: string | undefined;
   ngOnInit() {
     if (this.data.status === 'updateAccount') {
       if (this.data.account) this.accountAddForm.patchValue(this.data.account);
     }
+    
   }
 
+  //check whether button is selected 
+  changeState(){
+    this.active=true;
+  }
+
+  isButtonDisabled(): boolean {
+    if(this.accountAddForm.invalid || this.active==false){
+      return true;
+    }
+    return false;
+  }
   // //Adding Map Location Pickup.....
   openGoogleMap() {
     let dialogRef = this.dialog.open(GoogleMapComponent, {
@@ -66,11 +80,8 @@ export class AddAccountFormComponent {
     dialogRef.afterClosed().subscribe(
       (result: ICoordinate) => {
         this.coordinates = result;
-        console.log(this.coordinates.latitude);
-        if (this.coordinates.address) this.address = this.coordinates.address;
-        if (this.coordinates) {
-          this.accountAddForm.controls.location.patchValue(this.coordinates);
-        }
+        if(this.coordinates)this.accountAddForm.controls.location.patchValue(this.coordinates);
+        
       },
       () => {
         console.log('Error Found');
@@ -79,7 +90,7 @@ export class AddAccountFormComponent {
   }
 
   addAccount() {
-    // console.log("Add ACcount Form: "+this.accountAddForm.value.acc_email);
+    
     this.accountAddForm.value.location = this.coordinates;
     this.accountAddForm.value.customer_email = this.data.email;
     console.log(this.accountAddForm.value);
@@ -96,7 +107,7 @@ export class AddAccountFormComponent {
 
           this.logInfo.userId = 'abc@gmail.com';
           this.logInfo.operation = 'created';
-          this.logInfo.message = `${result?.aname} has been created.`;
+          this.logInfo.message = `${result?.aname} account of customer ${this.data?.customerName} has been created.`;
           this.logInfo.timeStamp = `${this.datepipe.transform(
             new Date(),
             'MM/dd/yyyy h:mm:ss'
@@ -128,7 +139,7 @@ export class AddAccountFormComponent {
 
           this.logInfo.userId = 'abc@gmail.com';
           this.logInfo.operation = 'updated';
-          this.logInfo.message = `${result?.aname} has been updated.`;
+          this.logInfo.message = `${result?.aname} account of customer ${this.data.customerName} has been updated.`;
           this.logInfo.timeStamp = `${this.datepipe.transform(
             new Date(),
             'MM/dd/yyyy h:mm:ss'

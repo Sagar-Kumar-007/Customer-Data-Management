@@ -6,6 +6,8 @@ import {AccountsModule} from './dashboard/accounts/accounts.module';
 import { RouterModule} from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { LogsModule } from './dashboard/logs/logs.module';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -20,7 +22,9 @@ import { LogsModule } from './dashboard/logs/logs.module';
     CustomerModule,
     RouterModule,
     MaterialModule,
-    LogsModule
+    LogsModule,
+    MatPaginatorModule,
+    NgxPaginationModule
     
   ],
   exports: [DashboardComponent]

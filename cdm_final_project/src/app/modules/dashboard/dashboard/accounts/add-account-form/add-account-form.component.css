@@ -5,6 +5,11 @@
     width: 100%;
 }
 
+.location-btn{
+    width: 100%;
+    padding: 27px;
+    margin-bottom: 20px;
+}
 
 mat-label {
     width: 20p;

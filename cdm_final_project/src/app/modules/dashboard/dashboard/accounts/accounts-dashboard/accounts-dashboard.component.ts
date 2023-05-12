@@ -19,7 +19,10 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./accounts-dashboard.component.css'],
 })
 export class AccountsDashboardComponent implements OnInit {
+  p:number =1;
+  itemsPerPage:number=5;
   customerId: string = '1';
+  customerName: string | null | undefined;
   accountsList: IAccount[] | undefined;
   totalRevenue: number | string = 0;
   totalAccounts: number = 0;
@@ -59,6 +62,7 @@ export class AccountsDashboardComponent implements OnInit {
     this._accountsService
       .accountsList(this.customerId)
       .subscribe((result: ICustomer) => {
+        if(result) this.customerName=result.cname;
         if (result.accounts) {
           this.accountsList = result.accounts;
           this.totalAccounts = this.accountsList.length;
@@ -144,7 +148,7 @@ export class AccountsDashboardComponent implements OnInit {
 
             this.logInfo.userId = 'abc@gmail.com';
             this.logInfo.operation = 'deleted';
-            this.logInfo.message = `${account.aname} has been deleted.`;
+            if(this.customerName) this.logInfo.message = `${account.aname} of customer ${this.customerName} has been deleted.`;
             this.logInfo.timeStamp = `${this.datepipe.transform(
               new Date(),
               'MM/dd/yyyy h:mm:ss'
@@ -159,14 +163,13 @@ export class AccountsDashboardComponent implements OnInit {
         await new Promise((f) => {
           setTimeout(f, 1000);
         });
-        // window.location.reload();
+         window.location.reload();
       },
       () => {}
     );
   }
 
   searchVal(data: HTMLInputElement) {
-    // console.log(data.value);
 
     if (!data.value) {
       this.showAccountsList();
