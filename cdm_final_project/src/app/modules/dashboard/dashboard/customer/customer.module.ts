@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerNavigationPaneComponent } from './customer-navigation-pane/customer-navigation-pane.component';
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { MaterialModule } from 'src/app/modules/material/material.module';
@@ -23,7 +22,6 @@ import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
-    CustomerNavigationPaneComponent,
     CustomerDashboardComponent,
     CreateCustomerComponent,
     CustomerComponent,
@@ -47,7 +45,6 @@ import { MapComponent } from './map/map.component';
   ],
   exports:[
     CustomerDashboardComponent,
-    CustomerNavigationPaneComponent,
     CreateCustomerComponent
   ],
   providers: [CustomerService]

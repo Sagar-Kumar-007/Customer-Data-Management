@@ -6,23 +6,23 @@ import {AccountsModule} from './dashboard/accounts/accounts.module';
 import { RouterModule} from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { LogsModule } from './dashboard/logs/logs.module';
+import { SidebarModule } from "../sidebar/sidebar.module";
 
 
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    
-  ],
-  imports: [
-    CommonModule,
-    AccountsModule,
-    CustomerModule,
-    RouterModule,
-    MaterialModule,
-    LogsModule
-    
-  ],
-  exports: [DashboardComponent]
+    declarations: [
+        DashboardComponent,
+    ],
+    exports: [DashboardComponent],
+    imports: [
+        CommonModule,
+        AccountsModule,
+        CustomerModule,
+        RouterModule,
+        MaterialModule,
+        LogsModule,
+        SidebarModule
+    ]
 })
 export class DashboardModule { }

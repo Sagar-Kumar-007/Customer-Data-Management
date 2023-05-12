@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { DatePipe } from '@angular/common';
 import { AuthModule } from './modules/auth/auth.module';
+import { SidebarModule } from './modules/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AuthModule } from './modules/auth/auth.module';
     AuthModule,
     BrowserModule,
     AppRoutingModule,
+    SidebarModule,
     DashboardModule,
     MaterialModule,
     ReactiveFormsModule,
