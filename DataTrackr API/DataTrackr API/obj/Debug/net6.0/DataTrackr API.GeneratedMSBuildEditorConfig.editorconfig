@@ -9,13 +9,13 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DataTrackr_API
 build_property.RootNamespace = DataTrackr_API
-build_property.ProjectDir = c:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API\
+build_property.ProjectDir = C:\Users\sagkumar\Downloads\Customer-Data-Management\DataTrackr API\DataTrackr API\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Final Project\CDM\Customer-Data-Management\DataTrackr API\DataTrackr API
+build_property.MSBuildProjectDirectory = C:\Users\sagkumar\Downloads\Customer-Data-Management\DataTrackr API\DataTrackr API
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Final Project/CDM/Customer-Data-Management/DataTrackr API/DataTrackr API/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/sagkumar/Downloads/Customer-Data-Management/DataTrackr API/DataTrackr API/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
