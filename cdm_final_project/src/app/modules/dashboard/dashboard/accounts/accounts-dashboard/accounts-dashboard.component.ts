@@ -101,13 +101,14 @@ export class AccountsDashboardComponent implements OnInit {
       });
   }
   ngOnInit() {
-    this._route.paramMap.subscribe((params) => {
-      let id = params.get('customerEmail');
-      if (id) this.customerId = id;
+    this._route.queryParams.subscribe(params=>{
+      let id = params['customer'];
+      if (id){
+        this.customerId = id;
+        let main = document.querySelector('.main') as HTMLDivElement;
+        this.showAccountsList();
+      }
     });
-    console.log('Account Customer Email: ' + this.customerId);
-    let main = document.querySelector('.main') as HTMLDivElement;
-    this.showAccountsList();
   }
 
   onToggleClick() {

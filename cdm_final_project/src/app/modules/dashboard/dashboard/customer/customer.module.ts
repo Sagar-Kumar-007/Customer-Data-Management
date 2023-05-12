@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerNavigationPaneComponent } from './customer-navigation-pane/customer-navigation-pane.component';
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { MaterialModule } from 'src/app/modules/material/material.module';
@@ -25,7 +24,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
-    CustomerNavigationPaneComponent,
     CustomerDashboardComponent,
     CreateCustomerComponent,
     CustomerComponent,
@@ -51,7 +49,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
   ],
   exports:[
     CustomerDashboardComponent,
-    CustomerNavigationPaneComponent,
     CreateCustomerComponent
   ],
   providers: [CustomerService]

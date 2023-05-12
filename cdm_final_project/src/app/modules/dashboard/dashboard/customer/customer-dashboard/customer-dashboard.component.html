@@ -22,7 +22,7 @@
         <ng-template [ngIf]="customersList!=undefined">
           <li *ngFor="let customer of customersList| paginate : { itemsPerPage: itemsPerPage, currentPage: p }">
             <div class="card">
-              <div class="image-session" routerLink="getcustomer/{{customer.email}}">
+              <div class="image-session" routerLink="/accountDashboard" [queryParams]="{customer:customer.email}">
                 <span
                   class="image"
                   style="
@@ -36,7 +36,7 @@
                   <p class="desc">
                     {{customer['description']}}
                   </p>
-                  <span routerLink="getcustomer/{{customer.email}}" class="read-more">Read More..</span>
+                  <span routerLink="/accountDashboard" [queryParams]="{customer:customer.email}" class="read-more">Read More..</span>
                  
                 </div>
                 <div class="footer">
@@ -45,7 +45,7 @@
                   </div>
                   <!-- <a href="#" class="button">Read more →</a> -->
                   <div class="icons">
-                      <i routerLink="getcustomer/{{customer.email}}" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;" title="account-dashboard"></i>
+                      <i routerLink="/accountDashboard" [queryParams]="{customer:customer.email}" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;" title="account-dashboard"></i>
                       <i (click)="mapCall(customer.cname, customer.email)" class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;" title="map"></i>
                       <i (click)="updateCustomer(customer.email)" class="fa-solid fa-pencil" style="color: #ead053;" title="update-customer"></i>
                       <i (click)="deleteCustomer(customer.email, customer.cname)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;" title="delete-customer"></i>
