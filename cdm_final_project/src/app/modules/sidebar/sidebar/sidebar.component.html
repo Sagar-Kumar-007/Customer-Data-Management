@@ -65,7 +65,7 @@
         </a>
       </li>
   
-      <li
+      <li *ngIf="dashboard==='customer'"
         (mouseover)="animateIcon(icon3, 'fa-beat-fade')"
         (mouseout)="removeAnimation(icon3, 'fa-beat-fade')"
         routerLink="/logs"
