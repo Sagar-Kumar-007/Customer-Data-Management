@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataTrackr_API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230503063700_Initial")]
-    partial class Initial
+    [Migration("20230515060557_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
