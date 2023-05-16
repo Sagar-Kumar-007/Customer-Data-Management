@@ -42,12 +42,12 @@ export class LoginComponent implements OnInit{
   }
 
 addSignup() {
-  let container = document.querySelector(".container") as HTMLDivElement;
+  let container = document.querySelector(".container-login") as HTMLDivElement;
   container.classList.add("sign-up-mode");
 };
 
 removeSignup(){
-  let container = document.querySelector(".container") as HTMLDivElement;
+  let container = document.querySelector(".container-login") as HTMLDivElement;
   container.classList.remove("sign-up-mode");
 };
 
@@ -61,7 +61,7 @@ OnLogin() {
         this.loginForm.reset();
         this.auth.storeToken(res.token);
         this.toast.success({detail:"SUCCESS", summary:res.message,duration:5000});
-        this.router.navigate(['customer']);
+        this.router.navigate(['customerDashboard']);
 
       }),
       error:(err=>{
@@ -84,7 +84,8 @@ OnLogin() {
             console.log("a: "+res.message);
             alert(res.message);
             this.signUpForm.reset();
-            this.router.navigate(['login']);
+            // this.router.navigate(['login']);
+            this.removeSignup();
           }),
           error:(err=>{
             console.log("a: "+err.message);
