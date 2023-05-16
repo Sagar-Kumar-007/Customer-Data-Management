@@ -12,6 +12,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
+import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
 
 @Component({
   selector: 'app-accounts-dashboard',
@@ -21,8 +22,8 @@ import { DatePipe } from '@angular/common';
 export class AccountsDashboardComponent implements OnInit {
   p:number =1;
   itemsPerPage:number=5;
+  totalItems:number=this.itemsPerPage;
   customerId: string = '1';
-  customerName: string | null | undefined;
   accountsList: IAccount[] | undefined;
   totalRevenue: number | string = 0;
   totalAccounts: number = 0;
@@ -60,12 +61,14 @@ export class AccountsDashboardComponent implements OnInit {
     this.pieChartLegend = false;
     this.pieChartPlugins = [];
     this._accountsService
-      .accountsList(this.customerId)
-      .subscribe((result: ICustomer) => {
-        if(result) this.customerName=result.cname;
-        if (result.accounts) {
-          this.accountsList = result.accounts;
-          this.totalAccounts = this.accountsList.length;
+      .accountsList(this.customerId,(this.p-1)*this.itemsPerPage,this.p,this.itemsPerPage)
+      .subscribe((result: IPaginatedResults<IAccount>) => {
+        if (result) {
+          
+          this.accountsList = result.items;
+          this.totalItems=result.totalCount;
+          // console.log(this.accountsList);
+          this.totalAccounts = result.totalCount;
           this.accountsList.sort((a, b) => {
             if (a.acc_revenue && b.acc_revenue)
               return b.acc_revenue - a.acc_revenue;
@@ -94,10 +97,7 @@ export class AccountsDashboardComponent implements OnInit {
           if(typeof this.totalRevenue=="number" && this.totalRevenue-sumOfTopFourAccounts>0)this.pieChartLabels.push("Others");
           if(typeof this.totalRevenue=="number" && this.totalRevenue-sumOfTopFourAccounts>0)this.pieChartDatasets[0].data.push(this.totalRevenue-sumOfTopFourAccounts);
           this.chart.update();
-
-
         }
-        
       });
   }
   ngOnInit() {
@@ -149,7 +149,7 @@ export class AccountsDashboardComponent implements OnInit {
 
             this.logInfo.userId = 'abc@gmail.com';
             this.logInfo.operation = 'deleted';
-            if(this.customerName) this.logInfo.message = `${account.aname} of customer ${this.customerName} has been deleted.`;
+            if(this.customerId) this.logInfo.message = `${account.aname} of customer ${this.customerId} has been deleted.`;
             this.logInfo.timeStamp = `${this.datepipe.transform(
               new Date(),
               'MM/dd/yyyy h:mm:ss'
@@ -180,5 +180,11 @@ export class AccountsDashboardComponent implements OnInit {
         if (result) this.accountsList = result;
       });
     // if(!data.value)console.log(this.customersList);
+  }
+
+  onPageChange(event:number){
+    // console.log(event);
+    this.p=event;
+    this.showAccountsList();
   }
 }

@@ -10,6 +10,8 @@ using AutoMapper;
 using DataTrackr_API.DTO.Account;
 using DataTrackr_API.DTO.Customer;
 using Microsoft.CodeAnalysis;
+using DataTrackr_API.Models;
+using AutoMapper.QueryableExtensions;
 
 namespace DataTrackr_API.Controllers
 {
@@ -27,14 +29,37 @@ namespace DataTrackr_API.Controllers
         }
 
         // GET: api/Accounts
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
-        {
-            var accounts = await _context.Accounts.Include(q=>q.Location).ToListAsync();
-            var records = _mapper.Map<List<GetAccountDto>>(accounts);
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
+        //{
+        //    var accounts = await _context.Accounts.Include(q=>q.Location).ToListAsync();
+        //    var records = _mapper.Map<List<GetAccountDto>>(accounts);
        
-            return Ok(records);
+        //    return Ok(records);
+        //}
+
+        // GET: api/Accounts/fetchAccounts?StartIndex=0&PageSize=25&PageNumber=1 (Paginated)
+        [HttpGet]
+        [Route("/api/Accounts$fetch")]
+        public async Task<ActionResult<PagedResult<GetAccountDto>>> GetPagedAccounts([FromQuery] QueryParameters queryParameters)
+        {
+            var totalSize = await _context.Accounts.CountAsync();
+            var items = await _context.Accounts
+                .Where(d=>d.Customer_email==queryParameters.CustomerEmail)
+                .Skip(queryParameters.StartIndex)
+                .Take(queryParameters.PageSize)
+                .ProjectTo<GetAccountDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+            var pagedAccountsResult= new PagedResult<GetAccountDto>
+            {
+                Items = items,
+                PageNumber = queryParameters.PageNumber,
+                RecordNumber = queryParameters.PageSize,
+                TotalCount = totalSize
+            };
+            return Ok(pagedAccountsResult);
         }
+
         // GET: api/Accounts$like?search=sagar
         [HttpGet]
         [Route("/api/Accounts$like")]

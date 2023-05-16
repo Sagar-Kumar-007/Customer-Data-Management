@@ -11,6 +11,9 @@ using AutoMapper;
 using DataTrackr_API.DTO.Customer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web.Resource;
+using DataTrackr_API.DTO.Account;
+using DataTrackr_API.Models;
+using AutoMapper.QueryableExtensions;
 
 namespace DataTrackr_API.Controllers
 {
@@ -36,6 +39,28 @@ namespace DataTrackr_API.Controllers
             var records = _mapper.Map<List<GetCustomerDto>>(customers);
             return Ok(records);
         }
+
+        // GET: api/Customers/fetchAccounts?StartIndex=0&PageSize=25&PageNumber=1 (Paginated)
+        [HttpGet]
+        [Route("/api/Customers$fetch")]
+        public async Task<ActionResult<PagedResult<GetCustomerDto>>> GetPagedCustomers([FromQuery] QueryParameters queryParameters)
+        {
+            var totalSize = await _context.Customers.CountAsync();
+            var items = await _context.Customers
+                .Skip(queryParameters.StartIndex)
+                .Take(queryParameters.PageSize)
+                .ProjectTo<GetCustomerDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+            var pagedCustomersResult = new PagedResult<GetCustomerDto>
+            {
+                Items = items,
+                PageNumber = queryParameters.PageNumber,
+                RecordNumber = queryParameters.PageSize,
+                TotalCount = totalSize
+            };
+            return Ok(pagedCustomersResult);
+        }
+
         // GET: api/Customers$like?search=sagar
         [HttpGet]
         [Route("/api/Customers$like")]
@@ -58,6 +83,22 @@ namespace DataTrackr_API.Controllers
             }
 
             var customerDetailsDto = _mapper.Map<GetCustomerDetails>(customer);
+
+            return Ok(customerDetailsDto);
+        }
+
+        // GET: api/Customers/CustomerDetails/5
+        [HttpGet("CustomerDetails/{id}")]
+        public async Task<ActionResult<Customer>> GetCustomerDetails(string id)
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(q => q.email == id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var customerDetailsDto = _mapper.Map<GetCustomerDto>(customer);
 
             return Ok(customerDetailsDto);
         }

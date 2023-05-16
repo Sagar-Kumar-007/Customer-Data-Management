@@ -20,7 +20,7 @@
     <div class="article-contener">
       <ul class="groups">
         <ng-template [ngIf]="customersList!=undefined">
-          <li *ngFor="let customer of customersList| paginate : { itemsPerPage: itemsPerPage, currentPage: p }">
+          <li *ngFor="let customer of customersList| paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }">
             <div class="card">
               <div class="image-session" routerLink="/accountDashboard" [queryParams]="{customer:customer.email}">
                 <span
@@ -60,7 +60,7 @@
     </div>
   </div>
   <div class="paginationclass">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
   </div>
   
 </div>

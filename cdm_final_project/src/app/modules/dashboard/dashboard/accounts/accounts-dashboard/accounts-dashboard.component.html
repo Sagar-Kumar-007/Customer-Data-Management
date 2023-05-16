@@ -73,11 +73,6 @@
     <!-- ================ Order Details List ================= -->
     <div class="details">
         <div class="recentOrders">
-            <div class="cardHeader">
-                <h2>Accounts</h2>
-                <a href="#" class="btn">View All</a>
-            </div>
-
             <table class="account-table">
                 <thead class="account-head">
                     <tr>
@@ -91,11 +86,10 @@
 
                 <tbody>
                     <ng-template [ngIf]="accountsList!=undefined">
-                        <tr class="accounts-tr"  *ngFor="let account of accountsList | paginate : { itemsPerPage: itemsPerPage, currentPage: p }">
+                        <tr class="accounts-tr"  *ngFor="let account of accountsList | paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }">
                             <td>{{account['aname']}}</td>
                             <td>{{account['estYear']}}</td>
                             <td>{{account.location?.address}}</td>
-                            <!-- Change id to email in updateAccount and deleteAccount -->
                             <td class="update-icon"><span (click)="updateAccount(account)"><i class="fa-solid fa-pencil" style="color: #ffc400;" title="update-account"></i></span></td>
                             <td class="delete-icon"><span (click)="deleteAccount(account, account.aname)" ><i class="fa-solid fa-trash" style="color: #a80000;" title="delete-account"></i></span></td>
                         </tr>
@@ -106,6 +100,6 @@
     </div>
 
     <div class="paginationclass">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
       </div>
 </div>

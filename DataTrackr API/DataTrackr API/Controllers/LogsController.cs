@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataTrackr_API.Models;
 using DataTrackr_Web_API.Models;
+using AutoMapper.QueryableExtensions;
+using DataTrackr_API.DTO.Account;
 
 namespace DataTrackr_API.Controllers
 {
@@ -27,6 +29,27 @@ namespace DataTrackr_API.Controllers
         {
             return await _context.Logs.ToListAsync();
         }
+
+        // GET: api/Logs/fetchAccounts?StartIndex=0&PageSize=25&PageNumber=1 (Paginated)
+        [HttpGet]
+        [Route("/api/Logs$fetch")]
+        public async Task<ActionResult<PagedResult<Logs>>> GetPagedAccounts([FromQuery] QueryParameters queryParameters)
+        {
+            var totalSize = await _context.Logs.CountAsync();
+            var items = await _context.Logs
+                .Skip(queryParameters.StartIndex)
+                .Take(queryParameters.PageSize)
+                .ToListAsync();
+            var pagedAccountsResult = new PagedResult<Logs>
+            {
+                Items = items,
+                PageNumber = queryParameters.PageNumber,
+                RecordNumber = queryParameters.PageSize,
+                TotalCount = totalSize
+            };
+            return Ok(pagedAccountsResult);
+        }
+
 
         // Search
 

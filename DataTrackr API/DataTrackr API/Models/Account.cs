@@ -15,7 +15,7 @@ namespace DataTrackr_Web_API.Models
     {
         [Key]
         public string Acc_email { get; set; }
-        public double Acc_revenue { get; set; }
+        public decimal Acc_revenue { get; set; }
 
         public Coordinates Location { get; set; }
 
