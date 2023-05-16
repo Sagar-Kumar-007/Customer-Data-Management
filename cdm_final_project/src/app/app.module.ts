@@ -17,6 +17,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { DatePipe } from '@angular/common';
 import { LoginComponent } from './modules/auth/components/login/login.component';
 
+import { SidebarModule } from './modules/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
     AuthModule,
     BrowserModule,
     AppRoutingModule,
+    SidebarModule,
     DashboardModule,
     MaterialModule,
     ReactiveFormsModule,

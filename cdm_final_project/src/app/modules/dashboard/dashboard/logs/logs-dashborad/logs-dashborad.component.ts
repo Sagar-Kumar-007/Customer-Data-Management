@@ -10,6 +10,8 @@ import { LogsService } from 'src/app/services/logs.service';
 })
 export class LogsDashboradComponent {
 
+  p:number =1;
+  itemsPerPage:number=10;
   logsList: Ilogs[] | undefined;
   constructor(private _logsService: LogsService){}
 
@@ -22,6 +24,7 @@ export class LogsDashboradComponent {
       ?.getAllLogs()
       .subscribe((result: Ilogs[] | undefined) => {
         this.logsList = result;
+        this.logsList?.reverse();
       });
   }
   //Toggle

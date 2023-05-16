@@ -23,6 +23,9 @@ export class CustomerDashboardComponent implements OnInit {
     { lat: 22.4064172, lng: 69.0750171, label: 'name' },
   ];
 
+  p:number =1;
+  itemsPerPage:number=4;
+
   constructor(
     public datepipe: DatePipe,
     private _logService: LogsService,
@@ -32,9 +35,13 @@ export class CustomerDashboardComponent implements OnInit {
     private confirm: NgConfirmService,
     private toastService: NgToastService
   ) {}
+
+
   ngOnInit(): void {
     this.showCustomerList();
   }
+
+  
 
   showCustomerList() {
     this._customerService
@@ -75,9 +82,13 @@ export class CustomerDashboardComponent implements OnInit {
   // Delete a Customer
 
   deleteCustomer(id?: string | null, cname?: string | null) {
+    
     this.confirm.showConfirm(
+      
       `Are you sure want to delete ${cname}?`,
+      
       async () => {
+        
         if (id)
           this._customerService.deleteCustomer(id).subscribe((res) => {
             this.logInfo.userId = 'abc@gmail.com';
@@ -132,7 +143,7 @@ export class CustomerDashboardComponent implements OnInit {
 
               this.markers?.push(obj);
             });
-          console.log(this.markers);
+          
 
           if (this.markers.length > 0) {
             this.dialog.open(MapComponent, {

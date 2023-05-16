@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerNavigationPaneComponent } from './customer-navigation-pane/customer-navigation-pane.component';
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { MaterialModule } from 'src/app/modules/material/material.module';
@@ -15,6 +14,8 @@ import { CustomerComponent } from './customer/customer.component';
 import { Router, RouterModule } from '@angular/router';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -23,13 +24,14 @@ import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
-    CustomerNavigationPaneComponent,
     CustomerDashboardComponent,
     CreateCustomerComponent,
     CustomerComponent,
     MapComponent
   ],
   imports: [
+    MatPaginatorModule,
+    NgxPaginationModule,
     CommonModule,
     MaterialModule,
     FormsModule,
@@ -47,7 +49,6 @@ import { MapComponent } from './map/map.component';
   ],
   exports:[
     CustomerDashboardComponent,
-    CustomerNavigationPaneComponent,
     CreateCustomerComponent
   ],
   providers: [CustomerService]

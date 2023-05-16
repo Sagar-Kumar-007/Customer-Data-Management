@@ -91,7 +91,7 @@
 
                 <tbody>
                     <ng-template [ngIf]="accountsList!=undefined">
-                        <tr class="accounts-tr"  *ngFor="let account of accountsList">
+                        <tr class="accounts-tr"  *ngFor="let account of accountsList | paginate : { itemsPerPage: itemsPerPage, currentPage: p }">
                             <td>{{account['aname']}}</td>
                             <td>{{account['estYear']}}</td>
                             <td>{{account.location?.address}}</td>
@@ -100,10 +100,12 @@
                             <td class="delete-icon"><span (click)="deleteAccount(account, account.aname)" ><i class="fa-solid fa-trash" style="color: #a80000;" title="delete-account"></i></span></td>
                         </tr>
                     </ng-template>
-
-
                 </tbody>
             </table>
         </div>
     </div>
+
+    <div class="paginationclass">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
 </div>

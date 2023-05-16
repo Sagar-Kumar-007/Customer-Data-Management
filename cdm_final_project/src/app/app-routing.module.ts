@@ -10,10 +10,9 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login', component:LoginComponent},
-  {path:'account', component:AccountsComponent, canActivate:[AuthGuard]},
-  {path:'customer',component:CustomerComponent},
-  {path:'logs',component:LogsComponent},
-  {path:'customer/getcustomer/:customerEmail',component:AccountsComponent, canActivate:[AuthGuard]},
+  { path: 'customerDashboard', component: CustomerComponent,canActivate:[AuthGuard] },
+  { path: 'logs', component: LogsComponent },
+  {path:'accountDashboard',component:AccountsComponent,canActivate:[AuthGuard]},
   {path:'**',component:FourOfourComponent}
 ]
 
