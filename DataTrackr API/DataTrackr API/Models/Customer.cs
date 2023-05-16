@@ -20,5 +20,7 @@ namespace DataTrackr_Web_API.Models
         public string Description { get; set; }
         public string Website { get; set; }
         public virtual IList<Account> Accounts { get; set; }
+
+        //public virtual List<Account> Accounts { get; set; }
     }
 }

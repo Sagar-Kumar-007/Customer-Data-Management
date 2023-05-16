@@ -14,6 +14,7 @@ using Microsoft.Identity.Web.Resource;
 
 namespace DataTrackr_API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -72,7 +73,7 @@ namespace DataTrackr_API.Controllers
                 return BadRequest();
             }
 
-            //_context.Entry(customer).State = EntityState.Modified;
+            //_context.Entry(updateCustomerDto).State = EntityState.Modified;
             var customer = await _context.Customers.FindAsync(id);
             if(customer==null)
             {

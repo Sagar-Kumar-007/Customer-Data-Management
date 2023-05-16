@@ -10,8 +10,5 @@ namespace DataTrackr_API.Models
         public string timeStamp { get; set; }
         public string operation { get; set; }
         public string message { get; set; }
-
-
-
     }
 }

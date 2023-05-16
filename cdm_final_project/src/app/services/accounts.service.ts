@@ -11,13 +11,13 @@ export class AccountsService {
     return this._http.get<ICustomer>(this.baseUrl+'Customers/'+customerEmail);
   }
   addAccount(account:IAccount){
-    // console.log("account to be added:");
-    // console.log(account);
+    console.log("account to be added:");
+    console.log(account);
     return this._http.post<IAccount>(this.baseUrl+'Accounts',account);
   }
   updateAccount(account:IAccount | undefined,id:string | undefined | null){
-    // console.log("urL: "+this.baseUrl+'Accounts/'+id);
-    // console.log("account: "+account);
+    console.log("urL: "+this.baseUrl+'Accounts/'+id);
+    console.log("account: "+account);
     return this._http.put<IAccount>(this.baseUrl+'Accounts/'+id,account);
   }
   deleteAccount(account:IAccount | undefined,id:string | undefined | null){

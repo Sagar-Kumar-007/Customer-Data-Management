@@ -10,11 +10,15 @@ using AutoMapper;
 using DataTrackr_API.DTO.Account;
 using DataTrackr_API.DTO.Customer;
 using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web.Resource;
 
 namespace DataTrackr_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class AccountsController : ControllerBase
     {
         private readonly ApiDbContext _context;
@@ -30,9 +34,8 @@ namespace DataTrackr_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
         {
-            var accounts = await _context.Accounts.Include(q=>q.Location).ToListAsync();
-            var records = _mapper.Map<List<GetAccountDto>>(accounts);
-       
+            var account = await _context.Accounts.Include(q=>q.Location).ToListAsync();
+            var records = _mapper.Map<List<GetAccountDto>>(account);
             return Ok(records);
         }
         // GET: api/Accounts$like?search=sagar
@@ -40,7 +43,8 @@ namespace DataTrackr_API.Controllers
         [Route("/api/Accounts$like")]
         public async Task<ActionResult<IEnumerable<GetAccountDto>>> SearchAccounts([FromQuery] string search)
         {
-            var accounts = await _context.Accounts.Include(q => q.Location).Where(d=>d.aname.Contains(search) || d.description.Contains(search) || d.EstYear.Contains(search) || d.Location.address.Contains(search)).ToListAsync();
+            var accounts = await _context.Accounts.Include(q => q.Location).Where(d=>d.aname.Contains(search)
+            || d.description.Contains(search) || d.EstYear.Contains(search) || d.Location.address.Contains(search)).ToListAsync();
             var records = _mapper.Map<List<GetAccountDto>>(accounts);
 
             return Ok(records);
@@ -66,18 +70,21 @@ namespace DataTrackr_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount(string id, UpdateAccountDetailDto updateAccountDto)
         {
+            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q => q.Acc_email == id);
             if (id != updateAccountDto.Acc_email)
             {
                 return BadRequest();
             }
 
             //_context.Entry(account).State = EntityState.Modified;
-            var account = await _context.Accounts.FindAsync(id);
+            //var account = await _context.Accounts.FindAsync(id);
             if (account == null)
             {
                 return NotFound();
             }
             _mapper.Map(updateAccountDto, account);
+            //Console.WriteLine(account.Location.Id + " " + updateAccountDto.Location.Id);
+            //updateAccountDto.Location.Id = account.Location.Id;
 
             try
             {
