@@ -4,7 +4,7 @@ import { LogsDashboradComponent } from './logs-dashborad/logs-dashborad.componen
 import { LogsNavigationPaneComponent } from './logs-navigation-pane/logs-navigation-pane.component';
 import { LogsComponent } from './logs/logs.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-// import {NgxPaginationModule} from 'ngx-pagination';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -17,7 +17,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
   imports: [
     CommonModule,
     MatPaginatorModule,
-    // NgxPaginationModule
+    NgxPaginationModule
   ], 
   exports:[
     LogsDashboradComponent,

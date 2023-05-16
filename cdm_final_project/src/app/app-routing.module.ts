@@ -13,6 +13,8 @@ const routes: Routes = [
   { path: 'customerDashboard', component: CustomerComponent,canActivate:[AuthGuard] },
   { path: 'logs', component: LogsComponent },
   {path:'accountDashboard',component:AccountsComponent,canActivate:[AuthGuard]},
+  // {path:'account', component:AccountsComponent, canActivate:[AuthGuard]},
+  // {path:'customer',component:CustomerComponent},
   {path:'**',component:FourOfourComponent}
 ]
 
