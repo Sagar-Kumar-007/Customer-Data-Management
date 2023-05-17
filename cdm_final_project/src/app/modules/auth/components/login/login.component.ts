@@ -85,7 +85,7 @@ OnLogin() {
   {
       if(this.signUpForm.valid)
       {
-        console.log(this.signUpForm.value);
+        // console.log(this.signUpForm.value);
         this.auth.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
             console.log("a: "+res.message);
