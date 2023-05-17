@@ -56,3 +56,13 @@ td {
 form{
     padding-top:50px;
 }
+
+.location-btn{
+    width: 100%;
+    padding: 27px;
+    margin-bottom: 20px;
+}
+
+.countrycode input{
+width: 100%;
+}

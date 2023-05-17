@@ -14,6 +14,7 @@ import { AgmCoreModule } from '@agm/core';
 import { DatePipe } from '@angular/common';
 import { AuthModule } from './modules/auth/auth.module';
 import { SidebarModule } from './modules/sidebar/sidebar.module';
+import { Ng2TelInputModule } from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SidebarModule } from './modules/sidebar/sidebar.module';
     FourOfourComponent
   ],
   imports: [
+    Ng2TelInputModule,
     AuthModule,
     BrowserModule,
     AppRoutingModule,

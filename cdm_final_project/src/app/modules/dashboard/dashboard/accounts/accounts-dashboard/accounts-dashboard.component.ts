@@ -62,6 +62,7 @@ export class AccountsDashboardComponent implements OnInit {
     this._accountsService
       .accountsList(this.customerId)
       .subscribe((result: ICustomer) => {
+        if(result)console.log(result);
         if(result) this.customerName=result.cname;
         if (result.accounts) {
           this.accountsList = result.accounts;
@@ -125,6 +126,7 @@ export class AccountsDashboardComponent implements OnInit {
 
   updateAccount(account: IAccount) {
     let dialogRef = this.dialog.open(AddAccountFormComponent, {
+      disableClose:true,
       maxHeight: 'calc(100vh - 120px)',
       backdropClass: 'backgroundblur',
       data: {

@@ -7,14 +7,14 @@
          [longitude]='long'
          [zoom]='zoom'
          >
-          
+          <!--[fitBounds]="mapBounds() | async"-->
           <agm-marker 
-              *ngFor="let marker of markers" 
+              *ngFor="let marker of locations" 
               [latitude]="marker.lat" 
-                [longitude]="marker.lng">    
-                    <agm-info-window #infoWindow>
-                        {{ marker.label }}
-                  </agm-info-window>
+                [longitude]="marker.lng"
+                [iconUrl]="marker.iconUrl?marker.iconUrl:''"
+                >    
+            
           </agm-marker>
           
       </agm-map>

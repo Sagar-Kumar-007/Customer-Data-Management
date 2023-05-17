@@ -52,6 +52,23 @@
       <table class="example-full-width" cellspacing="0">
         <tr class="table-row">
           <td>
+           <mat-form-field appearance="fill">
+              <mat-label>Country Code</mat-label>
+              <!-- <div class="countrycode">  -->
+              <input
+                type="text"
+                ng2TelInput
+                matInput
+                formControlName="countryCode"
+                name="countryCode"
+                (countryChange)="onCountryChange($event)"
+              />
+              <mat-icon matSuffix>tag</mat-icon>
+              <mat-error><strong>Required</strong></mat-error> 
+           </mat-form-field>
+          <!-- </div> -->
+          </td>
+          <td>
             <mat-form-field>
               <mat-label>Phone</mat-label>
               <span matPrefix>&nbsp;</span>
@@ -77,6 +94,12 @@
       <table class="example-full-width" cellspacing="0">
         <tr class="table-row">
           <td>
+            <button class="location-btn" (click)="openGoogleMap()" mat-stroked-button style="border: 1px solid black;" (click)="changeState()"> 
+                <mat-icon matSuffix>location_on</mat-icon> Headquarter
+            </button>
+            
+        </td>
+          <!-- <td>
             <mat-form-field appearance="fill">
               <mat-label>Headquarter</mat-label>
               <input
@@ -84,24 +107,13 @@
                 matInput
                 formControlName="headquaters"
                 name="headquaters"
+                (click)="openGoogleMap()"
               />
               <mat-icon matSuffix>location_on</mat-icon>
               <mat-error><strong>Required</strong></mat-error>
             </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field appearance="fill">
-              <mat-label>Country Code</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="countryCode"
-                name="countryCode"
-              />
-              <mat-icon matSuffix>tag</mat-icon>
-              <mat-error><strong>Required</strong></mat-error>
-            </mat-form-field>
-          </td>
+          </td> -->
+          
         </tr>
       </table>
       <mat-form-field appearance="fill">
@@ -128,6 +140,7 @@
         type="submit"
         class="submitbtn"
         (click)="addCustomer()"
+        [disabled]="isButtonDisabled()"
       >
         Submit
       </button>
