@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICustomer } from '../datatypes/customer';
 import { IAccount } from '../datatypes/account';
 import { IPaginatedResults } from '../datatypes/paginatedResults';
 
@@ -14,8 +13,6 @@ export class AccountsService {
     return this._http.get<IPaginatedResults<IAccount>>(`${this.baseUrl}$fetch?StartIndex=${StartIndex}&PageNumber=${PageNumber}&CustomerEmail=${CustomerEmail}&PageSize=${PageSize}`)
   }
   addAccount(account:IAccount){
-    // console.log("account to be added:");
-    // console.log(account);
     return this._http.post<IAccount>(this.baseUrl,account);
   }
   updateAccount(account:IAccount | undefined,id:string | undefined | null){

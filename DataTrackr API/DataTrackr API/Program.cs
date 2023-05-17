@@ -2,13 +2,20 @@ using DataTrackr_API.Configurations;
 using DataTrackr_Web_API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.CommandLine;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 
 
@@ -23,13 +30,31 @@ builder.Services.AddSwaggerGen();
 
 
 
-
 var connectionString = builder.Configuration.GetConnectionString("DevelopConnection");
+
 builder.Services.AddDbContext<ApiDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
 
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("veryverysecret....")),
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ClockSkew = TimeSpan.Zero
+    };
+});
 
 
 builder.Services.AddCors(options =>
@@ -37,6 +62,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll",
         b => b.AllowAnyHeader()
         .AllowAnyMethod()
+        //.SetIsOriginAllowed(
+        //    origin=>origin=="http://localhost:4200")
         .AllowAnyOrigin());
 });
 
@@ -52,6 +79,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();
+app.UseDeveloperExceptionPage();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

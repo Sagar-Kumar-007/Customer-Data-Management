@@ -1,5 +1,6 @@
 ﻿using DataTrackr_Web_API.Models;
 
+
 namespace DataTrackr_API.DTO.Account
 {
     public class UpdateAccountDetailDto
@@ -7,7 +8,7 @@ namespace DataTrackr_API.DTO.Account
         public string Acc_email { get; set; }
         //public decimal Acc_revenue { get; set; }
 
-        public Coordinates Location { get; set; }
+        public virtual Coordinates Location { get; set; }
 
         public string aname { get; set; }
 

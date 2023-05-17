@@ -27,7 +27,6 @@ export class LogsDashboradComponent {
       .subscribe((result: IPaginatedResults<Ilogs>) => {
         this.logsList = result.items;
         this.totalItems=result.totalCount;
-        this.logsList?.reverse();
       });
   }
   //Toggle

@@ -189,4 +189,12 @@ export class CustomerDashboardComponent implements OnInit {
     this.showCustomerList();
   }
 
+  resetPassword(){
+
+  }
+
+  logout(){
+    
+  }
+
 }

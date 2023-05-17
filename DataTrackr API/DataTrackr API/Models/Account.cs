@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using DataTrackr_API.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 namespace DataTrackr_Web_API.Models
@@ -17,7 +19,7 @@ namespace DataTrackr_Web_API.Models
         public string Acc_email { get; set; }
         public decimal Acc_revenue { get; set; }
 
-        public Coordinates Location { get; set; }
+        public virtual Coordinates Location { get; set; }
 
         public string aname { get; set; }
 

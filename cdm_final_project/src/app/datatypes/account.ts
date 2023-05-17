@@ -7,6 +7,5 @@ export interface IAccount{
     address?: string | null;
     aname?:string |null;
     estYear?:string | null;
-    description?:string | null;
-    customer_email?:string | null;
+    PmId?:number | null;
 }

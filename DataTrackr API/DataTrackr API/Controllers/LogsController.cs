@@ -37,6 +37,7 @@ namespace DataTrackr_API.Controllers
         {
             var totalSize = await _context.Logs.CountAsync();
             var items = await _context.Logs
+                .OrderByDescending(x => x.logId)
                 .Skip(queryParameters.StartIndex)
                 .Take(queryParameters.PageSize)
                 .ToListAsync();
