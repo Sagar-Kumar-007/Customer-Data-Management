@@ -4,7 +4,6 @@ import { AccountsService } from 'src/app/services/accounts.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddAccountFormComponent } from '../add-account-form/add-account-form.component';
 import { ActivatedRoute } from '@angular/router';
-import { ICustomer } from 'src/app/datatypes/customer';
 import { NgConfirmService } from 'ng-confirm-box';
 import { ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -13,6 +12,9 @@ import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
 import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
+import {Subscription} from 'rxjs';
+import { DashboardService } from 'src/app/services/dashboard.service';
+
 
 @Component({
   selector: 'app-accounts-dashboard',
@@ -40,6 +42,8 @@ export class AccountsDashboardComponent implements OnInit {
   } ];
   pieChartLegend = false;
   pieChartPlugins = [];
+  searchEventSubscription:Subscription | undefined;
+
 
   constructor(
     public datepipe: DatePipe,
@@ -48,8 +52,15 @@ export class AccountsDashboardComponent implements OnInit {
     private _accountsService: AccountsService,
     private dialog: MatDialog,
     private _route: ActivatedRoute,
-    private _ngtoastService: NgToastService
-  ) {}
+    private _ngtoastService: NgToastService,
+    private dashboardService:DashboardService
+  ) {
+    this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
+      if(data){
+        this.searchVal(data.value);
+      }
+    });
+  }
   showAccountsList() {
     this.totalRevenue = 0;
     this.totalAccounts = 0;
@@ -170,16 +181,16 @@ export class AccountsDashboardComponent implements OnInit {
     );
   }
 
-  searchVal(data: HTMLInputElement) {
-
-    if (!data.value) {
+  searchVal(data: string | undefined) {
+    console.log(data);
+    
+    if (!data) {
       this.showAccountsList();
     }
-    if (data.value)
-      this._accountsService.searchAccounts(data.value).subscribe((result) => {
+    if (data)
+      this._accountsService.searchAccounts(data).subscribe((result) => {
         if (result) this.accountsList = result;
       });
-    // if(!data.value)console.log(this.customersList);
   }
 
   onPageChange(event:number){

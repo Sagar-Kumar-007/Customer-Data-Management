@@ -4,9 +4,10 @@
     position: absolute;
     width: calc(100% - 300px);
     left: 300px;
-    min-height: 100vh;
+    min-height: calc(100vh-60px);
     background: var(--white);
     transition: 0.5s;
+    margin-top: 60px;
   }
   .main.active {
     width: calc(100% - 80px);

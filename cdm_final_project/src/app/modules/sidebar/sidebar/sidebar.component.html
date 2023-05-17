@@ -1,5 +1,5 @@
 <!--Navigation....-->
-<div class="navigation" [ngClass]="{'': detectDashboard()}">
+<div class="navigation">
     <ul>
       <li>
         <div class="brand">
@@ -35,7 +35,7 @@
       <li
         (mouseover)="animateIcon(icon1, 'fa-beat')"
         (mouseout)="removeAnimation(icon1, 'fa-beat')"
-        *ngIf="dashboard==='customer'"
+        *ngIf="dashboard==='customer' || 'logs'"
       >
         <a [routerLink]="['/customerDashboard']">
           <span class="icon">
@@ -53,6 +53,7 @@
         </a>
     </li>
       <li
+        *ngIf="dashboard!=='logs'"
         (mouseover)="animateIcon(icon2, 'fa-bounce')"
         (mouseout)="removeAnimation(icon2, 'fa-bounce')"
         (click)="addOperation()"
@@ -65,7 +66,7 @@
         </a>
       </li>
   
-      <li *ngIf="dashboard==='customer'"
+      <li *ngIf="dashboard==='customer' || 'logs'"
         (mouseover)="animateIcon(icon3, 'fa-beat-fade')"
         (mouseout)="removeAnimation(icon3, 'fa-beat-fade')"
         routerLink="/logs"
