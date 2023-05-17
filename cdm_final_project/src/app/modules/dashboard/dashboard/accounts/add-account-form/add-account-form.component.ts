@@ -6,7 +6,7 @@ import { IAccount } from 'src/app/datatypes/account';
 import { ICoordinate } from 'src/app/datatypes/Coordinates';
 import { ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { GoogleMapComponent } from '../google-map/google-map.component';
+import { GoogleMapComponent } from '../../../google-map/google-map.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { LogsService } from 'src/app/services/logs.service';
