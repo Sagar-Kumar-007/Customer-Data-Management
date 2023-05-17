@@ -43,6 +43,8 @@ export class AccountsDashboardComponent implements OnInit {
   pieChartLegend = false;
   pieChartPlugins = [];
   searchEventSubscription:Subscription | undefined;
+  accountListEventSubscription:Subscription | undefined;
+
 
 
   constructor(
@@ -60,6 +62,11 @@ export class AccountsDashboardComponent implements OnInit {
         this.searchVal(data.value);
       }
     });
+    this.accountListEventSubscription=dashboardService.getAddAccountEvent().subscribe(data=>{
+      if(data){
+        this.showAccountsList();
+      }
+    })
   }
   showAccountsList() {
     this.totalRevenue = 0;
@@ -156,6 +163,7 @@ export class AccountsDashboardComponent implements OnInit {
         this._accountsService
           .deleteAccount(account, account.acc_email?.toString())
           .subscribe((result) => {
+            this.showAccountsList();
             this._ngtoastService.success({detail:'SUCCESS', summary: 'Deleted Successfully', duration: 3000});
 
             this.logInfo.userId = 'abc@gmail.com';
@@ -175,7 +183,7 @@ export class AccountsDashboardComponent implements OnInit {
         await new Promise((f) => {
           setTimeout(f, 1000);
         });
-         window.location.reload();
+        //  window.location.reload();
       },
       () => {}
     );

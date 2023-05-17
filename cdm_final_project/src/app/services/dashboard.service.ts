@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from './customer.service';
 import { ICustomer } from '../datatypes/customer';
 import {Observable,Subject} from 'rxjs';
+import { IAccount } from '../datatypes/account';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,35 @@ import {Observable,Subject} from 'rxjs';
 export class DashboardService {
 
   dashboard:string='';
-  private subject=new Subject<any>();
+  private searchSubject=new Subject<any>();
+  private customerSubject=new Subject<any>();
+  private accountSubject=new Subject<any>();
+
 
   sendSearchEvent(data:HTMLInputElement){
-    this.subject.next(data);
+    this.searchSubject.next(data);
   }
 
   getSearchEvent():Observable<any>{
-    return this.subject.asObservable();
+    return this.searchSubject.asObservable();
+  }
+
+  sendAddCustomerEvent(res:ICustomer){
+    console.log('send')
+    this.customerSubject.next(res);
+  }
+  getAddCustomerEvent(){
+    console.log("subscribe");
+    return this.customerSubject.asObservable();
+  }
+
+  sendAddAccountEvent(res:IAccount){
+    console.log('send')
+    this.accountSubject.next(res);
+  }
+  getAddAccountEvent(){
+    console.log("subscribe");
+    return this.accountSubject.asObservable();
   }
 
   detectDashboard(currentUrl:string) {

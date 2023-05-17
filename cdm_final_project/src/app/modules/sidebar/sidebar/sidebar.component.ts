@@ -18,6 +18,7 @@ export class SidebarComponent {
   customerId?:string | null;
   customer?:ICustomer;
   dashboard:string='';
+  
   constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,private _customerService:CustomerService,private dashboardService:DashboardService) {}
   ngOnInit(){
     this.router.events.subscribe((event) => {
@@ -77,7 +78,7 @@ export class SidebarComponent {
       backdropClass: 'backgroundblur',
     });
     dialogRef.afterClosed().subscribe((result)=>{
-      window.location.reload();
+      // window.location.reload();
     })
   }
   showCustomerCard(flag:boolean){
@@ -120,7 +121,7 @@ export class SidebarComponent {
       }
     });
     dialogRef.afterClosed().subscribe(result=>{
-      window.location.reload();
+      // window.location.reload();
     })
   }
   addOperation(){

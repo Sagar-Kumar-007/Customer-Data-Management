@@ -30,6 +30,8 @@ export class CustomerDashboardComponent implements OnInit {
   itemsPerPage:number=4;
   totalItems:number=this.itemsPerPage;
   searchEventSubscription:Subscription | undefined;
+  customerListEventSubscription:Subscription | undefined;
+
 
   constructor(
     public datepipe: DatePipe,
@@ -46,6 +48,11 @@ export class CustomerDashboardComponent implements OnInit {
         this.searchVal(data.value);
       }
     });
+    this.customerListEventSubscription=dashboardService.getAddCustomerEvent().subscribe(data=>{
+      if(data){
+        this.showCustomerList();
+      }
+    })
   }
 
 
@@ -130,7 +137,7 @@ export class CustomerDashboardComponent implements OnInit {
           setTimeout(f, 1000);
         });
 
-        window.location.reload();
+        // window.location.reload();
       },
       () => {}
     );
