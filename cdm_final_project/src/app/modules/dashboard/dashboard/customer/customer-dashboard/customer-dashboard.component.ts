@@ -10,6 +10,7 @@ import { MapComponent } from '../map/map.component';
 import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
+import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -25,6 +26,7 @@ export class CustomerDashboardComponent implements OnInit {
 
   p:number =1;
   itemsPerPage:number=4;
+  totalItems:number=this.itemsPerPage;
 
   constructor(
     public datepipe: DatePipe,
@@ -45,9 +47,10 @@ export class CustomerDashboardComponent implements OnInit {
 
   showCustomerList() {
     this._customerService
-      ?.getAllCustomers()
-      .subscribe((result: ICustomer[] | undefined) => {
-        this.customersList = result;
+      ?.getAllCustomersPaginated((this.p-1)*this.itemsPerPage,this.p,this.itemsPerPage)
+      .subscribe((result: IPaginatedResults<ICustomer>) => {
+        this.customersList = result.items;
+        this.totalItems=result.totalCount;
       });
   }
 
@@ -117,7 +120,7 @@ export class CustomerDashboardComponent implements OnInit {
           setTimeout(f, 1000);
         });
 
-        window.location.reload();
+        // window.location.reload();
       },
       () => {}
     );
@@ -179,4 +182,19 @@ export class CustomerDashboardComponent implements OnInit {
       });
     // if(!data.value)console.log(this.customersList);
   }
+
+  onPageChange(event:number){
+    // console.log(event);
+    this.p=event;
+    this.showCustomerList();
+  }
+
+  resetPassword(){
+
+  }
+
+  logout(){
+    
+  }
+
 }

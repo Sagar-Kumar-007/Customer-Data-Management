@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICustomer } from '../datatypes/customer';
+import { IPaginatedResults } from '../datatypes/paginatedResults';
 
 @Injectable()
 export class CustomerService {
@@ -9,15 +10,23 @@ export class CustomerService {
   private baseUrl:string='https://localhost:7196/api/Customers'
 
    /********************  Get all Customers********************/
-
    getAllCustomers(){
+    // https://localhost:7196/api/Customers
     return this._http.get<ICustomer[]>(`${this.baseUrl}`);
+   }
+   getAllCustomersPaginated(StartIndex:number,PageNumber:number,PageSize:number){
+    // https://localhost:7196/api/Customers$fetch?StartIndex=0&PageNumber=1&PageSize=5
+    return this._http.get<IPaginatedResults<ICustomer>>(`${this.baseUrl}$fetch?StartIndex=${StartIndex}&PageNumber=${PageNumber}&PageSize=${PageSize}`);
    }
 
    /********************  Get a Customer by Id ********************/
-
    getCustomer(customerId: string){
+    // https://localhost:7196/api/Customers/amazon%40amazon.com
     return this._http.get<ICustomer>(`${this.baseUrl}/${customerId}`);
+   }
+   getCustomerDetails(customerId: string){
+    // https://localhost:7196/api/Customers/CustomerDetails/amazon%40amazon.com
+    return this._http.get<ICustomer>(`${this.baseUrl}/CustomerDetails/${customerId}`);
    }
 
   /********************  Add a Customer********************/

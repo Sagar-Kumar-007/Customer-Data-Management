@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { NgToastModule } from 'ng-angular-popup';
@@ -18,7 +19,7 @@ import { MapComponent } from './map/map.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2TelInputModule } from 'ng2-tel-input';
-
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 
 
 
@@ -32,6 +33,7 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     MapComponent
   ],
   imports: [
+    NgxMatIntlTelInputComponent,
     Ng2TelInputModule,
     MatPaginatorModule,
     NgxPaginationModule,
@@ -41,6 +43,7 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     ReactiveFormsModule,
     MatDialogModule,
     MatIconModule,
+    MatMenuModule,
     NgConfirmModule,
     NgToastModule,
     RouterModule,

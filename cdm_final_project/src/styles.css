@@ -129,3 +129,67 @@ mat-dialog-content {
 .ngx-pagination .current{
   background-color: #00599C!important;
 }
+
+
+/* ====================== Mat-Menu ===========================*/
+
+.menu:hover{
+    background-color: #FFFFFF;
+}
+
+.mat-mdc-menu-panel.mat-mdc-menu-panel {
+    min-width: 112px;
+    max-width: 280px;
+    overflow: auto;
+   
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    margin-top: 10%;
+    right:0 ;
+}
+
+@media (max-width: 375px) {
+  .mat-mdc-menu-panel.mat-mdc-menu-panel {
+    min-width: 112px;
+    max-width: 280px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    margin-top: 10%;
+    right:25% ;
+}
+}
+
+.country-selector {
+
+  opacity: 1 !important;
+  
+  width: 80px !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  
+  }
+  
+  
+  
+  
+  input.country-search{
+  
+  padding: 0 !important;
+  
+  text-align: center;
+  
+  }
+  
+  
+  
+  
+  .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  
+  height: 35px !important;
+  
+  }
+
+ 
+
+

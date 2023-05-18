@@ -30,6 +30,7 @@ export class CreateCustomerComponent {
   public isUpdateActive: boolean = false;
   logInfo: Ilogs = {};
   active: boolean = false;
+  selectcountry: boolean=false;
 
   constructor(
     public datepipe: DatePipe,
@@ -66,8 +67,22 @@ export class CreateCustomerComponent {
     this.active = true;
   }
 
+  isCountrySelected(){
+    this.selectcountry=true;
+  }
+
+  isCountryUnselected(){
+    this.selectcountry=false;
+  }
+
   isButtonDisabled(): boolean {
-    if (this.customerAddForm.invalid || this.active == false) {
+    console.log(this.customerAddForm.value.headquaters?.address);
+    console.log(this.customerAddForm.value.headquaters?.latitude);
+    console.log(this.customerAddForm.value.headquaters?.longitude);
+
+    if(this.customerAddForm.invalid)return true;
+    if(this.isUpdateActive==true) return false;
+    else if (this.active == false) {
       return true;
     }
     return false;
@@ -88,11 +103,13 @@ export class CreateCustomerComponent {
 
     dialogRef.afterClosed().subscribe(
       (result: ICoordinate) => {
+        
         this.coordinates = result;
-        if (this.coordinates)
+        if (this.coordinates){
           this.customerAddForm.controls.headquaters.patchValue(
             this.coordinates
           );
+        }
       },
       () => {
         console.log('Error Found');
@@ -112,12 +129,13 @@ export class CreateCustomerComponent {
       Validators.minLength(10),
     ]),
     website: new FormControl('', []),
-    countryCode: new FormControl('', [Validators.required]),
+    countryCode: new FormControl(''),
   });
 
   // Add Customer.........
 
   addCustomer() {
+    console.log("c: "+this.customerAddForm.value.headquaters?.address);
     this.customer.addCustomer(this.customerAddForm.value).subscribe((res) => {
       console.log(res);
       if (res) {
@@ -196,6 +214,7 @@ export class CreateCustomerComponent {
     return this.customerAddForm.get('phoneNo');
   }
 
+
   fillFormToUpdate(customer: ICustomer) {
     this.customerAddForm.patchValue({
       cname: customer.cname,
@@ -212,7 +231,11 @@ export class CreateCustomerComponent {
 
   onCountryChange(event:any) {
     console.log(event);
+    this.customerAddForm.controls.countryCode.patchValue(event.dialCode);
   }
+
+  
+
   ngOnDestroy() {
     this.matDialogRef.close();
   }

@@ -15,7 +15,13 @@
 
       <mat-form-field appearance="fill" *ngIf="isUpdateActive">
         <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" name="email" readonly/>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          name="email"
+          readonly
+        />
         <mat-icon matSuffix>email</mat-icon>
         <mat-error *ngIf="email && email.invalid && email.touched">
           Please Enter valid email
@@ -51,10 +57,10 @@
 
       <table class="example-full-width" cellspacing="0">
         <tr class="table-row">
-          <td>
-           <mat-form-field appearance="fill">
+          <!-- <td>
+            <mat-form-field appearance="fill">
               <mat-label>Country Code</mat-label>
-              <!-- <div class="countrycode">  -->
+              
               <input
                 type="text"
                 ng2TelInput
@@ -64,12 +70,12 @@
                 (countryChange)="onCountryChange($event)"
               />
               <mat-icon matSuffix>tag</mat-icon>
-              <mat-error><strong>Required</strong></mat-error> 
-           </mat-form-field>
-          <!-- </div> -->
-          </td>
-          <td>
-            <mat-form-field>
+              <mat-error><strong>Required</strong></mat-error>
+            </mat-form-field>
+            
+          </td> -->
+          <!-- <td> -->
+          <!-- <mat-form-field>
               <mat-label>Phone</mat-label>
               <span matPrefix>&nbsp;</span>
               <input
@@ -81,7 +87,26 @@
               />
               <mat-icon matSuffix>call</mat-icon>
               <mat-error><strong>Required</strong></mat-error>
-            </mat-form-field>
+            </mat-form-field> -->
+
+          <!-- </td> -->
+          <td>
+            <mat-form-field (click)="isCountrySelected()" (focusout)="isCountryUnselected()">
+              <!-- <mat-label *ngIf="selectcountry===false">Phone</mat-label> -->
+            <ngx-mat-intl-tel-input
+              name="phoneNo"
+              [preferredCountries]="['in', 'us']"
+              [placeholder]="'PhoneNo'"
+              [enableSearch]="true"
+              [enablePlaceholder]="true"
+              describedBy="phoneNo"
+              formControlName="phoneNo"
+              (countryChanged)="onCountryChange($event)"
+              
+
+            >
+            </ngx-mat-intl-tel-input>
+          </mat-form-field>
           </td>
         </tr>
       </table>
@@ -94,11 +119,16 @@
       <table class="example-full-width" cellspacing="0">
         <tr class="table-row">
           <td>
-            <button class="location-btn" (click)="openGoogleMap()" mat-stroked-button style="border: 1px solid black;" (click)="changeState()"> 
-                <mat-icon matSuffix>location_on</mat-icon> Headquarter
+            <button
+              class="location-btn"
+              (click)="openGoogleMap()"
+              mat-stroked-button
+              style="border: 1px solid black"
+              (click)="changeState()"
+            >
+              <mat-icon matSuffix>location_on</mat-icon> Headquarter
             </button>
-            
-        </td>
+          </td>
           <!-- <td>
             <mat-form-field appearance="fill">
               <mat-label>Headquarter</mat-label>
@@ -113,7 +143,6 @@
               <mat-error><strong>Required</strong></mat-error>
             </mat-form-field>
           </td> -->
-          
         </tr>
       </table>
       <mat-form-field appearance="fill">
@@ -133,8 +162,7 @@
       </button>
       <button
         *ngIf="!isUpdateActive"
-        style="background-color: #00599c; color: white;"
-        [disabled]="customerAddForm.invalid"
+        style="background-color: #00599c; color: white"
         mat-raised-button
         color="primary"
         type="submit"
@@ -146,8 +174,8 @@
       </button>
       <button
         *ngIf="isUpdateActive"
-        style="background-color: #00599c; color:white"
-        [disabled]="customerAddForm.invalid"
+        style="background-color: #00599c; color: white"
+        [disabled]="isButtonDisabled()"
         mat-raised-button
         color="primary"
         type="submit"

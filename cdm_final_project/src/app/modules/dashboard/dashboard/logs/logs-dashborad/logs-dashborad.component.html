@@ -47,7 +47,7 @@
             <tr
               *ngFor="
                 let logList of logsList
-                  | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
+                  | paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }
               "
             >
               <td>{{ logList.userId }}</td>
@@ -76,7 +76,9 @@
   </div>
 
   <div class="paginationclass">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
   </div>
   
 </div>
+
+

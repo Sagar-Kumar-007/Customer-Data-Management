@@ -297,4 +297,11 @@
   }
 }
 
+@media (max-width:375px){
+  .main.active .toggle i{
+    position: relative;
+    right: 100%;
+  }
+}
+
 

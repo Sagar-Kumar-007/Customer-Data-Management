@@ -11,15 +11,20 @@ import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
-import { DatePipe } from '@angular/common';
 import { AuthModule } from './modules/auth/auth.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { DatePipe } from '@angular/common';
+import { LoginComponent } from './modules/auth/components/login/login.component';
+
 import { SidebarModule } from './modules/sidebar/sidebar.module';
 import { Ng2TelInputModule } from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FourOfourComponent
+    FourOfourComponent,
+    
   ],
   imports: [
     Ng2TelInputModule,
@@ -39,7 +44,13 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
       libraries: ['places']
     })
   ],
-  providers: [DatePipe],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true  
+    },
+  DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

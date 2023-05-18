@@ -9,10 +9,47 @@
           <i class="fa fa-solid fa-magnifying-glass"></i>
       </label>
   </div>
-    <div class="user">
+    <div class="user" [matMenuTriggerFor]="menu">
       <img src="https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" alt="" />
     </div>
+
+    <mat-menu #menu="matMenu" class="customize">
+
+      <button mat-menu-item class="customize-bname" >
+  
+        <mat-icon>badge</mat-icon>
+  
+        <span>{{"adminName"|titlecase}}</span>
+  
+      </button>
+  
+      <button routerLink="logs" mat-menu-item class="customize-b" >
+  
+        <mat-icon>description</mat-icon>
+  
+        <span>Logs</span>
+  
+      </button>
+  
+      <button (click)="resetPassword()" mat-menu-item class="customize-b">
+  
+        <mat-icon>password</mat-icon>
+  
+        <span>Reset Password</span>
+  
+      </button>
+  
+      <button (click)="logout()" mat-menu-item class="customize-b">
+  
+        <mat-icon>logout</mat-icon>
+  
+        <span>Logout</span>
+  
+      </button>
+  
+    </mat-menu>
   </div>
+
 
 
 <!-- ================ Customer List ================= -->
@@ -20,7 +57,7 @@
     <div class="article-contener">
       <ul class="groups">
         <ng-template [ngIf]="customersList!=undefined">
-          <li *ngFor="let customer of customersList| paginate : { itemsPerPage: itemsPerPage, currentPage: p }">
+          <li *ngFor="let customer of customersList| paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }">
             <div class="card">
               <div class="image-session" routerLink="/accountDashboard" [queryParams]="{customer:customer.email}">
                 <span
@@ -41,7 +78,7 @@
                 </div>
                 <div class="footer">
                   <div class="views">
-                    <span><b>Sector:</b> {{customer.sector}}</span>
+                    <span><b>Sector:</b> {{customer['sector']}}</span>
                   </div>
                   <!-- <a href="#" class="button">Read more →</a> -->
                   <div class="icons">
@@ -60,7 +97,7 @@
     </div>
   </div>
   <div class="paginationclass">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
   </div>
   
 </div>

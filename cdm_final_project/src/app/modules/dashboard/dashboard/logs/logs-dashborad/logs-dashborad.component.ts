@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Ilogs } from 'src/app/datatypes/logs';
+import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
 import { LogsService } from 'src/app/services/logs.service';
 
 
@@ -12,6 +13,7 @@ export class LogsDashboradComponent {
 
   p:number =1;
   itemsPerPage:number=10;
+  totalItems:number=this.itemsPerPage;
   logsList: Ilogs[] | undefined;
   constructor(private _logsService: LogsService){}
 
@@ -21,10 +23,10 @@ export class LogsDashboradComponent {
 
   showLogsList() {
     this._logsService
-      ?.getAllLogs()
-      .subscribe((result: Ilogs[] | undefined) => {
-        this.logsList = result;
-        this.logsList?.reverse();
+      ?.getAllLogsPaginated((this.p-1)*this.itemsPerPage,this.p,this.itemsPerPage)
+      .subscribe((result: IPaginatedResults<Ilogs>) => {
+        this.logsList = result.items;
+        this.totalItems=result.totalCount;
       });
   }
   //Toggle
@@ -52,6 +54,11 @@ export class LogsDashboradComponent {
         if (result) this.logsList = result;
       });
     // if(!data.value)console.log(this.customersList);
+  }
+  onPageChange(event:number){
+    // console.log(event);
+    this.p=event;
+    this.showLogsList();
   }
   
 }

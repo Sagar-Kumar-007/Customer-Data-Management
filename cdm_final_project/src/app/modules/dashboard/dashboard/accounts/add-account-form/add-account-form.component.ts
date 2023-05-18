@@ -59,7 +59,8 @@ export class AddAccountFormComponent {
   }
 
   isButtonDisabled(): boolean {
-    if(this.accountAddForm.invalid || this.active==false){
+    if (this.data.status === 'updateAccount' && !this.accountAddForm.invalid) return false;
+    else if(this.accountAddForm.invalid || this.active==false){
       return true;
     }
     return false;
