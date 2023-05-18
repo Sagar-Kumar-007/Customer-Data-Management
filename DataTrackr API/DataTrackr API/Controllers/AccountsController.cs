@@ -71,8 +71,6 @@ namespace DataTrackr_API.Controllers
                 return BadRequest();
             }
 
-            //_context.Entry(account).State = EntityState.Modified;
-            var account = await _context.Accounts.FindAsync(id);
             if (account == null)
             {
                 return NotFound();
@@ -128,12 +126,11 @@ namespace DataTrackr_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(string id)
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await _context.Accounts.Include(l=>l.Location).FirstOrDefaultAsync(q=>q.Acc_email==id);
             if (account == null)
             {
                 return NotFound();
             }
-
             _context.Accounts.Remove(account);
             await _context.SaveChangesAsync();
 

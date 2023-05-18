@@ -11,6 +11,8 @@ import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
 import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -27,16 +29,27 @@ export class CustomerDashboardComponent implements OnInit {
   p:number =1;
   itemsPerPage:number=4;
   totalItems:number=this.itemsPerPage;
+  searchEventSubscription:Subscription | undefined;
+  customerListEventSubscription:Subscription | undefined;
+
 
   constructor(
     public datepipe: DatePipe,
     private _logService: LogsService,
     private dialog: MatDialog,
     private _customerService: CustomerService,
+    private dashboardService:DashboardService,
     private router: Router,
     private confirm: NgConfirmService,
     private toastService: NgToastService
-  ) {}
+  ) {
+    this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
+        this.searchVal(data.value);
+    });
+    this.customerListEventSubscription=dashboardService.getAddCustomerEvent().subscribe(data=>{
+        this.showCustomerList();
+    })
+  }
 
 
   ngOnInit(): void {
@@ -170,17 +183,14 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   // Search bar implementation
-  searchVal(data: HTMLInputElement) {
-    // console.log(data.value);
-
-    if (!data.value) {
+  searchVal(data:string | undefined) {
+    if (!data) {
       this.showCustomerList();
     }
-    if (data.value)
-      this._customerService.searchCustomers(data.value).subscribe((result) => {
+    if (data)
+      this._customerService.searchCustomers(data).subscribe((result) => {
         if (result) this.customersList = result;
       });
-    // if(!data.value)console.log(this.customersList);
   }
 
   onPageChange(event:number){

@@ -16,6 +16,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { GoogleMapComponent } from '../../../google-map/google-map.component';
 
 @Component({
@@ -40,6 +41,7 @@ export class CreateCustomerComponent {
     private dialog: MatDialog,
     private toastService: NgToastService,
     private confirm: NgConfirmService,
+    private dashboardService:DashboardService,
     private matDialogRef: MatDialogRef<CreateCustomerComponent>,
     @Inject(MAT_DIALOG_DATA)
     private data: {
@@ -139,6 +141,7 @@ export class CreateCustomerComponent {
     this.customer.addCustomer(this.customerAddForm.value).subscribe((res) => {
       console.log(res);
       if (res) {
+        this.dashboardService.sendAddCustomerEvent(res);
         this.toastService.success({
           detail: 'Success',
           summary: 'Customer Added',

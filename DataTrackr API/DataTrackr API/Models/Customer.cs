@@ -6,10 +6,8 @@ namespace DataTrackr_Web_API.Models
 {
     public class Customer
     {
-        [Key]
         public string email { get; set; }
 
-        [Column(TypeName = "nvarchar(250)")]
         public string cname { get; set; }
 
         public string logo { get; set; }

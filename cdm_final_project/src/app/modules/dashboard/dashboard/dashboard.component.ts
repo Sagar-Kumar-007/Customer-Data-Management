@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,12 +8,19 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-
-  
-  view:string="history";
-  item:boolean | undefined;
-  passedValue(item:boolean){
-    this.item=item;
+  decodedToken:string='';
+  constructor(private _authService:AuthService){}
+  ngOnInit(){
+    let token:string | null=this._authService.getToken();
+    // console.log(token);
+    try {
+      let decodedToken:string='';
+      if(token) decodedToken = jwt_decode(token);
+      console.log(decodedToken);
+      this.decodedToken=decodedToken;
+    } catch (error) {
+      console.error('Error decoding JWT token:', error);
+    }
   }
 }
 

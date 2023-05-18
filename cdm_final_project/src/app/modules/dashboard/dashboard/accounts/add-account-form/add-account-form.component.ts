@@ -12,6 +12,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-add-account-form',
@@ -31,6 +32,7 @@ export class AddAccountFormComponent {
     private toastService: NgToastService,
     private _accountsService: AccountsService,
     private matDialogRef: MatDialogRef<AddAccountFormComponent>,
+    private dashboardService:DashboardService,
     @Inject(MAT_DIALOG_DATA)
     private data: {
       status: string;
@@ -64,6 +66,10 @@ export class AddAccountFormComponent {
       return true;
     }
     return false;
+    // if(this.accountAddForm.invalid || this.active==false){
+    //   return true;
+    // }
+    // return false;
   }
   // //Adding Map Location Pickup.....
   openGoogleMap() {
@@ -100,6 +106,7 @@ export class AddAccountFormComponent {
       .addAccount(this.accountAddForm.value)
       .subscribe((result) => {
         if (result) {
+        this.dashboardService.sendAddAccountEvent(result);
           this.toastService.success({
             detail: 'Success',
             summary: 'Customer updated',

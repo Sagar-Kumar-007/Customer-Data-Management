@@ -9,6 +9,7 @@ import { LogsModule } from './dashboard/logs/logs.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NavbarModule } from '../navbar/navbar.module';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMapComponent } from './google-map/google-map.component';
 
@@ -27,7 +28,8 @@ import { GoogleMapComponent } from './google-map/google-map.component';
     SidebarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAzfzsRZ4XEwzxiXnjzTybY6TflZnRTeq4',
-      libraries: ['places'],
+      libraries: ['places'],,
+        NavbarModule
     }),
   ],
 })

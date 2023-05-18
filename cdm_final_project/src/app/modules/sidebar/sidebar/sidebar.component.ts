@@ -6,6 +6,7 @@ import { AddAccountFormComponent } from '../../dashboard/dashboard/accounts/add-
 import { ICustomer } from 'src/app/datatypes/customer';
 import { AccountsService } from 'src/app/services/accounts.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,29 +14,24 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  dashboard:string='customer';
   currentUrl!: string;
   customerId?:string | null;
   customer?:ICustomer;
-  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,private _customerService:CustomerService) {
-    router.events.subscribe((event) => {
+  dashboard:string='';
+  
+  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,private _customerService:CustomerService,private dashboardService:DashboardService) {}
+  ngOnInit(){
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
+        this.dashboardService.detectDashboard(this.currentUrl);
+        this.dashboard=this.dashboardService.dashboard;
+        this.fetchAccountsWithCustomerEmail();
       }
     });
   }
-  detectDashboard(): boolean {
-    // console.log("dash: "+this.dashboard);
-    if(this.currentUrl && this.currentUrl.includes('customerDashboard')){
-      if(this.dashboard!=='customer'){
-        // console.log(this.currentUrl);
-        this.dashboard='customer';
-      }
-      return true;
-    }
-    else if(this.currentUrl && this.currentUrl.includes('accountDashboard')){
-      
-      if(this.dashboard!=='account'){
+  fetchAccountsWithCustomerEmail() {
+    if(this.dashboard==='Accounts'){
         this.route.queryParams.subscribe(params=>{
           let id = params['customer'];
           if (id){
@@ -48,11 +44,7 @@ export class SidebarComponent {
           }
         });
       }
-      this.dashboard='account';
-      return false;
     }
-    return true;
-  }
 
 
   //Toggle
@@ -86,7 +78,7 @@ export class SidebarComponent {
       backdropClass: 'backgroundblur',
     });
     dialogRef.afterClosed().subscribe((result)=>{
-      //window.location.reload();
+      // window.location.reload();
     })
   }
   showCustomerCard(flag:boolean){
@@ -129,14 +121,14 @@ export class SidebarComponent {
       }
     });
     dialogRef.afterClosed().subscribe(result=>{
-      //window.location.reload();
+      // window.location.reload();
     })
   }
   addOperation(){
-    if(this.dashboard==='customer'){
+    if(this.dashboard==='Customers'){
       this.addCustomer();
     }
-    else if(this.dashboard==='account'){
+    else if(this.dashboard==='Accounts'){
       this.addAccount();
     }
   }
