@@ -60,7 +60,7 @@ export class AccountsDashboardComponent implements OnInit {
     this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
         this.searchVal(data.value);
     });
-    this.accountListEventSubscription=dashboardService.getAddAccountEvent().subscribe(data=>{
+    this.accountListEventSubscription=dashboardService.getAddAccountEvent().subscribe(data=>{    
         this.showAccountsList();
     })
   }

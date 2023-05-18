@@ -102,20 +102,11 @@ namespace DataTrackr_API.Controllers
                 return BadRequest();
             }
 
-            //_context.Entry(account).State = EntityState.Modified;
-            //var account = await _context.Accounts.FindAsync(id);
             if (account == null)
             {
                 return NotFound();
             }
-            //_context.Entry(account).CurrentValues.SetValues(updateAccountDto);
-            //if(account.Location.latitude!=updateAccountDto.Location.latitude || account.Location.longitude!=updateAccountDto.Location.longitude || account.Location.address != updateAccountDto.Location.address)
-            //{
-            //    account.Location = updateAccountDto.Location;
-            //}
             _mapper.Map(updateAccountDto, account);
-            //Console.WriteLine(account.Location.Id + " " + updateAccountDto.Location.Id);
-            //updateAccountDto.Location.Id = account.Location.Id;
 
             try
             {
