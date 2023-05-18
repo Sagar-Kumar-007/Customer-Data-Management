@@ -44,14 +44,10 @@ export class CustomerDashboardComponent implements OnInit {
     private toastService: NgToastService
   ) {
     this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
-      if(data){
         this.searchVal(data.value);
-      }
     });
     this.customerListEventSubscription=dashboardService.getAddCustomerEvent().subscribe(data=>{
-      if(data){
         this.showCustomerList();
-      }
     })
   }
 

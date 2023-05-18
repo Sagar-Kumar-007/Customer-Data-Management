@@ -25,20 +25,20 @@ export class DashboardService {
   }
 
   sendAddCustomerEvent(res:ICustomer){
-    console.log('send')
+    // console.log('send')
     this.customerSubject.next(res);
   }
   getAddCustomerEvent(){
-    console.log("subscribe");
+    // console.log("subscribe");
     return this.customerSubject.asObservable();
   }
 
   sendAddAccountEvent(res:IAccount){
-    console.log('send')
+    // console.log('send')
     this.accountSubject.next(res);
   }
   getAddAccountEvent(){
-    console.log("subscribe");
+    // console.log("subscribe");
     return this.accountSubject.asObservable();
   }
 

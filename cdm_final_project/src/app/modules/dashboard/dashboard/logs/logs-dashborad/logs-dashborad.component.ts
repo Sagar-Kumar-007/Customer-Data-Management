@@ -21,9 +21,7 @@ export class LogsDashboradComponent {
 
     constructor(private _logsService: LogsService,private dashboardService:DashboardService){
       this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
-        if(data){
           this.searchVal(data.value);
-        }
       });
     }
 

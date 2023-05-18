@@ -58,14 +58,10 @@ export class AccountsDashboardComponent implements OnInit {
     private dashboardService:DashboardService
   ) {
     this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
-      if(data){
         this.searchVal(data.value);
-      }
     });
     this.accountListEventSubscription=dashboardService.getAddAccountEvent().subscribe(data=>{
-      if(data){
         this.showAccountsList();
-      }
     })
   }
   showAccountsList() {

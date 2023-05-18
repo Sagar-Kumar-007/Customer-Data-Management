@@ -108,6 +108,11 @@ namespace DataTrackr_API.Controllers
             {
                 return NotFound();
             }
+            //_context.Entry(account).CurrentValues.SetValues(updateAccountDto);
+            //if(account.Location.latitude!=updateAccountDto.Location.latitude || account.Location.longitude!=updateAccountDto.Location.longitude || account.Location.address != updateAccountDto.Location.address)
+            //{
+            //    account.Location = updateAccountDto.Location;
+            //}
             _mapper.Map(updateAccountDto, account);
             //Console.WriteLine(account.Location.Id + " " + updateAccountDto.Location.Id);
             //updateAccountDto.Location.Id = account.Location.Id;
@@ -161,12 +166,11 @@ namespace DataTrackr_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(string id)
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await _context.Accounts.Include(l=>l.Location).FirstOrDefaultAsync(q=>q.Acc_email==id);
             if (account == null)
             {
                 return NotFound();
             }
-
             _context.Accounts.Remove(account);
             await _context.SaveChangesAsync();
 

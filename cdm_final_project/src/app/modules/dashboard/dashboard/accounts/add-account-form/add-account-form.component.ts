@@ -61,10 +61,11 @@ export class AddAccountFormComponent {
   }
 
   isButtonDisabled(): boolean {
-    if(this.accountAddForm.invalid || this.active==false){
-      return true;
-    }
     return false;
+    // if(this.accountAddForm.invalid || this.active==false){
+    //   return true;
+    // }
+    // return false;
   }
   // //Adding Map Location Pickup.....
   openGoogleMap() {
