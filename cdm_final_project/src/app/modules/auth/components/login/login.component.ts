@@ -14,31 +14,38 @@ export class LoginComponent implements OnInit{
   loginForm!:FormGroup;
   signUpForm!:FormGroup;
 
+
   constructor(
               private fb:FormBuilder,
               private auth:AuthService,
-              private router:Router,
-              private toast:NgToastService
+              private _router:Router,
+              private toast:NgToastService,
+              private _authService:AuthService
   ){}
 
 
   ngOnInit(): void {
 
-    this.signUpForm=this.fb.group({
+    if(this._authService.isLoggedIn()){
+      this._router.navigate(['customerDashboard']);
+    }
+    else{
+      this.signUpForm=this.fb.group({
       
-      firstName:['',Validators.required],
-      lastName:['',Validators.required],
-      userName:['',Validators.required],
-      email:['',Validators.required],
-      password:['',Validators.required],
-      confirmPassword:['',Validators.required]
-   
-       }),
-
-    this.loginForm= this.fb.group({
-      username:['',Validators.required],
-      password:['',Validators.required]
-     })
+        firstName:['',Validators.required],
+        lastName:['',Validators.required],
+        userName:['',Validators.required],
+        email:['',Validators.required],
+        password:['',Validators.required],
+        confirmPassword:['',Validators.required]
+     
+         }),
+  
+      this.loginForm= this.fb.group({
+        username:['',Validators.required],
+        password:['',Validators.required]
+       })
+    }
   }
 
 addSignup() {
@@ -61,7 +68,7 @@ OnLogin() {
         this.loginForm.reset();
         this.auth.storeToken(res.token);
         this.toast.success({detail:"SUCCESS", summary:res.message,duration:5000});
-        this.router.navigate(['customerDashboard']);
+        this._router.navigate(['customerDashboard']);
 
       }),
       error:(err=>{
@@ -78,7 +85,7 @@ OnLogin() {
   {
       if(this.signUpForm.valid)
       {
-        console.log(this.signUpForm.value);
+        // console.log(this.signUpForm.value);
         this.auth.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
             console.log("a: "+res.message);

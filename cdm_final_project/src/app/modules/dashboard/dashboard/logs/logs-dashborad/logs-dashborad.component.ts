@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Ilogs } from 'src/app/datatypes/logs';
+import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { LogsService } from 'src/app/services/logs.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -12,8 +15,15 @@ export class LogsDashboradComponent {
 
   p:number =1;
   itemsPerPage:number=10;
+  totalItems:number=this.itemsPerPage;
   logsList: Ilogs[] | undefined;
-  constructor(private _logsService: LogsService){}
+  searchEventSubscription:Subscription | undefined;
+
+    constructor(private _logsService: LogsService,private dashboardService:DashboardService){
+      this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
+          this.searchVal(data.value);
+      });
+    }
 
   ngOnInit(): void {
     this.showLogsList();
@@ -21,10 +31,10 @@ export class LogsDashboradComponent {
 
   showLogsList() {
     this._logsService
-      ?.getAllLogs()
-      .subscribe((result: Ilogs[] | undefined) => {
-        this.logsList = result;
-        this.logsList?.reverse();
+      ?.getAllLogsPaginated((this.p-1)*this.itemsPerPage,this.p,this.itemsPerPage)
+      .subscribe((result: IPaginatedResults<Ilogs>) => {
+        this.logsList = result.items;
+        this.totalItems=result.totalCount;
       });
   }
   //Toggle
@@ -41,17 +51,21 @@ export class LogsDashboradComponent {
   }
 
   // Search bar implementation
-  searchVal(data: HTMLInputElement) {
-    // console.log(data.value);
+  searchVal(data: string | undefined) {
 
-    if (!data.value) {
+    if (!data) {
       this.showLogsList();
     }
-    if (data.value)
-      this._logsService.searchLogs(data.value).subscribe((result) => {
+    if (data)
+      this._logsService.searchLogs(data).subscribe((result) => {
         if (result) this.logsList = result;
       });
     // if(!data.value)console.log(this.customersList);
+  }
+  onPageChange(event:number){
+    // console.log(event);
+    this.p=event;
+    this.showLogsList();
   }
   
 }
