@@ -5,7 +5,6 @@ import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
-
 import jwt_decode from 'jwt-decode';
 import { UserService } from 'src/app/services/user.service';
 
@@ -84,7 +83,6 @@ extractJWTToken(){
 openForgotPasswordDialog() {
   this.dialogRef = this.dialog.open(ForgotPasswordDialogComponent);
   this.dialogRef.afterClosed().subscribe(result => {
-    // Handle dialog close event here (e.g., perform any necessary actions)
     console.log('Dialog closed:', result);
   });
 }

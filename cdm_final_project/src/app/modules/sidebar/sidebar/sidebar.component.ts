@@ -20,7 +20,14 @@ export class SidebarComponent {
   customer?:ICustomer;
   dashboard:string='';
   
-  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,private _customerService:CustomerService,private dashboardService:DashboardService) {}
+  constructor(private dialog: MatDialog,
+     private router: Router,
+     private route: ActivatedRoute,
+     private _accountsService:AccountsService,
+     private _customerService:CustomerService,
+     private dashboardService:DashboardService,
+     private auth:AuthService
+     ) {}
   ngOnInit(){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -134,7 +141,6 @@ export class SidebarComponent {
     }
   }
   signout(){
-    console.log("hey");
     this.auth.signOut();
    }
 

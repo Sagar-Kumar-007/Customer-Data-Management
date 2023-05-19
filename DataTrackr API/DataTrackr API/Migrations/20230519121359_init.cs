@@ -12,35 +12,18 @@ namespace DataTrackr_API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "coordinates",
+                name: "Coordinates",
                 columns: table => new
                 {
-                    address = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    coordinateId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     latitude = table.Column<double>(type: "float", nullable: false),
-                    longitude = table.Column<double>(type: "float", nullable: false)
+                    longitude = table.Column<double>(type: "float", nullable: false),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_coordinates", x => x.address);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    cname = table.Column<string>(type: "nvarchar(250)", nullable: true),
-                    logo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    sector = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    phoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    headquaters = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.email);
+                    table.PrimaryKey("PK_Coordinates", x => x.coordinateId);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,31 +64,62 @@ namespace DataTrackr_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    cname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    logo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    sector = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    phoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    coordinateId = table.Column<int>(type: "int", nullable: false),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.email);
+                    table.ForeignKey(
+                        name: "FK_Customers_Coordinates_coordinateId",
+                        column: x => x.coordinateId,
+                        principalTable: "Coordinates",
+                        principalColumn: "coordinateId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Accounts",
                 columns: table => new
                 {
                     Acc_email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Acc_revenue = table.Column<double>(type: "float", nullable: false),
-                    Locationaddress = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Acc_revenue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     aname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EstYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    coordinateId = table.Column<int>(type: "int", nullable: false),
                     Customer_email = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Acc_email);
                     table.ForeignKey(
+                        name: "FK_Accounts_Coordinates_coordinateId",
+                        column: x => x.coordinateId,
+                        principalTable: "Coordinates",
+                        principalColumn: "coordinateId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Accounts_Customers_Customer_email",
                         column: x => x.Customer_email,
                         principalTable: "Customers",
                         principalColumn: "email");
-                    table.ForeignKey(
-                        name: "FK_Accounts_coordinates_Locationaddress",
-                        column: x => x.Locationaddress,
-                        principalTable: "coordinates",
-                        principalColumn: "address");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Accounts_coordinateId",
+                table: "Accounts",
+                column: "coordinateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_Customer_email",
@@ -113,9 +127,9 @@ namespace DataTrackr_API.Migrations
                 column: "Customer_email");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_Locationaddress",
-                table: "Accounts",
-                column: "Locationaddress");
+                name: "IX_Customers_coordinateId",
+                table: "Customers",
+                column: "coordinateId");
         }
 
         /// <inheritdoc />
@@ -134,7 +148,7 @@ namespace DataTrackr_API.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "coordinates");
+                name: "Coordinates");
         }
     }
 }
