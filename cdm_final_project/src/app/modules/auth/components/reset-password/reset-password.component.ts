@@ -12,6 +12,10 @@ import { ResetPasswordService } from 'src/app/services/reset-password.service';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent {
+
+  password: string | undefined;
+  confirmPassword: string | undefined;
+  passwordMatchError: boolean = false;
   resetPasswordForm!:FormGroup;
   emailToken!:string;
   resetPasswordObj=new ResetPassword();
@@ -21,13 +25,13 @@ export class ResetPasswordComponent {
               private router:Router,
               private toast:NgToastService){ }
 
-  ngOnInit():void{
-    this.resetPasswordForm=this.fb.group({
-      email:[null,Validators.required],
-      password:[null,Validators.required],
-      confirmPassword:[null,Validators.required],
-      securityCode:[null,Validators.required],
-    } );
+  ngOnInit(): void {
+    this.resetPasswordForm = this.fb.group({
+      email: [null, Validators.required],
+      password: [null, Validators.required],
+      confirmPassword: [null, Validators.required],
+      securityCode: [null, Validators.required],
+    });
   }
 
 reset(){
@@ -36,8 +40,20 @@ reset(){
     this.resetPasswordObj.newPassword=this.resetPasswordForm.value.password;
     this.resetPasswordObj.confirmPassword=this.resetPasswordForm.value.confirmPassword;
     this.resetPasswordObj.emailToken=this.resetPasswordForm.value.securityCode;
+
+    if (this.password !== this.confirmPassword) {
+      this.toast.error({
+        detail: 'Error',
+        summary: "Password doesn't match !",
+        duration: 5000,
+      });
+      this.passwordMatchError = true;
+    }
+    else{
+      this.passwordMatchError=false;
+    }
     
-  if (this.resetPasswordForm.valid) 
+  if (this.resetPasswordForm.valid && !this.passwordMatchError) 
   {
     
     this.resetService.resetPassword(this.resetPasswordObj).subscribe({
@@ -50,11 +66,8 @@ reset(){
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.toast.success({
-          detail: 'Error',
-          summary: 'Something went Wrong.',
-          duration: 5000,
-        });
+        console.log("a: "+err.message);
+            alert(err?.error.message);
       }
     });
   }
@@ -66,15 +79,3 @@ reset(){
 }
 
 }
-
-
-
-
-// this.resetPasswordForm=this.fb.group({
-//   email:[null,Validators.required],
-//   password:[null,Validators.required],
-//   confirmPassword:[null,Validators.required],
-//   securityCode:[null,Validators.required],
-// },{
-//   validator: ConfirmPasswordValidator("password", "confirmPassword")
-// } );
