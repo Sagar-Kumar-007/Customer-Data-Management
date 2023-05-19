@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
+import jwt_decode from 'jwt-decode';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +17,14 @@ export class LoginComponent implements OnInit{
   signUpForm!:FormGroup;
 
 
+
   constructor(
               private fb:FormBuilder,
               private auth:AuthService,
               private _router:Router,
               private toast:NgToastService,
-              private _authService:AuthService
+              private _authService:AuthService,
+              private _userService:UserService
   ){}
 
 
@@ -58,6 +62,19 @@ removeSignup(){
   container.classList.remove("sign-up-mode");
 };
 
+extractJWTToken(){
+  let token:string | null=this._authService.getToken();
+  try {
+    type jwtToken={unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string};
+    let decodedToken:{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string} | undefined;
+    if(token) decodedToken = jwt_decode<{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string}>(token);
+    return decodedToken;
+  } catch (error) {
+    console.error('Error decoding JWT token:', error);
+    return undefined;
+  }
+}
+
 OnLogin() {
   if(this.loginForm.valid)
   {
@@ -69,6 +86,8 @@ OnLogin() {
         this.auth.storeToken(res.token);
         this.toast.success({detail:"SUCCESS", summary:res.message,duration:5000});
         this._router.navigate(['customerDashboard']);
+        this._userService.user=this.extractJWTToken();
+
 
       }),
       error:(err=>{
