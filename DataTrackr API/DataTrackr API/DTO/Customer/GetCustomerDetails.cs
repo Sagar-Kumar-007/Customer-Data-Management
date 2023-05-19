@@ -13,7 +13,7 @@ namespace DataTrackr_API.DTO.Customer
         public string logo { get; set; }
         public string sector { get; set; }
         public string phoneNo { get; set; }
-        public string headquaters { get; set; }
+        public virtual Coordinates headquaters { get; set; }
         public string CountryCode { get; set; }
         public string Description { get; set; }
         public string Website { get; set; }

@@ -94,19 +94,32 @@ namespace DataTrackr_API.Controllers
         // PUT: api/Accounts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount(string id, UpdateAccountDetailDto updateAccountDto)
+        public async Task<IActionResult> PutAccount(string id, UpdateAccountDetailDto updateAccount)
         {
-            var account = await _context.Accounts.Include(q => q.Location).FirstOrDefaultAsync(q => q.Acc_email == id);
-            if (id != updateAccountDto.Acc_email)
+            var currentaccount = await _context.Accounts.FirstOrDefaultAsync(q => q.Acc_email == id);
+            if (id != updateAccount.Acc_email)
             {
                 return BadRequest();
             }
 
-            if (account == null)
+            if (currentaccount == null)
             {
                 return NotFound();
             }
-            _mapper.Map(updateAccountDto, account);
+            //_mapper.Map(updateAccount, account);
+
+            var coordinateId = currentaccount.coordinateId;
+
+            var currentLocation = await _context.Coordinates.FirstOrDefaultAsync(q => q.coordinateId == coordinateId);
+
+            currentaccount.aname = updateAccount.aname;
+            currentaccount.EstYear = updateAccount.EstYear;
+            currentaccount.description = updateAccount.description;
+
+            currentLocation.latitude = updateAccount.Location.latitude;
+            currentLocation.longitude = updateAccount.Location.longitude;
+            currentLocation.address = updateAccount.Location.address;
+
 
             try
             {
@@ -133,6 +146,8 @@ namespace DataTrackr_API.Controllers
         public async Task<ActionResult<Account>> PostAccount(CreateAccountDto createAccountDto)
         {
             var account = _mapper.Map<Account>(createAccountDto);
+            var currentAccount = await _context.Accounts.Include(a => a.Location).FirstOrDefaultAsync(a => a.Acc_email == createAccountDto.Acc_email);
+            
             _context.Accounts.Add(account);
             try
             {
@@ -158,11 +173,16 @@ namespace DataTrackr_API.Controllers
         public async Task<IActionResult> DeleteAccount(string id)
         {
             var account = await _context.Accounts.Include(l=>l.Location).FirstOrDefaultAsync(q=>q.Acc_email==id);
+            var coordinateId = account.coordinateId;
+            var location = await _context.Coordinates.FirstOrDefaultAsync(q => q.coordinateId == coordinateId);
+
             if (account == null)
             {
                 return NotFound();
             }
             _context.Accounts.Remove(account);
+            _context.Coordinates.Remove(location);
+
             await _context.SaveChangesAsync();
 
             return NoContent();

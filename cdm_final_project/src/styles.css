@@ -12,7 +12,7 @@
 }
 
 :root {
-  --blue: #003B69;
+  --blue: #003b69;
   --white: #fff;
   --gray: #dfe2e3;
   --black1: #222;
@@ -28,9 +28,14 @@ body {
   width: 100%;
 }
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /********** Material UI *******/
 
@@ -40,7 +45,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
-
 }
 
 mat-label {
@@ -49,7 +53,7 @@ mat-label {
 
 .mat-mdc-dialog-container .mdc-dialog__title {
   color: white;
-  background: #00599C;
+  background: #00599c;
 }
 
 mat-dialog-content {
@@ -78,12 +82,12 @@ mat-dialog-content {
 }
 
 .mat-mdc-raised-button.mat-warn {
-  --mdc-protected-button-container-color: #C8CCCE;
+  --mdc-protected-button-container-color: #c8ccce;
   --mdc-protected-button-label-text-color: black;
 }
 
 .mat-mdc-raised-button.mat-primary {
-  --mdc-protected-button-container-color: #00599C;
+  --mdc-protected-button-container-color: #00599c;
   --mdc-protected-button-label-text-color: white;
 }
 
@@ -99,53 +103,50 @@ mat-dialog-content {
   backdrop-filter: blur(3px);
 }
 
-
-.change{
+.change {
   height: 100px !important;
 }
 
 /************ng confirm ********************/
 
-.modal1{
-  background-color: var(--gray)!important;
+.modal1 {
+  background-color: var(--gray) !important;
   margin-top: 10%;
 }
 
-.mat-button{
+.mat-button {
   margin: 5px;
- 
 }
 
-@media  (max-width: 1000px)  {
-  .modal1{
+@media (max-width: 1000px) {
+  .modal1 {
     margin-top: 20%;
   }
 }
 
 /* ======================== Pagination =========================*/
-.paginationclass{
+.paginationclass {
   margin-left: 4%;
 }
-.ngx-pagination .current{
-  background-color: #00599C!important;
+.ngx-pagination .current {
+  background-color: #00599c !important;
 }
-
 
 /* ====================== Mat-Menu ===========================*/
 
-.menu:hover{
-    background-color: #FFFFFF;
+.menu:hover {
+  background-color: #ffffff;
 }
 
 .mat-mdc-menu-panel.mat-mdc-menu-panel {
-    min-width: 112px;
-    max-width: 280px;
-    overflow: auto;
-   
-    -webkit-overflow-scrolling: touch;
-    position: relative;
-    margin-top: 10%;
-    right:0 ;
+  min-width: 112px;
+  max-width: 280px;
+  overflow: auto;
+
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  margin-top: 10%;
+  right: 0;
 }
 
 @media (max-width: 375px) {
@@ -156,7 +157,28 @@ mat-dialog-content {
     -webkit-overflow-scrolling: touch;
     position: absolute;
     margin-top: 10%;
-    right:25% ;
-}
+    right: 25%;
+  }
 }
 
+/*======================= Customer Form Phone and Country select ==============================*/
+
+.country-selector {
+  opacity: 1 !important;
+
+  width: 80px !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+}
+
+input.country-search {
+  padding: 0 !important;
+  text-align: center;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--textarea)
+  .mat-mdc-form-field-input-control.mdc-text-field__input,
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  height: 35px !important;
+  
+}

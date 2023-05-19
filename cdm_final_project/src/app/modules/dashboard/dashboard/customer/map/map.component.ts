@@ -13,31 +13,46 @@ export class MapComponent {
     @Inject(MAT_DIALOG_DATA)
     private data: {
       customerName: string | null;
-      customerId: string 
+      customerId: string;
     },
     private _customerService: CustomerService
   ) {}
-  markers: { lat: number; lng: number; label: string }[]=[{lat : 22.4064172,
-    lng : 69.0750171,
-    label : "name"}];
-  ngOnInit() {
-    this._customerService.getCustomer(this.data.customerId).subscribe((result) => {
-      if(result){
-        let accounts = result.accounts;
-      this.markers.pop();
-      if (accounts)
-        accounts.forEach((account) => {
-          let obj: { lat: number; lng: number; label: string } = {
-            lat: account.location?.latitude? account.location?.latitude:22.4064172,
-            lng:  account.location?.longitude? account.location?.longitude: 69.0750171,
-            label:  account.aname? account.aname:'Surat'
-          };
+  locations: {
+    lat: number;
+    lng: number;
+    iconUrl?: string;
+  }[] = [{ lat: 22.4064172, lng: 69.0750171 }];
 
-          this.markers?.push(obj);
-        });
-        console.log(this.markers);
-      }
-    });
+  ngOnInit() {
+    this._customerService
+      .getCustomer(this.data.customerId)
+      .subscribe((result) => {
+        if (result) {
+          let accounts = result.accounts;
+          this.locations.pop();
+          if (accounts)
+            accounts.forEach((account) => {
+              this.locations?.push({
+                lat: account.location?.latitude
+                  ? account.location?.latitude
+                  : 22.4064172,
+                lng: account.location?.longitude
+                  ? account.location?.longitude
+                  : 69.0750171,
+              });
+            });
+
+          this.locations?.push({
+            lat: result.headquaters?.latitude
+              ? result.headquaters?.latitude
+              : 0,
+            lng: result.headquaters?.longitude
+              ? result.headquaters?.longitude
+              : 0,
+            iconUrl: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+          });
+        }
+      });
   }
 
   customerName = this.data.customerName;

@@ -76,7 +76,7 @@ namespace DataTrackr_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(string id)
         {
-            var customer = await _context.Customers.Include(q=>q.Accounts).ThenInclude(q=>q.Location).FirstOrDefaultAsync(q=>q.email==id);
+            var customer = await _context.Customers.Include(q=>q.headquaters).Include(q=>q.Accounts).ThenInclude(q=>q.Location).FirstOrDefaultAsync(q=>q.email==id);
 
             if (customer == null)
             {
@@ -107,20 +107,41 @@ namespace DataTrackr_API.Controllers
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, UpdateCustomerDto updateCustomerDto)
+        public async Task<IActionResult> PutCustomer(string id, UpdateCustomerDto updateData)
         {
-            if (id != updateCustomerDto.email)
+            if (id != updateData.email)
             {
                 return BadRequest();
             }
 
             //_context.Entry(updateCustomerDto).State = EntityState.Modified;
-            var customer = await _context.Customers.FindAsync(id);
-            if(customer==null)
+            var currentCustomer = await _context.Customers.FirstOrDefaultAsync(q => q.email == id);
+            if (currentCustomer==null)
             {
                 return NotFound();
             }
-            _mapper.Map(updateCustomerDto, customer);
+            //_mapper.Map(updateCustomerDto, customer);
+
+            var coordinateId=currentCustomer.coordinateId;
+            var currentLocation = await _context.Coordinates.FirstOrDefaultAsync(q => q.coordinateId == coordinateId);
+
+            currentCustomer.cname = updateData.cname;
+            currentCustomer.logo = updateData.logo;
+            currentCustomer.sector = updateData.sector;
+            currentCustomer.phoneNo = updateData.phoneNo;
+            currentCustomer.CountryCode = updateData.CountryCode;
+            currentCustomer.Description = updateData.Description;
+            currentCustomer.Website = updateData.Website;
+
+            currentLocation.latitude = updateData.headquaters.latitude;
+            currentLocation.longitude = updateData.headquaters.longitude;
+            currentLocation.address = updateData.headquaters.address;
+
+
+
+
+
+
 
             try
             {
@@ -144,8 +165,7 @@ namespace DataTrackr_API.Controllers
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(CreateCustomerDto createcustomer)
-        {
+        public async Task<ActionResult<Customer>> PostCustomer(CreateCustomerDto createcustomer) { 
             var customer = _mapper.Map<Customer>(createcustomer);
             _context.Customers.Add(customer);
             try
@@ -171,13 +191,17 @@ namespace DataTrackr_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(string id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.FirstOrDefaultAsync(q => q.email == id);
+            var coordinateId = customer.coordinateId;
+            var location= await _context.Coordinates.FirstOrDefaultAsync(q => q.coordinateId== coordinateId);
+
             if (customer == null)
             {
                 return NotFound();
             }
 
             _context.Customers.Remove(customer);
+            _context.Coordinates.Remove(location);
             await _context.SaveChangesAsync();
 
             return NoContent();

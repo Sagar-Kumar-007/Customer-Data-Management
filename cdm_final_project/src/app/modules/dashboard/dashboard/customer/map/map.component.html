@@ -1,6 +1,6 @@
 <div class="map-container">
   
-    <h1>Projecting all accounts of {{customerName}}</h1>
+    <h1>Projecting all Locations of {{customerName}}</h1>
     
       <agm-map 
          [latitude]='lat' 
@@ -8,14 +8,14 @@
          [zoom]='zoom'
          >
           
-          <agm-marker 
-              *ngFor="let marker of markers" 
-              [latitude]="marker.lat" 
-                [longitude]="marker.lng">    
-                    <agm-info-window #infoWindow>
-                        {{ marker.label }}
-                  </agm-info-window>
-          </agm-marker>
+         <agm-marker 
+         *ngFor="let marker of locations" 
+         [latitude]="marker.lat" 
+           [longitude]="marker.lng"
+           [iconUrl]="marker.iconUrl?marker.iconUrl:''"
+           >    
+       
+     </agm-marker>
           
       </agm-map>
     

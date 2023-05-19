@@ -15,6 +15,9 @@ import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { ICoordinate } from 'src/app/datatypes/Coordinates';
+import { GoogleMapComponent } from '../../../google-map/google-map.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-customer',
@@ -26,9 +29,13 @@ export class CreateCustomerComponent {
   public userIdToUpdate!: string;
   public isUpdateActive: boolean = false;
   logInfo: Ilogs = {};
+  coordinates: ICoordinate;
+  active: boolean = false;
+  selectcountry: boolean=false;
 
   constructor(
     public datepipe: DatePipe,
+    private dialog: MatDialog,
     private _logService: LogsService,
     private customer: CustomerService,
     private router: Router,
@@ -41,7 +48,13 @@ export class CreateCustomerComponent {
       status: string;
       customerId: string | null;
     }
-  ) {}
+  ) {
+
+    this.coordinates = {} as ICoordinate;
+    if (this.coordinates) {
+      this.customerAddForm.controls.headquaters.patchValue(this.coordinates);
+    }
+  }
 
   ngOnInit(): void {
     if (this.data.customerId)
@@ -57,15 +70,43 @@ export class CreateCustomerComponent {
     sector: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    headquaters: new FormControl('', [Validators.required]),
+    headquaters: new FormControl<ICoordinate>({}, [Validators.required]),
     phoneNo: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
     ]),
     website: new FormControl('', []),
-    countryCode: new FormControl('', [Validators.required]),
+    countryCode: new FormControl(''),
   });
 
+  // //Adding Map Location Pickup.....
+  openGoogleMap() {
+    let dialogRef = this.dialog.open(GoogleMapComponent, {
+      data: {
+        address: 'Some Data',
+        latitude: 'From Parent Component',
+        longitude: 'This Can be anything',
+      },
+      maxHeight: 'calc(100vh - 120px)',
+      width: '100%',
+      backdropClass: 'backgroundblur',
+    });
+
+    dialogRef.afterClosed().subscribe(
+      (result: ICoordinate) => {
+        
+        this.coordinates = result;
+        if (this.coordinates){
+          this.customerAddForm.controls.headquaters.patchValue(
+            this.coordinates
+          );
+        }
+      },
+      () => {
+        console.log('Error Found');
+      }
+    );
+  }
   // Add Customer.........
 
   addCustomer() {
@@ -75,7 +116,7 @@ export class CreateCustomerComponent {
         this.dashboardService.sendAddCustomerEvent(res);
         this.toastService.success({
           detail: 'Success',
-          summary: 'Customer Added',
+          summary: 'Customer Added Successfully',
           duration: 3000,
         });
         this.customerAddForm.reset();
@@ -95,6 +136,24 @@ export class CreateCustomerComponent {
     });
   }
 
+   //check whether headquarter button is selected
+   changeState() {
+    this.active = true;
+  }
+
+  isCountrySelected(){
+    this.selectcountry=true;
+  }
+
+  isCountryUnselected(){
+    this.selectcountry=false;
+  }
+
+  onCountryChange(event:any) {
+    console.log(event);
+    this.customerAddForm.controls.countryCode.patchValue(event.dialCode);
+  }
+
   // Update a Customer
 
   updateCustomer() {
@@ -105,7 +164,7 @@ export class CreateCustomerComponent {
           
           this.toastService.success({
             detail: 'Success',
-            summary: 'Customer updated',
+            summary: 'Customer Updated Successfully',
             duration: 3000,
           });
           this.customerAddForm.reset();
