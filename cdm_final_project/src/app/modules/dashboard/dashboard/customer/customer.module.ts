@@ -17,8 +17,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
-
-
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 
 
 
@@ -31,6 +30,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MapComponent
   ],
   imports: [
+    NgxMatIntlTelInputComponent,
     MatPaginatorModule,
     NgxPaginationModule,
     CommonModule,

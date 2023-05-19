@@ -27,7 +27,7 @@ namespace DataTrackr_Web_API.Models
                 .HasKey(c => c.email);
 
             modelBuilder.Entity<Coordinates>()
-                .HasKey(l => new {l.latitude,l.longitude,l.Acc_email});
+                .HasKey(l => l.coordinateId);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(c => c.Accounts)
@@ -36,8 +36,13 @@ namespace DataTrackr_Web_API.Models
 
             modelBuilder.Entity<Account>()
                 .HasOne(a => a.Location)
-                .WithOne(l => l.Account)
-                .HasForeignKey<Coordinates>(c=> c.Acc_email);
+                .WithMany(l => l.Accounts)
+                .HasForeignKey(a=>a.coordinateId);
+
+            modelBuilder.Entity<Customer>()
+                .HasOne(c => c.headquaters)
+                .WithMany(l => l.Customers)
+                .HasForeignKey(c => c.coordinateId);
         }
 
 

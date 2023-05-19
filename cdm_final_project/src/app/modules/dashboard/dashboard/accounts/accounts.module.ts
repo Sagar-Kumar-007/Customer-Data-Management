@@ -9,7 +9,7 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { AccountsComponent } from './accounts/accounts.component';
-import { GoogleMapComponent } from './google-map/google-map.component';
+import { GoogleMapComponent } from '../../google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { RouterModule } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';

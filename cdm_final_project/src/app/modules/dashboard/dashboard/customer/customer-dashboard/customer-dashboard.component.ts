@@ -12,7 +12,7 @@ import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
 import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -22,48 +22,49 @@ import {Subscription} from 'rxjs';
 export class CustomerDashboardComponent implements OnInit {
   customersList: ICustomer[] | undefined;
   logInfo: Ilogs = {};
-  markers: { lat: number; lng: number; label: string }[] = [
-    { lat: 22.4064172, lng: 69.0750171, label: 'name' },
-  ];
 
-  p:number =1;
-  itemsPerPage:number=4;
-  totalItems:number=this.itemsPerPage;
-  searchEventSubscription:Subscription | undefined;
-  customerListEventSubscription:Subscription | undefined;
-
+  p: number = 1;
+  itemsPerPage: number = 4;
+  totalItems: number = this.itemsPerPage;
+  searchEventSubscription: Subscription | undefined;
+  customerListEventSubscription: Subscription | undefined;
 
   constructor(
     public datepipe: DatePipe,
     private _logService: LogsService,
     private dialog: MatDialog,
     private _customerService: CustomerService,
-    private dashboardService:DashboardService,
+    private dashboardService: DashboardService,
     private router: Router,
     private confirm: NgConfirmService,
     private toastService: NgToastService
   ) {
-    this.searchEventSubscription=dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
+    this.searchEventSubscription = dashboardService
+      .getSearchEvent()
+      .subscribe((data: HTMLInputElement) => {
         this.searchVal(data.value);
-    });
-    this.customerListEventSubscription=dashboardService.getAddCustomerEvent().subscribe(data=>{
+      });
+    this.customerListEventSubscription = dashboardService
+      .getAddCustomerEvent()
+      .subscribe((data) => {
         this.showCustomerList();
-    })
+      });
   }
-
 
   ngOnInit(): void {
     this.showCustomerList();
   }
 
-  
-
   showCustomerList() {
     this._customerService
-      ?.getAllCustomersPaginated((this.p-1)*this.itemsPerPage,this.p,this.itemsPerPage)
+      ?.getAllCustomersPaginated(
+        (this.p - 1) * this.itemsPerPage,
+        this.p,
+        this.itemsPerPage
+      )
       .subscribe((result: IPaginatedResults<ICustomer>) => {
         this.customersList = result.items;
-        this.totalItems=result.totalCount;
+        this.totalItems = result.totalCount;
       });
   }
 
@@ -98,37 +99,46 @@ export class CustomerDashboardComponent implements OnInit {
   // Delete a Customer
 
   deleteCustomer(id?: string | null, cname?: string | null) {
-    
     this.confirm.showConfirm(
-      
       `Are you sure want to delete ${cname}?`,
-      
+
       async () => {
-        
-        if (id)
-          this._customerService.deleteCustomer(id).subscribe((res) => {
-            this.logInfo.userId = 'abc@gmail.com';
-            this.logInfo.operation = 'deleted';
-            this.logInfo.message = `${cname} has been deleted.`;
-            this.logInfo.timeStamp = `${this.datepipe.transform(
-              new Date(),
-              'MM/dd/yyyy h:mm:ss'
-            )}`;
-
-            this._logService.postLogs(this.logInfo).subscribe(result=>{
-              console.log(result);
-              
-            });;
-
-            if (res)
-              this.toastService.success({
-                detail: 'SUCCESS',
-                summary: 'Deleted Successfully',
+        if(id){
+          this._customerService.getCustomer(id).subscribe((res)=>{
+            if (res.accounts && res.accounts?.length > 0) {
+              console.log("Testing ")
+              this.toastService.error({
+                detail: 'CANNOT DELETE',
+                summary: 'Account Already Exist',
                 duration: 3000,
               });
-            this.showCustomerList();
-          });
+            }
+          })
+        }
+        else if (id)
+          this._customerService.deleteCustomer(id).subscribe((res) => {
+          
+              this.logInfo.userId = 'abc@gmail.com';
+              this.logInfo.operation = 'deleted';
+              this.logInfo.message = `${cname} has been deleted.`;
+              this.logInfo.timeStamp = `${this.datepipe.transform(
+                new Date(),
+                'MM/dd/yyyy h:mm:ss'
+              )}`;
 
+              this._logService.postLogs(this.logInfo).subscribe((result) => {
+                console.log(result);
+              });
+
+              this.toastService.success({
+                detail: 'SUCCESS',
+                summary: 'Customer Deleted Successfully',
+                duration: 3000,
+              });
+            })
+
+            this.showCustomerList();
+          
         await new Promise((f) => {
           setTimeout(f, 1000);
         });
@@ -140,50 +150,19 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   mapCall(cname?: string | null, id?: string | null) {
-    if (id)
-      this._customerService.getCustomer(id).subscribe((result) => {
-        if (result) {
-          let accounts = result.accounts;
-          this.markers.pop();
-          if (accounts)
-            accounts.forEach((account) => {
-              let obj: { lat: number; lng: number; label: string } = {
-                lat: account.location?.latitude
-                  ? account.location?.latitude
-                  : 22.4064172,
-                lng: account.location?.longitude
-                  ? account.location?.longitude
-                  : 69.0750171,
-                label: account.aname ? account.aname : 'AName',
-              };
-
-              this.markers?.push(obj);
-            });
-          
-
-          if (this.markers.length > 0) {
-            this.dialog.open(MapComponent, {
-              data: {
-                customerName: cname,
-                customerId: id,
-              },
-              height: 'calc(100vh-60px)',
-              width: '60%',
-              backdropClass: 'backgroundblur',
-            });
-          } else {
-            this.toastService.info({
-              detail: 'INFO',
-              summary: 'No Accounts exist!',
-              duration: 3000,
-            });
-          }
-        }
-      });
+    this.dialog.open(MapComponent, {
+      data: {
+        customerName: cname,
+        customerId: id,
+      },
+      height: 'calc(100vh-60px)',
+      width: '60%',
+      backdropClass: 'backgroundblur',
+    });
   }
 
   // Search bar implementation
-  searchVal(data:string | undefined) {
+  searchVal(data: string | undefined) {
     if (!data) {
       this.showCustomerList();
     }
@@ -193,18 +172,13 @@ export class CustomerDashboardComponent implements OnInit {
       });
   }
 
-  onPageChange(event:number){
+  onPageChange(event: number) {
     // console.log(event);
-    this.p=event;
+    this.p = event;
     this.showCustomerList();
   }
 
-  resetPassword(){
+  resetPassword() {}
 
-  }
-
-  logout(){
-    
-  }
-
+  logout() {}
 }

@@ -6,7 +6,7 @@ import { IAccount } from 'src/app/datatypes/account';
 import { ICoordinate } from 'src/app/datatypes/Coordinates';
 import { ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { GoogleMapComponent } from '../google-map/google-map.component';
+import { GoogleMapComponent } from '../../../google-map/google-map.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { LogsService } from 'src/app/services/logs.service';
@@ -105,7 +105,7 @@ export class AddAccountFormComponent {
         this.dashboardService.sendAddAccountEvent(result);
           this.toastService.success({
             detail: 'Success',
-            summary: 'Customer updated',
+            summary: 'Account Added Successfully',
             duration: 3000,
           });
 
@@ -118,7 +118,7 @@ export class AddAccountFormComponent {
           )}`;
 
           this._logService.postLogs(this.logInfo).subscribe(result=>{
-            console.log("Harsh");
+           
             console.log(result);
             
           });;
@@ -137,7 +137,7 @@ export class AddAccountFormComponent {
           console.log(result);
           this.toastService.success({
             detail: 'Success',
-            summary: 'Customer updated',
+            summary: 'Account Updated Successfully',
             duration: 3000,
           });
 
