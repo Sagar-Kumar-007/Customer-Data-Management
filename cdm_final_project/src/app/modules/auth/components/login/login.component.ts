@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
+
 
 @Component({
   selector: 'app-login',
@@ -13,27 +16,31 @@ export class LoginComponent implements OnInit{
 
   loginForm!:FormGroup;
   signUpForm!:FormGroup;
+  showForm = false;
+
+  dialogRef: MatDialogRef<ForgotPasswordDialogComponent> | undefined;
+
 
   constructor(
               private fb:FormBuilder,
               private auth:AuthService,
               private router:Router,
-              private toast:NgToastService
+              private toast:NgToastService,
+              private dialog: MatDialog,
+              
   ){}
 
 
   ngOnInit(): void {
 
-    this.signUpForm=this.fb.group({
-      
-      firstName:['',Validators.required],
-      lastName:['',Validators.required],
-      userName:['',Validators.required],
-      email:['',Validators.required],
-      password:['',Validators.required],
-      confirmPassword:['',Validators.required]
-   
-       }),
+    this.signUpForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userName: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', [Validators.required]]
+    });
 
     this.loginForm= this.fb.group({
       username:['',Validators.required],
@@ -50,6 +57,15 @@ removeSignup(){
   let container = document.querySelector(".container-login") as HTMLDivElement;
   container.classList.remove("sign-up-mode");
 };
+
+
+openForgotPasswordDialog() {
+  this.dialogRef = this.dialog.open(ForgotPasswordDialogComponent);
+  this.dialogRef.afterClosed().subscribe(result => {
+    // Handle dialog close event here (e.g., perform any necessary actions)
+    console.log('Dialog closed:', result);
+  });
+}
 
 OnLogin() {
   if(this.loginForm.valid)
@@ -70,7 +86,7 @@ OnLogin() {
     })
   }
   else{
-    //throw error
+   
   }
  }
 

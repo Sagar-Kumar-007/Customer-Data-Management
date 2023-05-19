@@ -129,3 +129,6 @@ mat-dialog-content {
 .ngx-pagination .current{
   background-color: #00599C!important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

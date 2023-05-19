@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataTrackr_API.Models
 {
@@ -13,5 +14,7 @@ namespace DataTrackr_API.Models
         public string Token { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
+        public string ResetPasswordToken { get; set; }
+        public DateTime ResetPasswordExpiry { get; set; }
     }
 }

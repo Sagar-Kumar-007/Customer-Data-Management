@@ -5,6 +5,7 @@ import { NavigationEnd, Router,ActivatedRoute } from '@angular/router';
 import { AddAccountFormComponent } from '../../dashboard/dashboard/accounts/add-account-form/add-account-form.component';
 import { ICustomer } from 'src/app/datatypes/customer';
 import { AccountsService } from 'src/app/services/accounts.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +17,7 @@ export class SidebarComponent {
   currentUrl!: string;
   customerId?:string | null;
   customer?:ICustomer;
-  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService) {
+  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,  private auth:AuthService) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
@@ -139,4 +140,9 @@ export class SidebarComponent {
       this.addAccount();
     }
   }
+  signout(){
+    console.log("hey");
+    this.auth.signOut();
+   }
+
 }
