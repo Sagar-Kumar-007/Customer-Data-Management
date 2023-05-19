@@ -69,7 +69,7 @@ export class NavbarComponent{
   resetPassword(){
 
   }
-  logout(){
-    
+  logOut(){
+    this._authService.signOut();
   }
 }

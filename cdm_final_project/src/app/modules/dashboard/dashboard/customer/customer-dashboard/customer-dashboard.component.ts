@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -32,12 +33,14 @@ export class CustomerDashboardComponent implements OnInit {
   constructor(
     public datepipe: DatePipe,
     private _logService: LogsService,
+    private _userService: UserService,
     private dialog: MatDialog,
     private _customerService: CustomerService,
     private dashboardService: DashboardService,
     private router: Router,
     private confirm: NgConfirmService,
-    private toastService: NgToastService
+    private toastService: NgToastService,
+    private _dashboardService: DashboardService
   ) {
     this.searchEventSubscription = dashboardService
       .getSearchEvent()
@@ -102,23 +105,14 @@ export class CustomerDashboardComponent implements OnInit {
     this.confirm.showConfirm(
       `Are you sure want to delete ${cname}?`,
 
-      async () => {
-        if(id){
-          this._customerService.getCustomer(id).subscribe((res)=>{
-            if (res.accounts && res.accounts?.length > 0) {
-              console.log("Testing ")
-              this.toastService.error({
-                detail: 'CANNOT DELETE',
-                summary: 'Account Already Exist',
-                duration: 3000,
-              });
-            }
-          })
-        }
-        else if (id)
-          this._customerService.deleteCustomer(id).subscribe((res) => {
-          
-              this.logInfo.userId = 'abc@gmail.com';
+      () => {
+        if (id) {
+          this._customerService.deleteCustomer(id).subscribe(
+            (res) => {
+              console.log('res: ' + res);
+              this.showCustomerList();
+
+              this.logInfo.userId = this._userService.user?.email;
               this.logInfo.operation = 'deleted';
               this.logInfo.message = `${cname} has been deleted.`;
               this.logInfo.timeStamp = `${this.datepipe.transform(
@@ -135,15 +129,16 @@ export class CustomerDashboardComponent implements OnInit {
                 summary: 'Customer Deleted Successfully',
                 duration: 3000,
               });
-            })
-
-            this.showCustomerList();
-          
-        await new Promise((f) => {
-          setTimeout(f, 1000);
-        });
-
-        // window.location.reload();
+            },
+            (err) => {
+              this.toastService.error({
+                detail: 'CANNOT DELETE',
+                summary: 'Account Already Exist',
+                duration: 3000,
+              });
+            }
+          );
+        }
       },
       () => {}
     );

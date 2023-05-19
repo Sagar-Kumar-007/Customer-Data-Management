@@ -159,7 +159,7 @@ namespace DataTrackr_API.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(updateData);
         }
 
         // POST: api/Customers
@@ -204,7 +204,7 @@ namespace DataTrackr_API.Controllers
             _context.Coordinates.Remove(location);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool CustomerExists(string id)

@@ -7,6 +7,7 @@ import { ICustomer } from 'src/app/datatypes/customer';
 import { AccountsService } from 'src/app/services/accounts.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,13 +20,14 @@ export class SidebarComponent {
   customer?:ICustomer;
   dashboard:string='';
   
-  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,private _customerService:CustomerService,private dashboardService:DashboardService) {}
+  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,private _customerService:CustomerService,private dashboardService:DashboardService,private _authService:AuthService) {}
   ngOnInit(){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
         this.dashboardService.detectDashboard(this.currentUrl);
         this.dashboard=this.dashboardService.dashboard;
+        console.log("dash: "+this.dashboard);
         this.fetchAccountsWithCustomerEmail();
       }
     });
@@ -131,5 +133,8 @@ export class SidebarComponent {
     else if(this.dashboard==='Accounts'){
       this.addAccount();
     }
+  }
+  logOut(){
+    this._authService.signOut();
   }
 }
