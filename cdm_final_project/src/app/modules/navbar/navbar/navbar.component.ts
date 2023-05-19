@@ -56,9 +56,17 @@ export class NavbarComponent{
       }
       this._userService.user=this.extractJWTToken();
       this.user=this._userService.user;
+      
     });
   }
 
+  generateInitials(){
+    let initials:string="";
+    let firstName:string | undefined=this.user?.unique_name.split(' ')[0][0];
+    let lastName:string | undefined=this.user?.unique_name.split(' ')[1][0];
+    if(firstName && lastName)initials=firstName+lastName;
+    return initials;
+  }
 
   onToggleClick() {
     let navigation = document.querySelector('.navigation') as HTMLDivElement;
