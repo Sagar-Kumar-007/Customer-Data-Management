@@ -26,6 +26,7 @@ export class SidebarComponent {
         this.currentUrl = event.url;
         this.dashboardService.detectDashboard(this.currentUrl);
         this.dashboard=this.dashboardService.dashboard;
+        console.log("dash: "+this.dashboard);
         this.fetchAccountsWithCustomerEmail();
       }
     });

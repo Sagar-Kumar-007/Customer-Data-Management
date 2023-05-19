@@ -6,6 +6,7 @@ import { LogsService } from 'src/app/services/logs.service';
 import {Subscription} from 'rxjs';
 
 
+
 @Component({
   selector: 'app-logs-dashborad',
   templateUrl: './logs-dashborad.component.html',

@@ -1,6 +1,5 @@
 using DataTrackr_API.Models;
 using Microsoft.EntityFrameworkCore;
-using DataTrackr_API.Models;
 
 namespace DataTrackr_Web_API.Models
 {

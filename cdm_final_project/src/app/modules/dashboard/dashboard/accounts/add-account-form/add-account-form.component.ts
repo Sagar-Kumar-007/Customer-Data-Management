@@ -13,6 +13,7 @@ import { LogsService } from 'src/app/services/logs.service';
 import { Ilogs } from 'src/app/datatypes/logs';
 import { DatePipe } from '@angular/common';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-account-form',
@@ -26,6 +27,7 @@ export class AddAccountFormComponent {
   active:boolean=false;
 
   constructor(
+    private _userService: UserService,
     public datepipe: DatePipe,
     private _logService: LogsService,
     private dialog: MatDialog,
@@ -61,11 +63,11 @@ export class AddAccountFormComponent {
   }
 
   isButtonDisabled(): boolean {
+    if(!this.accountAddForm.invalid && this.data.status === 'updateAccount') return false;
+    if(this.accountAddForm.invalid || this.active==false){
+      return true;
+    }
     return false;
-    // if(this.accountAddForm.invalid || this.active==false){
-    //   return true;
-    // }
-    // return false;
   }
   // //Adding Map Location Pickup.....
   openGoogleMap() {
@@ -109,7 +111,7 @@ export class AddAccountFormComponent {
             duration: 3000,
           });
 
-          this.logInfo.userId = 'abc@gmail.com';
+          this.logInfo.userId = this._userService.user?.email;
           this.logInfo.operation = 'created';
           this.logInfo.message = `${result?.aname} account of customer ${this.data?.customerName} has been created.`;
           this.logInfo.timeStamp = `${this.datepipe.transform(
@@ -122,6 +124,14 @@ export class AddAccountFormComponent {
             console.log(result);
             
           });;
+        }
+      }, err=>{
+        if(err){
+          this.toastService.error({
+            detail: 'UNSUCCESSFUL',
+            summary: 'Account with this Email Already Exist',
+            duration: 3000,
+          });
         }
       });
   }
@@ -141,7 +151,7 @@ export class AddAccountFormComponent {
             duration: 3000,
           });
 
-          this.logInfo.userId = 'abc@gmail.com';
+          this.logInfo.userId = this._userService.user?.email;
           this.logInfo.operation = 'updated';
           this.logInfo.message = `${result?.aname} account of customer ${this.data.customerName} has been updated.`;
           this.logInfo.timeStamp = `${this.datepipe.transform(
