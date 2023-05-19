@@ -59,7 +59,7 @@ namespace DataTrackr_API.Controllers
             return Ok(new
             {
                 Token=user.Token,
-                Message = "Login Success!"
+                Message = "Login Success!" 
             });
         }
 
