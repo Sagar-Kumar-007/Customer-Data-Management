@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,12 +6,10 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  constructor(){
+  }
+  ngOnInit(){
 
-  
-  view:string="history";
-  item:boolean | undefined;
-  passedValue(item:boolean){
-    this.item=item;
   }
 }
 

@@ -130,5 +130,33 @@ mat-dialog-content {
   background-color: #00599C!important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ====================== Mat-Menu ===========================*/
+
+.menu:hover{
+    background-color: #FFFFFF;
+}
+
+.mat-mdc-menu-panel.mat-mdc-menu-panel {
+    min-width: 112px;
+    max-width: 280px;
+    overflow: auto;
+   
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    margin-top: 10%;
+    right:0 ;
+}
+
+@media (max-width: 375px) {
+  .mat-mdc-menu-panel.mat-mdc-menu-panel {
+    min-width: 112px;
+    max-width: 280px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    margin-top: 10%;
+    right:25% ;
+}
+}
+

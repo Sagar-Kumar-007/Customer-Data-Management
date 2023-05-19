@@ -146,7 +146,8 @@ namespace DataTrackr_API.Controllers
             var identity = new ClaimsIdentity(new Claim[]               //Payload
             {
                 new Claim(ClaimTypes.Role,user.Role),
-                new Claim(ClaimTypes.Name,$"{user.FirstName} {user.LastName}")
+                new Claim(ClaimTypes.Name,$"{user.FirstName} {user.LastName}"),
+                new Claim(ClaimTypes.Email,user.Email)
             });
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);

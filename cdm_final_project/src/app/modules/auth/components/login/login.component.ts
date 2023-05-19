@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
+import jwt_decode from 'jwt-decode';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +19,15 @@ export class LoginComponent implements OnInit{
   loginForm!:FormGroup;
   signUpForm!:FormGroup;
   showForm = false;
-
   dialogRef: MatDialogRef<ForgotPasswordDialogComponent> | undefined;
-
 
   constructor(
               private fb:FormBuilder,
               private auth:AuthService,
-              private router:Router,
+              private _router:Router,
               private toast:NgToastService,
+              private _authService:AuthService,
+              private _userService:UserService,
               private dialog: MatDialog,
               
   ){}
@@ -33,19 +35,26 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.signUpForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      userName: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', [Validators.required]]
-    });
-
-    this.loginForm= this.fb.group({
-      username:['',Validators.required],
-      password:['',Validators.required]
-     })
+    if(this._authService.isLoggedIn()){
+      this._router.navigate(['customerDashboard']);
+    }
+    else{
+      this.signUpForm=this.fb.group({
+      
+        firstName:['',Validators.required],
+        lastName:['',Validators.required],
+        userName:['',Validators.required],
+        email:['',Validators.required],
+        password:['',Validators.required],
+        confirmPassword:['',Validators.required]
+     
+         }),
+  
+      this.loginForm= this.fb.group({
+        username:['',Validators.required],
+        password:['',Validators.required]
+       })
+    }
   }
 
 addSignup() {
@@ -57,6 +66,19 @@ removeSignup(){
   let container = document.querySelector(".container-login") as HTMLDivElement;
   container.classList.remove("sign-up-mode");
 };
+
+extractJWTToken(){
+  let token:string | null=this._authService.getToken();
+  try {
+    type jwtToken={unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string};
+    let decodedToken:{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string} | undefined;
+    if(token) decodedToken = jwt_decode<{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string}>(token);
+    return decodedToken;
+  } catch (error) {
+    console.error('Error decoding JWT token:', error);
+    return undefined;
+  }
+}
 
 
 openForgotPasswordDialog() {
@@ -77,7 +99,9 @@ OnLogin() {
         this.loginForm.reset();
         this.auth.storeToken(res.token);
         this.toast.success({detail:"SUCCESS", summary:res.message,duration:5000});
-        this.router.navigate(['customerDashboard']);
+        this._router.navigate(['customerDashboard']);
+        this._userService.user=this.extractJWTToken();
+
 
       }),
       error:(err=>{
@@ -94,7 +118,7 @@ OnLogin() {
   {
       if(this.signUpForm.valid)
       {
-        console.log(this.signUpForm.value);
+        // console.log(this.signUpForm.value);
         this.auth.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
             console.log("a: "+res.message);

@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { NgToastModule } from 'ng-angular-popup';
@@ -38,6 +39,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ReactiveFormsModule,
     MatDialogModule,
     MatIconModule,
+    MatMenuModule,
     NgConfirmModule,
     NgToastModule,
     RouterModule,

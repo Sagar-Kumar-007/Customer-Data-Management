@@ -12,6 +12,8 @@ using DataTrackr_API.DTO.Customer;
 using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web.Resource;
+using DataTrackr_API.Models;
+using AutoMapper.QueryableExtensions;
 
 namespace DataTrackr_API.Controllers
 {
@@ -31,13 +33,37 @@ namespace DataTrackr_API.Controllers
         }
 
         // GET: api/Accounts
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
+        //{
+        //    var accounts = await _context.Accounts.Include(q=>q.Location).ToListAsync();
+        //    var records = _mapper.Map<List<GetAccountDto>>(accounts);
+       
+        //    return Ok(records);
+        //}
+
+        // GET: api/Accounts/fetchAccounts?StartIndex=0&PageSize=25&PageNumber=1 (Paginated)
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetAccountDto>>> GetAccounts()
+        [Route("/api/Accounts$fetch")]
+        public async Task<ActionResult<PagedResult<GetAccountDto>>> GetPagedAccounts([FromQuery] QueryParameters queryParameters)
         {
-            var account = await _context.Accounts.Include(q=>q.Location).ToListAsync();
-            var records = _mapper.Map<List<GetAccountDto>>(account);
-            return Ok(records);
+            var totalSize = await _context.Accounts.Where(d => d.Customer_email == queryParameters.CustomerEmail).CountAsync();
+            var items = await _context.Accounts
+                .Where(d=>d.Customer_email==queryParameters.CustomerEmail)
+                .Skip(queryParameters.StartIndex)
+                .Take(queryParameters.PageSize)
+                .ProjectTo<GetAccountDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+            var pagedAccountsResult= new PagedResult<GetAccountDto>
+            {
+                Items = items,
+                PageNumber = queryParameters.PageNumber,
+                RecordNumber = queryParameters.PageSize,
+                TotalCount = totalSize
+            };
+            return Ok(pagedAccountsResult);
         }
+
         // GET: api/Accounts$like?search=sagar
         [HttpGet]
         [Route("/api/Accounts$like")]
@@ -76,15 +102,11 @@ namespace DataTrackr_API.Controllers
                 return BadRequest();
             }
 
-            //_context.Entry(account).State = EntityState.Modified;
-            //var account = await _context.Accounts.FindAsync(id);
             if (account == null)
             {
                 return NotFound();
             }
             _mapper.Map(updateAccountDto, account);
-            //Console.WriteLine(account.Location.Id + " " + updateAccountDto.Location.Id);
-            //updateAccountDto.Location.Id = account.Location.Id;
 
             try
             {
@@ -135,12 +157,11 @@ namespace DataTrackr_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(string id)
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await _context.Accounts.Include(l=>l.Location).FirstOrDefaultAsync(q=>q.Acc_email==id);
             if (account == null)
             {
                 return NotFound();
             }
-
             _context.Accounts.Remove(account);
             await _context.SaveChangesAsync();
 
