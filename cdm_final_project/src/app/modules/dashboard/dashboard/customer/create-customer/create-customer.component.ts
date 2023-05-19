@@ -186,7 +186,7 @@ export class CreateCustomerComponent {
 
             this.logInfo.userId = this._userService.user?.email;
             this.logInfo.operation = 'updated';
-            if (res)this.logInfo.message = `${res?.cname} has been updated.`;
+            if (res)this.logInfo.message = `${res?.email} has been updated.`;
             this.logInfo.timeStamp = `${this.datepipe.transform(
               new Date(),
               'MM/dd/yyyy h:mm:ss'

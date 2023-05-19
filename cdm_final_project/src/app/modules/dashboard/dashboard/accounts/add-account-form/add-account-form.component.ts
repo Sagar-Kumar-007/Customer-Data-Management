@@ -153,7 +153,7 @@ export class AddAccountFormComponent {
 
           this.logInfo.userId = this._userService.user?.email;
           this.logInfo.operation = 'updated';
-          this.logInfo.message = `${result?.aname} account of customer ${this.data.customerName} has been updated.`;
+          this.logInfo.message = `${result?.aname} account of customer ${this.data.email} has been updated.`;
           this.logInfo.timeStamp = `${this.datepipe.transform(
             new Date(),
             'MM/dd/yyyy h:mm:ss'
