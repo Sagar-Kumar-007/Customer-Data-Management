@@ -1,4 +1,6 @@
-﻿namespace DataTrackr_API.Helpers.UtilityService
+﻿using DataTrackr_API.Models;
+
+namespace DataTrackr_API.Helpers.UtilityService
 {
     public static class EmailBody
     {
@@ -7,7 +9,7 @@
             return $@"
                     <html>
                      <head></head>
-                     <body>Reset Password</body>
+                     <body>Security code to reset your password is: {emailToken} </body>
                     </html>
                     ";
         }

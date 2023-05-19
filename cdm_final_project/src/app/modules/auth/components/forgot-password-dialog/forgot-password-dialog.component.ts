@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 
@@ -22,7 +23,8 @@ export class ForgotPasswordDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ForgotPasswordDialogComponent>,
     private formBuilder: FormBuilder,
     private toast:NgToastService,
-    private resetService:ResetPasswordService
+    private resetService:ResetPasswordService,
+    private router:Router
   ) { }
 
 
@@ -40,30 +42,22 @@ export class ForgotPasswordDialogComponent implements OnInit {
       next:(res)=>{
         this.toast.success({
           detail:'Success',
-          summary:'Please open the link sent to your email to reset your password!',
+          summary:'A security code has been sent to your mail.',
           duration:5000,
         });
         this.resetPasswordEmail = '';
         this.showForm = false;
+        this.router.navigate(["/resetPassword"]);
         this.closeForm();
       },
       error:(err)=>{
 
-        this.toast.success({
-          detail:'Success',
-          summary:'Please open the link sent to your email to reset your password!',
+        this.toast.error({
+          detail:'ERROR',
+          summary:'Your entered email is not correct, try again!',
           duration:5000,
         });
-        this.resetPasswordEmail = '';
-        this.showForm = false;
         this.closeForm();
-        
-        // this.toast.error({
-        //   detail:'ERROR',
-        //   summary:'Something went wrong!',
-        //   duration:5000,
-        // });
-        // this.closeForm();
     
       }
     });

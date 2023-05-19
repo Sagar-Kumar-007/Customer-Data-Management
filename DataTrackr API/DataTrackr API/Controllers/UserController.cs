@@ -181,7 +181,7 @@ namespace DataTrackr_API.Controllers
             Random random = new Random();
             string emailToken = random.Next(1000, 10000).ToString();
             //var tokenBytes = RandomNumberGenerator.GetBytes(64);
-            //var emailToken = Convert.ToBase64String(tokenBytes;
+            //var emailToken = Convert.ToBase64String(tokenBytes);
             Console.WriteLine(user.LastName);
             Console.WriteLine(emailToken);
             user.ResetPasswordToken = emailToken;
@@ -194,7 +194,7 @@ namespace DataTrackr_API.Controllers
             //_authContext.Users.Update(user);
 
             await _authContext.SaveChangesAsync();
-            _emailService.SendEmail(emailModel);
+            //_emailService.SendEmail(emailModel);
 
             return Ok(new
             {
@@ -210,33 +210,33 @@ namespace DataTrackr_API.Controllers
         {
             var newToken = resetPasswordDto.EmailToken.Replace(" ", "+");
             var user = await _authContext.Users.AsNoTracking().FirstOrDefaultAsync(a => a.Email == resetPasswordDto.Email);
+
             if (user is null)
             {
                 return NotFound(new
                 {
                     StatusCode = 404,
-                    Message = "User doesn't Exist"
+                    Message = "User doesn't Exist, try correct email."
                 });
             }
-            Console.WriteLine(user.ResetPasswordExpiry);
             string tokenCode = user.ResetPasswordToken;
 
-            //string tokenCode = "1479";
-            DateTime emailTokenExpiry = user.ResetPasswordExpiry;
-            if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
-            {
-                Console.WriteLine(tokenCode);
-                Console.WriteLine(resetPasswordDto.EmailToken);
-                Console.WriteLine(resetPasswordDto.ConfirmPassword);
-                Console.WriteLine(resetPasswordDto.NewPassword);
-                Console.WriteLine(resetPasswordDto.Email);
 
+            DateTime emailTokenExpiry = user.ResetPasswordExpiry;
+            if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now) 
+            { 
                 return BadRequest(new
                 {
                     StatusCode = 400,
-                    Message = "Invalid Reset Link"
+                    Message = "Security Code doesn't match."
                 });
             }
+            var newPassword = CheckPasswordStrength(resetPasswordDto.NewPassword);
+            if (!string.IsNullOrEmpty(newPassword))
+            {
+                return BadRequest(new { Message = newPassword.ToString() });
+            }
+
             user.Password = PasswordHasher.HashPassword(resetPasswordDto.NewPassword);
             _authContext.Entry(user).State = EntityState.Modified;
             await _authContext.SaveChangesAsync();
