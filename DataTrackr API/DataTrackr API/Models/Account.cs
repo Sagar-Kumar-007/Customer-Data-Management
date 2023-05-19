@@ -17,7 +17,9 @@ namespace DataTrackr_Web_API.Models
 
         public string description { get; set; }
 
-        public int CoordinateId { get; set; }
+        /*public virtual Coordinates Location { get; set; }*/
+        public int coordinateId { get; set; }
+
         public virtual Coordinates Location { get; set; }
         public string Customer_email { get; set; }
         [JsonIgnore]

@@ -1,3 +1,4 @@
+import { ICoordinate } from "./Coordinates";
 import { IAccount } from "./account";
 
 export interface ICustomer{
@@ -6,7 +7,7 @@ export interface ICustomer{
     logo?:string | null;
     sector?:string | null;
     phoneNo?:string | null;
-    headquaters?:string | null;
+    headquaters?:ICoordinate | null;
     countryCode?:string | null;
     description?:string | null;
     website?:string | null;
