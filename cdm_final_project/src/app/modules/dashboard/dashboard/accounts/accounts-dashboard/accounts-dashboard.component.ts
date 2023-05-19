@@ -160,7 +160,7 @@ export class AccountsDashboardComponent implements OnInit {
           .deleteAccount(account, account.acc_email?.toString())
           .subscribe((result) => {
             this.showAccountsList();
-            this._ngtoastService.success({detail:'SUCCESS', summary: 'Deleted Successfully', duration: 3000});
+            this._ngtoastService.success({detail:'SUCCESS', summary: 'Account Deleted Successfully', duration: 3000});
 
             this.logInfo.userId = 'abc@gmail.com';
             this.logInfo.operation = 'deleted';

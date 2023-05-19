@@ -116,7 +116,7 @@ export class CreateCustomerComponent {
         this.dashboardService.sendAddCustomerEvent(res);
         this.toastService.success({
           detail: 'Success',
-          summary: 'Customer Added',
+          summary: 'Customer Added Successfully',
           duration: 3000,
         });
         this.customerAddForm.reset();
@@ -164,7 +164,7 @@ export class CreateCustomerComponent {
           
           this.toastService.success({
             detail: 'Success',
-            summary: 'Customer updated',
+            summary: 'Customer Updated Successfully',
             duration: 3000,
           });
           this.customerAddForm.reset();
