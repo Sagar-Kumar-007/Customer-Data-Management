@@ -19,18 +19,11 @@
     
           <mat-icon>badge</mat-icon>
     
-          <span>{{"adminName"|titlecase}}</span>
+          <span *ngIf="user">{{user.unique_name|titlecase}}</span>
     
         </button>
     
-        <button routerLink="logs" mat-menu-item class="customize-b" >
-    
-          <mat-icon>description</mat-icon>
-    
-          <span>Logs</span>
-    
-        </button>
-    
+        
         <button (click)="resetPassword()" mat-menu-item class="customize-b">
     
           <mat-icon>password</mat-icon>
