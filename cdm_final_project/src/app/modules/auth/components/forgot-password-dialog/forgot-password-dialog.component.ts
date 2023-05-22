@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 
 
@@ -20,11 +21,13 @@ export class ForgotPasswordDialogComponent implements OnInit {
 
 
   constructor(
-    public dialogRef: MatDialogRef<ForgotPasswordDialogComponent>,
+    public dialogRef: MatDialogRef<ResetPasswordComponent>,
+    public forgotPasswordDialogRef: MatDialogRef<ForgotPasswordDialogComponent>,
     private formBuilder: FormBuilder,
     private toast:NgToastService,
     private resetService:ResetPasswordService,
-    private router:Router
+    private router:Router,
+    private dialog: MatDialog,
   ) { }
 
 
@@ -34,12 +37,22 @@ export class ForgotPasswordDialogComponent implements OnInit {
     });
   }
 
+  openResetPasswordDialog() {
+    this.submitForm();
+  }
+
   submitForm() {
     this.resetPasswordEmail=this.forgotPasswordForm.get('email')!.value;
     console.log('Submitted email:', this.resetPasswordEmail);
     
     this.resetService.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
       next:(res)=>{
+
+        this.dialogRef = this.dialog.open(ResetPasswordComponent);
+        this.dialogRef.afterClosed().subscribe(result => {
+          console.log('Dialog closed:', result);
+        });
+
         this.toast.success({
           detail:'Success',
           summary:'A security code has been sent to your mail.',
@@ -47,8 +60,8 @@ export class ForgotPasswordDialogComponent implements OnInit {
         });
         this.resetPasswordEmail = '';
         this.showForm = false;
-        this.router.navigate(["/resetPassword"]);
-        this.closeForm();
+        // this.router.navigate(["/resetPassword"]);
+       
       },
       error:(err)=>{
 
@@ -68,9 +81,9 @@ export class ForgotPasswordDialogComponent implements OnInit {
     const field = this.forgotPasswordForm.get(fieldName);
     return field!.invalid && (field!.touched || field!.dirty);
   }
-
-  closeForm()
-  {
-    this.dialogRef.close();
+  closeForm(){
+    this.forgotPasswordDialogRef.close();
   }
+
+
 }

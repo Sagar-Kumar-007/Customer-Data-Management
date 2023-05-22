@@ -8,7 +8,7 @@ import { AccountsService } from 'src/app/services/accounts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-sidebar',

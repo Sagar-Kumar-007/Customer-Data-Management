@@ -1,10 +1,13 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ConfirmPasswordValidator } from 'src/app/helpers/confirm-password.validator';
 import { ResetPassword } from 'src/app/helpers/reset-password.model';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-reset-password',
@@ -23,7 +26,11 @@ export class ResetPasswordComponent {
   constructor(private fb:FormBuilder,
               private resetService:ResetPasswordService,
               private router:Router,
-              private toast:NgToastService){ }
+              private toast:NgToastService,
+              public resetPassworddialogRef: MatDialogRef<ResetPasswordComponent>,
+              public forgetPassdialogRef: MatDialogRef<ForgotPasswordDialogComponent>,
+              
+              ){ }
 
   ngOnInit(): void {
     this.resetPasswordForm = this.fb.group({
@@ -63,10 +70,10 @@ reset(){
           summary: 'Password reset successfully',
           duration: 5000,
         });
-        this.router.navigate(['/']);
+        this.resetPassworddialogRef.close();
+        this.forgetPassdialogRef.close();
       },
       error: (err) => {
-        console.log("a: "+err.message);
             alert(err?.error.message);
       }
     });

@@ -121,14 +121,10 @@ form.sign-in-form {
   transition: 0.3s;
 }
 
-.social-icon:hover {
-  color: #00599C;
-  border-color: #00599C;
-}
 
 .btn {
   width: 150px;
-  background-color: #00599C;
+  background-color: var(--blue);
   border: none;
   outline: none;
   height: 49px;
@@ -162,7 +158,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #00599C 0%, #04befe 100%);
+  background-image: linear-gradient(-45deg, var(--blue) 0%, #00599C 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -369,7 +365,7 @@ form.sign-in-form {
 }
 
 .forgot-password-link {
-  color: #00bcd4;
+  color: var(--blue);
   cursor: pointer;
   text-decoration: none;
 }
