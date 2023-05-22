@@ -72,7 +72,7 @@ reset(){
     });
   }
   else{
-    console.log("Hello");
+  
   }
   
 

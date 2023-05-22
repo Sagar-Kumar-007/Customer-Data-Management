@@ -66,13 +66,13 @@
 
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input formControlName="password" type="password" placeholder="Password" id="password"required>
+          <input formControlName="password" type="password" placeholder="Password" id="password"required [(ngModel)]="password">
         </div>
         <small *ngIf="signUpForm.controls['password'].dirty && signUpForm.hasError('required','password')">*Password is required.</small>
 
         <div class="input-field">
           <i class="fa-solid fa-lock"></i>
-          <input formControlName="confirmPassword" type="password" placeholder="confirmPassword" id="confirmPassword"required>
+          <input formControlName="confirmPassword" type="password" placeholder="confirmPassword" id="confirmPassword"required [(ngModel)]="confirmPassword">
         </div>
 
         <small *ngIf="signUpForm.controls['confirmPassword'].dirty && signUpForm.hasError('required','confirmPassword')">*Required.</small>

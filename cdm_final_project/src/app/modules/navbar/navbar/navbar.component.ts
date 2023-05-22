@@ -29,7 +29,10 @@ export class NavbarComponent{
   dialogRef: MatDialogRef<ForgotPasswordDialogComponent> | undefined;
 
   openForgotPasswordDialog() {
-    this.dialogRef = this.dialog.open(ForgotPasswordDialogComponent);
+    this.dialogRef = this.dialog.open(ForgotPasswordDialogComponent,{
+      disableClose:true,
+      width:'400px'
+    });
     this.dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed:', result);
     });
