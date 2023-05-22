@@ -25,6 +25,7 @@ export class AddAccountFormComponent {
   address!: string;
   logInfo: Ilogs = {};
   active:boolean=false;
+  isUpdate: boolean=false;
 
   constructor(
     private _userService: UserService,
@@ -52,6 +53,7 @@ export class AddAccountFormComponent {
 
   ngOnInit() {
     if (this.data.status === 'updateAccount') {
+      this.isUpdate=true;
       if (this.data.account) this.accountAddForm.patchValue(this.data.account);
     }
     
