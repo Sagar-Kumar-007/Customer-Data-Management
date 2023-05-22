@@ -22,10 +22,12 @@
           *Password is required 
         </small>
 
+
+        <a class="forgot-password-link" (click)="openForgotPasswordDialog()">Forgot Password?</a>
+
         <div>
           <button (click)="OnLogin()" class="btn">LOGIN</button>
         </div>
-        <p class="social-text">Connect with Fastenal social Media platforms.</p>
 
       </form>
       <form action="#" class="sign-up-form" [formGroup]="signUpForm">
@@ -63,21 +65,20 @@
 
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input formControlName="password" type="password" placeholder="Password" required>
+          <input formControlName="password" type="password" placeholder="Password" id="password"required [(ngModel)]="password">
         </div>
         <small *ngIf="signUpForm.controls['password'].dirty && signUpForm.hasError('required','password')">*Password is required.</small>
 
         <div class="input-field">
           <i class="fa-solid fa-lock"></i>
-          <input formControlName="confirmPassword" type="password" placeholder="Confirm Password" required>
+          <input formControlName="confirmPassword" type="password" placeholder="confirmPassword" id="confirmPassword"required [(ngModel)]="confirmPassword">
         </div>
+
         <small *ngIf="signUpForm.controls['confirmPassword'].dirty && signUpForm.hasError('required','confirmPassword')">*Required.</small>
 
         <div>
           <button (click)="OnSignUp()" class="btn">SIGNUP</button>
         </div>
-
-        <p class="social-text">Connect with Fastenal social Media platforms.</p>
 
       </form>
     </div>
@@ -98,7 +99,7 @@
     </div>
     <div class="panel right-panel">
       <div class="content">
-        <h3>One of us ?</h3>
+        <h3>One of us?</h3>
         <p>
           Welcome to Fastenal CDM where Industry meets Innovation!
         </p>

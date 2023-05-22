@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,6 @@ export class DashboardComponent {
   constructor(){
   }
   ngOnInit(){
-
   }
 }
 

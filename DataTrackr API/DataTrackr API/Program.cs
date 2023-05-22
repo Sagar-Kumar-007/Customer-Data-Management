@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
+using DataTrackr_API.Helpers.UtilityService;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +69,7 @@ builder.Services.AddCors(options =>
         .AllowAnyOrigin());
 });
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 var app = builder.Build();
 

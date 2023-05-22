@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { UserService } from 'src/app/services/user.service';
 import jwt_decode from 'jwt-decode';
+import { ForgotPasswordDialogComponent } from '../../auth/components/forgot-password-dialog/forgot-password-dialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navbar',
@@ -15,9 +17,28 @@ export class NavbarComponent{
   currentUrl!: string;
   user:{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string} | undefined;
   
-  constructor(private router:Router,private dashboardService:DashboardService,private _userService:UserService,private _authService:AuthService){}
+  constructor(
+    private router:Router,
+    private dashboardService:DashboardService,
+    private _userService:UserService,
+    private auth:AuthService,
+    private dialog: MatDialog
+    ){}
+  
+
+  dialogRef: MatDialogRef<ForgotPasswordDialogComponent> | undefined;
+
+  openForgotPasswordDialog() {
+    this.dialogRef = this.dialog.open(ForgotPasswordDialogComponent,{
+      disableClose:true,
+      width:'400px'
+    });
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed:', result);
+    });
+  }
   extractJWTToken(){
-    let token:string | null=this._authService.getToken();
+    let token:string | null=this.auth.getToken();
     try {
       type jwtToken={unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string};
       let decodedToken:{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string} | undefined;
@@ -66,10 +87,7 @@ export class NavbarComponent{
   searchVal(data:HTMLInputElement){
     this.dashboardService.sendSearchEvent(data);
   }
-  resetPassword(){
-
-  }
-  logOut(){
-    this._authService.signOut();
-  }
+  signout(){
+    this.auth.signOut();
+   }
 }

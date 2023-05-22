@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 import jwt_decode from 'jwt-decode';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,8 +17,11 @@ export class LoginComponent implements OnInit{
 
   loginForm!:FormGroup;
   signUpForm!:FormGroup;
-
-
+  showForm = false;
+  dialogRef: MatDialogRef<ForgotPasswordDialogComponent> | undefined;
+  password: string | undefined;
+  confirmPassword: string | undefined;
+  passwordMatchError: boolean = false;
 
   constructor(
               private fb:FormBuilder,
@@ -24,7 +29,9 @@ export class LoginComponent implements OnInit{
               private _router:Router,
               private toast:NgToastService,
               private _authService:AuthService,
-              private _userService:UserService
+              private _userService:UserService,
+              private dialog: MatDialog,
+              
   ){}
 
 
@@ -75,6 +82,14 @@ extractJWTToken(){
   }
 }
 
+
+openForgotPasswordDialog() {
+  this.dialogRef = this.dialog.open(ForgotPasswordDialogComponent);
+  this.dialogRef.afterClosed().subscribe(result => {
+    console.log('Dialog closed:', result);
+  });
+}
+
 OnLogin() {
   if(this.loginForm.valid)
   {
@@ -96,21 +111,31 @@ OnLogin() {
     })
   }
   else{
-    //throw error
+   
   }
  }
 
  OnSignUp()
   {
-      if(this.signUpForm.valid)
+    if (this.password !== this.confirmPassword) {
+      this.toast.error({
+        detail: 'Error',
+        summary: "Password doesn't match !",
+        duration: 5000,
+      });
+      this.passwordMatchError = true;
+    }
+    else{
+      this.passwordMatchError=false;
+    }
+
+      if(this.signUpForm.valid && !this.passwordMatchError)
       {
-        // console.log(this.signUpForm.value);
         this.auth.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
             console.log("a: "+res.message);
             alert(res.message);
             this.signUpForm.reset();
-            // this.router.navigate(['login']);
             this.removeSignup();
           }),
           error:(err=>{
@@ -121,7 +146,7 @@ OnLogin() {
       }
       else
       {
-
+    
       }
   }
 

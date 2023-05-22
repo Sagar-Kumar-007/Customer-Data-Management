@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataTrackr_API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230515115426_init2")]
-    partial class init2
+    [Migration("20230519121359_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,46 @@ namespace DataTrackr_API.Migrations
                     b.ToTable("Logs");
                 });
 
+            modelBuilder.Entity("DataTrackr_API.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ResetPasswordExpiry")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResetPasswordToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("DataTrackr_Web_API.Models.Account", b =>
                 {
                     b.Property<string>("Acc_email")
@@ -64,17 +104,11 @@ namespace DataTrackr_API.Migrations
                     b.Property<string>("EstYear")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Locationaddress")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double?>("Locationlatitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Locationlongitude")
-                        .HasColumnType("float");
-
                     b.Property<string>("aname")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("coordinateId")
+                        .HasColumnType("int");
 
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
@@ -83,23 +117,29 @@ namespace DataTrackr_API.Migrations
 
                     b.HasIndex("Customer_email");
 
-                    b.HasIndex("Locationlatitude", "Locationlongitude", "Locationaddress");
+                    b.HasIndex("coordinateId");
 
                     b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("DataTrackr_Web_API.Models.Coordinates", b =>
                 {
+                    b.Property<int>("coordinateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("coordinateId"));
+
+                    b.Property<string>("address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("latitude")
                         .HasColumnType("float");
 
                     b.Property<double>("longitude")
                         .HasColumnType("float");
 
-                    b.Property<string>("address")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("latitude", "longitude", "address");
+                    b.HasKey("coordinateId");
 
                     b.ToTable("Coordinates");
                 });
@@ -119,10 +159,10 @@ namespace DataTrackr_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("cname")
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("headquaters")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("coordinateId")
+                        .HasColumnType("int");
 
                     b.Property<string>("logo")
                         .HasColumnType("nvarchar(max)");
@@ -135,6 +175,8 @@ namespace DataTrackr_API.Migrations
 
                     b.HasKey("email");
 
+                    b.HasIndex("coordinateId");
+
                     b.ToTable("Customers");
                 });
 
@@ -145,12 +187,32 @@ namespace DataTrackr_API.Migrations
                         .HasForeignKey("Customer_email");
 
                     b.HasOne("DataTrackr_Web_API.Models.Coordinates", "Location")
-                        .WithMany()
-                        .HasForeignKey("Locationlatitude", "Locationlongitude", "Locationaddress");
+                        .WithMany("Accounts")
+                        .HasForeignKey("coordinateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("DataTrackr_Web_API.Models.Customer", b =>
+                {
+                    b.HasOne("DataTrackr_Web_API.Models.Coordinates", "headquaters")
+                        .WithMany("Customers")
+                        .HasForeignKey("coordinateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("headquaters");
+                });
+
+            modelBuilder.Entity("DataTrackr_Web_API.Models.Coordinates", b =>
+                {
+                    b.Navigation("Accounts");
+
+                    b.Navigation("Customers");
                 });
 
             modelBuilder.Entity("DataTrackr_Web_API.Models.Customer", b =>
