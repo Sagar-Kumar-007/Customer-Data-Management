@@ -137,7 +137,7 @@ namespace DataTrackr_API.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(updateAccount);
         }
 
         // POST: api/Accounts
@@ -185,7 +185,7 @@ namespace DataTrackr_API.Controllers
 
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool AccountExists(string id)

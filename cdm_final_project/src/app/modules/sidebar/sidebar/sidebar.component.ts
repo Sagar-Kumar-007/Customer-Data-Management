@@ -8,6 +8,7 @@ import { AccountsService } from 'src/app/services/accounts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -34,6 +35,7 @@ export class SidebarComponent {
         this.currentUrl = event.url;
         this.dashboardService.detectDashboard(this.currentUrl);
         this.dashboard=this.dashboardService.dashboard;
+        console.log("dash: "+this.dashboard);
         this.fetchAccountsWithCustomerEmail();
       }
     });
