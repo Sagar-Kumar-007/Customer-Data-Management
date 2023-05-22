@@ -6,6 +6,7 @@ import { AccountsComponent } from './modules/dashboard/dashboard/accounts/accoun
 import { AuthGuard } from './guards/auth.guard';
 import { LogsComponent } from './modules/dashboard/dashboard/logs/logs/logs.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
+import { ResetPasswordComponent } from './modules/auth/components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'customerDashboard', component: CustomerComponent,canActivate:[AuthGuard] },
   { path: 'logs', component: LogsComponent },
   {path:'accountDashboard',component:AccountsComponent,canActivate:[AuthGuard]},
+  // {path:'resetPassword',component:ResetPasswordComponent},
   // {path:'account', component:AccountsComponent, canActivate:[AuthGuard]},
   // {path:'customer',component:CustomerComponent},
   {path:'**',component:FourOfourComponent}

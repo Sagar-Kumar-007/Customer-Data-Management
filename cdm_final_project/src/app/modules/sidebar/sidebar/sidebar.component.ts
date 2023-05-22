@@ -5,9 +5,10 @@ import { NavigationEnd, Router,ActivatedRoute } from '@angular/router';
 import { AddAccountFormComponent } from '../../dashboard/dashboard/accounts/add-account-form/add-account-form.component';
 import { ICustomer } from 'src/app/datatypes/customer';
 import { AccountsService } from 'src/app/services/accounts.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -20,7 +21,14 @@ export class SidebarComponent {
   customer?:ICustomer;
   dashboard:string='';
   
-  constructor(private dialog: MatDialog, private router: Router,private route: ActivatedRoute,private _accountsService:AccountsService,private _customerService:CustomerService,private dashboardService:DashboardService,private _authService:AuthService) {}
+  constructor(private dialog: MatDialog,
+     private router: Router,
+     private route: ActivatedRoute,
+     private _accountsService:AccountsService,
+     private _customerService:CustomerService,
+     private dashboardService:DashboardService,
+     private auth:AuthService
+     ) {}
   ngOnInit(){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -134,7 +142,8 @@ export class SidebarComponent {
       this.addAccount();
     }
   }
-  logOut(){
-    this._authService.signOut();
-  }
+  signout(){
+    this.auth.signOut();
+   }
+
 }
