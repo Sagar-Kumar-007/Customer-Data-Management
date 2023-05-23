@@ -17,6 +17,7 @@ export class DashboardComponent {
         let currentUrl = event.url;
         this._dashboardService.detectDashboard(currentUrl);
         this.dashboard=this._dashboardService.dashboard;
+        this._dashboardService.sendGetCustomerDetailsEvent();
       }
     });
   }

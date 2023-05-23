@@ -58,6 +58,12 @@ export class CustomerDashboardComponent implements OnInit {
     this.showCustomerList();
   }
 
+  getCustomerDetails(){
+    console.log("bb");
+    
+    this.dashboardService.sendGetCustomerDetailsEvent();
+  }
+
   showCustomerList() {
     this._customerService
       ?.getAllCustomersPaginated(

@@ -14,6 +14,7 @@ export class DashboardService {
   private searchSubject=new Subject<any>();
   private customerSubject=new Subject<any>();
   private accountSubject=new Subject<any>();
+  private getCustomerDetailsSubject=new Subject<any>();
 
 
   sendSearchEvent(data:HTMLInputElement){
@@ -40,6 +41,13 @@ export class DashboardService {
   getAddAccountEvent(){
     // console.log("subscribe");
     return this.accountSubject.asObservable();
+  }
+
+  sendGetCustomerDetailsEvent(){
+    return this.getCustomerDetailsSubject.next('');
+  }
+  getGetCustomerDetailsEvent(){
+    return this.getCustomerDetailsSubject.asObservable();
   }
 
   detectDashboard(currentUrl:string) {

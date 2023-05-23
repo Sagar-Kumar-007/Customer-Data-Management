@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCustomerComponent } from '../../dashboard/dashboard/customer/create-customer/create-customer.component';
 import { NavigationEnd, Router,ActivatedRoute } from '@angular/router';
@@ -19,7 +19,7 @@ export class SidebarComponent {
   currentUrl!: string;
   customerId?:string | null;
   customer?:ICustomer;
-  dashboard:string='';
+  @Input() dashboard:string='';
   
   constructor(private dialog: MatDialog,
      private router: Router,
@@ -30,18 +30,15 @@ export class SidebarComponent {
      private auth:AuthService
      ) {}
   ngOnInit(){
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.currentUrl = event.url;
-        this.dashboardService.detectDashboard(this.currentUrl);
-        this.dashboard=this.dashboardService.dashboard;
-        console.log("dash: "+this.dashboard);
-        this.fetchAccountsWithCustomerEmail();
-      }
-    });
+    this.dashboardService.getGetCustomerDetailsEvent().subscribe((res)=>{
+      console.log("cc");
+      this.fetchAccountsWithCustomerEmail();
+    })
   }
   fetchAccountsWithCustomerEmail() {
-    if(this.dashboard==='Accounts'){
+    console.log("a");
+    
+    if(this.dashboardService.dashboard==='Accounts'){
         this.route.queryParams.subscribe(params=>{
           let id = params['customer'];
           if (id){
@@ -146,10 +143,10 @@ export class SidebarComponent {
     })
   }
   addOperation(){
-    if(this.dashboard==='Customers'){
+    if(this.dashboardService.dashboard==='Customers'){
       this.addCustomer();
     }
-    else if(this.dashboard==='Accounts'){
+    else if(this.dashboardService.dashboard==='Accounts'){
       this.addAccount();
     }
   }
