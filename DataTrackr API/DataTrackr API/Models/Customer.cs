@@ -6,25 +6,16 @@ namespace DataTrackr_Web_API.Models
 {
     public class Customer
     {
-        public string email { get; set; }
-
-        public string cname { get; set; }
-
-        public string logo { get; set; }
-        public string sector { get; set; }
-        public string phoneNo { get; set; }
-
-        /*public virtual Coordinates headquaters { get; set; }*/
-
-        public int coordinateId { get; set; }
-        
-        public virtual Coordinates headquaters { get; set; }
-
+        public string CustomerEmail { get; set; }
+        public string CustomerName { get; set; }
+        public string Logo { get; set; }
+        public string Sector { get; set; }
+        public string PhoneNumber { get; set; }
+        public int CoordinateId { get; set; }
+        public virtual Coordinates Headquarters { get; set; }
         public string CountryCode { get; set; }
         public string Description { get; set; }
         public string Website { get; set; }
         public virtual IList<Account> Accounts { get; set; }
-
-        //public virtual List<Account> Accounts { get; set; }
     }
 }

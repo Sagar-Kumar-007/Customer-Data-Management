@@ -5,16 +5,14 @@ using DataTrackr_API.Helpers.UtilityService;
 using DataTrackr_API.Models;
 using DataTrackr_Web_API.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Common;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -56,6 +54,16 @@ namespace DataTrackr_API.Controllers
                 return BadRequest(new { Message = "Password is Incorrect" });
             }
             user.Token = CreateJwt(user);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.ReadToken(user.Token) as JwtSecurityToken;
+            var expirationTime = token.ValidTo;
+            var currentTime = DateTime.UtcNow;
+
+            if (currentTime > expirationTime)
+            { 
+                Console.WriteLine("Token has expired!");
+            }
             return Ok(new
             {
                 Token=user.Token,
@@ -93,7 +101,6 @@ namespace DataTrackr_API.Controllers
             }
 
             userObj.Password = PasswordHasher.HashPassword(userObj.Password);
-            userObj.Role = "User";
             userObj.Token = "";
 
             await _authContext.Users.AddAsync(userObj);
@@ -145,7 +152,6 @@ namespace DataTrackr_API.Controllers
 
             var identity = new ClaimsIdentity(new Claim[]               //Payload
             {
-                new Claim(ClaimTypes.Role,user.Role),
                 new Claim(ClaimTypes.Name,$"{user.FirstName} {user.LastName}"),
                 new Claim(ClaimTypes.Email,user.Email)
             });
@@ -155,7 +161,7 @@ namespace DataTrackr_API.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddMinutes(1),
+                Expires = DateTime.Now.AddMinutes(30),
                 SigningCredentials = credentials
             };
 
@@ -181,8 +187,6 @@ namespace DataTrackr_API.Controllers
             }
             Random random = new Random();
             string emailToken = random.Next(1000, 10000).ToString();
-            //var tokenBytes = RandomNumberGenerator.GetBytes(64);
-            //var emailToken = Convert.ToBase64String(tokenBytes);
             Console.WriteLine(user.LastName);
             Console.WriteLine(emailToken);
             user.ResetPasswordToken = emailToken;
@@ -191,11 +195,9 @@ namespace DataTrackr_API.Controllers
             string from = _configuration["EmailSettings:From"];
 
             var emailModel = new EmailModel(email, "Reset Password !!", EmailBody.EmailStringBody(email, emailToken));
-            //_authContext.Entry(user).State = EntityState.Modified; 
-            //_authContext.Users.Update(user);
 
             await _authContext.SaveChangesAsync();
-            //_emailService.SendEmail(emailModel);
+            _emailService.SendEmail(emailModel);
 
             return Ok(new
             {
@@ -224,7 +226,7 @@ namespace DataTrackr_API.Controllers
 
 
             DateTime emailTokenExpiry = user.ResetPasswordExpiry;
-            if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now) 
+            if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
             { 
                 return BadRequest(new
                 {

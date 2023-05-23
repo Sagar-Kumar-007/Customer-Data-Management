@@ -1,22 +1,13 @@
 ﻿using DataTrackr_Web_API.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataTrackr_API.DTO.Customer
 {
-    public class UpdateCustomerDto
+    public class UpdateCustomerDto:BaseCustomerDTO
     {
-        public string email { get; set; }
 
-        public string cname { get; set; }
 
-        public string logo { get; set; }
-        public string sector { get; set; }
-        public string phoneNo { get; set; }
-        public virtual Coordinates headquaters { get; set; }
+        public virtual Coordinates Headquarters { get; set; }
         public string CountryCode { get; set; }
-        public string Description { get; set; }
-        public string Website { get; set; }
+
     }
 }

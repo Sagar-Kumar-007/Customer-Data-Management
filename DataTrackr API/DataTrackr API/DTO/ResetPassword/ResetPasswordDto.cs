@@ -1,5 +1,4 @@
-﻿using System;
-namespace DataTrackr_API.DTO.ResetPassword
+﻿namespace DataTrackr_API.DTO.ResetPassword
 {
     public class ResetPasswordDto
     {

@@ -2,7 +2,7 @@
 {
     public class QueryParameters
     {
-        public int _pageSize = 15;
+        private int _pageSize = 15;
         public int StartIndex { get; set; }
         public int PageNumber { get; set; }
         public virtual string CustomerEmail { get; set; }
