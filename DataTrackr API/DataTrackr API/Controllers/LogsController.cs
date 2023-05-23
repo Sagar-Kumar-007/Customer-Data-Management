@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataTrackr_API.Models;
 using DataTrackr_Web_API.Models;
-using AutoMapper.QueryableExtensions;
-using DataTrackr_API.DTO.Account;
 
 namespace DataTrackr_API.Controllers
 {
@@ -25,7 +21,7 @@ namespace DataTrackr_API.Controllers
 
         // GET: api/Logs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Logs>>> GetLogs()
+        public async Task<ActionResult<IEnumerable<Log>>> GetLogs()
         {
             return await _context.Logs.ToListAsync();
         }
@@ -33,15 +29,15 @@ namespace DataTrackr_API.Controllers
         // GET: api/Logs/fetchAccounts?StartIndex=0&PageSize=25&PageNumber=1 (Paginated)
         [HttpGet]
         [Route("/api/Logs$fetch")]
-        public async Task<ActionResult<PagedResult<Logs>>> GetPagedAccounts([FromQuery] QueryParameters queryParameters)
+        public async Task<ActionResult<PagedResult<Log>>> GetPagedAccounts([FromQuery] QueryParameters queryParameters)
         {
             var totalSize = await _context.Logs.CountAsync();
             var items = await _context.Logs
-                .OrderByDescending(x => x.logId)
+                .OrderByDescending(x => x.LogId)
                 .Skip(queryParameters.StartIndex)
                 .Take(queryParameters.PageSize)
                 .ToListAsync();
-            var pagedAccountsResult = new PagedResult<Logs>
+            var pagedAccountsResult = new PagedResult<Log>
             {
                 Items = items,
                 PageNumber = queryParameters.PageNumber,
@@ -57,14 +53,14 @@ namespace DataTrackr_API.Controllers
         // GET: api/Logs
         [HttpGet]
         [Route("/api/Logs$like")]
-        public async Task<ActionResult<IEnumerable<Logs>>> SearchLogs([FromQuery] string search)
+        public async Task<ActionResult<IEnumerable<Log>>> SearchLogs([FromQuery] string search)
         {
-            return Ok(await _context.Logs.Where(d => d.userId.Contains(search) || d.message.Contains(search) || d.operation.Contains(search) || d.timeStamp.Contains(search)).ToListAsync());
+            return Ok(await _context.Logs.Where(d => d.UserId.Contains(search) || d.Message.Contains(search) || d.Operation.Contains(search) || d.TimeStamp.Contains(search)).ToListAsync());
         }
 
         // GET: api/Logs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Logs>> GetLogs(int id)
+        public async Task<ActionResult<Log>> GetLogs(int id)
         {
             var logs = await _context.Logs.FindAsync(id);
 
@@ -80,19 +76,12 @@ namespace DataTrackr_API.Controllers
         // POST: api/Logs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Logs>> PostLogs(Logs logs)
+        public async Task<ActionResult<Log>> PostLogs(Log logs)
         {
             _context.Logs.Add(logs);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLogs", new { id = logs.logId }, logs);
-        }
-
-        
-
-        private bool LogsExists(int id)
-        {
-            return _context.Logs.Any(e => e.logId == id);
+            return CreatedAtAction("GetLogs", new { id = logs.LogId }, logs);
         }
     }
 }

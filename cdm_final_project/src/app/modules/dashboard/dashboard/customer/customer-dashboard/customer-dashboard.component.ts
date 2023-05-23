@@ -63,6 +63,7 @@ export class CustomerDashboardComponent implements OnInit {
         this.itemsPerPage
       )
       .subscribe((result: IPaginatedResults<ICustomer>) => {
+        
         this.customersList = result.Items;
         this.totalItems = result.TotalCount;
       });
