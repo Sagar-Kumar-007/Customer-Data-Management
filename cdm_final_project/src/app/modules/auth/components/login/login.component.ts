@@ -94,18 +94,20 @@ OnLogin() {
   {
     this._authService.login(this.loginForm.value).subscribe({
        next:(res=>{
-        alert(res.message);
-        console.log(res.token);
+        alert(res.Message);
+        console.log(res.Token);
         this.loginForm.reset();
-        this._authService.storeToken(res.token);
-        this.toast.success({detail:"SUCCESS", summary:res.message,duration:5000});
+        this._authService.storeToken(res.Token);
+        console.log("Toekn: "+res.Token);
+        
+        this.toast.success({detail:"SUCCESS", summary:res.Message,duration:5000});
         this._router.navigate(['customerDashboard']);
         this._userService.user=this.extractJWTToken();
 
 
       }),
       error:(err=>{
-        alert(err?.error.message)
+        alert(err?.error.Message)
       })
     })
   }

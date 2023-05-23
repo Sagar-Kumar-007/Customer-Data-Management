@@ -55,7 +55,7 @@ namespace DataTrackr_API.Controllers
         [Route("/api/Logs$like")]
         public async Task<ActionResult<IEnumerable<Log>>> SearchLogs([FromQuery] string search)
         {
-            return Ok(await _context.Logs.Where(d => d.UserId.Contains(search) || d.Message.Contains(search) || d.Operation.Contains(search) || d.TimeStamp.Contains(search)).ToListAsync());
+            return Ok(await _context.Logs.OrderByDescending(x=>x.LogId).Where(d => d.UserId.Contains(search) || d.Message.Contains(search) || d.Operation.Contains(search) || d.TimeStamp.Contains(search)).ToListAsync());
         }
 
         // GET: api/Logs/5

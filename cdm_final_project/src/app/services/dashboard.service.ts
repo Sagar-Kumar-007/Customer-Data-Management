@@ -14,6 +14,7 @@ export class DashboardService {
   private searchSubject=new Subject<any>();
   private customerSubject=new Subject<any>();
   private accountSubject=new Subject<any>();
+  private getCustomerDetailsSubject=new Subject<any>();
 
 
   sendSearchEvent(data:HTMLInputElement){
@@ -42,6 +43,13 @@ export class DashboardService {
     return this.accountSubject.asObservable();
   }
 
+  sendGetCustomerDetailsEvent(){
+    return this.getCustomerDetailsSubject.next('');
+  }
+  getGetCustomerDetailsEvent(){
+    return this.getCustomerDetailsSubject.asObservable();
+  }
+
   detectDashboard(currentUrl:string) {
 
     if(currentUrl.includes('customerDashboard')){
@@ -52,6 +60,12 @@ export class DashboardService {
     }
     else if(currentUrl.includes('logs')){
       this.dashboard='Logs';
+    }
+    else if(currentUrl.includes('login')){
+      this.dashboard='Login';
+    }
+    else{
+      this.dashboard='fourOFour';
     }
   }
 }

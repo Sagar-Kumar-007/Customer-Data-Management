@@ -15,14 +15,16 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { DatePipe } from '@angular/common';
-import { LoginComponent } from './modules/auth/components/login/login.component';
 
 import { SidebarModule } from './modules/sidebar/sidebar.module';
+import { SpinnerComponent } from './modules/spinner/spinner.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     FourOfourComponent,
+    SpinnerComponent,
     
   ],
   imports: [
@@ -47,6 +49,9 @@ import { SidebarModule } from './modules/sidebar/sidebar.module';
       provide:HTTP_INTERCEPTORS,
       useClass:TokenInterceptor,
       multi:true  
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
     },
   DatePipe],
   bootstrap: [AppComponent]
