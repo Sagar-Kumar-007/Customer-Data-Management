@@ -53,13 +53,11 @@ export class NavbarComponent{
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
-        // this.detectDashboard();
         this.dashboardService.detectDashboard(this.currentUrl);
         this.dashboard=this.dashboardService.dashboard;
       }
       this._userService.user=this.extractJWTToken();
       this.user=this._userService.user;
-      
     });
   }
 

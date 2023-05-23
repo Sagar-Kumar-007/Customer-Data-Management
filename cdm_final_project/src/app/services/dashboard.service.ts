@@ -53,5 +53,11 @@ export class DashboardService {
     else if(currentUrl.includes('logs')){
       this.dashboard='Logs';
     }
+    else if(currentUrl.includes('login')){
+      this.dashboard='Login';
+    }
+    else{
+      this.dashboard='fourOFour';
+    }
   }
 }

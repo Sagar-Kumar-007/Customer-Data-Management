@@ -1,3 +1,3 @@
-<app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
+<app-navbar *ngIf="dashboard!=='Login' && dashboard!=='fourOFour'"></app-navbar>
+<app-sidebar *ngIf="dashboard!=='Login' && dashboard!=='fourOFour'"></app-sidebar>
 <router-outlet></router-outlet>
