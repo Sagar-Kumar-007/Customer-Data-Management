@@ -9,13 +9,13 @@ import { IPaginatedResults } from '../datatypes/paginatedResults';
 export class LogsService {
 
   constructor(private _http: HttpClient) { }
-  private baseUrl:string='https://localhost:7196/api/Logs'
+  private baseUrl:string='https://datatrackrapi.azurewebsites.net/api/Logs'
   getAllLogs(){
     return this._http.get<Ilogs[]>(`${this.baseUrl}`);
    }
    
    getAllLogsPaginated(StartIndex:number,PageNumber:number,PageSize:number){
-    // https://localhost:7196/api/Logs$fetch?StartIndex=0&PageNumber=1&PageSize=10
+    // https://datatrackrapi.azurewebsites.net/api/Logs$fetch?StartIndex=0&PageNumber=1&PageSize=10
     return this._http.get<IPaginatedResults<Ilogs>>(`${this.baseUrl}$fetch?StartIndex=${StartIndex}&PageNumber=${PageNumber}&PageSize=${PageSize}`);
    }
 
