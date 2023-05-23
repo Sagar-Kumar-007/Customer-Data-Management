@@ -161,7 +161,7 @@ namespace DataTrackr_API.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddMinutes(30),
+                Expires = DateTime.Now.AddSeconds(10),
                 SigningCredentials = credentials
             };
 
