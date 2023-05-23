@@ -67,7 +67,7 @@ export class AccountsDashboardComponent implements OnInit {
     this.searchEventSubscription = dashboardService
       .getSearchEvent()
       .subscribe((data: HTMLInputElement) => {
-        this.searchVal(data.value);
+        this.searchVal(data.value,this.customerId);
       });
     this.accountListEventSubscription = dashboardService
       .getAddAccountEvent()
@@ -212,14 +212,14 @@ export class AccountsDashboardComponent implements OnInit {
     );
   }
 
-  searchVal(data: string | undefined) {
+  searchVal(data: string | undefined,customerEmail:string) {
     console.log(data);
 
     if (!data) {
       this.showAccountsList();
     }
     if (data)
-      this._accountsService.searchAccounts(data).subscribe((result) => {
+      this._accountsService.searchAccounts(data,customerEmail).subscribe((result) => {
         if (result) this.accountsList = result;
       });
   }
