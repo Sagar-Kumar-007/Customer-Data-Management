@@ -7,21 +7,30 @@
     
             <mat-form-field class="example-full-width">
                 <mat-label>Account's Name</mat-label>
-                <input matInput type="text" formControlName="aname" name="aname" >
+                <input matInput type="text" formControlName="AccountName" name="AccountName" >
                 <mat-icon matSuffix>computer</mat-icon>
-                <mat-error *ngIf="aname && aname.invalid">
+                <mat-error *ngIf="AccountName && AccountName.invalid">
                     Account's Name Required
                 </mat-error>
             </mat-form-field>
     
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" *ngIf="isUpdate">
                 <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="acc_email" name="acc_email">
+                <input type="email" matInput formControlName="AccountEmail" name="AccountEmail" readonly>
                 <mat-icon matSuffix>email</mat-icon>
-                <mat-error *ngIf="email && email.invalid && email.touched">
+                <mat-error *ngIf="AccountEmail && AccountEmail.invalid && AccountEmail.touched">
                     Please Enter valid email
                 </mat-error>
             </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="!isUpdate">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="AccountEmail" name="AccountEmail">
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error *ngIf="AccountEmail && AccountEmail.invalid && AccountEmail.touched">
+                    Please Enter valid email
+                </mat-error>
+            </mat-form-field>
+            
     
             
             <table class="example-full-width" cellspacing="0">
@@ -37,7 +46,7 @@
     
                         <mat-form-field appearance="fill">
                             <mat-label>Year of Establishment</mat-label>
-                            <input type="text" matInput formControlName="estYear" name="estYear" >
+                            <input type="text" matInput formControlName="EstablishmentYear" name="EstablishmentYear" >
                             <mat-icon matSuffix>tag</mat-icon>
                             <mat-error>Year Required</mat-error>
                         </mat-form-field>
@@ -48,9 +57,9 @@
 
             <mat-form-field class="example-full-width">
                 <mat-label>Description</mat-label>
-                <input matInput type="text" formControlName="description" name="description" >
+                <input matInput type="text" formControlName="Description" name="Description" >
                 <mat-icon matSuffix>computer</mat-icon>
-                <mat-error *ngIf="aname && aname.invalid">
+                <mat-error *ngIf="AccountName && AccountName.invalid">
                    Description Required
                 </mat-error>
             </mat-form-field>

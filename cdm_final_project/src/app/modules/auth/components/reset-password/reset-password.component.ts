@@ -4,7 +4,6 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { ConfirmPasswordValidator } from 'src/app/helpers/confirm-password.validator';
 import { ResetPassword } from 'src/app/helpers/reset-password.model';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
@@ -24,9 +23,9 @@ export class ResetPasswordComponent {
   resetPasswordObj=new ResetPassword();
 
   constructor(private fb:FormBuilder,
-              private resetService:ResetPasswordService,
+              private _resetService:ResetPasswordService,
               private router:Router,
-              private toast:NgToastService,
+              private _toastService:NgToastService,
               public resetPassworddialogRef: MatDialogRef<ResetPasswordComponent>,
               public forgetPassdialogRef: MatDialogRef<ForgotPasswordDialogComponent>,
               
@@ -49,7 +48,7 @@ reset(){
     this.resetPasswordObj.emailToken=this.resetPasswordForm.value.securityCode;
 
     if (this.password !== this.confirmPassword) {
-      this.toast.error({
+      this._toastService.error({
         detail: 'Error',
         summary: "Password doesn't match !",
         duration: 5000,
@@ -63,9 +62,9 @@ reset(){
   if (this.resetPasswordForm.valid && !this.passwordMatchError) 
   {
     
-    this.resetService.resetPassword(this.resetPasswordObj).subscribe({
+    this._resetService.resetPassword(this.resetPasswordObj).subscribe({
       next: (res) => {
-        this.toast.success({
+        this._toastService.success({
           detail: 'Success',
           summary: 'Password reset successfully',
           duration: 5000,

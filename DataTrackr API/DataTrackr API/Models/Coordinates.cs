@@ -8,13 +8,12 @@ namespace DataTrackr_Web_API.Models
 {
     public class Coordinates
     {
-        public int coordinateId { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
-        public string address { get; set; }
+        public int CoordinateId { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Address { get; set; }
         [JsonIgnore]
         public virtual ICollection<Customer> Customers { get; set; }
-
         [JsonIgnore]
         public virtual ICollection<Account> Accounts{ get; set; }
     }

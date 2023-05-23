@@ -1,6 +1,6 @@
 export interface IPaginatedResults<T>{
-    totalCount:number,
-    pageNumber:number,
-    recordNumber:number,
-    items: T[]
+    TotalCount:number,
+    PageNumber:number,
+    RecordNumber:number,
+    Items: T[]
 }

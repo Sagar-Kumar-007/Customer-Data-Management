@@ -12,7 +12,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { NgToastModule } from 'ng-angular-popup';
 import { CustomerComponent } from './customer/customer.component';
-import { Router, RouterModule } from '@angular/router';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 import {MatPaginatorModule} from '@angular/material/paginator';

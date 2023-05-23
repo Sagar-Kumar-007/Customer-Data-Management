@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
@@ -24,9 +23,8 @@ export class ForgotPasswordDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ResetPasswordComponent>,
     public forgotPasswordDialogRef: MatDialogRef<ForgotPasswordDialogComponent>,
     private formBuilder: FormBuilder,
-    private toast:NgToastService,
-    private resetService:ResetPasswordService,
-    private router:Router,
+    private _toastService:NgToastService,
+    private _resetService:ResetPasswordService,
     private dialog: MatDialog,
   ) { }
 
@@ -45,7 +43,7 @@ export class ForgotPasswordDialogComponent implements OnInit {
     this.resetPasswordEmail=this.forgotPasswordForm.get('email')!.value;
     console.log('Submitted email:', this.resetPasswordEmail);
     
-    this.resetService.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
+    this._resetService.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
       next:(res)=>{
 
         this.dialogRef = this.dialog.open(ResetPasswordComponent);
@@ -53,7 +51,7 @@ export class ForgotPasswordDialogComponent implements OnInit {
           console.log('Dialog closed:', result);
         });
 
-        this.toast.success({
+        this._toastService.success({
           detail:'Success',
           summary:'A security code has been sent to your mail.',
           duration:5000,
@@ -65,7 +63,7 @@ export class ForgotPasswordDialogComponent implements OnInit {
       },
       error:(err)=>{
 
-        this.toast.error({
+        this._toastService.error({
           detail:'ERROR',
           summary:'Your entered email is not correct, try again!',
           duration:5000,

@@ -303,7 +303,3 @@ C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr 
 C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.pdb
 C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\DataTrackr API.genruntimeconfig.cache
 C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Debug\net6.0\ref\DataTrackr API.dll
-C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\MailKit.dll
-C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\MimeKit.dll
-C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\NETCore.MailKit.dll
-C:\Users\hchoudha\Desktop\latest_datatrackr\Customer-Data-Management\DataTrackr API\DataTrackr API\bin\Debug\net6.0\BouncyCastle.Crypto.dll

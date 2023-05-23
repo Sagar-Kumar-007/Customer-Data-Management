@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataTrackr_Web_API.Models;
@@ -10,8 +8,6 @@ using DataTrackr_API.DTO.Country;
 using AutoMapper;
 using DataTrackr_API.DTO.Customer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Identity.Web.Resource;
-using DataTrackr_API.DTO.Account;
 using DataTrackr_API.Models;
 using AutoMapper.QueryableExtensions;
 
@@ -67,7 +63,7 @@ namespace DataTrackr_API.Controllers
         [Route("/api/Customers$like")]
         public async Task<ActionResult<IEnumerable<GetCustomerDto>>> SearchCustomers([FromQuery] string search)
         {
-            var customers = await _context.Customers.Where(d => d.cname.Contains(search) || d.CountryCode.Contains(search) || d.Description.Contains(search) || d.sector.Contains(search)).ToListAsync();
+            var customers = await _context.Customers.Where(d => d.CustomerName.Contains(search) || d.CountryCode.Contains(search) || d.Description.Contains(search) || d.Sector.Contains(search)).ToListAsync();
             var records = _mapper.Map<List<GetCustomerDto>>(customers);
             return Ok(records);
         }
@@ -76,14 +72,14 @@ namespace DataTrackr_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(string id)
         {
-            var customer = await _context.Customers.Include(q=>q.headquaters).Include(q=>q.Accounts).ThenInclude(q=>q.Location).FirstOrDefaultAsync(q=>q.email==id);
+            var customer = await _context.Customers.Include(q=>q.Headquarters).Include(q=>q.Accounts).ThenInclude(q=>q.Location).FirstOrDefaultAsync(q=>q.CustomerEmail==id);
 
             if (customer == null)
             {
                 return NotFound();
             }
 
-            var customerDetailsDto = _mapper.Map<GetCustomerDetails>(customer);
+            var customerDetailsDto = _mapper.Map<GetCustomerDetailsWithAccountsDTO>(customer);
 
             return Ok(customerDetailsDto);
         }
@@ -92,7 +88,7 @@ namespace DataTrackr_API.Controllers
         [HttpGet("CustomerDetails/{id}")]
         public async Task<ActionResult<Customer>> GetCustomerDetails(string id)
         {
-            var customer = await _context.Customers.FirstOrDefaultAsync(q => q.email == id);
+            var customer = await _context.Customers.FirstOrDefaultAsync(q => q.CustomerEmail == id);
 
             if (customer == null)
             {
@@ -107,35 +103,35 @@ namespace DataTrackr_API.Controllers
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, UpdateCustomerDto updateData)
+        public async Task<IActionResult> UpdateCustomer(string id, UpdateCustomerDto updateData)
         {
-            if (id != updateData.email)
+            if (id != updateData.CustomerEmail)
             {
                 return BadRequest();
             }
 
             //_context.Entry(updateCustomerDto).State = EntityState.Modified;
-            var currentCustomer = await _context.Customers.FirstOrDefaultAsync(q => q.email == id);
+            var currentCustomer = await _context.Customers.FirstOrDefaultAsync(q => q.CustomerEmail == id);
             if (currentCustomer==null)
             {
                 return NotFound();
             }
             //_mapper.Map(updateCustomerDto, customer);
 
-            var coordinateId=currentCustomer.coordinateId;
-            var currentLocation = await _context.Coordinates.FirstOrDefaultAsync(q => q.coordinateId == coordinateId);
+            var CoordinateId=currentCustomer.CoordinateId;
+            var currentLocation = await _context.Coordinates.FirstOrDefaultAsync(q => q.CoordinateId == CoordinateId);
 
-            currentCustomer.cname = updateData.cname;
-            currentCustomer.logo = updateData.logo;
-            currentCustomer.sector = updateData.sector;
-            currentCustomer.phoneNo = updateData.phoneNo;
+            currentCustomer.CustomerName = updateData.CustomerName;
+            currentCustomer.Logo = updateData.Logo;
+            currentCustomer.Sector = updateData.Sector;
+            currentCustomer.PhoneNumber = updateData.PhoneNumber;
             currentCustomer.CountryCode = updateData.CountryCode;
             currentCustomer.Description = updateData.Description;
             currentCustomer.Website = updateData.Website;
 
-            currentLocation.latitude = updateData.headquaters.latitude;
-            currentLocation.longitude = updateData.headquaters.longitude;
-            currentLocation.address = updateData.headquaters.address;
+            currentLocation.Latitude = updateData.Headquarters.Latitude;
+            currentLocation.Longitude = updateData.Headquarters.Longitude;
+            currentLocation.Address = updateData.Headquarters.Address;
 
 
 
@@ -174,7 +170,7 @@ namespace DataTrackr_API.Controllers
             }
             catch (DbUpdateException)
             {
-                if (CustomerExists(customer.email))
+                if (CustomerExists(customer.CustomerEmail))
                 {
                     return Conflict();
                 }
@@ -184,16 +180,16 @@ namespace DataTrackr_API.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCustomer", new { id = customer.email }, customer);
+            return CreatedAtAction("GetCustomer", new { id = customer.CustomerEmail }, customer);
         }
 
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(string id)
         {
-            var customer = await _context.Customers.FirstOrDefaultAsync(q => q.email == id);
-            var coordinateId = customer.coordinateId;
-            var location= await _context.Coordinates.FirstOrDefaultAsync(q => q.coordinateId== coordinateId);
+            var customer = await _context.Customers.FirstOrDefaultAsync(q => q.CustomerEmail == id);
+            var CoordinateId = customer.CoordinateId;
+            var location= await _context.Coordinates.FirstOrDefaultAsync(q => q.CoordinateId== CoordinateId);
 
             if (customer == null)
             {
@@ -209,7 +205,7 @@ namespace DataTrackr_API.Controllers
 
         private bool CustomerExists(string id)
         {
-            return _context.Customers.Any(e => e.email == id);
+            return _context.Customers.Any(e => e.CustomerEmail == id);
         }
     }
 }

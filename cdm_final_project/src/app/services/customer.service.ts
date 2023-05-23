@@ -7,25 +7,25 @@ import { IPaginatedResults } from '../datatypes/paginatedResults';
 export class CustomerService {
 
   constructor(private _http: HttpClient) { }
-  private baseUrl:string='https://datatrackrapi.azurewebsites.net/api/Customers'
+  private baseUrl:string='https://localhost:7196/api/Customers'
 
    /********************  Get all Customers********************/
    getAllCustomers(){
-    // https://datatrackrapi.azurewebsites.net/api/Customers
+    // https://localhost:7196/api/Customers
     return this._http.get<ICustomer[]>(`${this.baseUrl}`);
    }
    getAllCustomersPaginated(StartIndex:number,PageNumber:number,PageSize:number){
-    // https://datatrackrapi.azurewebsites.net/api/Customers$fetch?StartIndex=0&PageNumber=1&PageSize=5
+    // https://localhost:7196/api/Customers$fetch?StartIndex=0&PageNumber=1&PageSize=5
     return this._http.get<IPaginatedResults<ICustomer>>(`${this.baseUrl}$fetch?StartIndex=${StartIndex}&PageNumber=${PageNumber}&PageSize=${PageSize}`);
    }
 
    /********************  Get a Customer by Id ********************/
    getCustomer(customerId: string){
-    // https://datatrackrapi.azurewebsites.net/api/Customers/amazon%40amazon.com
+    // https://localhost:7196/api/Customers/amazon%40amazon.com
     return this._http.get<ICustomer>(`${this.baseUrl}/${customerId}`);
    }
    getCustomerDetails(customerId: string){
-    // https://datatrackrapi.azurewebsites.net/api/Customers/CustomerDetails/amazon%40amazon.com
+    // https://localhost:7196/api/Customers/CustomerDetails/amazon%40amazon.com
     return this._http.get<ICustomer>(`${this.baseUrl}/CustomerDetails/${customerId}`);
    }
 
