@@ -2,13 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NgConfirmService } from 'ng-confirm-box';
 import { NgToastService } from 'ng-angular-popup';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCustomerComponent } from '../create-customer/create-customer.component';
 import { ICustomer } from 'src/app/datatypes/customer';
 import { MapComponent } from '../map/map.component';
 import { LogsService } from 'src/app/services/logs.service';
-import { Ilogs } from 'src/app/datatypes/logs';
+import { Ilog } from 'src/app/datatypes/log';
 import { DatePipe } from '@angular/common';
 import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -22,7 +21,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CustomerDashboardComponent implements OnInit {
   customersList: ICustomer[] | undefined;
-  logInfo: Ilogs = {};
+  logInfo: Ilog = {};
 
   p: number = 1;
   itemsPerPage: number = 4;
@@ -36,18 +35,16 @@ export class CustomerDashboardComponent implements OnInit {
     private _userService: UserService,
     private dialog: MatDialog,
     private _customerService: CustomerService,
-    private dashboardService: DashboardService,
-    private router: Router,
-    private confirm: NgConfirmService,
-    private toastService: NgToastService,
+    private _confirmService: NgConfirmService,
+    private _toastService: NgToastService,
     private _dashboardService: DashboardService
   ) {
-    this.searchEventSubscription = dashboardService
+    this.searchEventSubscription = _dashboardService
       .getSearchEvent()
       .subscribe((data: HTMLInputElement) => {
         this.searchVal(data.value);
       });
-    this.customerListEventSubscription = dashboardService
+    this.customerListEventSubscription = _dashboardService
       .getAddCustomerEvent()
       .subscribe((data) => {
         this.showCustomerList();
@@ -61,7 +58,7 @@ export class CustomerDashboardComponent implements OnInit {
   getCustomerDetails(){
     console.log("bb");
     
-    this.dashboardService.sendGetCustomerDetailsEvent();
+    this._dashboardService.sendGetCustomerDetailsEvent();
   }
 
   showCustomerList() {
@@ -72,8 +69,9 @@ export class CustomerDashboardComponent implements OnInit {
         this.itemsPerPage
       )
       .subscribe((result: IPaginatedResults<ICustomer>) => {
-        this.customersList = result.items;
-        this.totalItems = result.totalCount;
+        
+        this.customersList = result.Items;
+        this.totalItems = result.TotalCount;
       });
   }
 
@@ -108,7 +106,7 @@ export class CustomerDashboardComponent implements OnInit {
   // Delete a Customer
 
   deleteCustomer(id?: string | null, cname?: string | null) {
-    this.confirm.showConfirm(
+    this._confirmService.showConfirm(
       `Are you sure want to delete ${cname}?`,
 
       () => {
@@ -118,10 +116,10 @@ export class CustomerDashboardComponent implements OnInit {
               console.log('res: ' + res);
               this.showCustomerList();
 
-              this.logInfo.userId = this._userService.user?.email;
-              this.logInfo.operation = 'deleted';
-              this.logInfo.message = `${cname} has been deleted.`;
-              this.logInfo.timeStamp = `${this.datepipe.transform(
+              this.logInfo.UserId = this._userService.user?.email;
+              this.logInfo.Operation = 'deleted';
+              this.logInfo.Message = `${cname} has been deleted.`;
+              this.logInfo.TimeStamp = `${this.datepipe.transform(
                 new Date(),
                 'MM/dd/yyyy h:mm:ss'
               )}`;
@@ -130,14 +128,14 @@ export class CustomerDashboardComponent implements OnInit {
                 console.log(result);
               });
 
-              this.toastService.success({
+              this._toastService.success({
                 detail: 'SUCCESS',
                 summary: 'Customer Deleted Successfully',
                 duration: 3000,
               });
             },
             (err) => {
-              this.toastService.error({
+              this._toastService.error({
                 detail: 'CANNOT DELETE',
                 summary: 'Account Already Exist',
                 duration: 3000,
@@ -174,7 +172,7 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   onPageChange(event: number) {
-    // console.log(event);
+    
     this.p = event;
     this.showCustomerList();
   }

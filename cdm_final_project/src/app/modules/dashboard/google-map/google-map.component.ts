@@ -113,9 +113,9 @@ export class GoogleMapComponent implements OnInit {
 
   saveLocation(){
     const data:ICoordinate = {
-      address: this.address,
-      latitude: this.latitude,
-      longitude: this.longitude
+      Address: this.address,
+      Latitude: this.latitude,
+      Longitude: this.longitude
     }
     this.matDialogRef.close(data);
   }

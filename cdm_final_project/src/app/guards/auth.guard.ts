@@ -11,7 +11,6 @@ export class AuthGuard implements CanActivate {
     constructor(private auth:AuthService, private router:Router,private toast:NgToastService){}
   canActivate():boolean  {
       if(this.auth.isLoggedIn()){
-            // this.router.navigate(['customer']);
             return true;
           }
           else{

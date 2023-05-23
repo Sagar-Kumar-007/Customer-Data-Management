@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="dataTrackrAPI" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\sagkumar\\Downloads\\cdm\ final\\Customer-Data-Management\\DataTrackr\ API\\DataTrackr\ API\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
-  </parameter>
-  <parameter name="DataTrackr_Web_API.Models.ApiDbContext" description="" value="Data Source=tcp:datatrackrserver.database.windows.net,1433;Initial Catalog=DataTrackr_Final_DB;User Id=sagarsk@datatrackrserver;Password=Sagar_sk007" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\sagkumar\\Downloads\\cdm\ final\\Customer-Data-Management\\DataTrackr\ API\\DataTrackr\ API\\obj\\Release\\net6\.0\\PubTmp\\EFSQLScripts\\DataTrackr_Web_API\.Models\.ApiDbContext\.sql$" />
-  </parameter>
-</parameters>

@@ -12,7 +12,7 @@ namespace DataTrackr_API.Configurations
         {
             CreateMap<Customer, CreateCustomerDto>().ReverseMap();
             CreateMap<Customer, GetCustomerDto>().ReverseMap();
-            CreateMap<Customer, GetCustomerDetails>().ReverseMap();
+            CreateMap<Customer, GetCustomerDetailsWithAccountsDTO>().ReverseMap();
             CreateMap<Customer, UpdateCustomerDto>().ReverseMap();
 
             CreateMap<Account, GetAccountDto>().ReverseMap();

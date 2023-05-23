@@ -8,11 +8,9 @@ import {
 import { ICustomer } from 'src/app/datatypes/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NgToastService } from 'ng-angular-popup';
-import { NgConfirmService } from 'ng-confirm-box';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LogsService } from 'src/app/services/logs.service';
-import { Ilogs } from 'src/app/datatypes/logs';
+import { Ilog } from 'src/app/datatypes/log';
 import { DatePipe } from '@angular/common';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ICoordinate } from 'src/app/datatypes/Coordinates';
@@ -29,7 +27,7 @@ export class CreateCustomerComponent {
   //Form Logic
   public userIdToUpdate!: string;
   public isUpdateActive: boolean = false;
-  logInfo: Ilogs = {};
+  logInfo: Ilog = {};
   coordinates: ICoordinate;
   active: boolean = false;
   
@@ -40,11 +38,9 @@ export class CreateCustomerComponent {
     public datepipe: DatePipe,
     private dialog: MatDialog,
     private _logService: LogsService,
-    private customer: CustomerService,
-    private router: Router,
-    private toastService: NgToastService,
-    private confirm: NgConfirmService,
-    private dashboardService: DashboardService,
+    private _customerService: CustomerService,
+    private _toastService: NgToastService,
+    private _dashboardService: DashboardService,
     private matDialogRef: MatDialogRef<CreateCustomerComponent>,
     @Inject(MAT_DIALOG_DATA)
     private data: {
@@ -54,13 +50,13 @@ export class CreateCustomerComponent {
   ) {
     this.coordinates = {} as ICoordinate;
     if (this.coordinates) {
-      this.customerAddForm.controls.headquaters.patchValue(this.coordinates);
+      this.customerAddForm.controls.Headquarters.patchValue(this.coordinates);
     }
   }
 
   ngOnInit(): void {
     if (this.data.customerId)
-      this.customer.getCustomer(this.data.customerId).subscribe((res) => {
+      this._customerService.getCustomer(this.data.customerId).subscribe((res) => {
         this.isUpdateActive = true;
         this.fillFormToUpdate(res);
         this.active = false;
@@ -68,18 +64,18 @@ export class CreateCustomerComponent {
   }
 
   customerAddForm = new FormGroup({
-    cname: new FormControl('', [Validators.required]),
-    logo: new FormControl('', []),
-    sector: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    headquaters: new FormControl<ICoordinate>({}, [Validators.required]),
-    phoneNo: new FormControl('', [
+    CustomerName: new FormControl('', [Validators.required]),
+    Logo: new FormControl('', []),
+    Sector: new FormControl('', [Validators.required]),
+    Description: new FormControl('', [Validators.required]),
+    CustomerEmail: new FormControl('', [Validators.required, Validators.email]),
+    Headquarters: new FormControl<ICoordinate>({}, [Validators.required]),
+    PhoneNumber: new FormControl('', [
       Validators.required,
       
     ]),
-    website: new FormControl('', []),
-    countryCode: new FormControl(''),
+    Website: new FormControl('', []),
+    CountryCode: new FormControl(''),
   });
 
   // //Adding Map Location Pickup.....
@@ -99,7 +95,7 @@ export class CreateCustomerComponent {
       (result: ICoordinate) => {
         this.coordinates = result;
         if (this.coordinates) {
-          this.customerAddForm.controls.headquaters.patchValue(
+          this.customerAddForm.controls.Headquarters.patchValue(
             this.coordinates
           );
         }
@@ -113,20 +109,20 @@ export class CreateCustomerComponent {
 
   addCustomer() {
 
-    this.customer.addCustomer(this.customerAddForm.value).subscribe((res) => {
+    this._customerService.addCustomer(this.customerAddForm.value).subscribe((res) => {
       if (res) {
-        this.dashboardService.sendAddCustomerEvent(res);
-        this.toastService.success({
+        this._dashboardService.sendAddCustomerEvent(res);
+        this._toastService.success({
           detail: 'Success',
           summary: 'Customer Added Successfully',
           duration: 3000,
         });
         this.customerAddForm.reset();
 
-        this.logInfo.userId = this._userService.user?.email;
-        this.logInfo.operation = 'created';
-        this.logInfo.message = `${res?.cname} has been created.`;
-        this.logInfo.timeStamp = `${this.datepipe.transform(
+        this.logInfo.UserId = this._userService.user?.email;
+        this.logInfo.Operation = 'created';
+        this.logInfo.Message = `${res?.CustomerName} has been created.`;
+        this.logInfo.TimeStamp = `${this.datepipe.transform(
           new Date(),
           'MM/dd/yyyy h:mm:ss'
         )}`;
@@ -135,9 +131,11 @@ export class CreateCustomerComponent {
           console.log(result);
         });
       }
+
+    this.matDialogRef.close();
     }, err=>{
       if(err){
-        this.toastService.error({
+        this._toastService.error({
           detail: 'UNSUCCESSFUL',
           summary: 'Customer with this Email Already Exist',
           duration: 3000,
@@ -162,21 +160,21 @@ export class CreateCustomerComponent {
 
   onCountryChange(event: any) {
     console.log(event);
-    this.customerAddForm.controls.countryCode.patchValue(event.dialCode);
+    this.customerAddForm.controls.CountryCode.patchValue(event.dialCode);
   }
 
   // Update a Customer
 
   updateCustomer() {
     if (this.data.customerId)
-      this.customer
+      this._customerService
         .updateCustomer(this.customerAddForm.value, this.data.customerId)
         .subscribe((res) => {
-          console.log("hey");
+          
           if (res) {
           console.log(res);
 
-            this.toastService.success({
+            this._toastService.success({
               detail: 'Success',
               summary: 'Customer Updated Successfully',
               duration: 3000,
@@ -184,10 +182,10 @@ export class CreateCustomerComponent {
 
             this.customerAddForm.reset();
 
-            this.logInfo.userId = this._userService.user?.email;
-            this.logInfo.operation = 'updated';
-            if (res)this.logInfo.message = `${res?.email} has been updated.`;
-            this.logInfo.timeStamp = `${this.datepipe.transform(
+            this.logInfo.UserId = this._userService.user?.email;
+            this.logInfo.Operation = 'updated';
+            if (res)this.logInfo.Message = `${res?.CustomerEmail} has been updated.`;
+            this.logInfo.TimeStamp = `${this.datepipe.transform(
               new Date(),
               'MM/dd/yyyy h:mm:ss'
             )}`;
@@ -196,46 +194,43 @@ export class CreateCustomerComponent {
               console.log(result);
             });
           }
+          this.matDialogRef.close();
         });
   }
 
   // Validations......
 
-  get email() {
-    return this.customerAddForm.get('email');
+  get CustomerEmail() {
+    return this.customerAddForm.get('CustomerEmail');
   }
-  get cname() {
-    return this.customerAddForm.get('cname');
-  }
-
-  get gstin() {
-    return this.customerAddForm.get('gstin');
+  get CustomerName() {
+    return this.customerAddForm.get('CustomerName');
   }
 
-  get headquaters() {
-    return this.customerAddForm.get('headquaters');
+  get Headquarters() {
+    return this.customerAddForm.get('Headquarters');
   }
-  get countryCode() {
-    return this.customerAddForm.get('countryCode');
+  get CountryCode() {
+    return this.customerAddForm.get('CountryCode');
   }
-  get description() {
-    return this.customerAddForm.get('description');
+  get Description() {
+    return this.customerAddForm.get('Description');
   }
-  get phoneNo() {
-    return this.customerAddForm.get('phoneNo');
+  get PhoneNumber() {
+    return this.customerAddForm.get('PhoneNumber');
   }
 
   fillFormToUpdate(customer: ICustomer) {
     this.customerAddForm.patchValue({
-      cname: customer.cname,
-      logo: customer.logo,
-      sector: customer.sector,
-      description: customer.description,
-      email: customer.email,
-      headquaters: customer.headquaters,
-      phoneNo: customer.phoneNo,
-      website: customer.website,
-      countryCode: customer.countryCode,
+      CustomerName: customer.CustomerName,
+      Logo: customer.Logo,
+      Sector: customer.Sector,
+      Description: customer.Description,
+      CustomerEmail: customer.CustomerEmail,
+      Headquarters: customer.Headquarters,
+      PhoneNumber: customer.PhoneNumber,
+      Website: customer.Website,
+      CountryCode: customer.CountryCode,
     });
   }
 

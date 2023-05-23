@@ -1,11 +1,10 @@
 import { ICoordinate } from "./Coordinates";
 
 export interface IAccount{
-    acc_email?:string | null;
-    acc_revenue?:number | null;
-    location?:ICoordinate | null;
-    address?: string | null;
-    aname?:string |null;
-    estYear?:string | null;
-    PmId?:number | null;
+    AccountEmail?:string | null;
+    AccountRevenue?:number | null;
+    Location?:ICoordinate | null;
+    Address?: string | null;
+    AccountName?:string |null;
+    EstablishmentYear?:string | null;
 }

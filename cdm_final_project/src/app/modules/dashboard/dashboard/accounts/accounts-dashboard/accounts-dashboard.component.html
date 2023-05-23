@@ -24,14 +24,7 @@
         </div>
 
         <div class="card">
-            <!-- <div>
-                <div class="numbers">284</div>
-                <div class="cardName">Comments</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="chatbubbles-outline"></ion-icon>
-            </div> -->
+           
             <div class="piechart-revenue">
 
                 <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
@@ -41,19 +34,9 @@
             <div class="cardName">Accounts Revenue Chart <br> (In Cr)</div>
         </div>
 
-        <!-- <div class="card">
-            <div>
-                <div class="numbers">$7,842</div>
-                <div class="cardName">Earning</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cash-outline"></ion-icon>
-            </div>
-        </div> -->
     </div>
 
-    <!-- ================ Order Details List ================= -->
+    <!-- ================ List of Accounts ================= -->
     <div class="details">
         <div class="recentOrders">
             <table class="account-table">
@@ -70,11 +53,11 @@
                 <tbody>
                     <ng-template [ngIf]="accountsList!=undefined">
                         <tr class="accounts-tr"  *ngFor="let account of accountsList | paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }">
-                            <td>{{account['aname']}}</td>
-                            <td>{{account['estYear']}}</td>
-                            <td>{{account.location?.address}}</td>
+                            <td>{{account['AccountName']}}</td>
+                            <td>{{account['EstablishmentYear']}}</td>
+                            <td>{{account.Location?.Address}}</td>
                             <td class="update-icon"><span (click)="updateAccount(account)"><i class="fa-solid fa-pencil" style="color: #ffc400;" title="update-account"></i></span></td>
-                            <td class="delete-icon"><span (click)="deleteAccount(account, account.aname)" ><i class="fa-solid fa-trash" style="color: #a80000;" title="delete-account"></i></span></td>
+                            <td class="delete-icon"><span (click)="deleteAccount(account, account.AccountName)" ><i class="fa-solid fa-trash" style="color: #a80000;" title="delete-account"></i></span></td>
                         </tr>
                     </ng-template>
                 </tbody>

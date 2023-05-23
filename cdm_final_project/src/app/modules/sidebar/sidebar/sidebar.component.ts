@@ -26,11 +26,11 @@ export class SidebarComponent {
      private route: ActivatedRoute,
      private _accountsService:AccountsService,
      private _customerService:CustomerService,
-     private dashboardService:DashboardService,
-     private auth:AuthService
+     private _dashboardService:DashboardService,
+     private _authService:AuthService
      ) {}
   ngOnInit(){
-    this.dashboardService.getGetCustomerDetailsEvent().subscribe((res)=>{
+    this._dashboardService.getGetCustomerDetailsEvent().subscribe((res)=>{
       console.log("cc");
       this.fetchAccountsWithCustomerEmail();
     })
@@ -38,7 +38,7 @@ export class SidebarComponent {
   fetchAccountsWithCustomerEmail() {
     console.log("a");
     
-    if(this.dashboardService.dashboard==='Accounts'){
+    if(this._dashboardService.dashboard==='Accounts'){
         this.route.queryParams.subscribe(params=>{
           let id = params['customer'];
           if (id){
@@ -96,7 +96,7 @@ export class SidebarComponent {
       backdropClass: 'backgroundblur',
     });
     dialogRef.afterClosed().subscribe((result)=>{
-      // window.location.reload();
+      
     })
   }
   showCustomerCard(flag:boolean){
@@ -135,23 +135,23 @@ export class SidebarComponent {
         status:'addAccount',
         account:null,
         email:this.customerId,
-        customerName: this.customer?.cname
+        customerName: this.customer?.CustomerName
       }
     });
     dialogRef.afterClosed().subscribe(result=>{
-      // window.location.reload();
+      
     })
   }
   addOperation(){
-    if(this.dashboardService.dashboard==='Customers'){
+    if(this._dashboardService.dashboard==='Customers'){
       this.addCustomer();
     }
-    else if(this.dashboardService.dashboard==='Accounts'){
+    else if(this._dashboardService.dashboard==='Accounts'){
       this.addAccount();
     }
   }
   signout(){
-    this.auth.signOut();
+    this._authService.signOut();
    }
 
 }

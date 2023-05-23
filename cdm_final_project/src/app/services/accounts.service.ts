@@ -5,7 +5,7 @@ import { IPaginatedResults } from '../datatypes/paginatedResults';
 
 @Injectable()
 export class AccountsService {
-  private baseUrl:string='https://datatrackrapi.azurewebsites.net/api/Accounts'
+  private baseUrl:string='https://localhost:7196/api/Accounts'
   constructor(private _http:HttpClient){}
   accountsList(CustomerEmail:string,StartIndex:number,PageNumber:number,PageSize:number){
     return this._http.get<IPaginatedResults<IAccount>>(`${this.baseUrl}$fetch?StartIndex=${StartIndex}&PageNumber=${PageNumber}&CustomerEmail=${CustomerEmail}&PageSize=${PageSize}`)

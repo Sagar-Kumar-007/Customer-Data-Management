@@ -8,20 +8,14 @@ namespace DataTrackr_Web_API.Models
 {
     public class Account
     {
-        public string Acc_email { get; set; }
-        public decimal Acc_revenue { get; set; }
-
-        public string aname { get; set; }
-
-        public string EstYear { get; set; }
-
-        public string description { get; set; }
-
-        /*public virtual Coordinates Location { get; set; }*/
-        public int coordinateId { get; set; }
-
+        public string AccountEmail { get; set; }
+        public decimal AccountRevenue { get; set; }
+        public string AccountName { get; set; }
+        public string EstablishmentYear { get; set; }
+        public string Description { get; set; }
+        public int CoordinateId { get; set; }
         public virtual Coordinates Location { get; set; }
-        public string Customer_email { get; set; }
+        public string CustomerEmail { get; set; }
         [JsonIgnore]
         public Customer Customer { get; set; }
     }

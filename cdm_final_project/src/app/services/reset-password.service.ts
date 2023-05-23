@@ -6,7 +6,7 @@ import { ResetPassword } from '../helpers/reset-password.model';
   providedIn: 'root'
 })
 export class ResetPasswordService {
-  private baseUrl:string="https://datatrackrapi.azurewebsites.net/api/User"
+  private baseUrl:string="https://localhost:7196/api/User"
   constructor(private http:HttpClient) { }
   
   sendResetPasswordLink(email:string)

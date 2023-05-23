@@ -19,9 +19,9 @@ export class NavbarComponent{
   
   constructor(
     private router:Router,
-    private dashboardService:DashboardService,
+    private _dashboardService:DashboardService,
     private _userService:UserService,
-    private auth:AuthService,
+    private _authService:AuthService,
     private dialog: MatDialog
     ){}
   
@@ -38,7 +38,7 @@ export class NavbarComponent{
     });
   }
   extractJWTToken(){
-    let token:string | null=this.auth.getToken();
+    let token:string | null=this._authService.getToken();
     try {
       type jwtToken={unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string};
       let decodedToken:{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string} | undefined;
@@ -76,9 +76,9 @@ export class NavbarComponent{
     }, 500);
   }
   searchVal(data:HTMLInputElement){
-    this.dashboardService.sendSearchEvent(data);
+    this._dashboardService.sendSearchEvent(data);
   }
   signout(){
-    this.auth.signOut();
+    this._authService.signOut();
    }
 }
