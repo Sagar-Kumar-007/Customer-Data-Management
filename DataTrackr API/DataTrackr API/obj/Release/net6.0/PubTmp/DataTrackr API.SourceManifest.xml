@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\sagkumar\Downloads\cdm final\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Release\net6.0\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\sagkumar\Downloads\cdm final\Customer-Data-Management\DataTrackr API\DataTrackr API\obj\Release\net6.0\PubTmp\EFSQLScripts\DataTrackr_Web_API.Models.ApiDbContext.sql" />
+</sitemanifest>
