@@ -131,6 +131,8 @@ export class CreateCustomerComponent {
           console.log(result);
         });
       }
+
+    this.matDialogRef.close();
     }, err=>{
       if(err){
         this._toastService.error({
@@ -192,6 +194,7 @@ export class CreateCustomerComponent {
               console.log(result);
             });
           }
+          this.matDialogRef.close();
         });
   }
 
