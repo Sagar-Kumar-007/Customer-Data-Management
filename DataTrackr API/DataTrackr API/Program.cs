@@ -14,7 +14,6 @@ using System.Text;
 using System;
 using DataTrackr_API.Helpers.UtilityService;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -26,15 +25,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers()
- .AddJsonOptions(options =>
- {
-     options.JsonSerializerOptions.PropertyNamingPolicy = null;
- });
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DevelopConnection");
 
@@ -73,7 +72,6 @@ builder.Services.AddCors(options =>
         .AllowAnyOrigin());
 });
 
-builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 var app = builder.Build();
 

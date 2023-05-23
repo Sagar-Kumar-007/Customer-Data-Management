@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -13,15 +13,15 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent{
-  dashboard:string="Customers";
+  @Input() dashboard:string="Customers";
   currentUrl!: string;
   user:{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string} | undefined;
   
   constructor(
     private router:Router,
-    private dashboardService:DashboardService,
+    private _dashboardService:DashboardService,
     private _userService:UserService,
-    private auth:AuthService,
+    private _authService:AuthService,
     private dialog: MatDialog
     ){}
   
@@ -38,7 +38,7 @@ export class NavbarComponent{
     });
   }
   extractJWTToken(){
-    let token:string | null=this.auth.getToken();
+    let token:string | null=this._authService.getToken();
     try {
       type jwtToken={unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string};
       let decodedToken:{unique_name:string;role:string;nbf:number;iat:number;exp:number;email:string} | undefined;
@@ -50,17 +50,8 @@ export class NavbarComponent{
     }
   }
   ngOnInit(){
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.currentUrl = event.url;
-        // this.detectDashboard();
-        this.dashboardService.detectDashboard(this.currentUrl);
-        this.dashboard=this.dashboardService.dashboard;
-      }
-      this._userService.user=this.extractJWTToken();
-      this.user=this._userService.user;
-      
-    });
+    this._userService.user=this.extractJWTToken();
+    this.user=this._userService.user;
   }
 
   generateInitials(){
@@ -85,9 +76,9 @@ export class NavbarComponent{
     }, 500);
   }
   searchVal(data:HTMLInputElement){
-    this.dashboardService.sendSearchEvent(data);
+    this._dashboardService.sendSearchEvent(data);
   }
   signout(){
-    this.auth.signOut();
+    this._authService.signOut();
    }
 }

@@ -1,6 +1,4 @@
-﻿
-using DataTrackr_API.DTO.ResetPassword;
-using DataTrackr_API.Helpers;
+﻿using DataTrackr_API.DTO.ResetPassword;
 using DataTrackr_API.Helpers.UtilityService;
 using DataTrackr_API.Models;
 using DataTrackr_Web_API.Models;
@@ -9,13 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using NuGet.Common;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
+using System.Text;
 using System.Threading.Tasks;
+using System;
+using DataTrackr_API.Helpers;
 
 namespace DataTrackr_API.Controllers
 {
@@ -49,7 +48,7 @@ namespace DataTrackr_API.Controllers
                 return NotFound(new { Message = "User Not Found !" });
             }
 
-            if(!PasswordHasher.VerifyPassword(userObj.Password,user.Password))
+            if (!PasswordHasher.VerifyPassword(userObj.Password, user.Password))
             {
                 return BadRequest(new { Message = "Password is Incorrect" });
             }
@@ -61,13 +60,13 @@ namespace DataTrackr_API.Controllers
             var currentTime = DateTime.UtcNow;
 
             if (currentTime > expirationTime)
-            { 
+            {
                 Console.WriteLine("Token has expired!");
             }
             return Ok(new
             {
-                Token=user.Token,
-                Message = "Login Success!" 
+                Token = user.Token,
+                Message = "Login Success!"
             });
         }
 
@@ -100,7 +99,7 @@ namespace DataTrackr_API.Controllers
                 return BadRequest(new { Message = password.ToString() });
             }
 
-            userObj.Password = PasswordHasher.HashPassword(userObj.Password);
+userObj.Password = PasswordHasher.HashPassword(userObj.Password);
             userObj.Token = "";
 
             await _authContext.Users.AddAsync(userObj);
@@ -113,8 +112,8 @@ namespace DataTrackr_API.Controllers
 
         [Authorize]
         [HttpGet]
-        
-        public async Task<ActionResult<User>>GetAllUsers()
+
+        public async Task<ActionResult<User>> GetAllUsers()
         {
             return Ok(await _authContext.Users.ToListAsync());
         }
@@ -144,7 +143,7 @@ namespace DataTrackr_API.Controllers
             }
             return sb.ToString();
         }
-    
+
         private string CreateJwt(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
@@ -171,18 +170,17 @@ namespace DataTrackr_API.Controllers
 
 
 
-
         [HttpPost("send-reset-email/{email}")]
-        public async Task<IActionResult>SendEmail(string email)
+        public async Task<IActionResult> SendEmail(string email)
         {
-            var user=await _authContext.Users.FirstOrDefaultAsync(a => a.Email == email);
+            var user = await _authContext.Users.FirstOrDefaultAsync(a => a.Email == email);
 
-            if(user is null)
+            if (user is null)
             {
                 return NotFound(new
                 {
-                        StatusCode = 404,
-                        Message = "email doesn't Exist" 
+                    StatusCode = 404,
+                    Message = "email doesn't Exist"
                 });
             }
             Random random = new Random();
@@ -190,7 +188,7 @@ namespace DataTrackr_API.Controllers
             Console.WriteLine(user.LastName);
             Console.WriteLine(emailToken);
             user.ResetPasswordToken = emailToken;
-            user.ResetPasswordExpiry = DateTime.Now.AddMinutes(15); 
+            user.ResetPasswordExpiry = DateTime.Now.AddMinutes(15);
 
             string from = _configuration["EmailSettings:From"];
 
@@ -204,7 +202,7 @@ namespace DataTrackr_API.Controllers
                 StatusCode = 200,
                 Message = "Email Sent!"
             });
-            
+
         }
 
 
@@ -227,7 +225,7 @@ namespace DataTrackr_API.Controllers
 
             DateTime emailTokenExpiry = user.ResetPasswordExpiry;
             if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
-            { 
+            {
                 return BadRequest(new
                 {
                     StatusCode = 400,
@@ -249,6 +247,7 @@ namespace DataTrackr_API.Controllers
                 Message = "Password Reset Successfully"
             });
         }
-    
+
     }
 }
+

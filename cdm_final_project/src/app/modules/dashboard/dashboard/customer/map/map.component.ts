@@ -28,26 +28,26 @@ export class MapComponent {
       .getCustomer(this.data.customerId)
       .subscribe((result) => {
         if (result) {
-          let accounts = result.accounts;
+          let accounts = result.Accounts;
           this.locations.pop();
           if (accounts)
             accounts.forEach((account) => {
               this.locations?.push({
-                lat: account.location?.latitude
-                  ? account.location?.latitude
+                lat: account.Location?.Latitude
+                  ? account.Location?.Latitude
                   : 22.4064172,
-                lng: account.location?.longitude
-                  ? account.location?.longitude
+                lng: account.Location?.Longitude
+                  ? account.Location?.Longitude
                   : 69.0750171,
               });
             });
 
           this.locations?.push({
-            lat: result.headquaters?.latitude
-              ? result.headquaters?.latitude
+            lat: result.Headquarters?.Latitude
+              ? result.Headquarters?.Latitude
               : 0,
-            lng: result.headquaters?.longitude
-              ? result.headquaters?.longitude
+            lng: result.Headquarters?.Longitude
+              ? result.Headquarters?.Longitude
               : 0,
             iconUrl: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
           });

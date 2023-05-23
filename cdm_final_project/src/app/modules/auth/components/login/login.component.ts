@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit{
 
   constructor(
               private fb:FormBuilder,
-              private auth:AuthService,
               private _router:Router,
               private toast:NgToastService,
               private _authService:AuthService,
@@ -93,11 +92,11 @@ openForgotPasswordDialog() {
 OnLogin() {
   if(this.loginForm.valid)
   {
-    this.auth.login(this.loginForm.value).subscribe({
+    this._authService.login(this.loginForm.value).subscribe({
        next:(res=>{
         alert(res.Message);
         this.loginForm.reset();
-        this.auth.storeToken(res.Token);
+        this._authService.storeToken(res.Token);
         this.toast.success({detail:"SUCCESS", summary:res.Message,duration:5000});
         this._router.navigate(['customerDashboard']);
         this._userService.user=this.extractJWTToken();
@@ -130,7 +129,7 @@ OnLogin() {
 
       if(this.signUpForm.valid && !this.passwordMatchError)
       {
-        this.auth.signUp(this.signUpForm.value).subscribe({
+        this._authService.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
             console.log("a: "+res.Message);
             alert(res.Message);
