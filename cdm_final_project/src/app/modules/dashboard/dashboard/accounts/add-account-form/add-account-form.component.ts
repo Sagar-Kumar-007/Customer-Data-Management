@@ -10,7 +10,7 @@ import { GoogleMapComponent } from '../../../google-map/google-map.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { LogsService } from 'src/app/services/logs.service';
-import { Ilogs } from 'src/app/datatypes/logs';
+import { Ilog } from 'src/app/datatypes/log';
 import { DatePipe } from '@angular/common';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { UserService } from 'src/app/services/user.service';
@@ -23,7 +23,7 @@ import { UserService } from 'src/app/services/user.service';
 export class AddAccountFormComponent {
   coordinates: ICoordinate;
   address!: string;
-  logInfo: Ilogs = {};
+  logInfo: Ilog = {};
   active:boolean=false;
   isUpdate: boolean=false;
 
@@ -32,10 +32,10 @@ export class AddAccountFormComponent {
     public datepipe: DatePipe,
     private _logService: LogsService,
     private dialog: MatDialog,
-    private toastService: NgToastService,
+    private _toastService: NgToastService,
     private _accountsService: AccountsService,
     private matDialogRef: MatDialogRef<AddAccountFormComponent>,
-    private dashboardService:DashboardService,
+    private _dashboardService:DashboardService,
     @Inject(MAT_DIALOG_DATA)
     private data: {
       status: string;
@@ -47,7 +47,7 @@ export class AddAccountFormComponent {
   ) {
     this.coordinates = {} as ICoordinate;
     if (this.coordinates) {
-      this.accountAddForm.controls.location.patchValue(this.coordinates);
+      this.accountAddForm.controls.Location.patchValue(this.coordinates);
     }
   }
 
@@ -87,7 +87,7 @@ export class AddAccountFormComponent {
     dialogRef.afterClosed().subscribe(
       (result: ICoordinate) => {
         this.coordinates = result;
-        if(this.coordinates)this.accountAddForm.controls.location.patchValue(this.coordinates);
+        if(this.coordinates)this.accountAddForm.controls.Location.patchValue(this.coordinates);
         
       },
       () => {
@@ -98,25 +98,25 @@ export class AddAccountFormComponent {
 
   addAccount() {
     
-    this.accountAddForm.value.location = this.coordinates;
-    this.accountAddForm.value.customer_email = this.data.email;
+    this.accountAddForm.value.Location = this.coordinates;
+    this.accountAddForm.value.CustomerEmail = this.data.email;
     console.log(this.accountAddForm.value);
-    this.accountAddForm.value.acc_revenue = Math.floor(Math.random() * 101);
+    this.accountAddForm.value.AccountRevenue = Math.floor(Math.random() * 101);
     this._accountsService
       .addAccount(this.accountAddForm.value)
       .subscribe((result) => {
         if (result) {
-        this.dashboardService.sendAddAccountEvent(result);
-          this.toastService.success({
+        this._dashboardService.sendAddAccountEvent(result);
+          this._toastService.success({
             detail: 'Success',
             summary: 'Account Added Successfully',
             duration: 3000,
           });
 
-          this.logInfo.userId = this._userService.user?.email;
-          this.logInfo.operation = 'created';
-          this.logInfo.message = `${result?.aname} account of customer ${this.data?.customerName} has been created.`;
-          this.logInfo.timeStamp = `${this.datepipe.transform(
+          this.logInfo.UserId = this._userService.user?.email;
+          this.logInfo.Operation = 'created';
+          this.logInfo.Message = `${result?.AccountName} account of customer ${this.data?.customerName} has been created.`;
+          this.logInfo.TimeStamp = `${this.datepipe.transform(
             new Date(),
             'MM/dd/yyyy h:mm:ss'
           )}`;
@@ -129,7 +129,7 @@ export class AddAccountFormComponent {
         }
       }, err=>{
         if(err){
-          this.toastService.error({
+          this._toastService.error({
             detail: 'UNSUCCESSFUL',
             summary: 'Account with this Email Already Exist',
             duration: 3000,
@@ -142,21 +142,21 @@ export class AddAccountFormComponent {
     this._accountsService
       .updateAccount(
         this.accountAddForm.value,
-        this.accountAddForm.value.acc_email
+        this.accountAddForm.value.AccountEmail
       )
       .subscribe((result) => {
         if (result) {
           console.log(result);
-          this.toastService.success({
+          this._toastService.success({
             detail: 'Success',
             summary: 'Account Updated Successfully',
             duration: 3000,
           });
 
-          this.logInfo.userId = this._userService.user?.email;
-          this.logInfo.operation = 'updated';
-          this.logInfo.message = `${result?.aname} account of customer ${this.data.email} has been updated.`;
-          this.logInfo.timeStamp = `${this.datepipe.transform(
+          this.logInfo.UserId = this._userService.user?.email;
+          this.logInfo.Operation = 'updated';
+          this.logInfo.Message = `${result?.AccountName} account of customer ${this.data.email} has been updated.`;
+          this.logInfo.TimeStamp = `${this.datepipe.transform(
             new Date(),
             'MM/dd/yyyy h:mm:ss'
           )}`;
@@ -191,32 +191,32 @@ export class AddAccountFormComponent {
   }
 
   accountAddForm = new FormGroup({
-    acc_email: new FormControl('', [Validators.required, Validators.email]),
-    aname: new FormControl('', [Validators.required]),
-    location: new FormControl<ICoordinate>({}, [Validators.required]),
-    estYear: new FormControl('', [
+    AccountEmail: new FormControl('', [Validators.required, Validators.email]),
+    AccountName: new FormControl('', [Validators.required]),
+    Location: new FormControl<ICoordinate>({}, [Validators.required]),
+    EstablishmentYear: new FormControl('', [
       Validators.required,
       this.yearValidator.bind(this.yearValidator),
     ]),
-    description: new FormControl('', [Validators.required]),
-    customer_email: new FormControl(this.data.email),
-    acc_revenue: new FormControl(0),
+    Description: new FormControl('', [Validators.required]),
+    CustomerEmail: new FormControl(this.data.email),
+    AccountRevenue: new FormControl(0),
   });
 
-  get aname() {
-    return this.accountAddForm.get('aname');
+  get AccountName() {
+    return this.accountAddForm.get('AccountName');
   }
-  get email() {
-    return this.accountAddForm.get('acc_email');
+  get AccountEmail() {
+    return this.accountAddForm.get('AccountEmail');
   }
-  get location() {
-    return this.accountAddForm.get('location');
+  get Location() {
+    return this.accountAddForm.get('Location');
   }
-  get estYear() {
-    return this.accountAddForm.get('estYear');
+  get EstablishmentYear() {
+    return this.accountAddForm.get('EstablishmentYear');
   }
-  get description() {
-    return this.accountAddForm.get('description');
+  get Description() {
+    return this.accountAddForm.get('Description');
   }
 
   ngOnDestroy() {

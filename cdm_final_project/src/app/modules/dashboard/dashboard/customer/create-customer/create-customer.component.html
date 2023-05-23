@@ -6,9 +6,9 @@
     <form [formGroup]="customerAddForm">
       <mat-form-field class="example-full-width">
         <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="cname" name="cname" />
+        <input matInput type="text" formControlName="CustomerName" name="CustomerName" />
         <mat-icon matSuffix>person</mat-icon>
-        <mat-error *ngIf="cname && cname.invalid">
+        <mat-error *ngIf="CustomerName && CustomerName.invalid">
           Name <strong>Required</strong>
         </mat-error>
       </mat-form-field>
@@ -18,40 +18,42 @@
         <input
           type="email"
           matInput
-          formControlName="email"
-          name="email"
+          formControlName="CustomerEmail"
+          name="CustomerEmail"
           readonly
         />
         <mat-icon matSuffix>email</mat-icon>
-        <mat-error *ngIf="email && email.invalid && email.touched">
+        <mat-error *ngIf="CustomerEmail && CustomerEmail.invalid && CustomerEmail.touched">
           Please Enter valid email
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill" *ngIf="!isUpdateActive">
         <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" name="email" />
+        <input type="email" matInput formControlName="CustomerEmail" name="CustomerEmail" />
         <mat-icon matSuffix>email</mat-icon>
-        <mat-error *ngIf="email && email.invalid && email.touched">
+        <mat-error *ngIf="CustomerEmail && CustomerEmail.invalid && CustomerEmail.touched">
           Please Enter valid email
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Sector</mat-label>
-        <mat-select formControlName="sector">
+        <mat-select formControlName="Sector">
           <mat-option value="Construction">Construction</mat-option>
           <mat-option value="IT">IT</mat-option>
           <mat-option value="Electronics">Electronics</mat-option>
           <mat-option value="Textiles">Textiles</mat-option>
           <mat-option value="Machinery">Machinery</mat-option>
           <mat-option value="Automobile">Automobile</mat-option>
-          <mat-option value="Power">Power</mat-option>
+          <mat-option value="Finance">Finance</mat-option>
+          <mat-option value="Ed-Tech">EdTech</mat-option>
+          
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Logo</mat-label>
-        <input type="text" matInput formControlName="logo" />
+        <input type="text" matInput formControlName="Logo" />
         <mat-icon matSuffix>link</mat-icon>
       </mat-form-field>
 
@@ -60,24 +62,24 @@
           <td>
             <mat-form-field>
               <ngx-mat-intl-tel-input
-                name="phoneNo"
+                name="PhoneNumber"
                 [preferredCountries]="['in', 'us']"
-                [placeholder]="'PhoneNo'"
+                [placeholder]="'PhoneNumber'"
                 [enableSearch]="true"
                 [enablePlaceholder]="true"
                 describedBy="phoneNo"
-                formControlName="phoneNo"
+                formControlName="PhoneNumber"
                 (countryChanged)="onCountryChange($event)"
               >
               </ngx-mat-intl-tel-input>
               <mat-error
-                *ngIf="customerAddForm.controls.phoneNo.errors?.required"
+                *ngIf="customerAddForm.controls.PhoneNumber.errors?.required"
                 >Phone <strong>Required</strong></mat-error
               >
 
               <mat-error
                 *ngIf="
-                  customerAddForm.controls.phoneNo.errors?.validatePhoneNumber
+                  customerAddForm.controls.PhoneNumber.errors?.validatePhoneNumber
                 "
                 >invalid <strong>Number</strong></mat-error
               >
@@ -88,7 +90,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Website</mat-label>
-        <input type="text" matInput formControlName="website" name="website" />
+        <input type="text" matInput formControlName="Website" name="Website" />
         <mat-icon matSuffix>language</mat-icon>
       </mat-form-field>
       <table class="example-full-width" cellspacing="0">
@@ -110,8 +112,8 @@
         <mat-label>Description</mat-label>
         <textarea
           matInput
-          formControlName="description"
-          name="description"
+          formControlName="Description"
+          name="Description"
         ></textarea>
         <mat-icon matSuffix>mode_edit</mat-icon>
         <mat-error><strong>Required</strong></mat-error>

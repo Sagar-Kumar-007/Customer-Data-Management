@@ -26,15 +26,15 @@ export class SidebarComponent {
      private route: ActivatedRoute,
      private _accountsService:AccountsService,
      private _customerService:CustomerService,
-     private dashboardService:DashboardService,
-     private auth:AuthService
+     private _dashboardService:DashboardService,
+     private _authService:AuthService
      ) {}
   ngOnInit(){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
-        this.dashboardService.detectDashboard(this.currentUrl);
-        this.dashboard=this.dashboardService.dashboard;
+        this._dashboardService.detectDashboard(this.currentUrl);
+        this.dashboard=this._dashboardService.dashboard;
         console.log("dash: "+this.dashboard);
         this.fetchAccountsWithCustomerEmail();
       }
@@ -88,7 +88,7 @@ export class SidebarComponent {
       backdropClass: 'backgroundblur',
     });
     dialogRef.afterClosed().subscribe((result)=>{
-      // window.location.reload();
+      
     })
   }
   showCustomerCard(flag:boolean){
@@ -127,11 +127,11 @@ export class SidebarComponent {
         status:'addAccount',
         account:null,
         email:this.customerId,
-        customerName: this.customer?.cname
+        customerName: this.customer?.CustomerName
       }
     });
     dialogRef.afterClosed().subscribe(result=>{
-      // window.location.reload();
+      
     })
   }
   addOperation(){
@@ -143,7 +143,7 @@ export class SidebarComponent {
     }
   }
   signout(){
-    this.auth.signOut();
+    this._authService.signOut();
    }
 
 }

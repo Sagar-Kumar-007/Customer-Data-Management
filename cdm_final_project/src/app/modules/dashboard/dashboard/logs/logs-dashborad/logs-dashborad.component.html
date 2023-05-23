@@ -27,22 +27,22 @@
                   | paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }
               "
             >
-              <td>{{ logList.userId }}</td>
-              <td>{{ logList.timeStamp }}</td>
-              <td>{{ logList.message }}</td>
-              <ng-template [ngIf]="logList.operation === 'created'"
+              <td>{{ logList.UserId }}</td>
+              <td>{{ logList.TimeStamp }}</td>
+              <td>{{ logList.Message }}</td>
+              <ng-template [ngIf]="logList.Operation === 'created'"
                 ><td>
-                  <span class="status-created">{{ logList.operation }}</span>
+                  <span class="status-created">{{ logList.Operation }}</span>
                 </td></ng-template
               >
-              <ng-template [ngIf]="logList.operation === 'updated'"
+              <ng-template [ngIf]="logList.Operation === 'updated'"
                 ><td>
-                  <span class="status-updated">{{ logList.operation }}</span>
+                  <span class="status-updated">{{ logList.Operation }}</span>
                 </td></ng-template
               >
-              <ng-template [ngIf]="logList.operation === 'deleted'"
+              <ng-template [ngIf]="logList.Operation === 'deleted'"
                 ><td>
-                  <span class="status-deleted">{{ logList.operation }}</span>
+                  <span class="status-deleted">{{ logList.Operation }}</span>
                 </td></ng-template
               >
             </tr>

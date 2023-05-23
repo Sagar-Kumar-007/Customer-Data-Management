@@ -7,33 +7,33 @@
         <ng-template [ngIf]="customersList!=undefined">
           <li *ngFor="let customer of customersList| paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }">
             <div class="card">
-              <div class="image-session" routerLink="/accountDashboard" [queryParams]="{customer:customer.email}">
+              <div class="image-session" routerLink="/accountDashboard" [queryParams]="{customer:customer.CustomerEmail}">
                 <span
                   class="image"
                   style="
-                    background-image: url({{customer.logo}});
+                    background-image: url({{customer.Logo}});
                   "
                 ></span>
               </div>
               <div class="meta-sission">
                 <div class="body">
-                  <h2 class="title">{{customer.cname}}</h2>
+                  <h2 class="title">{{customer.CustomerName}}</h2>
                   <p class="desc">
-                    {{customer['description']}}
+                    {{customer['Description']}}
                   </p>
-                  <span routerLink="/accountDashboard" [queryParams]="{customer:customer.email}" class="read-more">Read More..</span>
+                  <span routerLink="/accountDashboard" [queryParams]="{customer:customer.CustomerEmail}" class="read-more">Read More..</span>
                  
                 </div>
                 <div class="footer">
                   <div class="views">
-                    <span><b>Sector:</b> {{customer['sector']}}</span>
+                    <span><b>Sector:</b> {{customer['Sector']}}</span>
                   </div>
                   <!-- <a href="#" class="button">Read more →</a> -->
                   <div class="icons">
-                      <i routerLink="/accountDashboard" [queryParams]="{customer:customer.email}" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;" title="account-dashboard"></i>
-                      <i (click)="mapCall(customer.cname, customer.email)" class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;" title="map"></i>
-                      <i (click)="updateCustomer(customer.email)" class="fa-solid fa-pencil" style="color: #ead053;" title="update-customer"></i>
-                      <i (click)="deleteCustomer(customer.email, customer.cname)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;" title="delete-customer"></i>
+                      <i routerLink="/accountDashboard" [queryParams]="{customer:customer.CustomerEmail}" class="fa-sharp fa-solid fa-eye" style="color: #1d5cc9;" title="account-dashboard"></i>
+                      <i (click)="mapCall(customer.CustomerName, customer.CustomerEmail)" class="fa-sharp fa-solid fa-map-location-dot" style="color: #275db9;" title="map"></i>
+                      <i (click)="updateCustomer(customer.CustomerEmail)" class="fa-solid fa-pencil" style="color: #ead053;" title="update-customer"></i>
+                      <i (click)="deleteCustomer(customer.CustomerEmail, customer.CustomerName)" class="fa-sharp fa-solid fa-trash" style="color: #c02c1b;" title="delete-customer"></i>
                   </div>
                 </div>
               </div>

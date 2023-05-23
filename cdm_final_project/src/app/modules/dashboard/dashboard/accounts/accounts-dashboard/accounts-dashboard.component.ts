@@ -15,7 +15,7 @@ import { ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { NgToastService } from 'ng-angular-popup';
 import { LogsService } from 'src/app/services/logs.service';
-import { Ilogs } from 'src/app/datatypes/logs';
+import { Ilog } from 'src/app/datatypes/log';
 import { DatePipe } from '@angular/common';
 import { IPaginatedResults } from 'src/app/datatypes/paginatedResults';
 import { Subscription } from 'rxjs';
@@ -35,7 +35,7 @@ export class AccountsDashboardComponent implements OnInit {
   accountsList: IAccount[] | undefined;
   totalRevenue: number | string = 0;
   totalAccounts: number = 0;
-  logInfo: Ilogs = {};
+  logInfo: Ilog = {};
   @Output() newEventEmitter = new EventEmitter<boolean>();
   // Pie
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
@@ -57,19 +57,19 @@ export class AccountsDashboardComponent implements OnInit {
     private _userService: UserService,
     public datepipe: DatePipe,
     private _logService: LogsService,
-    private confirm: NgConfirmService,
+    private _confirmService: NgConfirmService,
     private _accountsService: AccountsService,
     private dialog: MatDialog,
     private _route: ActivatedRoute,
     private _ngtoastService: NgToastService,
-    private dashboardService: DashboardService
+    private _dashboardService: DashboardService
   ) {
-    this.searchEventSubscription = dashboardService
+    this.searchEventSubscription = _dashboardService
       .getSearchEvent()
       .subscribe((data: HTMLInputElement) => {
         this.searchVal(data.value);
       });
-    this.accountListEventSubscription = dashboardService
+    this.accountListEventSubscription = _dashboardService
       .getAddAccountEvent()
       .subscribe((data) => {
         this.showAccountsList();
@@ -94,31 +94,30 @@ export class AccountsDashboardComponent implements OnInit {
       )
       .subscribe((result: IPaginatedResults<IAccount>) => {
         if (result) {
-          this.accountsList = result.items;
-          this.totalItems = result.totalCount;
-          // console.log(this.accountsList);
-          this.totalAccounts = result.totalCount;
+          this.accountsList = result.Items;
+          this.totalItems = result.TotalCount;
+          this.totalAccounts = result.TotalCount;
           this.accountsList.sort((a, b) => {
-            if (a.acc_revenue && b.acc_revenue)
-              return b.acc_revenue - a.acc_revenue;
+            if (a.AccountRevenue && b.AccountRevenue)
+              return b.AccountRevenue - a.AccountRevenue;
             return 1;
           });
           let idx = 0;
           let sumOfTopFourAccounts = 0;
           this.accountsList.forEach((element) => {
             if (idx < 4) {
-              if (element.aname) this.pieChartLabels.push(element.aname);
-              if (element.acc_revenue)
-                this.pieChartDatasets[0].data.push(element.acc_revenue);
-              if (element.acc_revenue)
-                sumOfTopFourAccounts += element.acc_revenue;
+              if (element.AccountName) this.pieChartLabels.push(element.AccountName);
+              if (element.AccountRevenue)
+                this.pieChartDatasets[0].data.push(element.AccountRevenue);
+              if (element.AccountRevenue)
+                sumOfTopFourAccounts += element.AccountRevenue;
               else {
                 this.pieChartLabels.pop();
               }
               idx++;
             }
-            if (element.acc_revenue && typeof this.totalRevenue == 'number')
-              this.totalRevenue += element.acc_revenue;
+            if (element.AccountRevenue && typeof this.totalRevenue == 'number')
+              this.totalRevenue += element.AccountRevenue;
             else {
               this.totalRevenue = 'Err';
               return;
@@ -179,11 +178,11 @@ export class AccountsDashboardComponent implements OnInit {
   }
 
   deleteAccount(account: IAccount, aname?: string | null) {
-    this.confirm.showConfirm(
+    this._confirmService.showConfirm(
       `Are you sure want to delete ${aname}?`,
       () => {
         this._accountsService
-          .deleteAccount(account, account.acc_email?.toString())
+          .deleteAccount(account, account.AccountEmail?.toString())
           .subscribe((result) => {
             console.log(result);
 
@@ -194,11 +193,11 @@ export class AccountsDashboardComponent implements OnInit {
               duration: 3000,
             });
 
-            this.logInfo.userId = this._userService.user?.email;
-            this.logInfo.operation = 'deleted';
+            this.logInfo.UserId = this._userService.user?.email;
+            this.logInfo.Operation = 'deleted';
             if (this.customerId)
-              this.logInfo.message = `${account.aname} of customer ${this.customerId} has been deleted.`;
-            this.logInfo.timeStamp = `${this.datepipe.transform(
+              this.logInfo.Message = `${account.AccountName} of customer ${this.customerId} has been deleted.`;
+            this.logInfo.TimeStamp = `${this.datepipe.transform(
               new Date(),
               'MM/dd/yyyy h:mm:ss'
             )}`;
@@ -225,7 +224,7 @@ export class AccountsDashboardComponent implements OnInit {
   }
 
   onPageChange(event: number) {
-    // console.log(event);
+    
     this.p = event;
     this.showAccountsList();
   }
