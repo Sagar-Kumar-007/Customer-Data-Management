@@ -1,7 +1,7 @@
 <!--Navigation....-->
 <div class="navigation">
     <ul>
-      <li>
+      <li (click)="removeActiveClassNavigation()">
         <div class="brand">
           <a>
             <div>
@@ -17,7 +17,7 @@
           </a>
         </div>
       </li>
-      <li *ngIf="dashboard==='Accounts'" class="customer-card">
+      <li *ngIf="dashboard==='Accounts'" class="customer-card" (click)="removeActiveClassNavigation()">
         <div class="customer" *ngIf="!validateViewportSize()" >
             <div class="customer-img" >
                 <img *ngIf="customer?.logo" src={{customer?.logo}} alt="">
@@ -36,15 +36,17 @@
         (mouseover)="animateIcon(icon1, 'fa-beat')"
         (mouseout)="removeAnimation(icon1, 'fa-beat')"
         *ngIf="dashboard==='Customers' || dashboard==='Logs'"
+        routerLink="/customerDashboard"
+        (click)="removeActiveClassNavigation()"
       >
-        <a [routerLink]="['/customerDashboard']">
+        <a>
           <span class="icon">
             <i class="fa-solid fa-house" #icon1 style="color: #ffffff"></i>
           </span>
           <span class="title">Dashboard</span>
         </a>
       </li>
-    <li *ngIf="dashboard==='Accounts'" (mouseover)="animateIcon(icon2,'fa-bounce')" (mouseout)="removeAnimation(icon2,'fa-bounce')" routerLink="/customerDashboard">
+    <li (click)="removeActiveClassNavigation()" *ngIf="dashboard==='Accounts'" (mouseover)="animateIcon(icon2,'fa-bounce')" (mouseout)="removeAnimation(icon2,'fa-bounce')" routerLink="/customerDashboard">
         <a>
             <span class="icon">
                 <i class="fa-solid fa-home" #icon2 style="color: #ffffff;"></i>
@@ -53,6 +55,7 @@
         </a>
     </li>
       <li
+        (click)="removeActiveClassNavigation()"
         *ngIf="dashboard!=='Logs'"
         (mouseover)="animateIcon(icon2, 'fa-bounce')"
         (mouseout)="removeAnimation(icon2, 'fa-bounce')"
@@ -70,6 +73,7 @@
         (mouseover)="animateIcon(icon3, 'fa-beat-fade')"
         (mouseout)="removeAnimation(icon3, 'fa-beat-fade')"
         routerLink="/logs"
+        (click)="removeActiveClassNavigation()"
       >
         <a>
           <span class="icon">
