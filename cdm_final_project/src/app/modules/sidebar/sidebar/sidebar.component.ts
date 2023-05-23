@@ -70,7 +70,18 @@ export class SidebarComponent {
       toggle.classList.remove('fa-flip');
     }, 500);
   }
-
+  removeActiveClassNavigation(){
+    let width = window.innerWidth;
+    
+    if(width<=991){
+      let mainNav = document.querySelector('.main-nav') as HTMLDivElement;
+      mainNav.classList.remove('active');
+      let sidebar = document.querySelector('.navigation') as HTMLDivElement;
+      sidebar.classList.remove('active');
+      let main = document.querySelector('.main') as HTMLDivElement;
+      main.classList.remove('active');
+    }
+  }
   animateIcon(icon: HTMLElement, classToBeAdded: string) {
     icon.classList.add(classToBeAdded);
     icon.style.color = '#003b69';
