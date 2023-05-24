@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CustomerService } from './customer.service';
 import { ICustomer } from '../datatypes/customer';
 import {Observable,Subject} from 'rxjs';
 import { IAccount } from '../datatypes/account';
@@ -26,20 +24,16 @@ export class DashboardService {
   }
 
   sendAddCustomerEvent(res:ICustomer){
-    // console.log('send')
     this.customerSubject.next(res);
   }
   getAddCustomerEvent(){
-    // console.log("subscribe");
     return this.customerSubject.asObservable();
   }
 
   sendAddAccountEvent(res:IAccount){
-    // console.log('send')
     this.accountSubject.next(res);
   }
   getAddAccountEvent(){
-    // console.log("subscribe");
     return this.accountSubject.asObservable();
   }
 
@@ -52,16 +46,25 @@ export class DashboardService {
 
   detectDashboard(currentUrl:string) {
 
-    if(currentUrl.includes('customerDashboard')){
+    if(currentUrl==='/customerDashboard'){
         this.dashboard='Customers';
     }
     else if(currentUrl.includes('accountDashboard')){
-      this.dashboard='Accounts';
+      // this.dashboard='Accounts';
+      let temp=[currentUrl.split('?'),currentUrl.split('?')[1].split('=')];
+      console.log(temp);
+      
+      if(temp[0][0]==='/accountDashboard' && temp[1][0]==='customer' && temp[1][1].length>0){
+        this.dashboard='Accounts';        
+      }
+      else{
+        this.dashboard='fourOFour';
+      }
     }
-    else if(currentUrl.includes('logs')){
+    else if(currentUrl==='/logs'){
       this.dashboard='Logs';
     }
-    else if(currentUrl.includes('login')){
+    else if(currentUrl==='/login'){
       this.dashboard='Login';
     }
     else{

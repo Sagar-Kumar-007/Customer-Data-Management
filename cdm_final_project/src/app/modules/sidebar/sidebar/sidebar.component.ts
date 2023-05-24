@@ -31,13 +31,10 @@ export class SidebarComponent {
      ) {}
   ngOnInit(){
     this._dashboardService.getGetCustomerDetailsEvent().subscribe((res)=>{
-      console.log("cc");
       this.fetchAccountsWithCustomerEmail();
     })
   }
   fetchAccountsWithCustomerEmail() {
-    console.log("a");
-    
     if(this._dashboardService.dashboard==='Accounts'){
         this.route.queryParams.subscribe(params=>{
           let id = params['customer'];
@@ -56,7 +53,6 @@ export class SidebarComponent {
 
   //Toggle
   onToggleClick() {
-    console.log('Yes');
     let navigation = document.querySelector('.navigation') as HTMLDivElement;
     let main = document.querySelector('.main') as HTMLDivElement;
     let toggle = document.querySelector('.fa-bars') as HTMLIFrameElement;

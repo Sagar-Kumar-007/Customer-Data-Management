@@ -37,7 +37,6 @@ export class AccountsDashboardComponent implements OnInit {
   totalAccounts: number = 0;
   logInfo: Ilog = {};
   @Output() newEventEmitter = new EventEmitter<boolean>();
-  // Pie
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   pieChartOptions: ChartOptions<'pie'> = {
     responsive: true,
@@ -184,8 +183,6 @@ export class AccountsDashboardComponent implements OnInit {
         this._accountsService
           .deleteAccount(account, account.AccountEmail?.toString())
           .subscribe((result) => {
-            console.log(result);
-
             this.showAccountsList();
             this._ngtoastService.success({
               detail: 'SUCCESS',
@@ -203,7 +200,6 @@ export class AccountsDashboardComponent implements OnInit {
             )}`;
 
             this._logService.postLogs(this.logInfo).subscribe((result) => {
-              console.log(result);
             });
           });
       },
@@ -212,8 +208,6 @@ export class AccountsDashboardComponent implements OnInit {
   }
 
   searchVal(data: string | undefined,customerEmail:string) {
-    console.log(data);
-
     if (!data) {
       this.showAccountsList();
     }

@@ -6,7 +6,6 @@ import { AccountsComponent } from './modules/dashboard/dashboard/accounts/accoun
 import { AuthGuard } from './guards/auth.guard';
 import { LogsComponent } from './modules/dashboard/dashboard/logs/logs/logs.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
-import { ResetPasswordComponent } from './modules/auth/components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
