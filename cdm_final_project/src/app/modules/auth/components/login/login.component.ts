@@ -98,7 +98,7 @@ OnLogin() {
         console.log(res.Token);
         this.loginForm.reset();
         this._authService.storeToken(res.Token);
-        console.log("Toekn: "+res.Token);
+        
         
         this.toast.success({detail:"SUCCESS", summary:res.Message,duration:5000});
         this._router.navigate(['customerDashboard']);
@@ -134,14 +134,14 @@ OnLogin() {
       {
         this._authService.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
-            console.log("a: "+res.message);
-            alert(res.message);
+           
+            alert(res.Message);
             this.signUpForm.reset();
             this.removeSignup();
           }),
           error:(err=>{
-            console.log("a: "+err.message);
-            alert(err?.error.message)
+        
+            alert(err?.error.Message)
           })
         })
       }

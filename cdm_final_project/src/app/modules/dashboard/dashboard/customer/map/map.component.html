@@ -13,7 +13,15 @@
          [latitude]="marker.lat" 
            [longitude]="marker.lng"
            [iconUrl]="marker.iconUrl?marker.iconUrl:''"
-           >    
+          
+           >
+           <agm-info-window #infoWindow>
+            {{ marker.label}}
+      </agm-info-window>
+
+
+
+
        
      </agm-marker>
           
