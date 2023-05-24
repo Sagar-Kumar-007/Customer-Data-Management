@@ -21,7 +21,8 @@ export class MapComponent {
     lat: number;
     lng: number;
     iconUrl?: string;
-  }[] = [{ lat: 22.4064172, lng: 69.0750171 }];
+    label: string;
+  }[] = [{ lat: 22.4064172, lng: 69.0750171, label: '' }];
 
   ngOnInit() {
     this._customerService
@@ -39,6 +40,7 @@ export class MapComponent {
                 lng: account.Location?.Longitude
                   ? account.Location?.Longitude
                   : 69.0750171,
+                label: account.AccountName ? `${account.AccountName} of ${result.CustomerName}` : '',
               });
             });
 
@@ -50,6 +52,7 @@ export class MapComponent {
               ? result.Headquarters?.Longitude
               : 0,
             iconUrl: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+            label: result.CustomerName ? `${result.CustomerName}: Headquarters` : '',
           });
         }
       });
