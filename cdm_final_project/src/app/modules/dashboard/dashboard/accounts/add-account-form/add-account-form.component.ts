@@ -91,7 +91,6 @@ export class AddAccountFormComponent {
         
       },
       () => {
-        console.log('Error Found');
       }
     );
   }
@@ -100,7 +99,6 @@ export class AddAccountFormComponent {
     
     this.accountAddForm.value.Location = this.coordinates;
     this.accountAddForm.value.CustomerEmail = this.data.email;
-    console.log(this.accountAddForm.value);
     this.accountAddForm.value.AccountRevenue = Math.floor(Math.random() * 101);
     this._accountsService
       .addAccount(this.accountAddForm.value)
@@ -121,10 +119,7 @@ export class AddAccountFormComponent {
             'MM/dd/yyyy h:mm:ss'
           )}`;
 
-          this._logService.postLogs(this.logInfo).subscribe(result=>{
-           
-            console.log(result);
-            
+          this._logService.postLogs(this.logInfo).subscribe(result=>{            
           });;
         }
       }, err=>{
@@ -146,7 +141,6 @@ export class AddAccountFormComponent {
       )
       .subscribe((result) => {
         if (result) {
-          console.log(result);
           this._toastService.success({
             detail: 'Success',
             summary: 'Account Updated Successfully',
@@ -161,9 +155,7 @@ export class AddAccountFormComponent {
             'MM/dd/yyyy h:mm:ss'
           )}`;
 
-          this._logService.postLogs(this.logInfo).subscribe(result=>{
-            console.log(result);
-            
+          this._logService.postLogs(this.logInfo).subscribe(result=>{            
           });;
         }
       });

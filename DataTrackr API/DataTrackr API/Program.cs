@@ -35,7 +35,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 
-var connectionString = builder.Configuration.GetConnectionString("DevelopConnection");
+var connectionString = builder.Configuration.GetConnectionString("ProdConnection");
 
 builder.Services.AddDbContext<ApiDbContext>(options =>
 {

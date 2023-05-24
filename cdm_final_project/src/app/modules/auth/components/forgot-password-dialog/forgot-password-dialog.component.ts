@@ -41,14 +41,12 @@ export class ForgotPasswordDialogComponent implements OnInit {
 
   submitForm() {
     this.resetPasswordEmail=this.forgotPasswordForm.get('email')!.value;
-    console.log('Submitted email:', this.resetPasswordEmail);
     
     this._resetService.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
       next:(res)=>{
 
         this.dialogRef = this.dialog.open(ResetPasswordComponent);
         this.dialogRef.afterClosed().subscribe(result => {
-          console.log('Dialog closed:', result);
         });
 
         this._toastService.success({

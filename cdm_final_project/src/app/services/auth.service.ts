@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 
-  private baseUrl:string="https://localhost:7196/api/User";
+  private baseUrl:string="https://datatrackrapi.azurewebsites.net/api/User";
   constructor(private http:HttpClient,private router:Router) { }
   
   signUp(userObj:any){

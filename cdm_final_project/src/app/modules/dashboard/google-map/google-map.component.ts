@@ -79,7 +79,6 @@ export class GoogleMapComponent implements OnInit {
   }
 
   markerDragEnd($event: any) {
-    console.log($event);
     this.latitude = $event.latLng.lat();
     this.longitude = $event.latLng.lng();
     this.getAddress(this.latitude, this.longitude);
@@ -90,8 +89,6 @@ export class GoogleMapComponent implements OnInit {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
       (results: any, status: any) => {
-        console.log(results);
-        console.log(status);
         if (status === 'OK') {
           if (results[0]) {
             this.zoom = 12;

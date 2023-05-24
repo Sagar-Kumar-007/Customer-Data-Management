@@ -56,8 +56,6 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   getCustomerDetails(){
-    console.log("bb");
-    
     this._dashboardService.sendGetCustomerDetailsEvent();
   }
 
@@ -113,7 +111,6 @@ export class CustomerDashboardComponent implements OnInit {
         if (id) {
           this._customerService.deleteCustomer(id).subscribe(
             (res) => {
-              console.log('res: ' + res);
               this.showCustomerList();
 
               this.logInfo.UserId = this._userService.user?.email;
@@ -125,7 +122,6 @@ export class CustomerDashboardComponent implements OnInit {
               )}`;
 
               this._logService.postLogs(this.logInfo).subscribe((result) => {
-                console.log(result);
               });
 
               this._toastService.success({

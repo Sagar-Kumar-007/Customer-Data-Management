@@ -85,7 +85,6 @@ extractJWTToken(){
 openForgotPasswordDialog() {
   this.dialogRef = this.dialog.open(ForgotPasswordDialogComponent);
   this.dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialog closed:', result);
   });
 }
 
@@ -131,13 +130,11 @@ OnLogin() {
       {
         this._authService.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
-            console.log("a: "+res.Message);
             alert(res.Message);
             this.signUpForm.reset();
             this.removeSignup();
           }),
           error:(err=>{
-            console.log("a: "+err.Message);
             alert(err?.error.Message)
           })
         })

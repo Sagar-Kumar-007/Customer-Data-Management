@@ -101,7 +101,6 @@ export class CreateCustomerComponent {
         }
       },
       () => {
-        console.log('Error Found');
       }
     );
   }
@@ -128,7 +127,6 @@ export class CreateCustomerComponent {
         )}`;
 
         this._logService.postLogs(this.logInfo).subscribe((result) => {
-          console.log(result);
         });
       }
 
@@ -159,7 +157,6 @@ export class CreateCustomerComponent {
 
 
   onCountryChange(event: any) {
-    console.log(event);
     this.customerAddForm.controls.CountryCode.patchValue(event.dialCode);
   }
 
@@ -172,7 +169,6 @@ export class CreateCustomerComponent {
         .subscribe((res) => {
           
           if (res) {
-          console.log(res);
 
             this._toastService.success({
               detail: 'Success',
@@ -191,7 +187,6 @@ export class CreateCustomerComponent {
             )}`;
 
             if (res)this._logService.postLogs(this.logInfo).subscribe((result) => {
-              console.log(result);
             });
           }
           this.matDialogRef.close();

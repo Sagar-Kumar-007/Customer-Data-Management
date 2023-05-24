@@ -34,7 +34,6 @@ export class NavbarComponent{
       width:'400px'
     });
     this.dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed:', result);
     });
   }
   extractJWTToken(){
