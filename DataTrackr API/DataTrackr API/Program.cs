@@ -16,10 +16,6 @@ using DataTrackr_API.Helpers.UtilityService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
-
-
 // Add services to the container.
 
 
@@ -35,7 +31,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 
-var connectionString = builder.Configuration.GetConnectionString("DevelopConnection");
+var connectionString = builder.Configuration.GetConnectionString("ProdConnection");
 
 builder.Services.AddDbContext<ApiDbContext>(options =>
 {
@@ -69,7 +65,7 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod()
         .SetIsOriginAllowed(
             origin => origin == "http://localhost:4200")
-        .AllowAnyOrigin());
+        );
 });
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));

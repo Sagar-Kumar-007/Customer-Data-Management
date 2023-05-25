@@ -160,7 +160,7 @@ userObj.Password = PasswordHasher.HashPassword(userObj.Password);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddSeconds(10),
+                Expires = DateTime.Now.AddHours(2),
                 SigningCredentials = credentials
             };
 
@@ -188,7 +188,7 @@ userObj.Password = PasswordHasher.HashPassword(userObj.Password);
             Console.WriteLine(user.LastName);
             Console.WriteLine(emailToken);
             user.ResetPasswordToken = emailToken;
-            user.ResetPasswordExpiry = DateTime.Now.AddMinutes(15);
+            user.ResetPasswordExpiry = DateTime.Now.AddMinutes(5);
 
             string from = _configuration["EmailSettings:From"];
 
