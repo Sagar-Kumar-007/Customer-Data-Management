@@ -12,7 +12,7 @@
       <table class="account-table">
         <thead class="account-head">
           <tr>
-            <td>UserId</td>
+            <td>User Email</td>
             <td>TimeStamp</td>
             <td>Comment</td>
             <td>Action</td>
@@ -53,7 +53,7 @@
   </div>
 
   <div class="paginationclass">
-    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    <pagination-controls (pageChange)="onPageChange($event)" *ngIf="!searchResponse"></pagination-controls>
   </div>
   
 </div>

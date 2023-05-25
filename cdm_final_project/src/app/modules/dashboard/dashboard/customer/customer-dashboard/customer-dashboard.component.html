@@ -45,7 +45,7 @@
     </div>
   </div>
   <div class="paginationclass">
-    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    <pagination-controls (pageChange)="onPageChange($event)" *ngIf="!searchResponse"></pagination-controls>
   </div>
   
 </div>

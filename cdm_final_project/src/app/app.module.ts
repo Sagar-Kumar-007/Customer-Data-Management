@@ -51,7 +51,9 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
       multi:true  
     },
     {
-      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+      provide: HTTP_INTERCEPTORS, 
+      useClass: LoadingInterceptor, 
+      multi: true
     },
   DatePipe],
   bootstrap: [AppComponent]
