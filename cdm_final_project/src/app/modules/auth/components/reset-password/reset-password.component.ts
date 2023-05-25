@@ -73,7 +73,7 @@ reset(){
         this.forgetPassdialogRef.close();
       },
       error: (err) => {
-            alert(err?.error.message);
+            alert(err?.error.Message);
       }
     });
   }
