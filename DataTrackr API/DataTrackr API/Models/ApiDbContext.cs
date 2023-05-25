@@ -1,4 +1,4 @@
-using DataTrackr_API.Models;
+using DataTrackrAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataTrackr_Web_API.Models
@@ -6,16 +6,13 @@ namespace DataTrackr_Web_API.Models
     public class ApiDbContext : DbContext
     {
         public ApiDbContext(DbContextOptions options) : base(options)
-        {
-
+        { 
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Coordinates> Coordinates { get; set; }
         public DbSet<User> Users { get; set; }        
         public DbSet<Log> Logs { get; set; }
-        
-
         public DbSet<Coordinates> coordinates{get;set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,7 +46,5 @@ namespace DataTrackr_Web_API.Models
                 .WithMany(l => l.Customers)
                 .HasForeignKey(c => c.CoordinateId);
         }
-
-
     }
 }

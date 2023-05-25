@@ -1,6 +1,6 @@
-﻿using DataTrackr_API.Models;
+﻿using DataTrackrAPI.Models;
 
-namespace DataTrackr_API.Helpers.UtilityService
+namespace DataTrackrAPI.Helpers.UtilityService
 {
     public static class EmailBody
     {
@@ -10,8 +10,7 @@ namespace DataTrackr_API.Helpers.UtilityService
                     <html>
                      <head></head>
                      <body>Security code to reset your password is: {emailToken} </body>
-                    </html>
-                    ";
+                    </html>";
         }
     }
 }

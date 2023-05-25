@@ -1,10 +1,10 @@
-﻿using DataTrackr_API.Models;
+﻿using DataTrackrAPI.Models;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using System;
 
-namespace DataTrackr_API.Helpers.UtilityService
+namespace DataTrackrAPI.Helpers.UtilityService
 {
     public class EmailService : IEmailService
     {
@@ -12,7 +12,6 @@ namespace DataTrackr_API.Helpers.UtilityService
         public EmailService(IConfiguration configuration)
         {
             _config = configuration;
-
         }
         public void SendEmail(EmailModel emailModel)
         {
@@ -35,7 +34,7 @@ namespace DataTrackr_API.Helpers.UtilityService
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine("Errorrrrr!");
+                    Console.WriteLine("Error!"+ex);
                     throw;
                 }
                 finally

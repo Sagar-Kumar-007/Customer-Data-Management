@@ -1,25 +1,19 @@
-using DataTrackr_API.Configurations;
+using DataTrackrAPI.Configurations;
 using DataTrackr_Web_API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration.CommandLine;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
-using DataTrackr_API.Helpers.UtilityService;
+using DataTrackrAPI.Helpers.UtilityService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-
-
+// Add services to the container
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -38,7 +32,6 @@ builder.Services.AddDbContext<ApiDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 
-
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -56,7 +49,6 @@ builder.Services.AddAuthentication(x =>
         ClockSkew = TimeSpan.Zero
     };
 });
-
 
 builder.Services.AddCors(options =>
 {

@@ -14,7 +14,7 @@ import {Subscription} from 'rxjs';
 })
 export class LogsDashboradComponent {
 
-  p:number =1;
+  pageNumber:number =1;
   itemsPerPage:number=10;
   totalItems:number=this.itemsPerPage;
   logsList: Ilog[] | undefined;
@@ -22,10 +22,12 @@ export class LogsDashboradComponent {
   searchResponse:string | undefined;
 
     constructor(private _logsService: LogsService,private _dashboardService:DashboardService){
-      
+
       this.searchEventSubscription=_dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
-          this.searchVal(data.value);
-          this.searchResponse=data.value;
+          if(_dashboardService.dashboard==='Logs'){
+            this.searchVal(data.value);
+            this.searchResponse=data.value;
+          }
       });
     }
 
@@ -35,7 +37,7 @@ export class LogsDashboradComponent {
 
   showLogsList() {
     this._logsService
-      ?.getAllLogsPaginated((this.p-1)*this.itemsPerPage,this.p,this.itemsPerPage)
+      ?.getAllLogsPaginated((this.pageNumber-1)*this.itemsPerPage,this.pageNumber,this.itemsPerPage)
       .subscribe((result: IPaginatedResults<Ilog>) => {
         this.logsList = result.Items;
         this.totalItems=result.TotalCount;
@@ -68,7 +70,7 @@ export class LogsDashboradComponent {
   }
   onPageChange(event:number){
     
-    this.p=event;
+    this.pageNumber=event;
     this.showLogsList();
   }
   

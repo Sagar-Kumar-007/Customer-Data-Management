@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DataTrackr_API.Models
+namespace DataTrackrAPI.Models
 {
     public class Log
     {

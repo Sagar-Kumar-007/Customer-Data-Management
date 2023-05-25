@@ -1,22 +1,21 @@
-﻿using DataTrackr_API.DTO.ResetPassword;
-using DataTrackr_API.Helpers.UtilityService;
-using DataTrackr_API.Models;
+﻿using DataTrackrAPI.DTO.ResetPassword;
+using DataTrackrAPI.Helpers;
+using DataTrackrAPI.Helpers.UtilityService;
+using DataTrackrAPI.Models;
 using DataTrackr_Web_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Policy;
-using System.Text.RegularExpressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System;
-using DataTrackr_API.Helpers;
 
-namespace DataTrackr_API.Controllers
+namespace DataTrackrAPI.Controllers
 {
     [Route("api/User")]
     [ApiController]
@@ -93,13 +92,13 @@ namespace DataTrackr_API.Controllers
 
             //Check password Strngth
 
-            var password = CheckPasswordStrength(userObj.Password);
-            if (!string.IsNullOrEmpty(password))
+            var passwordCheck = CheckPasswordStrength(userObj.Password);
+            if (!string.IsNullOrEmpty(passwordCheck))
             {
-                return BadRequest(new { Message = password.ToString() });
+                return BadRequest(new { Message = passwordCheck.ToString() });
             }
 
-userObj.Password = PasswordHasher.HashPassword(userObj.Password);
+            userObj.Password = PasswordHasher.HashPassword(userObj.Password);
             userObj.Token = "";
 
             await _authContext.Users.AddAsync(userObj);
@@ -185,15 +184,10 @@ userObj.Password = PasswordHasher.HashPassword(userObj.Password);
             }
             Random random = new Random();
             string emailToken = random.Next(1000, 10000).ToString();
-            Console.WriteLine(user.LastName);
-            Console.WriteLine(emailToken);
             user.ResetPasswordToken = emailToken;
             user.ResetPasswordExpiry = DateTime.Now.AddMinutes(5);
-
             string from = _configuration["EmailSettings:From"];
-
             var emailModel = new EmailModel(email, "Reset Password !!", EmailBody.EmailStringBody(email, emailToken));
-
             await _authContext.SaveChangesAsync();
             _emailService.SendEmail(emailModel);
 
@@ -221,8 +215,6 @@ userObj.Password = PasswordHasher.HashPassword(userObj.Password);
                 });
             }
             string tokenCode = user.ResetPasswordToken;
-
-
             DateTime emailTokenExpiry = user.ResetPasswordExpiry;
             if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
             {
@@ -232,12 +224,11 @@ userObj.Password = PasswordHasher.HashPassword(userObj.Password);
                     Message = "Security Code doesn't match."
                 });
             }
-            var newPassword = CheckPasswordStrength(resetPasswordDto.NewPassword);
-            if (!string.IsNullOrEmpty(newPassword))
+            var passwordCheck = CheckPasswordStrength(resetPasswordDto.NewPassword);
+            if (!string.IsNullOrEmpty(passwordCheck))
             {
-                return BadRequest(new { Message = newPassword.ToString() });
+                return BadRequest(new { Message = passwordCheck.ToString() });
             }
-
             user.Password = PasswordHasher.HashPassword(resetPasswordDto.NewPassword);
             _authContext.Entry(user).State = EntityState.Modified;
             await _authContext.SaveChangesAsync();

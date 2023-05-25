@@ -1,6 +1,6 @@
 ﻿using DataTrackr_Web_API.Models;
 
-namespace DataTrackr_API.DTO.Account
+namespace DataTrackrAPI.DTO.Account
 {
     public class BaseAccountDTO
     {

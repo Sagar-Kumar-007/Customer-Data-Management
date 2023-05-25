@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using DataTrackr_API.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace DataTrackr_Web_API.Models
 {
