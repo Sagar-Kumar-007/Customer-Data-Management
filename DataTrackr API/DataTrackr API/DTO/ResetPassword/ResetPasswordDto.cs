@@ -1,4 +1,4 @@
-﻿namespace DataTrackr_API.DTO.ResetPassword
+﻿namespace DataTrackrAPI.DTO.ResetPassword
 {
     public class ResetPasswordDto
     {

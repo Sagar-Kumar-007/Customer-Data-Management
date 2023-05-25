@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DataTrackrAPI.Models;
+using DataTrackr_Web_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DataTrackr_API.Models;
-using DataTrackr_Web_API.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace DataTrackr_API.Controllers
+namespace DataTrackrAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LogsController : ControllerBase
     {
         private readonly ApiDbContext _context;
@@ -46,8 +48,6 @@ namespace DataTrackr_API.Controllers
             };
             return Ok(pagedAccountsResult);
         }
-
-
         // Search
 
         // GET: api/Logs
@@ -63,16 +63,13 @@ namespace DataTrackr_API.Controllers
         public async Task<ActionResult<Log>> GetLogs(int id)
         {
             var logs = await _context.Logs.FindAsync(id);
-
             if (logs == null)
             {
                 return NotFound();
             }
-
             return logs;
         }
 
-        
         // POST: api/Logs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -80,7 +77,6 @@ namespace DataTrackr_API.Controllers
         {
             _context.Logs.Add(logs);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetLogs", new { id = logs.LogId }, logs);
         }
     }

@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using DataTrackrAPI.DTO.Account;
+using DataTrackrAPI.Models;
+using DataTrackr_Web_API.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using DataTrackr_Web_API.Models;
-using AutoMapper;
-using DataTrackr_API.DTO.Account;
-using Microsoft.CodeAnalysis;
-using Microsoft.AspNetCore.Authorization;
-using DataTrackr_API.Models;
-using AutoMapper.QueryableExtensions;
 
-namespace DataTrackr_API.Controllers
+namespace DataTrackrAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

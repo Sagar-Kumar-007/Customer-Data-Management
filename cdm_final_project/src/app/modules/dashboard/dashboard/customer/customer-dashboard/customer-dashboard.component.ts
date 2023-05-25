@@ -45,8 +45,8 @@ export class CustomerDashboardComponent implements OnInit {
       .subscribe((data: HTMLInputElement) => {
         if(_dashboardService.dashboard==='Customers'){
           this.searchVal(data.value);
+          this.searchResponse=data.value;
         }
-        this.searchResponse=data.value;
       });
     this.customerListEventSubscription = _dashboardService
       .getAddCustomerEvent()

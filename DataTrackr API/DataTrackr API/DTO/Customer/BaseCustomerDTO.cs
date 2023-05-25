@@ -1,4 +1,4 @@
-﻿namespace DataTrackr_API.DTO.Customer
+﻿namespace DataTrackrAPI.DTO.Customer
 {
     public class BaseCustomerDTO
     {

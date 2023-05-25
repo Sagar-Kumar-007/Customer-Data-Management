@@ -1,4 +1,4 @@
-﻿namespace DataTrackr_API.Models
+﻿namespace DataTrackrAPI.Models
 {
     public class QueryParameters
     {

@@ -24,7 +24,7 @@
             <tr
               *ngFor="
                 let logList of logsList
-                  | paginate : { itemsPerPage: itemsPerPage, currentPage: p, totalItems:totalItems }
+                  | paginate : { itemsPerPage: itemsPerPage, currentPage: pageNumber, totalItems:totalItems }
               "
             >
               <td>{{ logList.UserId }}</td>
@@ -43,8 +43,8 @@
               <ng-template [ngIf]="logList.Operation === 'deleted'"
                 ><td>
                   <span class="status-deleted">{{ logList.Operation }}</span>
-                </td></ng-template
-              >
+                </td>
+                </ng-template>
             </tr>
           </ng-template>
         </tbody>

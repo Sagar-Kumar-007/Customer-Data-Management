@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using DataTrackr_API.DTO.Account;
-using DataTrackr_API.DTO.Country;
-using DataTrackr_API.DTO.Customer;
+using DataTrackrAPI.DTO.Account;
+using DataTrackrAPI.DTO.Country;
+using DataTrackrAPI.DTO.Customer;
 using DataTrackr_Web_API.Models;
 
-namespace DataTrackr_API.Configurations
+namespace DataTrackrAPI.Configurations
 {
     public class MapperConfig:Profile
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataTrackr_API.Models
+namespace DataTrackrAPI.Models
 {
     public class PagedResult<T>
     {

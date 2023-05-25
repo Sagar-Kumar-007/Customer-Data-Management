@@ -1,7 +1,6 @@
-﻿using System;
-using DataTrackr_API.Models;
+﻿using DataTrackrAPI.Models;
 
-namespace DataTrackr_API.Helpers.UtilityService
+namespace DataTrackrAPI.Helpers.UtilityService
 {
     public interface IEmailService
     {

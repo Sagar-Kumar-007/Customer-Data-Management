@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using DataTrackrAPI.DTO.Country;
+using DataTrackrAPI.DTO.Customer;
+using DataTrackrAPI.Models;
+using DataTrackr_Web_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DataTrackr_Web_API.Models;
-using DataTrackr_API.DTO.Country;
-using AutoMapper;
-using DataTrackr_API.DTO.Customer;
-using Microsoft.AspNetCore.Authorization;
-using DataTrackr_API.Models;
-using AutoMapper.QueryableExtensions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace DataTrackr_API.Controllers
+namespace DataTrackrAPI.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -73,14 +73,11 @@ namespace DataTrackr_API.Controllers
         public async Task<ActionResult<Customer>> GetCustomer(string id)
         {
             var customer = await _context.Customers.Include(q=>q.Headquarters).Include(q=>q.Accounts).ThenInclude(q=>q.Location).FirstOrDefaultAsync(q=>q.CustomerEmail==id);
-
             if (customer == null)
             {
                 return NotFound();
             }
-
             var customerDetailsDto = _mapper.Map<GetCustomerDetailsWithAccountsDTO>(customer);
-
             return Ok(customerDetailsDto);
         }
 
@@ -89,14 +86,11 @@ namespace DataTrackr_API.Controllers
         public async Task<ActionResult<Customer>> GetCustomerDetails(string id)
         {
             var customer = await _context.Customers.FirstOrDefaultAsync(q => q.CustomerEmail == id);
-
             if (customer == null)
             {
                 return NotFound();
             }
-
             var customerDetailsDto = _mapper.Map<GetCustomerDto>(customer);
-
             return Ok(customerDetailsDto);
         }
 
@@ -128,16 +122,9 @@ namespace DataTrackr_API.Controllers
             currentCustomer.CountryCode = updateData.CountryCode;
             currentCustomer.Description = updateData.Description;
             currentCustomer.Website = updateData.Website;
-
             currentLocation.Latitude = updateData.Headquarters.Latitude;
             currentLocation.Longitude = updateData.Headquarters.Longitude;
             currentLocation.Address = updateData.Headquarters.Address;
-
-
-
-
-
-
 
             try
             {
@@ -154,7 +141,6 @@ namespace DataTrackr_API.Controllers
                     throw;
                 }
             }
-
             return Ok(updateData);
         }
 
