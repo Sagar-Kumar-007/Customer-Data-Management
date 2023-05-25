@@ -93,7 +93,6 @@ OnLogin() {
   {
     this._authService.login(this.loginForm.value).subscribe({
        next:(res=>{
-        alert(res.Message);
         this.loginForm.reset();
         this._authService.storeToken(res.Token);
         this.toast.success({detail:"SUCCESS", summary:res.Message,duration:5000});
@@ -130,7 +129,6 @@ OnLogin() {
       {
         this._authService.signUp(this.signUpForm.value).subscribe({
           next:(res=>{
-            alert(res.Message);
             this.signUpForm.reset();
             this.removeSignup();
           }),
