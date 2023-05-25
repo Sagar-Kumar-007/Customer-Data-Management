@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataTrackr_API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230523141643_init")]
+    [Migration("20230524074903_init")]
     partial class init
     {
         /// <inheritdoc />

@@ -26,6 +26,7 @@ export class DashboardService {
   sendAddCustomerEvent(res:ICustomer){
     this.customerSubject.next(res);
   }
+
   getAddCustomerEvent(){
     return this.customerSubject.asObservable();
   }
@@ -50,9 +51,7 @@ export class DashboardService {
         this.dashboard='Customers';
     }
     else if(currentUrl.includes('accountDashboard')){
-      // this.dashboard='Accounts';
       let temp=[currentUrl.split('?'),currentUrl.split('?')[1].split('=')];
-      console.log(temp);
       
       if(temp[0][0]==='/accountDashboard' && temp[1][0]==='customer' && temp[1][1].length>0){
         this.dashboard='Accounts';        

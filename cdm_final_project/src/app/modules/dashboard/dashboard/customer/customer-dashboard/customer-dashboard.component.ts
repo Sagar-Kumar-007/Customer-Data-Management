@@ -25,6 +25,7 @@ export class CustomerDashboardComponent implements OnInit {
 
   p: number = 1;
   itemsPerPage: number = 4;
+  searchResponse:string | undefined;
   totalItems: number = this.itemsPerPage;
   searchEventSubscription: Subscription | undefined;
   customerListEventSubscription: Subscription | undefined;
@@ -42,7 +43,10 @@ export class CustomerDashboardComponent implements OnInit {
     this.searchEventSubscription = _dashboardService
       .getSearchEvent()
       .subscribe((data: HTMLInputElement) => {
-        this.searchVal(data.value);
+        if(_dashboardService.dashboard==='Customers'){
+          this.searchVal(data.value);
+        }
+        this.searchResponse=data.value;
       });
     this.customerListEventSubscription = _dashboardService
       .getAddCustomerEvent()
