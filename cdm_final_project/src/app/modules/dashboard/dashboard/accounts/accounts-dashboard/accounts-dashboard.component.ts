@@ -47,6 +47,7 @@ export class AccountsDashboardComponent implements OnInit {
       data: [],
     },
   ];
+  searchResponse:string | undefined;
   pieChartLegend = false;
   pieChartPlugins = [];
   searchEventSubscription: Subscription | undefined;
@@ -67,6 +68,7 @@ export class AccountsDashboardComponent implements OnInit {
       .getSearchEvent()
       .subscribe((data: HTMLInputElement) => {
         this.searchVal(data.value,this.customerId);
+        this.searchResponse=data.value;
       });
     this.accountListEventSubscription = _dashboardService
       .getAddAccountEvent()

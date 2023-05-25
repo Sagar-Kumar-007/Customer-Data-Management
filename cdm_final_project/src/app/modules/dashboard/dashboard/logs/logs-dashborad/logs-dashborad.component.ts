@@ -19,10 +19,13 @@ export class LogsDashboradComponent {
   totalItems:number=this.itemsPerPage;
   logsList: Ilog[] | undefined;
   searchEventSubscription:Subscription | undefined;
+  searchResponse:string | undefined;
 
     constructor(private _logsService: LogsService,private _dashboardService:DashboardService){
+      
       this.searchEventSubscription=_dashboardService.getSearchEvent().subscribe((data:HTMLInputElement)=>{
           this.searchVal(data.value);
+          this.searchResponse=data.value;
       });
     }
 
